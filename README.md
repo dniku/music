@@ -24,7 +24,7 @@
 
 ## Аудиореференсы
 
-Записи хранятся локально в `reference/audio/` и не добавляются в обычный Git. Их имена, длительности и контрольные суммы зафиксированы в [`reference/README.md`](reference/README.md).
+Записи хранятся локально в `reference/audio/` и не добавляются в обычный Git. Их имена, длительности и контрольные суммы зафиксированы в [`reference/README.md`](reference/README.md), а MusicBrainz и локальные идентификаторы — в [`reference/recordings.json`](reference/recordings.json).
 
 ## Состояние
 

@@ -27,6 +27,26 @@
             test -s "$out/volki-okeana.pdf"
             test -s "$out/volki-okeana.midi"
           '';
+      metadataFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+        in
+        pkgs.runCommand "volki-okeana-metadata-check"
+          {
+            nativeBuildInputs = [ pkgs.jq ];
+          }
+          ''
+            jq --exit-status '
+              .schemaVersion == 1
+              and (.canonicalRecording.musicbrainz.recordingMbid
+                | test("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"))
+              and (.assets | length == 2)
+              and ([.assets[].sha256 | test("^[0-9a-f]{64}$")] | all)
+              and ([.assets[].identity.status] | sort == ["matched", "unmatched_variant"])
+            ' ${./reference/recordings.json} >/dev/null
+            touch "$out"
+          '';
       renderAppFor =
         system:
         let
@@ -61,6 +81,7 @@
       });
 
       checks = forAllSystems (system: {
+        metadata = metadataFor system;
         score = scoreFor system;
       });
 

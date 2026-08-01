@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-01",
+  "canonicalRecording": {
+    "title": "Волки Океана",
+    "artist": "Атом-76",
+    "musicbrainz": {
+      "recordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
+      "artistMbid": "1344ed95-93b9-4b48-b125-4e885117ab4b",
+      "releaseMbid": "4deab243-b078-474e-9c3e-86da4e7d9768",
+      "releaseGroupMbid": "9e38b27b-1cb4-41df-9628-15142d8099e0",
+      "releaseTrackMbid": "1fa0a485-baa8-431b-b776-d64670f1a2f9",
+      "releaseTitle": "Волки океана",
+      "releaseYear": 2011,
+      "releaseCountry": "RU",
+      "trackNumber": 3,
+      "catalogDurationMs": 335000,
+      "isrc": null,
+      "workMbid": null
+    }
+  },
+  "assets": [
+    {
+      "path": "audio/03. Волки Океана.mp3",
+      "role": "full_mix",
+      "durationSeconds": 335.660408,
+      "sha256": "37633b1684794052d0e1ca5ad333fd9aa2fc2cbb3fc0fa464110c42457429bbc",
+      "identity": {
+        "status": "matched",
+        "recordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
+        "releaseTrackMbid": "1fa0a485-baa8-431b-b776-d64670f1a2f9",
+        "evidence": [
+          "artist",
+          "title",
+          "release year",
+          "track number",
+          "duration"
+        ]
+      }
+    },
+    {
+      "path": "audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus",
+      "role": "instrumental_reference",
+      "durationSeconds": 335.7675,
+      "sha256": "6774e9f2206b78351e18114a201ad6989595d14386bd21b3d2dbed011307f7a4",
+      "identity": {
+        "status": "unmatched_variant",
+        "recordingMbid": null,
+        "relatedRecordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
+        "reason": "An instrumental or karaoke mix is a distinct recording and no matching MusicBrainz recording was found."
+      },
+      "sourceHint": {
+        "kind": "youtubeVideoIdFromFilename",
+        "value": "2Goi7VNlL7I",
+        "verified": false
+      }
+    }
+  ]
+}
