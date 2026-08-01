@@ -69,9 +69,21 @@ verseLine = {
   c'1 | c' | c' | s2. c'4 |
 }
 
-soloCue = {
+soloCueOne = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Соло — см. блок выше"
+    "Соло 1:45.70–1:57.30 — см. выше"
+  \repeat unfold 8 { s1 | }
+}
+
+soloCueTwo = {
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box
+    "Соло 2:43.90–2:55.50 — см. выше"
+  \repeat unfold 8 { s1 | }
+}
+
+soloCueThree = {
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box
+    "Соло 5:15.20–5:26.80 — см. выше"
   \repeat unfold 8 { s1 | }
 }
 
@@ -86,7 +98,7 @@ vocalGuide = {
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 1"
   \repeat unfold 16 { c'1 | }
-  \soloCue
+  \soloCueOne
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 3"
   \repeat unfold 8 { \verseLine }
@@ -96,11 +108,11 @@ vocalGuide = {
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Бридж"
   \repeat unfold 14 { c'1 | }
-  \soloCue
+  \soloCueTwo
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
   \repeat unfold 8 { \verseLine }
-  \soloCue
+  \soloCueThree
 
   \bar "|."
 }
@@ -242,7 +254,8 @@ barLyrics = \lyricmode {
   \override #'(font-name . "DejaVu Sans")
   \fill-line {
     \bold "Синтезаторное соло"
-    \small \italic "×3: 1:45.70 · 2:43.90 · 5:15.20"
+    \small \italic
+      "1:45.70–1:57.30 · 2:43.90–2:55.50 · 5:15.20–5:26.80"
   }
 
 \score {
