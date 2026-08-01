@@ -1,0 +1,17 @@
+# Local reference recordings. Their metadata and checksums are tracked instead.
+/reference/audio/
+
+# Superseded source retained locally until it is explicitly removed.
+/full_text.txt
+
+# LilyPond and Nix build outputs.
+/build/
+/result
+/result-*
+*.midi
+*.mid
+*.pdf
+*.ps
+
+# Local development state.
+/.direnv/
