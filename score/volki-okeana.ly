@@ -1,12 +1,18 @@
 \version "2.24.0"
 
+#(set-global-staff-size 16)
+
 \paper {
   #(set-paper-size "a4")
-  top-margin = 12\mm
-  bottom-margin = 12\mm
-  left-margin = 12\mm
-  right-margin = 12\mm
-  ragged-bottom = ##f
+  top-margin = 6\mm
+  bottom-margin = 6\mm
+  left-margin = 8\mm
+  right-margin = 8\mm
+  system-system-spacing.basic-distance = #9
+  system-system-spacing.minimum-distance = #7
+  system-system-spacing.padding = #0.5
+  ragged-bottom = ##t
+  ragged-last-bottom = ##t
   oddFooterMarkup = ##f
   evenFooterMarkup = ##f
 }
@@ -42,12 +48,8 @@ introMusic = \fixed c' {
   r1 |
 }
 
-fourDownbeatMeasures = {
-  c'1 | c' | c' | c' | \break
-}
-
 verseLine = {
-  c'1 | c' | c' | s2. c'4 | \break
+  c'1 | c' | c' | s2. c'4 |
 }
 
 vocalGuide = {
@@ -60,24 +62,39 @@ vocalGuide = {
   \repeat unfold 8 { \verseLine }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 1"
-  \repeat unfold 4 { \fourDownbeatMeasures }
+  \repeat unfold 16 { c'1 | }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 3"
   \repeat unfold 8 { \verseLine }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 2"
-  \repeat unfold 4 { \fourDownbeatMeasures }
+  \repeat unfold 16 { c'1 | }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Чёрные флаги"
-  \fourDownbeatMeasures
-  c'1 | c' | c' | \break
-  \fourDownbeatMeasures
-  c'1 | c' | c' | \break
+  \repeat unfold 14 { c'1 | }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
   \repeat unfold 8 { \verseLine }
 
   \bar "|."
+}
+
+lineBreaks = {
+  % Page 1: intro plus 80 measures; page 2 starts with verse 3.
+  \repeat unfold 10 {
+    s1 | s | s | s | s | s | s | s | \break
+  }
+  \pageBreak
+  \repeat unfold 6 {
+    s1 | s | s | s | s | s | s | s | \break
+  }
+  % Preserve the two seven-measure halves of the bridge.
+  \repeat unfold 2 {
+    s1 | s | s | s | s | s | s | \break
+  }
+  \repeat unfold 4 {
+    s1 | s | s | s | s | s | s | s | \break
+  }
 }
 
 verseHarmony = \chordmode {
@@ -200,6 +217,10 @@ barLyrics = \lyricmode {
         \hideNotes
         \vocalGuide
       }
+
+      \new Voice {
+        \lineBreaks
+      }
     >>
 
     \new Lyrics \lyricsto "lyricsGuide" {
@@ -217,7 +238,7 @@ barLyrics = \lyricmode {
     \context {
       \Lyrics
       \override LyricText.font-name = "DejaVu Sans"
-      \override LyricText.font-size = #-1
+      \override LyricText.font-size = #-2
       \override LyricText.self-alignment-X = #LEFT
       \override LyricSpace.minimum-distance = #1.2
     }
