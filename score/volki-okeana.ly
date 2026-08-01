@@ -14,7 +14,7 @@
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Волки Океана"
   subtitle = \markup \override #'(font-name . "DejaVu Sans") {
-    "Текст по тактам · 6/8 · "
+    "Нотная сетка · 4/4 · "
     \note { 4 } #1
     " = 165"
   }
@@ -22,127 +22,199 @@
   tagline = ##f
 }
 
-verseOne = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Куплет 1" }
-    \line { "То│лько тру│сы перед бу│рей │" }
-    \line { "Убира│ют па│руса│. │" }
-    \line { "А│ избра│нники форту│ны  │" }
-    \line { "Держат пу│ть на не│беса│. │" }
-    \vspace #0.35
-    \line { "Пу│сть бесну│ется стихи│я, │" }
-    \line { "Смерть хохо│чет за│ борто│м — │" }
-    \line { "На│ши го│ловы лихи│е │" }
-    \line { "Ей доста│нутся│ пото│м. │" }
-  }
+global = {
+  \key e \minor
+  \time 4/4
+  \tempo 4 = 165
+}
 
-verseTwo = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Куплет 2" }
-    \line { "Ны│нче во│лки океа│на │" }
-    \line { "В путь гото│вы се│й же ча│с, │" }
-    \line { "Ли│шь бы бы│л у капита│на │" }
-    \line { "Самый пра│вильны│й компА│с, │" }
-    \line { "И│ к сокро│вищам забы│тым │" }
-    \line { "Чтобы ку│рс проло│жен бы│л │" }
-    \line { "Не│ по ли│ниям магни│тным, │" }
-    \line { "А по ли│ния│м судьбы│. │" }
+introMusic = \fixed c' {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \partial 4 e4 |
+  \repeat volta 2 {
+    b4 g fis a |
+    b g fis e |
   }
+  b4 g fis a |
+  g fis e r |
+  r1^\markup \override #'(font-name . "DejaVu Sans") \italic "синтезатор молчит" |
+  r1 |
+}
 
-chorusOne = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Припев 1" }
-    \line { "В о│кеа│не не│т запре│тов" }
-    \line { "И│ прото│ренны│х доро│г." }
-    \line { "Та│м над на│ми то│лько ве│тер," }
-    \line { "На│ш шально│й пира│тский бо│г." }
-  }
+fourMeasureLine = {
+  c'1 | c' | c' | c' | \break
+}
 
-verseThree = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Куплет 3" }
-    \line { "Не│ найти│ теперь свобо│ды │" }
-    \line { "На далё│ких бе│рега│х: │" }
-    \line { "Ка│ждый фу│т земли распро│дан, │" }
-    \line { "Под контро│лем ка│ждый ша│г. │" }
-    \line { "З│а фальши│выми реча│ми — │" }
-    \line { "Пустота│ трусли│вых ду│ш. │" }
-    \line { "Во│льный ве│тер океа│на — │" }
-    \line { "Не для э│тих жи│рных ту│ш! │" }
-  }
+vocalGuide = {
+  \global
 
-chorusTwo = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Припев 2" }
-    \line { "В о│кеа│не не│т зако│нов" }
-    \line { "И│ жесто│ких па│лаче│й," }
-    \line { "На│ши и│мена│ запо│мнит" }
-    \line { "То│лько ве│тер — стра│ж море│й." }
-  }
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
+  \repeat unfold 8 { \fourMeasureLine }
 
-bridge = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Чёрные флаги" }
-    \line { "Чё│рные фла│ги —" }
-    \line { "Ве│рные зна│ки" }
-    \line { "Во│льных бу│нтаре│й." }
-    \line { "Шку│ра в запла│тах —" }
-    \line { "До│ля пира│тов," }
-    \line { "Де│моно│в море│й." }
-  }
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 2"
+  \repeat unfold 8 { \fourMeasureLine }
 
-finalVerse = \markup
-  \override #'(font-name . "DejaVu Sans")
-  \override #'(baseline-skip . 3.2)
-  \column {
-    \line { \bold "Финал" }
-    \line { "Кто│ поко│й и безопа│сность │" }
-    \line { "Выше сча│стья о│цени│л, │" }
-    \line { "То│т распла│тится напра│сно: │" }
-    \line { "Кто не дра│лся, то│т не жи│л. │" }
-    \line { "Пу│сть брита│нская арма│да │" }
-    \line { "На фрега│т нарвё│тся на│ш — │" }
-    \line { "Мы│ любо│й добыче ра│ды. │" }
-    \line { "Эй, вперё│д, на а│борда│ж! │" }
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 1"
+  \repeat unfold 4 { \fourMeasureLine }
+
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 3"
+  \repeat unfold 8 { \fourMeasureLine }
+
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 2"
+  \repeat unfold 4 { \fourMeasureLine }
+
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Чёрные флаги"
+  \fourMeasureLine
+  c'1 | c' | c' | \break
+  \fourMeasureLine
+  c'1 | c' | c' | \break
+
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
+  \repeat unfold 8 { \fourMeasureLine }
+
+  \bar "|."
+}
+
+verseHarmony = \chordmode {
+  \repeat unfold 4 {
+    e1:m | e:m | e:m | e:m |
+    g1 | g | d | d |
   }
+}
+
+chorusHarmony = \chordmode {
+  e1:m | e:m | b:7 | b:7 |
+  c1 | g | c | d |
+  e1:m | e:m | b:7 | b:7 |
+  c1 | g | d | d |
+}
+
+bridgeHarmony = \chordmode {
+  e1:m | e:m |
+  c1 | c |
+  g1 | d | d |
+  e1:m | e:m |
+  c1 | c |
+  g1 | d | d |
+}
+
+allChords = \chordmode {
+  \verseHarmony
+  \verseHarmony
+  \chorusHarmony
+  \verseHarmony
+  \chorusHarmony
+  \bridgeHarmony
+  \verseHarmony
+}
+
+barLyrics = \lyricmode {
+  "Только" "трусы перед" "бурей" "Уби"
+  "рают" "пару" "са." \skip 1
+  "А из" "бранники фор" "туны" "Держат"
+  "путь на" "небе" "са." \skip 1
+  "Пусть бес" "нуется сти" "хия," "Смерть хо"
+  "хочет" "за бор" "том -" \skip 1
+  "Наши" "головы ли" "хие" "Ей до"
+  "станут" "ся по" "том." \skip 1
+
+  "Нынче" "волки оке" "ана" "В путь го"
+  "товы" "сей же" "час," \skip 1
+  "Лишь бы" "был у капи" "тана" "Самый"
+  "правиль" "ный ком" "пАс," \skip 1
+  "И к со" "кровищам за" "бытым" "Чтобы"
+  "курс про" "ложен" "был" \skip 1
+  "Не по" "линиям маг" "нитным," "А по"
+  "лини" "ям судь" "бы." "В"
+
+  "оке" "ане" "нет за" "претов"
+  "И про" "торен" "ных до" "рог."
+  "Там над" "нами" "только" "ветер,"
+  "Наш шаль" "ной пи" "ратский" "бог."
+
+  "Не най" "ти теперь сво" "боды" "На да"
+  "лёких" "бере" "гах:" \skip 1
+  "Каждый" "фут земли рас" "продан," "Под кон"
+  "тролем" "каждый" "шаг." \skip 1
+  "За фаль" "шивыми ре" "чами-" "Пусто"
+  "та трус" "ливых" "душ." \skip 1
+  "Вольный" "ветер оке" "ана -" "Не для"
+  "этих" "жирных" "туш!" "В"
+
+  "оке" "ане" "нет за" "конов"
+  "И жес" "токих" "пала" "чей,"
+  "Наши" "име" "на за" "помнит"
+  "Только" "ветер -" "страж мо" "рей."
+
+  "Чёрные" "флаги -"
+  "Верные" "знаки"
+  "Вольных" "бунта" "рей."
+  "Шкура в за" "платах -"
+  "Доля пи" "ратов,"
+  "Демо" "нов мо" "рей."
+
+  "Кто по" "кой и безо" "пасность" "Выше"
+  "счастья" "оце" "нил," \skip 1
+  "Тот рас" "платится на" "прасно:" "Кто не"
+  "дрался," "тот не" "жил." \skip 1
+  "Пусть бри" "танская ар" "мада" "На фре"
+  "гат нарвё" "тся" "наш -" \skip 1
+  "Мы лю" "бой добыче" "рады." "Эй, впе"
+  "рёд, на" "абор" "даж!" \skip 1
+}
 
 \markup
   \override #'(font-name . "DejaVu Sans")
   \fill-line {
-    \column {
-      \verseOne
-      \vspace #0.8
-      \verseTwo
-      \vspace #0.8
-      \chorusOne
-    }
-    \hspace #3
-    \column {
-      \verseThree
-      \vspace #0.8
-      \chorusTwo
-      \vspace #0.8
-      \bridge
-      \vspace #0.8
-      \finalVerse
-    }
+    \bold "Вступление — синтезатор"
+    \small \italic "по пользовательской записи ABC"
   }
 
-\markup
-  \override #'(font-name . "DejaVu Sans")
-  \fill-line {
-    \fontsize #-2 \italic
-    "│ — начало такта по пользовательской разметке; граница может проходить внутри слова."
+\score {
+  \new Staff \with {
+    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Синт."
+  } {
+    \clef treble
+    \introMusic
   }
+  \layout { }
+  \midi { }
+}
+
+\markup \vspace #1
+
+\score {
+  <<
+    \new ChordNames {
+      \set chordChanges = ##t
+      \allChords
+    }
+
+    \new Staff <<
+      \new Voice = "lyricsGuide" {
+        \hideNotes
+        \vocalGuide
+      }
+    >>
+
+    \new Lyrics \lyricsto "lyricsGuide" {
+      \barLyrics
+    }
+  >>
+
+  \layout {
+    \context {
+      \Score
+      barNumberVisibility = #all-bar-numbers-visible
+      \override BarNumber.font-size = #-2
+      \override RehearsalMark.self-alignment-X = #LEFT
+    }
+    \context {
+      \Lyrics
+      \override LyricText.font-name = "DejaVu Sans"
+      \override LyricText.font-size = #-1
+      \override LyricSpace.minimum-distance = #1.2
+    }
+  }
+}

@@ -25,6 +25,7 @@
             mkdir -p "$out"
             lilypond --output="$out/volki-okeana" ${./score/volki-okeana.ly}
             test -s "$out/volki-okeana.pdf"
+            test -s "$out/volki-okeana.midi"
           '';
       renderAppFor =
         system:
@@ -35,7 +36,15 @@
             runtimeInputs = [ pkgs.lilypond ];
             text = ''
               mkdir -p build
-              lilypond "$@" --output=build/volki-okeana score/volki-okeana.ly
+              rm --force -- \
+                build/volki-okeana.pdf \
+                build/volki-okeana.midi \
+                build/volki-okeana.png \
+                build/volki-okeana-page{1..99}.png
+              lilypond --output=build/volki-okeana score/volki-okeana.ly
+              if (( $# > 0 )); then
+                lilypond "$@" --output=build/volki-okeana score/volki-okeana.ly
+              fi
             '';
           };
         in
