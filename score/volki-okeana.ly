@@ -48,9 +48,7 @@ introMusic = \fixed c' {
   r1 |
 }
 
-soloMusic = \absolute {
-  \global
-  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+soloNotes = \absolute {
   \ottava #1
 
   e''8 d'' e'' fis'' e'' d'' e'' fis'' |
@@ -64,6 +62,12 @@ soloMusic = \absolute {
   d''1 |
   e'' |
   \ottava #0
+}
+
+soloMusic = {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \soloNotes
   \bar "|."
 }
 
@@ -111,19 +115,19 @@ earlySoloCue = {
 
 soloCueOne = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Соло 1:45.70–1:57.30 — см. выше"
+    "Соло 1:45.70–1:57.30"
   \repeat unfold 8 { s1 | }
 }
 
 soloCueTwo = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Соло 2:43.90–2:55.50 — см. выше"
+    "Соло 2:43.90–2:55.50"
   \repeat unfold 8 { s1 | }
 }
 
 soloCueThree = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Соло 5:15.20–5:26.80 — см. выше"
+    "Соло 5:15.20–5:26.80"
   \repeat unfold 8 { s1 | }
 }
 
@@ -158,13 +162,31 @@ vocalGuide = {
   \bar "|."
 }
 
+soloDisplayGuide = {
+  \global
+
+  \repeat unfold 32 { s1 | } % Verse 1
+  \repeat unfold 8 { s1 | } % Provisional early solo
+  \repeat unfold 32 { s1 | } % Verse 2
+  \repeat unfold 16 { s1 | } % Chorus 1
+  \soloNotes
+
+  \repeat unfold 32 { s1 | } % Verse 3
+  \repeat unfold 16 { s1 | } % Chorus 2
+  \repeat unfold 14 { s1 | } % Bridge
+  \soloNotes
+
+  \repeat unfold 32 { s1 | } % Finale
+  \soloNotes
+}
+
 lineBreaks = {
-  % Page 1 ends with chorus 1; page 2 starts with the following solo cue.
-  \repeat unfold 11 {
+  % Page 1 ends with the first confirmed solo; page 2 starts with verse 3.
+  \repeat unfold 12 {
     s1 | s | s | s | s | s | s | s | \break
   }
   \pageBreak
-  \repeat unfold 7 {
+  \repeat unfold 6 {
     s1 | s | s | s | s | s | s | s | \break
   }
   % Preserve the two seven-measure halves of the bridge.
@@ -217,6 +239,48 @@ allChords = \chordmode {
   \soloHarmony
   \verseHarmony
   \soloHarmony
+}
+
+verseChordVoicings = \absolute {
+  \repeat unfold 4 {
+    <e' g' b'>1 | s1 | s | s |
+    <g' b' d''>1 | s1 | <d' fis' a'>1 | s1 |
+  }
+}
+
+chorusChordVoicings = \absolute {
+  <e' g' b'>1 | s1 | <b dis' fis' a'>1 | s1 |
+  <c' e' g'>1 | <g' b' d''> | <c' e' g'> | <d' fis' a'> |
+  <e' g' b'>1 | s1 | <b dis' fis' a'>1 | s1 |
+  <c' e' g'>1 | <g' b' d''> | <d' fis' a'> | s1 |
+}
+
+bridgeChordVoicings = \absolute {
+  <e' g' b'>1 | s1 |
+  <c' e' g'>1 | s1 |
+  <g' b' d''>1 | <d' fis' a'> | s1 |
+  <e' g' b'>1 | s1 |
+  <c' e' g'>1 | s1 |
+  <g' b' d''>1 | <d' fis' a'> | s1 |
+}
+
+soloChordVoicingSpacers = {
+  \repeat unfold 8 { s1 | }
+}
+
+allChordVoicings = {
+  \global
+  \verseChordVoicings
+  \soloChordVoicingSpacers
+  \verseChordVoicings
+  \chorusChordVoicings
+  \soloChordVoicingSpacers
+  \verseChordVoicings
+  \chorusChordVoicings
+  \bridgeChordVoicings
+  \soloChordVoicingSpacers
+  \verseChordVoicings
+  \soloChordVoicingSpacers
 }
 
 barLyrics = \lyricmode {
@@ -311,24 +375,6 @@ barLyrics = \lyricmode {
   \layout { }
 }
 
-\markup
-  \override #'(font-name . "DejaVu Sans")
-  \fill-line {
-    \bold "Синтезаторное соло"
-    \small \italic
-      "1:45.70–1:57.30 · 2:43.90–2:55.50 · 5:15.20–5:26.80"
-  }
-
-\score {
-  \new Staff \with {
-    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Синт."
-  } {
-    \clef treble
-    \soloMusic
-  }
-  \layout { }
-}
-
 % Keep one useful MIDI file containing the established synthesizer parts;
 % omit the explicitly provisional early solo.
 \score {
@@ -350,8 +396,19 @@ barLyrics = \lyricmode {
 
     \new Staff <<
       \new Voice = "lyricsGuide" {
+        \voiceTwo
         \hideNotes
         \vocalGuide
+      }
+
+      \new Voice {
+        \voiceOne
+        \allChordVoicings
+      }
+
+      \new Voice {
+        \voiceOne
+        \soloDisplayGuide
       }
 
       \new Voice {
