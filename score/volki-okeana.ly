@@ -80,6 +80,25 @@ earlySoloDraftMusic = \absolute {
   \bar "|."
 }
 
+guitarBreakDraftMusic = \absolute {
+  \global
+  \set Staff.midiInstrument = "electric guitar (clean)"
+
+  \repeat unfold 2 {
+    \tuplet 3/2 { e''8 g'' b'' }
+    \tuplet 3/2 { e''' b'' g'' }
+    \tuplet 3/2 { e'' b' g' }
+    \tuplet 3/2 { e' g' b' } |
+  }
+  \repeat unfold 2 {
+    \tuplet 3/2 { d''8 fis'' a'' }
+    \tuplet 3/2 { d''' a'' fis'' }
+    \tuplet 3/2 { d'' a' fis' }
+    \tuplet 3/2 { d' fis' a' } |
+  }
+  \bar "|."
+}
+
 verseLine = {
   c'1 | c' | c' | s2. c'4 |
 }
@@ -360,4 +379,21 @@ barLyrics = \lyricmode {
       \override LyricSpace.minimum-distance = #1.2
     }
   }
+}
+
+\markup
+  \override #'(font-name . "DejaVu Sans")
+  \fill-line {
+    \bold "Проигрыш гитары на 3:11"
+    \small \bold "Очень черновые ноты · требуют доработки"
+  }
+
+\score {
+  \new Staff \with {
+    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Гит."
+  } {
+    \clef treble
+    \guitarBreakDraftMusic
+  }
+  \layout { }
 }
