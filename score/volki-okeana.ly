@@ -51,6 +51,7 @@ introMusic = \fixed c' {
 soloMusic = \absolute {
   \global
   \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \ottava #1
 
   e''8 d'' e'' fis'' e'' d'' e'' fis'' |
   e'' d'' e'' fis'' g'' fis'' e'' d'' |
@@ -62,11 +63,31 @@ soloMusic = \absolute {
   b'' a'' g'' fis'' e'' d'' e'' fis'' |
   d''1 |
   e'' |
+  \ottava #0
+  \bar "|."
+}
+
+earlySoloDraftMusic = \absolute {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \ottava #1
+
+  e''2 g''4 b'' |
+  e'''1 |
+  g''2 b''4 d''' |
+  d'''1 |
+  \ottava #0
   \bar "|."
 }
 
 verseLine = {
   c'1 | c' | c' | s2. c'4 |
+}
+
+earlySoloCue = {
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box
+    "Раннее соло 0:58.80–1:10.80 — черновик выше"
+  \repeat unfold 8 { s1 | }
 }
 
 soloCueOne = {
@@ -92,6 +113,7 @@ vocalGuide = {
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
   \repeat unfold 8 { \verseLine }
+  \earlySoloCue
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 2"
   \repeat unfold 8 { \verseLine }
@@ -118,13 +140,12 @@ vocalGuide = {
 }
 
 lineBreaks = {
-  % Page 1: intro, the notated solo, and the first solo cue; page 2 starts
-  % with verse 3.
+  % Page 1 ends with chorus 1; page 2 starts with the following solo cue.
   \repeat unfold 11 {
     s1 | s | s | s | s | s | s | s | \break
   }
   \pageBreak
-  \repeat unfold 6 {
+  \repeat unfold 7 {
     s1 | s | s | s | s | s | s | s | \break
   }
   % Preserve the two seven-measure halves of the bridge.
@@ -167,6 +188,7 @@ soloHarmony = \chordmode {
 
 allChords = \chordmode {
   \verseHarmony
+  \soloHarmony
   \verseHarmony
   \chorusHarmony
   \soloHarmony
@@ -253,6 +275,26 @@ barLyrics = \lyricmode {
 \markup
   \override #'(font-name . "DejaVu Sans")
   \fill-line {
+    \bold "Раннее соло — черновая транскрипция"
+    \right-column {
+      \small \italic "0:58.80–1:10.80 · гипотеза «once»: один проход"
+      \small \bold "Ноты требуют доработки"
+    }
+  }
+
+\score {
+  \new Staff \with {
+    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Синт."
+  } {
+    \clef treble
+    \earlySoloDraftMusic
+  }
+  \layout { }
+}
+
+\markup
+  \override #'(font-name . "DejaVu Sans")
+  \fill-line {
     \bold "Синтезаторное соло"
     \small \italic
       "1:45.70–1:57.30 · 2:43.90–2:55.50 · 5:15.20–5:26.80"
@@ -268,7 +310,8 @@ barLyrics = \lyricmode {
   \layout { }
 }
 
-% Keep one useful MIDI file containing both notated synthesizer parts.
+% Keep one useful MIDI file containing the established synthesizer parts;
+% omit the explicitly provisional early solo.
 \score {
   \new Staff {
     \unfoldRepeats {
