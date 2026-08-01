@@ -42,36 +42,40 @@ introMusic = \fixed c' {
   r1 |
 }
 
-fourMeasureLine = {
+fourDownbeatMeasures = {
   c'1 | c' | c' | c' | \break
+}
+
+verseLine = {
+  c'1 | c' | c' | s2. c'4 | \break
 }
 
 vocalGuide = {
   \global
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
-  \repeat unfold 8 { \fourMeasureLine }
+  \repeat unfold 8 { \verseLine }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 2"
-  \repeat unfold 8 { \fourMeasureLine }
+  \repeat unfold 8 { \verseLine }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 1"
-  \repeat unfold 4 { \fourMeasureLine }
+  \repeat unfold 4 { \fourDownbeatMeasures }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 3"
-  \repeat unfold 8 { \fourMeasureLine }
+  \repeat unfold 8 { \verseLine }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 2"
-  \repeat unfold 4 { \fourMeasureLine }
+  \repeat unfold 4 { \fourDownbeatMeasures }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Чёрные флаги"
-  \fourMeasureLine
+  \fourDownbeatMeasures
   c'1 | c' | c' | \break
-  \fourMeasureLine
+  \fourDownbeatMeasures
   c'1 | c' | c' | \break
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
-  \repeat unfold 8 { \fourMeasureLine }
+  \repeat unfold 8 { \verseLine }
 
   \bar "|."
 }
@@ -214,6 +218,7 @@ barLyrics = \lyricmode {
       \Lyrics
       \override LyricText.font-name = "DejaVu Sans"
       \override LyricText.font-size = #-1
+      \override LyricText.self-alignment-X = #LEFT
       \override LyricSpace.minimum-distance = #1.2
     }
   }
