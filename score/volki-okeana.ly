@@ -48,8 +48,31 @@ introMusic = \fixed c' {
   r1 |
 }
 
+soloMusic = \absolute {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+
+  e''8 d'' e'' fis'' e'' d'' e'' fis'' |
+  e'' d'' e'' fis'' g'' fis'' e'' d'' |
+  g''1 |
+  d'' |
+  \bar "||"
+
+  g''8 fis'' g'' a'' b'' a'' g'' fis'' |
+  b'' a'' g'' fis'' e'' d'' e'' fis'' |
+  d''1 |
+  e'' |
+  \bar "|."
+}
+
 verseLine = {
   c'1 | c' | c' | s2. c'4 |
+}
+
+soloCue = {
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box
+    "Соло — см. блок выше"
+  \repeat unfold 8 { s1 | }
 }
 
 vocalGuide = {
@@ -63,6 +86,7 @@ vocalGuide = {
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 1"
   \repeat unfold 16 { c'1 | }
+  \soloCue
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 3"
   \repeat unfold 8 { \verseLine }
@@ -72,16 +96,19 @@ vocalGuide = {
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Бридж"
   \repeat unfold 14 { c'1 | }
+  \soloCue
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
   \repeat unfold 8 { \verseLine }
+  \soloCue
 
   \bar "|."
 }
 
 lineBreaks = {
-  % Page 1: intro plus 80 measures; page 2 starts with verse 3.
-  \repeat unfold 10 {
+  % Page 1: intro, the notated solo, and the first solo cue; page 2 starts
+  % with verse 3.
+  \repeat unfold 11 {
     s1 | s | s | s | s | s | s | s | \break
   }
   \pageBreak
@@ -92,9 +119,11 @@ lineBreaks = {
   \repeat unfold 2 {
     s1 | s | s | s | s | s | s | \break
   }
+  s1 | s | s | s | s | s | s | s | \break
   \repeat unfold 4 {
     s1 | s | s | s | s | s | s | s | \break
   }
+  s1 | s | s | s | s | s | s | s | \break
 }
 
 verseHarmony = \chordmode {
@@ -120,14 +149,21 @@ bridgeHarmony = \chordmode {
   g1 | d | d |
 }
 
+soloHarmony = \chordmode {
+  \repeat unfold 8 { s1 | }
+}
+
 allChords = \chordmode {
   \verseHarmony
   \verseHarmony
   \chorusHarmony
+  \soloHarmony
   \verseHarmony
   \chorusHarmony
   \bridgeHarmony
+  \soloHarmony
   \verseHarmony
+  \soloHarmony
 }
 
 barLyrics = \lyricmode {
@@ -200,10 +236,35 @@ barLyrics = \lyricmode {
     \introMusic
   }
   \layout { }
-  \midi { }
 }
 
-\markup \vspace #1
+\markup
+  \override #'(font-name . "DejaVu Sans")
+  \fill-line {
+    \bold "Синтезаторное соло"
+    \small \italic "×3: 1:45.70 · 2:43.90 · 5:15.20"
+  }
+
+\score {
+  \new Staff \with {
+    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Синт."
+  } {
+    \clef treble
+    \soloMusic
+  }
+  \layout { }
+}
+
+% Keep one useful MIDI file containing both notated synthesizer parts.
+\score {
+  \new Staff {
+    \unfoldRepeats {
+      \introMusic
+      \soloMusic
+    }
+  }
+  \midi { }
+}
 
 \score {
   <<
