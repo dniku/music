@@ -35,15 +35,12 @@ global = {
 }
 
 introNotes = \fixed c' {
-  \partial 4 e4 |
-  \repeat volta 2 {
-    b4 g fis a |
-    b g fis e |
+  \partial 8 e8 |
+  \set countPercentRepeats = ##t
+  \repeat percent 6 {
+    b8 g fis a b g fis e |
   }
-  b4 g fis a |
-  g fis e r |
-  r1^\markup \override #'(font-name . "DejaVu Sans") \italic "синтезатор молчит" |
-  r1 |
+  b8 g fis a g fis e r |
 }
 
 introMusic = {
@@ -53,12 +50,8 @@ introMusic = {
 }
 
 introAlignment = {
-  \partial 4 s4 |
-  \repeat volta 2 {
-    s1 |
-    s1 |
-  }
-  \repeat unfold 4 { s1 | }
+  \partial 8 s8 |
+  \repeat unfold 7 { s1 | }
 }
 
 soloNotes = \absolute {
@@ -84,9 +77,7 @@ soloMusic = {
   \bar "|."
 }
 
-earlySoloDraftMusic = \absolute {
-  \global
-  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+earlySoloDraftNotes = \absolute {
   \ottava #1
 
   e''2 g''4 b'' |
@@ -94,13 +85,9 @@ earlySoloDraftMusic = \absolute {
   g''2 b''4 d''' |
   d'''1 |
   \ottava #0
-  \bar "|."
 }
 
-guitarBreakDraftMusic = \absolute {
-  \global
-  \set Staff.midiInstrument = "electric guitar (clean)"
-
+guitarBreakDraftNotes = \absolute {
   \repeat unfold 2 {
     \tuplet 3/2 { e''8 g'' b'' }
     \tuplet 3/2 { e''' b'' g'' }
@@ -113,7 +100,6 @@ guitarBreakDraftMusic = \absolute {
     \tuplet 3/2 { d'' a' fis' }
     \tuplet 3/2 { d' fis' a' } |
   }
-  \bar "|."
 }
 
 verseLine = {
@@ -121,8 +107,10 @@ verseLine = {
 }
 
 earlySoloCue = {
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Раннее соло 0:58.80–1:10.80 — черновик выше"
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box \left-column {
+    "Раннее соло 0:58.80–1:10.80 — черновик"
+    \tiny "гипотеза «once»: один проход · ноты требуют доработки"
+  }
   \repeat unfold 8 { s1 | }
 }
 
@@ -142,6 +130,14 @@ soloCueThree = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Соло 5:15.20–5:26.80"
   \repeat unfold 8 { s1 | }
+}
+
+guitarBreakCue = {
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box \left-column {
+    "Проигрыш гитары на 3:11"
+    \tiny "Очень черновые ноты · требуют доработки"
+  }
+  \repeat unfold 4 { s1 | }
 }
 
 vocalGuide = {
@@ -173,6 +169,7 @@ vocalGuide = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
   \repeat unfold 8 { \verseLine }
   \soloCueThree
+  \guitarBreakCue
 
   \bar "|."
 }
@@ -185,7 +182,8 @@ soloDisplayGuide = {
   \introNotes
 
   \repeat unfold 32 { s1 | } % Verse 1
-  \repeat unfold 8 { s1 | } % Provisional early solo
+  \earlySoloDraftNotes
+  \repeat unfold 4 { s1 | } % Untranscribed half of the provisional early solo
   \repeat unfold 32 { s1 | } % Verse 2
   \repeat unfold 16 { s1 | } % Chorus 1
   \soloNotes
@@ -197,6 +195,7 @@ soloDisplayGuide = {
 
   \repeat unfold 32 { s1 | } % Finale
   \soloNotes
+  \guitarBreakDraftNotes
 }
 
 lineBreaks = {
@@ -220,6 +219,7 @@ lineBreaks = {
     s1 | s | s | s | s | s | s | s | \break
   }
   s1 | s | s | s | s | s | s | s | \break
+  s1 | s | s | s | \break
 }
 
 verseHarmony = \chordmode {
@@ -249,6 +249,10 @@ soloHarmony = \chordmode {
   \repeat unfold 8 { s1 | }
 }
 
+guitarBreakHarmony = \chordmode {
+  \repeat unfold 4 { s1 | }
+}
+
 allChords = \chordmode {
   \introAlignment
   \verseHarmony
@@ -262,6 +266,7 @@ allChords = \chordmode {
   \soloHarmony
   \verseHarmony
   \soloHarmony
+  \guitarBreakHarmony
 }
 
 verseChordVoicings = \absolute {
@@ -291,6 +296,10 @@ soloChordVoicingSpacers = {
   \repeat unfold 8 { s1 | }
 }
 
+guitarBreakChordVoicingSpacers = {
+  \repeat unfold 4 { s1 | }
+}
+
 allChordVoicings = {
   \global
   \introAlignment
@@ -305,6 +314,7 @@ allChordVoicings = {
   \soloChordVoicingSpacers
   \verseChordVoicings
   \soloChordVoicingSpacers
+  \guitarBreakChordVoicingSpacers
 }
 
 barLyrics = \lyricmode {
@@ -360,26 +370,6 @@ barLyrics = \lyricmode {
   -- "гат нарвё" -- "тся" "наш -" \skip 1
   "Мы лю" -- "бой добыче" "рады." "Эй, впе"
   -- "рёд, на" "абор" -- "даж!" \skip 1
-}
-
-\markup
-  \override #'(font-name . "DejaVu Sans")
-  \fill-line {
-    \bold "Раннее соло — черновая транскрипция"
-    \right-column {
-      \small \italic "0:58.80–1:10.80 · гипотеза «once»: один проход"
-      \small \bold "Ноты требуют доработки"
-    }
-  }
-
-\score {
-  \new Staff \with {
-    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Синт."
-  } {
-    \clef treble
-    \earlySoloDraftMusic
-  }
-  \layout { }
 }
 
 % Keep one useful MIDI file containing the established synthesizer parts;
@@ -443,21 +433,4 @@ barLyrics = \lyricmode {
       \override LyricSpace.minimum-distance = #1.2
     }
   }
-}
-
-\markup
-  \override #'(font-name . "DejaVu Sans")
-  \fill-line {
-    \bold "Проигрыш гитары на 3:11"
-    \small \bold "Очень черновые ноты · требуют доработки"
-  }
-
-\score {
-  \new Staff \with {
-    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Гит."
-  } {
-    \clef treble
-    \guitarBreakDraftMusic
-  }
-  \layout { }
 }
