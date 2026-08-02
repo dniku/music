@@ -165,11 +165,11 @@ vocalGuide = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Бридж"
   \repeat unfold 14 { c'1 | }
   \soloCueTwo
+  \guitarBreakCue
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Финал"
   \repeat unfold 8 { \verseLine }
   \soloCueThree
-  \guitarBreakCue
 
   \bar "|."
 }
@@ -192,10 +192,10 @@ soloDisplayGuide = {
   \repeat unfold 16 { s1 | } % Chorus 2
   \repeat unfold 14 { s1 | } % Bridge
   \soloNotes
+  \guitarBreakDraftNotes
 
   \repeat unfold 32 { s1 | } % Finale
   \soloNotes
-  \guitarBreakDraftNotes
 }
 
 lineBreaks = {
@@ -215,11 +215,11 @@ lineBreaks = {
     s1 | s | s | s | s | s | s | \break
   }
   s1 | s | s | s | s | s | s | s | \break
+  s1 | s | s | s | \break
   \repeat unfold 4 {
     s1 | s | s | s | s | s | s | s | \break
   }
   s1 | s | s | s | s | s | s | s | \break
-  s1 | s | s | s | \break
 }
 
 verseHarmony = \chordmode {
@@ -264,9 +264,9 @@ allChords = \chordmode {
   \chorusHarmony
   \bridgeHarmony
   \soloHarmony
+  \guitarBreakHarmony
   \verseHarmony
   \soloHarmony
-  \guitarBreakHarmony
 }
 
 verseChordVoicings = \absolute {
@@ -312,9 +312,9 @@ allChordVoicings = {
   \chorusChordVoicings
   \bridgeChordVoicings
   \soloChordVoicingSpacers
+  \guitarBreakChordVoicingSpacers
   \verseChordVoicings
   \soloChordVoicingSpacers
-  \guitarBreakChordVoicingSpacers
 }
 
 barLyrics = \lyricmode {
