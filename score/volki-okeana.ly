@@ -182,7 +182,7 @@ soloDisplayGuide = {
   \global
   \once \omit Score.BarNumber
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Вступление — синтезатор"
+    "Вступление — синтезатор 0:00.00–0:12.30"
   \introNotes
 
   \repeat unfold 32 { s1 | } % Verse 1
