@@ -34,9 +34,7 @@ global = {
   \tempo 4 = 165
 }
 
-introMusic = \fixed c' {
-  \global
-  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+introNotes = \fixed c' {
   \partial 4 e4 |
   \repeat volta 2 {
     b4 g fis a |
@@ -46,6 +44,21 @@ introMusic = \fixed c' {
   g fis e r |
   r1^\markup \override #'(font-name . "DejaVu Sans") \italic "синтезатор молчит" |
   r1 |
+}
+
+introMusic = {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \introNotes
+}
+
+introAlignment = {
+  \partial 4 s4 |
+  \repeat volta 2 {
+    s1 |
+    s1 |
+  }
+  \repeat unfold 4 { s1 | }
 }
 
 soloNotes = \absolute {
@@ -133,6 +146,8 @@ soloCueThree = {
 
 vocalGuide = {
   \global
+  \introAlignment
+  \set Score.currentBarNumber = #1
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
   \repeat unfold 8 { \verseLine }
@@ -164,6 +179,10 @@ vocalGuide = {
 
 soloDisplayGuide = {
   \global
+  \once \omit Score.BarNumber
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box
+    "Вступление — синтезатор"
+  \introNotes
 
   \repeat unfold 32 { s1 | } % Verse 1
   \repeat unfold 8 { s1 | } % Provisional early solo
@@ -181,6 +200,9 @@ soloDisplayGuide = {
 }
 
 lineBreaks = {
+  \introAlignment
+  \break
+
   % Page 1 ends with the first confirmed solo; page 2 starts with verse 3.
   \repeat unfold 12 {
     s1 | s | s | s | s | s | s | s | \break
@@ -228,6 +250,7 @@ soloHarmony = \chordmode {
 }
 
 allChords = \chordmode {
+  \introAlignment
   \verseHarmony
   \soloHarmony
   \verseHarmony
@@ -270,6 +293,7 @@ soloChordVoicingSpacers = {
 
 allChordVoicings = {
   \global
+  \introAlignment
   \verseChordVoicings
   \soloChordVoicingSpacers
   \verseChordVoicings
@@ -336,23 +360,6 @@ barLyrics = \lyricmode {
   -- "гат нарвё" -- "тся" "наш -" \skip 1
   "Мы лю" -- "бой добыче" "рады." "Эй, впе"
   -- "рёд, на" "абор" -- "даж!" \skip 1
-}
-
-\markup
-  \override #'(font-name . "DejaVu Sans")
-  \fill-line {
-    \bold "Вступление — синтезатор"
-    \small \italic "по пользовательской записи ABC"
-  }
-
-\score {
-  \new Staff \with {
-    instrumentName = \markup \override #'(font-name . "DejaVu Sans") "Синт."
-  } {
-    \clef treble
-    \introMusic
-  }
-  \layout { }
 }
 
 \markup
