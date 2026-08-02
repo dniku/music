@@ -76,8 +76,6 @@ soloMusic = {
 }
 
 earlySoloNotes = \absolute {
-  \ottava #1
-
   e''2 b' |
   e'1 |
   r1 |
@@ -86,7 +84,6 @@ earlySoloNotes = \absolute {
   g'4 b' e''2 |
   r2 e'2 |
   g'4 b' d''2 |
-  \ottava #0
 }
 
 earlySoloMusic = {
