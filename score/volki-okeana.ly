@@ -77,14 +77,25 @@ soloMusic = {
   \bar "|."
 }
 
-earlySoloDraftNotes = \absolute {
+earlySoloNotes = \absolute {
   \ottava #1
 
-  e''2 g''4 b'' |
-  e'''1 |
-  g''2 b''4 d''' |
-  d'''1 |
+  e''2 b' |
+  e'1 |
+  r1 |
+  r1 |
+  r2 e'2 |
+  g'4 b' e''2 |
+  r2 e'2 |
+  g'4 b' d''2 |
   \ottava #0
+}
+
+earlySoloMusic = {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \earlySoloNotes
+  \bar "|."
 }
 
 guitarBreakDraftNotes = \absolute {
@@ -107,10 +118,8 @@ verseLine = {
 }
 
 earlySoloCue = {
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box \left-column {
-    "Раннее соло 0:58.80–1:10.80 — черновик"
-    \tiny "гипотеза «once»: один проход · ноты требуют доработки"
-  }
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box
+    "Раннее соло 0:58.80–1:10.80"
   \repeat unfold 8 { s1 | }
 }
 
@@ -182,8 +191,7 @@ soloDisplayGuide = {
   \introNotes
 
   \repeat unfold 32 { s1 | } % Verse 1
-  \earlySoloDraftNotes
-  \repeat unfold 4 { s1 | } % Untranscribed half of the provisional early solo
+  \earlySoloNotes
   \repeat unfold 32 { s1 | } % Verse 2
   \repeat unfold 16 { s1 | } % Chorus 1
   \soloNotes
@@ -372,12 +380,12 @@ barLyrics = \lyricmode {
   -- "рёд, на" "абор" -- "даж!" \skip 1
 }
 
-% Keep one useful MIDI file containing the established synthesizer parts;
-% omit the explicitly provisional early solo.
+% Keep one useful MIDI file containing the established synthesizer parts.
 \score {
   \new Staff {
     \unfoldRepeats {
       \introMusic
+      \earlySoloMusic
       \soloMusic
     }
   }
