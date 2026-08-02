@@ -1,8 +1,8 @@
 # Local reference recordings. Their metadata and checksums are tracked instead.
-/reference/audio/
+**/reference/audio/
 
 # Superseded source retained locally until it is explicitly removed.
-/full_text.txt
+**/sources/full-text.txt
 
 # LilyPond and Nix build outputs.
 /build/

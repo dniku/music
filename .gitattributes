@@ -3,11 +3,12 @@
 *.txt text eol=lf
 *.md text eol=lf
 *.nix text eol=lf
+*.json text eol=lf
 *.tsv text eol=lf
 
 *.mp3 binary
 *.opus binary
 *.wav binary
 
-# Preserve the user's spacing around chord annotations in the source transcript.
-sources/lyrics-with-bar-marks.txt whitespace=-trailing-space
+# Preserve the user's spacing around chord annotations in source transcripts.
+tracks/*/sources/lyrics-with-bar-marks.txt whitespace=-trailing-space
