@@ -35,12 +35,11 @@ global = {
 }
 
 introNotes = \fixed c' {
-  \partial 8 e8 |
   \set countPercentRepeats = ##t
   \repeat percent 6 {
-    b8 g fis a b g fis e |
+    e8 b g fis a b g fis |
   }
-  b8 g fis a g fis e r |
+  e8 b g fis a g fis e |
 }
 
 introMusic = {
@@ -50,7 +49,6 @@ introMusic = {
 }
 
 introAlignment = {
-  \partial 8 s8 |
   \repeat unfold 7 { s1 | }
 }
 
