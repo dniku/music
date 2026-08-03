@@ -2,8 +2,8 @@
 
 Локальное аудио лежит в `reference/audio/` и игнорируется Git. Его идентичность,
 хеш и источник зафиксированы в [`recordings.json`](recordings.json), а полная
-цепочка получения и преобразований — в корневом
-[`ro-crate-metadata.json`](../../../ro-crate-metadata.json).
+цепочка получения и преобразований — в sidecar-файле
+`youtube-nDxJJ_aEt2g.webm.provenance.json` рядом с аудио.
 
 | Файл | Источник | Длительность | SHA-256 |
 | --- | --- | ---: | --- |

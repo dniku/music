@@ -48,8 +48,7 @@
         }
       ],
       "provenance": {
-        "roCratePath": "../../../ro-crate-metadata.json",
-        "entityId": "#blown-away-youtube-audio"
+        "sidecarPath": "audio/youtube-nDxJJ_aEt2g.webm.provenance.json"
       }
     }
   ]

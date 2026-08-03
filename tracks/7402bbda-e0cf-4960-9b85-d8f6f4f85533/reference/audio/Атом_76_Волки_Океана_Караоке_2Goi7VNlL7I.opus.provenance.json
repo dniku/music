@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../artifact-provenance.schema.json",
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus",
+    "role": "instrumental_reference",
+    "mediaType": "audio/ogg",
+    "sizeBytes": 5501716,
+    "durationSeconds": 335.7675,
+    "sha256": "6774e9f2206b78351e18114a201ad6989595d14386bd21b3d2dbed011307f7a4"
+  },
+  "identity": {
+    "status": "unmatched_variant",
+    "relatedMusicbrainzRecordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
+    "notes": "Инструментальный или караоке-микс является отдельной записью; собственного MBID не найдено."
+  },
+  "provenance": {
+    "kind": "user_supplied",
+    "reproducibility": "unknown",
+    "sources": [],
+    "command": null,
+    "workflow": null,
+    "createdAt": null,
+    "notes": "Файл передан пользователем. 2Goi7VNlL7I в имени — непроверенная подсказка YouTube ID."
+  }
+}

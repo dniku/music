@@ -38,8 +38,7 @@
         ]
       },
       "provenance": {
-        "roCratePath": "../../../ro-crate-metadata.json",
-        "entityId": "#volki-full-mix"
+        "sidecarPath": "audio/03. Волки Океана.mp3.provenance.json"
       }
     },
     {
@@ -59,8 +58,7 @@
         "verified": false
       },
       "provenance": {
-        "roCratePath": "../../../ro-crate-metadata.json",
-        "entityId": "#volki-instrumental-reference"
+        "sidecarPath": "audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus.provenance.json"
       }
     }
   ]

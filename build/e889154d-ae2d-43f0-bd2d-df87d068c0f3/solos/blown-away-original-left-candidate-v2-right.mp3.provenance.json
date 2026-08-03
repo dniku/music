@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../artifact-provenance.schema.json",
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "blown-away-original-left-candidate-v2-right.mp3",
+    "role": "stereo_comparison",
+    "mediaType": "audio/mpeg",
+    "sizeBytes": 258309,
+    "durationSeconds": 10.9,
+    "sha256": "612e803ad1386892f91780968e4db17688a9eace98f8cbcedba30bd5428ba05b"
+  },
+  "identity": {
+    "status": "not_applicable",
+    "relatedMusicbrainzRecordingMbid": "e889154d-ae2d-43f0-bd2d-df87d068c0f3"
+  },
+  "provenance": {
+    "kind": "derived",
+    "reproducibility": "partial",
+    "sources": [
+      {
+        "role": "left_channel",
+        "path": "original-02m22.70-02m33.60.mp3",
+        "sha256": "47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709"
+      },
+      {
+        "role": "right_channel",
+        "path": "blown-away-rhythm-candidate-v2.mp3",
+        "sha256": "6aae3597f557e79601d0217a2878d5922cae405292a039ebb0622adbe08adee8"
+      }
+    ],
+    "command": null,
+    "workflow": null,
+    "environment": {
+      "nixpkgsRevision": "1559d3daa3ecc813a650b79375ea61b6741b8746",
+      "nixpkgsNarHash": "sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8=",
+      "tools": [
+        {
+          "name": "FFmpeg",
+          "version": "8.1.2"
+        }
+      ]
+    },
+    "createdAt": "2026-08-03T21:53:35+01:00",
+    "notes": "Оригинал сведён в левый канал, кандидат V2 — в правый; точная команда пока не вынесена в workflow."
+  }
+}

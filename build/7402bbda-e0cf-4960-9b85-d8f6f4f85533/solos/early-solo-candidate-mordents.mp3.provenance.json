@@ -1,0 +1,49 @@
+{
+  "$schema": "../../../artifact-provenance.schema.json",
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "early-solo-candidate-mordents.mp3",
+    "role": "early_solo_audition_candidate",
+    "mediaType": "audio/mpeg",
+    "sizeBytes": 252881,
+    "durationSeconds": 14.63678,
+    "sha256": "616f1ae80751bd543a21e5cd756f313e91a0d96720638fcb48ca1fcb1570c943"
+  },
+  "identity": {
+    "status": "not_applicable",
+    "relatedMusicbrainzRecordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533"
+  },
+  "provenance": {
+    "kind": "derived",
+    "reproducibility": "partial",
+    "sources": [
+      {
+        "role": "notation_source",
+        "path": "early-solo-candidate-mordents.ly",
+        "sha256": "8bd3f46a88526ffff6232634b73582c2de074ccd2bb3f2e293a62c95f344745b"
+      }
+    ],
+    "command": null,
+    "workflow": null,
+    "environment": {
+      "nixpkgsRevision": "1559d3daa3ecc813a650b79375ea61b6741b8746",
+      "nixpkgsNarHash": "sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8=",
+      "tools": [
+        {
+          "name": "LilyPond",
+          "version": "2.26.0"
+        },
+        {
+          "name": "TiMidity++",
+          "version": "2.15.0"
+        },
+        {
+          "name": "FFmpeg",
+          "version": "8.1.2"
+        }
+      ]
+    },
+    "createdAt": "2026-08-03T22:03:17+01:00",
+    "notes": "Рендер sawtooth-мелодии с удвоенными MIDI-длительностями; команда пока не оформлена отдельным workflow."
+  }
+}

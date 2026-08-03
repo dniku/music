@@ -14,8 +14,15 @@
       forAllSystems = lib.genAttrs systems;
       pkgsFor = system: import nixpkgs { inherit system; };
 
+      repositoryRoot = ./.;
       tracksDirectory = ./tracks;
-      roCrateMetadata = ./ro-crate-metadata.json;
+      artifactProvenanceSchema = ./artifact-provenance.schema.json;
+      provenanceSidecars = lib.filter (path: lib.hasSuffix ".provenance.json" (toString path)) (
+        lib.filesystem.listFilesRecursive repositoryRoot
+      );
+      provenanceSidecarPaths = map (
+        path: lib.removePrefix "${toString repositoryRoot}/" (toString path)
+      ) provenanceSidecars;
       trackIds = builtins.attrNames (
         lib.filterAttrs (_: kind: kind == "directory") (builtins.readDir tracksDirectory)
       );
@@ -70,7 +77,6 @@
           }
           ''
             jq --exit-status \
-              --slurpfile crate ${roCrateMetadata} \
               --arg track_id "${trackId}" '
               .schemaVersion == 1
               and .canonicalRecording.musicbrainz.recordingMbid == $track_id
@@ -85,9 +91,9 @@
                 and (.durationSeconds | numbers | . > 0)
                 and (.sha256 | strings | test("^[0-9a-f]{64}$"))
                 and (.identity.status | strings | length > 0)
-                and .provenance.roCratePath == "../../../ro-crate-metadata.json"
-                and (.provenance.entityId as $entity_id
-                  | any($crate[0]["@graph"][]; .["@id"] == $entity_id))
+                and (.provenance.sidecarPath
+                  | strings
+                  | test("^audio/.+\\.provenance\\.json$"))
               ] | all)
             ' ${track.metadataPath} >/dev/null
             touch "$out"
@@ -97,70 +103,43 @@
         system:
         let
           pkgs = pkgsFor system;
+          sidecarManifest = pkgs.writeText "artifact-provenance-sidecars" (
+            lib.concatStringsSep "\n" provenanceSidecarPaths
+          );
         in
-        pkgs.runCommand "ro-crate-metadata-check"
+        pkgs.runCommand "artifact-provenance-sidecars-check"
           {
-            nativeBuildInputs = [ pkgs.jq ];
+            nativeBuildInputs = [
+              pkgs.check-jsonschema
+              pkgs.coreutils
+              pkgs.jq
+            ];
+            src = repositoryRoot;
           }
           ''
-            jq --exit-status '
-              def types:
-                .["@type"] | if type == "array" then . else [.] end;
-              def refs:
-                if type == "array" then . else [.] end | map(.["@id"]);
+            sidecar_count=0
+            while IFS= read -r relative_sidecar; do
+              [[ -n "$relative_sidecar" ]] || continue
+              sidecar="$src/$relative_sidecar"
+              sidecar_count=$((sidecar_count + 1))
+              check-jsonschema \
+                --schemafile ${artifactProvenanceSchema} \
+                "$sidecar"
 
-              .["@graph"] as $graph
-              | ($graph | map(.["@id"])) as $ids
-              | ($graph
-                  | map(select(.["@id"] == "./"))
-                  | first) as $root
-              | ($root.hasPart | refs) as $root_parts
-              | .["@context"] == "https://w3id.org/ro/crate/1.3/context"
-              and ($ids | length) == ($ids | unique | length)
-              and any($graph[];
-                .["@id"] == "ro-crate-metadata.json"
-                and .["@type"] == "CreativeWork"
-                and .about["@id"] == "./"
-                and .conformsTo["@id"] == "https://w3id.org/ro/crate/1.3")
-              and ($root["@type"] == "Dataset")
-              and ($root.name | strings | length > 0)
-              and ($root.description | strings | length > 0)
-              and ($root.datePublished | strings
-                | test("^[0-9]{4}-[0-9]{2}-[0-9]{2}$"))
-              and ([
-                $graph[]
-                | select(types | index("AudioObject"))
-                | . as $artifact
-                | (.localPath | strings | length > 0)
-                  and (.encodingFormat | strings | startswith("audio/"))
-                  and (.contentSize | strings | test("^[0-9]+$"))
-                  and (.duration | strings | test("^PT"))
-                  and (.sha256 | strings | test("^[0-9a-f]{64}$"))
-                  and ($root_parts | index($artifact["@id"]) != null)
-                  and any($graph[];
-                    .["@type"] == "CreateAction"
-                    and (.result | refs | index($artifact["@id"]) != null))
-              ] | all)
-              and ([
-                $graph[]
-                | select(.["@type"] == "CreateAction")
-                | (.name | strings | length > 0)
-                  and (.description | strings | length > 0)
-                  and (.object["@id"] | strings | length > 0)
-                  and (.result | refs | length > 0)
-              ] | all)
-              and any($graph[];
-                .["@id"] == "#download-blown-away-youtube-audio"
-                and .description == "nix run .#fetch-blown-away-reference"
-                and .instrument["@id"] == "#fetch-blown-away-reference-cac9410")
-              and any($graph[];
-                .["@id"] == "#extract-blown-away-original-solo"
-                and .description == "nix run .#extract-blown-away-solo"
-                and .instrument["@id"] == "#extract-blown-away-solo-cac9410")
-              and any($graph[];
-                .["@id"] == "#git-commit-cac9410"
-                and .value == "cac941078530dc1b5f2027bf5d9c167beeb9a55e")
-            ' ${roCrateMetadata} >/dev/null
+              artifact_name="$(jq --raw-output '.artifact.path' "$sidecar")"
+              expected_name="$artifact_name.provenance.json"
+              actual_name="$(basename "$sidecar")"
+              if [[ "$actual_name" != "$expected_name" ]]; then
+                echo "Sidecar name mismatch: $sidecar" >&2
+                echo "expected basename: $expected_name" >&2
+                exit 1
+              fi
+            done < ${sidecarManifest}
+
+            if (( sidecar_count == 0 )); then
+              echo "No artifact provenance sidecars found" >&2
+              exit 1
+            fi
             touch "$out"
           '';
 
@@ -253,6 +232,108 @@
             };
         in
         {
+          verify-provenance =
+            appFor "verify-provenance" "Validate provenance sidecars and their adjacent local audio artifacts"
+              [
+                pkgs.check-jsonschema
+                pkgs.coreutils
+                pkgs.ffmpeg
+                pkgs.findutils
+                pkgs.gawk
+                pkgs.jq
+              ]
+              ''
+                mapfile -d $'\0' sidecars < <(
+                  find tracks build \
+                    -type f \
+                    -name '*.provenance.json' \
+                    -print0 \
+                    | sort --zero-terminated
+                )
+
+                if (( ''${#sidecars[@]} == 0 )); then
+                  echo "No artifact provenance sidecars found" >&2
+                  exit 1
+                fi
+
+                mapfile -d $'\0' audio_artifacts < <(
+                  find tracks build \
+                    -type f \
+                    \( \
+                      -name '*.mp3' \
+                      -o -name '*.opus' \
+                      -o -name '*.webm' \
+                      -o -name '*.wav' \
+                    \) \
+                    -print0 \
+                    | sort --zero-terminated
+                )
+
+                for artifact_path in "''${audio_artifacts[@]}"; do
+                  sidecar="$artifact_path.provenance.json"
+                  if [[ ! -f "$sidecar" ]]; then
+                    echo "Missing provenance sidecar for $artifact_path" >&2
+                    exit 1
+                  fi
+                done
+
+                for sidecar in "''${sidecars[@]}"; do
+                  check-jsonschema \
+                    --schemafile ${artifactProvenanceSchema} \
+                    "$sidecar"
+
+                  artifact_name="$(jq --raw-output '.artifact.path' "$sidecar")"
+                  artifact_path="$(dirname "$sidecar")/$artifact_name"
+                  if [[ ! -f "$artifact_path" ]]; then
+                    echo "Missing artifact for $sidecar: $artifact_path" >&2
+                    exit 1
+                  fi
+
+                  expected_sha256="$(jq --raw-output '.artifact.sha256' "$sidecar")"
+                  actual_sha256="$(sha256sum "$artifact_path" | cut --delimiter=' ' --fields=1)"
+                  if [[ "$actual_sha256" != "$expected_sha256" ]]; then
+                    echo "SHA-256 mismatch for $artifact_path" >&2
+                    echo "expected: $expected_sha256" >&2
+                    echo "actual:   $actual_sha256" >&2
+                    exit 1
+                  fi
+
+                  expected_size="$(jq --raw-output '.artifact.sizeBytes' "$sidecar")"
+                  actual_size="$(stat --format='%s' "$artifact_path")"
+                  if [[ "$actual_size" != "$expected_size" ]]; then
+                    echo "Size mismatch for $artifact_path" >&2
+                    echo "expected: $expected_size" >&2
+                    echo "actual:   $actual_size" >&2
+                    exit 1
+                  fi
+
+                  expected_duration="$(jq --raw-output '.artifact.durationSeconds' "$sidecar")"
+                  actual_duration="$(
+                    ffprobe \
+                      -v error \
+                      -show_entries format=duration \
+                      -of default=noprint_wrappers=1:nokey=1 \
+                      "$artifact_path"
+                  )"
+                  if ! awk \
+                    -v expected="$expected_duration" \
+                    -v actual="$actual_duration" '
+                      BEGIN {
+                        difference = expected - actual
+                        if (difference < 0) difference = -difference
+                        exit difference > 0.002
+                      }
+                    '; then
+                    echo "Duration mismatch for $artifact_path" >&2
+                    echo "expected: $expected_duration" >&2
+                    echo "actual:   $actual_duration" >&2
+                    exit 1
+                  fi
+                done
+
+                echo "Verified ''${#sidecars[@]} audio artifacts and provenance sidecars"
+              '';
+
           fetch-blown-away-reference =
             appFor "fetch-blown-away-reference" "Fetch and verify the Blown Away YouTube audio reference"
               [

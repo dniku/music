@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../artifact-provenance.schema.json",
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "early-solo-candidate-extra-e7.mp3",
+    "role": "early_solo_legacy_audition",
+    "mediaType": "audio/mpeg",
+    "sizeBytes": 271033,
+    "durationSeconds": 12.4,
+    "sha256": "de2b86df7efa59037234e76013d1c0236a1f8e13e1c2bccdd5a289cea770d484"
+  },
+  "identity": {
+    "status": "not_applicable",
+    "relatedMusicbrainzRecordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533"
+  },
+  "provenance": {
+    "kind": "legacy_derived",
+    "reproducibility": "unknown",
+    "sources": [
+      {
+        "role": "notation_source",
+        "path": "../../../tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly",
+        "notes": "Точная версия нотного исходника на момент рендера неизвестна."
+      }
+    ],
+    "command": null,
+    "workflow": null,
+    "createdAt": "2026-08-02T16:46:03+01:00",
+    "notes": "Создано до введения воспроизводимых команд; точные версии инструментов не записаны."
+  }
+}

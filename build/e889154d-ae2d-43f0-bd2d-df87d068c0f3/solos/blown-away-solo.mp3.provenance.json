@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../artifact-provenance.schema.json",
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "blown-away-solo.mp3",
+    "role": "legacy_transcription_audition",
+    "mediaType": "audio/mpeg",
+    "sizeBytes": 223399,
+    "durationSeconds": 12.000979,
+    "sha256": "1ec1da0d5733ff3aef20ee95692799f24184cea13c579fa3c4eb5a3852bed80c"
+  },
+  "identity": {
+    "status": "not_applicable",
+    "relatedMusicbrainzRecordingMbid": "e889154d-ae2d-43f0-bd2d-df87d068c0f3"
+  },
+  "provenance": {
+    "kind": "legacy_derived",
+    "reproducibility": "unknown",
+    "sources": [
+      {
+        "role": "notation_source",
+        "path": "../../../tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly",
+        "notes": "Точная версия нотного исходника на момент рендера неизвестна."
+      }
+    ],
+    "command": null,
+    "workflow": null,
+    "createdAt": "2026-08-03T10:05:19+01:00",
+    "notes": "Создано до введения воспроизводимых команд; точные версии инструментов не записаны."
+  }
+}

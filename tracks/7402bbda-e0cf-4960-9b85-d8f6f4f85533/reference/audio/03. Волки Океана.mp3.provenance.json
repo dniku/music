@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../../artifact-provenance.schema.json",
+  "schemaVersion": 1,
+  "artifact": {
+    "path": "03. Волки Океана.mp3",
+    "role": "full_mix",
+    "mediaType": "audio/mpeg",
+    "sizeBytes": 15052666,
+    "durationSeconds": 335.660408,
+    "sha256": "37633b1684794052d0e1ca5ad333fd9aa2fc2cbb3fc0fa464110c42457429bbc"
+  },
+  "identity": {
+    "status": "matched",
+    "musicbrainzRecordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
+    "notes": "Совпадение подтверждено исполнителем, названием, годом, номером трека и длительностью."
+  },
+  "provenance": {
+    "kind": "user_supplied",
+    "reproducibility": "unknown",
+    "sources": [],
+    "command": null,
+    "workflow": null,
+    "createdAt": null,
+    "notes": "Файл передан пользователем; предшествующий URL и история перекодирования неизвестны."
+  }
+}
