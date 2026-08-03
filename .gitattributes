@@ -8,6 +8,7 @@
 
 *.mp3 binary
 *.opus binary
+*.webm binary
 *.wav binary
 
 # Preserve the user's spacing around chord annotations in source transcripts.

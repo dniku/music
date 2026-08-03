@@ -148,6 +148,107 @@
           ) trackAliases;
         in
         canonicalApps // aliasApps;
+
+      provenanceAppsFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+          trackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
+          sourcePath = "tracks/${trackId}/reference/audio/youtube-nDxJJ_aEt2g.webm";
+          sourceSha256 = "e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30";
+          soloPath = "build/${trackId}/solos/original-02m22.70-02m33.60.mp3";
+          soloSha256 = "47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709";
+          appFor =
+            name: description: runtimeInputs: text:
+            let
+              application = pkgs.writeShellApplication {
+                inherit name runtimeInputs text;
+              };
+            in
+            {
+              type = "app";
+              program = "${application}/bin/${name}";
+              meta.description = description;
+            };
+        in
+        {
+          fetch-blown-away-reference =
+            appFor "fetch-blown-away-reference" "Fetch and verify the Blown Away YouTube audio reference"
+              [
+                pkgs.coreutils
+                pkgs.yt-dlp
+              ]
+              ''
+                output_path=${lib.escapeShellArg sourcePath}
+                expected_sha256=${lib.escapeShellArg sourceSha256}
+
+                mkdir -p "$(dirname "$output_path")"
+                yt-dlp \
+                  --no-playlist \
+                  --format 251 \
+                  --no-overwrites \
+                  --output "$output_path" \
+                  'https://www.youtube.com/watch?v=nDxJJ_aEt2g'
+
+                actual_sha256="$(sha256sum "$output_path" | cut --delimiter=' ' --fields=1)"
+                if [[ "$actual_sha256" != "$expected_sha256" ]]; then
+                  echo "SHA-256 mismatch for $output_path" >&2
+                  echo "expected: $expected_sha256" >&2
+                  echo "actual:   $actual_sha256" >&2
+                  exit 1
+                fi
+              '';
+
+          extract-blown-away-solo =
+            appFor "extract-blown-away-solo" "Extract and verify the original Blown Away solo audition clip"
+              [
+                pkgs.coreutils
+                pkgs.ffmpeg
+              ]
+              ''
+                input_path=${lib.escapeShellArg sourcePath}
+                expected_input_sha256=${lib.escapeShellArg sourceSha256}
+                output_path=${lib.escapeShellArg soloPath}
+                expected_output_sha256=${lib.escapeShellArg soloSha256}
+                temporary_output="''${output_path%.mp3}.tmp.mp3"
+
+                actual_input_sha256="$(sha256sum "$input_path" | cut --delimiter=' ' --fields=1)"
+                if [[ "$actual_input_sha256" != "$expected_input_sha256" ]]; then
+                  echo "SHA-256 mismatch for $input_path" >&2
+                  echo "expected: $expected_input_sha256" >&2
+                  echo "actual:   $actual_input_sha256" >&2
+                  exit 1
+                fi
+
+                mkdir -p "$(dirname "$output_path")"
+                rm --force -- "$temporary_output"
+                ffmpeg \
+                  -nostdin \
+                  -hide_banner \
+                  -loglevel warning \
+                  -i "$input_path" \
+                  -ss 00:02:22.700 \
+                  -t 00:00:10.900 \
+                  -map 0:a:0 \
+                  -vn \
+                  -codec:a libmp3lame \
+                  -q:a 2 \
+                  -metadata 'title=Blown Away — original solo 2:22.70–2:33.60' \
+                  -metadata 'source=https://www.youtube.com/watch?v=nDxJJ_aEt2g' \
+                  -y \
+                  "$temporary_output"
+
+                actual_output_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
+                if [[ "$actual_output_sha256" != "$expected_output_sha256" ]]; then
+                  echo "SHA-256 mismatch for generated solo" >&2
+                  echo "expected: $expected_output_sha256" >&2
+                  echo "actual:   $actual_output_sha256" >&2
+                  rm --force -- "$temporary_output"
+                  exit 1
+                fi
+                mv -- "$temporary_output" "$output_path"
+              '';
+        };
     in
     {
       apps = forAllSystems (
@@ -156,6 +257,7 @@
           renderAll = renderAppFor system "render-music" trackIds;
         in
         renderTrackAppsFor system
+        // provenanceAppsFor system
         // {
           default = renderAll;
           render = renderAll;
