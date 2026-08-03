@@ -45,9 +45,6 @@
           "@id": "#volki-early-solo-extra-e7"
         },
         {
-          "@id": "#volki-early-solo-variant-g4-d5"
-        },
-        {
           "@id": "#volki-guitar-break-draft"
         },
         {
@@ -432,46 +429,6 @@
       "duration": "PT12.4S",
       "sha256": "de2b86df7efa59037234e76013d1c0236a1f8e13e1c2bccdd5a289cea770d484",
       "identifier": "sha256:de2b86df7efa59037234e76013d1c0236a1f8e13e1c2bccdd5a289cea770d484"
-    },
-    {
-      "@id": "#side-conversation-volki-early-solo-variant-g4-d5",
-      "@type": "CreativeWork",
-      "name": "Вариант нот раннего соло G4–D5 из параллельной рабочей сессии",
-      "description": "Отдельный исходный файл с нотами или командой генерации в репозитории не сохранён."
-    },
-    {
-      "@id": "#generate-volki-early-solo-variant-g4-d5",
-      "@type": "CreateAction",
-      "name": "Generate Волки Океана early solo G4–D5 variant",
-      "description": "Generated in a parallel working session; the exact command, tool versions and producing Git commit were not recorded.",
-      "endTime": "2026-08-03T10:40:49+01:00",
-      "actionStatus": {
-        "@id": "http://schema.org/CompletedActionStatus"
-      },
-      "object": {
-        "@id": "#side-conversation-volki-early-solo-variant-g4-d5"
-      },
-      "instrument": {
-        "@id": "#legacy-volki-audio-toolchain"
-      },
-      "result": {
-        "@id": "#volki-early-solo-variant-g4-d5"
-      }
-    },
-    {
-      "@id": "#volki-early-solo-variant-g4-d5",
-      "@type": [
-        "File",
-        "AudioObject"
-      ],
-      "name": "Волки Океана — раннее соло — вариант G4–D5",
-      "description": "Создан в параллельной рабочей сессии; точная команда и версии инструментов в той сессии не были записаны.",
-      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-variant-g4-d5.mp3",
-      "encodingFormat": "audio/mpeg",
-      "contentSize": "260427",
-      "duration": "PT14.63678S",
-      "sha256": "1a65e9295bed68d579c21c2ce1a260ca16b8c8fb7f4fbc1ca419e6af06db1cb4",
-      "identifier": "sha256:1a65e9295bed68d579c21c2ce1a260ca16b8c8fb7f4fbc1ca419e6af06db1cb4"
     },
     {
       "@id": "#volki-guitar-break-draft",
