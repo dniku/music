@@ -9,6 +9,7 @@
 | Основной ID | Алиас | Трек | Партитура |
 | --- | --- | --- | --- |
 | [MusicBrainz Recording `7402…5533`](https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533) | `atom-76--volki-okeana` | Атом-76 — «Волки Океана» | [`score.ly`](tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly) |
+| [MusicBrainz Recording `e889…c0f3`](https://musicbrainz.org/recording/e889154d-ae2d-43f0-bd2d-df87d068c0f3) | `moi-rakety-vverh--blown-away` | Мои Ракеты Вверх — «Blown Away» | [`score.ly`](tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly) |
 
 Каталог трека называется по его MusicBrainz Recording MBID. Он однозначно
 идентифицирует конкретную запись, к которой относятся таймкоды, аранжировка и

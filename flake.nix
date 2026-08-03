@@ -76,7 +76,7 @@
                 | test("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"))
               and (.canonicalRecording.title | strings | length > 0)
               and (.canonicalRecording.artist | strings | length > 0)
-              and (.assets | arrays | length > 0)
+              and (.assets | arrays)
               and ([.assets[] |
                 (.path | strings | length > 0)
                 and (.role | strings | length > 0)

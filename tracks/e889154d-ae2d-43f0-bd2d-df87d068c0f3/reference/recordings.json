@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-08-02",
+  "canonicalRecording": {
+    "title": "Blown Away",
+    "artist": "Мои Ракеты Вверх",
+    "musicbrainz": {
+      "recordingMbid": "e889154d-ae2d-43f0-bd2d-df87d068c0f3",
+      "artistMbid": "3523a07d-e1e1-47af-8590-7a439e13f361",
+      "releaseMbid": "00ff38ab-630e-4e7e-a692-b78c47c56cd5",
+      "releaseGroupMbid": "dacbafff-ed43-47f5-9599-07e69c1f9bf5",
+      "releaseTrackMbid": "88821b52-b4cd-4efb-b084-9d277524df8a",
+      "releaseTitle": "Littoral",
+      "releaseYear": 2016,
+      "releaseCountry": "XW",
+      "trackNumber": 1,
+      "catalogDurationMs": 189100,
+      "isrc": null,
+      "workMbid": null
+    }
+  },
+  "assets": []
+}
