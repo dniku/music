@@ -96,6 +96,7 @@ Recording MBID обозначает конкретную запись, а SHA-25
 ```console
 nix run .#fetch-blown-away-reference
 nix run .#extract-blown-away-solo
+nix run .#extract-volki-early-solo
 ```
 
 Запись provenance указывает эту команду и Git-коммит с её реализацией.

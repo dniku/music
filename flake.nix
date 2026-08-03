@@ -229,11 +229,16 @@
         system:
         let
           pkgs = pkgsFor system;
-          trackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
-          sourcePath = "tracks/${trackId}/reference/audio/youtube-nDxJJ_aEt2g.webm";
-          sourceSha256 = "e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30";
-          soloPath = "build/${trackId}/solos/original-02m22.70-02m33.60.mp3";
-          soloSha256 = "47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709";
+          blownAwayTrackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
+          blownAwaySourcePath = "tracks/${blownAwayTrackId}/reference/audio/youtube-nDxJJ_aEt2g.webm";
+          blownAwaySourceSha256 = "e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30";
+          blownAwaySoloPath = "build/${blownAwayTrackId}/solos/original-02m22.70-02m33.60.mp3";
+          blownAwaySoloSha256 = "47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709";
+          volkiTrackId = "7402bbda-e0cf-4960-9b85-d8f6f4f85533";
+          volkiSourcePath = "tracks/${volkiTrackId}/reference/audio/03. Волки Океана.mp3";
+          volkiSourceSha256 = "37633b1684794052d0e1ca5ad333fd9aa2fc2cbb3fc0fa464110c42457429bbc";
+          volkiEarlySoloPath = "build/${volkiTrackId}/solos/original-00m58.80-01m10.80.mp3";
+          volkiEarlySoloSha256 = "3129d75f0863eb8771ec69e178d2639109d112ad09598febd59e34af9a3086f6";
           appFor =
             name: description: runtimeInputs: text:
             let
@@ -255,8 +260,8 @@
                 pkgs.yt-dlp
               ]
               ''
-                output_path=${lib.escapeShellArg sourcePath}
-                expected_sha256=${lib.escapeShellArg sourceSha256}
+                output_path=${lib.escapeShellArg blownAwaySourcePath}
+                expected_sha256=${lib.escapeShellArg blownAwaySourceSha256}
 
                 mkdir -p "$(dirname "$output_path")"
                 yt-dlp \
@@ -282,10 +287,10 @@
                 pkgs.ffmpeg
               ]
               ''
-                input_path=${lib.escapeShellArg sourcePath}
-                expected_input_sha256=${lib.escapeShellArg sourceSha256}
-                output_path=${lib.escapeShellArg soloPath}
-                expected_output_sha256=${lib.escapeShellArg soloSha256}
+                input_path=${lib.escapeShellArg blownAwaySourcePath}
+                expected_input_sha256=${lib.escapeShellArg blownAwaySourceSha256}
+                output_path=${lib.escapeShellArg blownAwaySoloPath}
+                expected_output_sha256=${lib.escapeShellArg blownAwaySoloSha256}
                 temporary_output="''${output_path%.mp3}.tmp.mp3"
 
                 actual_input_sha256="$(sha256sum "$input_path" | cut --delimiter=' ' --fields=1)"
@@ -317,6 +322,55 @@
                 actual_output_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
                 if [[ "$actual_output_sha256" != "$expected_output_sha256" ]]; then
                   echo "SHA-256 mismatch for generated solo" >&2
+                  echo "expected: $expected_output_sha256" >&2
+                  echo "actual:   $actual_output_sha256" >&2
+                  rm --force -- "$temporary_output"
+                  exit 1
+                fi
+                mv -- "$temporary_output" "$output_path"
+              '';
+
+          extract-volki-early-solo =
+            appFor "extract-volki-early-solo" "Extract and verify the original Volki Okeana early solo clip"
+              [
+                pkgs.coreutils
+                pkgs.ffmpeg
+              ]
+              ''
+                input_path=${lib.escapeShellArg volkiSourcePath}
+                expected_input_sha256=${lib.escapeShellArg volkiSourceSha256}
+                output_path=${lib.escapeShellArg volkiEarlySoloPath}
+                expected_output_sha256=${lib.escapeShellArg volkiEarlySoloSha256}
+                temporary_output="''${output_path%.mp3}.tmp.mp3"
+
+                actual_input_sha256="$(sha256sum "$input_path" | cut --delimiter=' ' --fields=1)"
+                if [[ "$actual_input_sha256" != "$expected_input_sha256" ]]; then
+                  echo "SHA-256 mismatch for $input_path" >&2
+                  echo "expected: $expected_input_sha256" >&2
+                  echo "actual:   $actual_input_sha256" >&2
+                  exit 1
+                fi
+
+                mkdir -p "$(dirname "$output_path")"
+                rm --force -- "$temporary_output"
+                ffmpeg \
+                  -nostdin \
+                  -hide_banner \
+                  -loglevel warning \
+                  -i "$input_path" \
+                  -ss 00:00:58.800 \
+                  -t 00:00:12.000 \
+                  -map 0:a:0 \
+                  -vn \
+                  -codec:a libmp3lame \
+                  -q:a 2 \
+                  -metadata 'title=Волки Океана — оригинальное раннее соло 0:58.80–1:10.80' \
+                  -y \
+                  "$temporary_output"
+
+                actual_output_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
+                if [[ "$actual_output_sha256" != "$expected_output_sha256" ]]; then
+                  echo "SHA-256 mismatch for generated early solo" >&2
                   echo "expected: $expected_output_sha256" >&2
                   echo "actual:   $actual_output_sha256" >&2
                   rm --force -- "$temporary_output"
