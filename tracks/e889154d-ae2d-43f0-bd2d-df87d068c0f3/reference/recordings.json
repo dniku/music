@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-08-02",
+  "verifiedAt": "2026-08-03",
   "canonicalRecording": {
     "title": "Blown Away",
     "artist": "Мои Ракеты Вверх",
@@ -19,5 +19,38 @@
       "workMbid": null
     }
   },
-  "assets": []
+  "assets": [
+    {
+      "path": "audio/youtube-nDxJJ_aEt2g.webm",
+      "role": "full_mix_reference",
+      "durationSeconds": 199.541,
+      "sha256": "e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30",
+      "identity": {
+        "status": "unmatched_variant",
+        "recordingMbid": null,
+        "relatedRecordingMbid": "e889154d-ae2d-43f0-bd2d-df87d068c0f3",
+        "reason": "The YouTube audio is 10.441 seconds longer than the 189.1-second catalog recording; title and artist alone do not prove that it is the same MusicBrainz Recording."
+      },
+      "source": {
+        "kind": "youtube",
+        "videoId": "nDxJJ_aEt2g",
+        "url": "https://www.youtube.com/watch?v=nDxJJ_aEt2g",
+        "title": "Мои Ракеты Вверх - Blown Away",
+        "channelName": "Sergey Sukhov",
+        "channelId": "UCYeyJY64OHds14RP4bI9vmA",
+        "uploadDate": "2020-04-29"
+      },
+      "segments": [
+        {
+          "label": "solo",
+          "startSeconds": 142.7,
+          "endSeconds": 153.6
+        }
+      ],
+      "provenance": {
+        "roCratePath": "../../../ro-crate-metadata.json",
+        "entityId": "#blown-away-youtube-audio"
+      }
+    }
+  ]
 }

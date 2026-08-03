@@ -1,0 +1,579 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.3/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.3"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "Музыкальные транскрипции",
+      "description": "Партитуры, аудиореференсы и прослушивания с машиночитаемым происхождением цифровых артефактов.",
+      "datePublished": "2026-08-01",
+      "dateModified": "2026-08-03",
+      "license": "Лицензия репозитория и включённых музыкальных материалов не указана; права на исходные записи сохраняются за их правообладателями.",
+      "hasPart": [
+        {
+          "@id": "flake.nix"
+        },
+        {
+          "@id": "flake.lock"
+        },
+        {
+          "@id": "tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly"
+        },
+        {
+          "@id": "tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly"
+        },
+        {
+          "@id": "#volki-full-mix"
+        },
+        {
+          "@id": "#volki-instrumental-reference"
+        },
+        {
+          "@id": "#volki-early-solo-draft"
+        },
+        {
+          "@id": "#volki-early-solo-extra-e7"
+        },
+        {
+          "@id": "#volki-early-solo-variant-g4-d5"
+        },
+        {
+          "@id": "#volki-guitar-break-draft"
+        },
+        {
+          "@id": "#volki-intro-synth"
+        },
+        {
+          "@id": "#volki-synth-solo-repeated"
+        },
+        {
+          "@id": "#blown-away-youtube-audio"
+        },
+        {
+          "@id": "#blown-away-solo-audition"
+        },
+        {
+          "@id": "#blown-away-original-solo-clip"
+        }
+      ]
+    },
+    {
+      "@id": "flake.nix",
+      "@type": [
+        "File",
+        "SoftwareSourceCode",
+        "ComputationalWorkflow"
+      ],
+      "name": "Nix flake workflows",
+      "description": "Pinned rendering, acquisition and conversion workflows for repository artifacts.",
+      "encodingFormat": "text/plain",
+      "programmingLanguage": {
+        "@id": "#nix-language"
+      },
+      "hasPart": [
+        {
+          "@id": "#fetch-blown-away-reference-cac9410"
+        },
+        {
+          "@id": "#extract-blown-away-solo-cac9410"
+        }
+      ]
+    },
+    {
+      "@id": "flake.lock",
+      "@type": "File",
+      "name": "Nix flake lock file",
+      "description": "Pins nixpkgs for the executable workflows.",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@id": "#nix-language",
+      "@type": [
+        "ComputerLanguage",
+        "SoftwareApplication"
+      ],
+      "name": "Nix",
+      "url": "https://nixos.org/",
+      "version": "2.34.8"
+    },
+    {
+      "@id": "#nixpkgs-1559d3d",
+      "@type": "SoftwareSourceCode",
+      "name": "nixpkgs",
+      "url": "https://github.com/NixOS/nixpkgs/commit/1559d3daa3ecc813a650b79375ea61b6741b8746",
+      "version": "1559d3daa3ecc813a650b79375ea61b6741b8746",
+      "identifier": "narHash:sha256-LQy14TZp77TwbQf40gg1V3jo8FwJG0jGDkAH+zRHqg8="
+    },
+    {
+      "@id": "#yt-dlp-2026.07.04",
+      "@type": "SoftwareApplication",
+      "name": "yt-dlp",
+      "url": "https://github.com/yt-dlp/yt-dlp",
+      "version": "2026.07.04"
+    },
+    {
+      "@id": "#ffmpeg-8.1.2",
+      "@type": "SoftwareApplication",
+      "name": "FFmpeg",
+      "url": "https://ffmpeg.org/",
+      "version": "8.1.2"
+    },
+    {
+      "@id": "#git-commit-cac9410",
+      "@type": "PropertyValue",
+      "name": "Git commit",
+      "propertyID": "https://git-scm.com/docs/gitglossary#def_commit",
+      "value": "cac941078530dc1b5f2027bf5d9c167beeb9a55e"
+    },
+    {
+      "@id": "#fetch-blown-away-reference-cac9410",
+      "@type": [
+        "SoftwareSourceCode",
+        "ComputationalWorkflow"
+      ],
+      "name": "Fetch and verify the Blown Away YouTube audio reference",
+      "isPartOf": {
+        "@id": "flake.nix"
+      },
+      "identifier": {
+        "@id": "#git-commit-cac9410"
+      },
+      "version": "cac941078530dc1b5f2027bf5d9c167beeb9a55e",
+      "programmingLanguage": {
+        "@id": "#nix-language"
+      },
+      "softwareRequirements": [
+        {
+          "@id": "#nixpkgs-1559d3d"
+        },
+        {
+          "@id": "#yt-dlp-2026.07.04"
+        }
+      ]
+    },
+    {
+      "@id": "#extract-blown-away-solo-cac9410",
+      "@type": [
+        "SoftwareSourceCode",
+        "ComputationalWorkflow"
+      ],
+      "name": "Extract and verify the original Blown Away solo audition clip",
+      "isPartOf": {
+        "@id": "flake.nix"
+      },
+      "identifier": {
+        "@id": "#git-commit-cac9410"
+      },
+      "version": "cac941078530dc1b5f2027bf5d9c167beeb9a55e",
+      "programmingLanguage": {
+        "@id": "#nix-language"
+      },
+      "softwareRequirements": [
+        {
+          "@id": "#nixpkgs-1559d3d"
+        },
+        {
+          "@id": "#ffmpeg-8.1.2"
+        }
+      ]
+    },
+    {
+      "@id": "https://www.youtube.com/watch?v=nDxJJ_aEt2g",
+      "@type": "VideoObject",
+      "name": "Мои Ракеты Вверх - Blown Away",
+      "identifier": "nDxJJ_aEt2g",
+      "url": "https://www.youtube.com/watch?v=nDxJJ_aEt2g",
+      "uploadDate": "2020-04-29",
+      "duration": "PT3M20S",
+      "creator": {
+        "@id": "https://www.youtube.com/channel/UCYeyJY64OHds14RP4bI9vmA"
+      }
+    },
+    {
+      "@id": "https://www.youtube.com/channel/UCYeyJY64OHds14RP4bI9vmA",
+      "@type": "Person",
+      "name": "Sergey Sukhov"
+    },
+    {
+      "@id": "#blown-away-youtube-audio",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Blown Away — YouTube audio reference",
+      "description": "Native format 251 audio-only stream downloaded without transcoding.",
+      "localPath": "tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm",
+      "encodingFormat": "audio/webm",
+      "contentSize": "3054107",
+      "duration": "PT3M19.541S",
+      "sha256": "e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30",
+      "identifier": "sha256:e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30",
+      "mainEntityOfPage": {
+        "@id": "https://www.youtube.com/watch?v=nDxJJ_aEt2g"
+      }
+    },
+    {
+      "@id": "#download-blown-away-youtube-audio",
+      "@type": "CreateAction",
+      "name": "Download Blown Away audio reference",
+      "description": "nix run .#fetch-blown-away-reference",
+      "endTime": "2026-08-03T10:28:47+01:00",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "object": {
+        "@id": "https://www.youtube.com/watch?v=nDxJJ_aEt2g"
+      },
+      "instrument": {
+        "@id": "#fetch-blown-away-reference-cac9410"
+      },
+      "result": {
+        "@id": "#blown-away-youtube-audio"
+      }
+    },
+    {
+      "@id": "#blown-away-original-solo-clip",
+      "@type": [
+        "File",
+        "AudioObject",
+        "Clip"
+      ],
+      "name": "Blown Away — original solo 2:22.70–2:33.60",
+      "description": "MP3 audition clip extracted from the downloaded YouTube audio reference.",
+      "localPath": "build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "264453",
+      "duration": "PT10.9S",
+      "startOffset": 142.7,
+      "endOffset": 153.6,
+      "sha256": "47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709",
+      "identifier": "sha256:47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709",
+      "isBasedOn": {
+        "@id": "#blown-away-youtube-audio"
+      }
+    },
+    {
+      "@id": "#extract-blown-away-original-solo",
+      "@type": "CreateAction",
+      "name": "Extract Blown Away solo at 2:22.70–2:33.60",
+      "description": "nix run .#extract-blown-away-solo",
+      "endTime": "2026-08-03T10:28:49+01:00",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "object": {
+        "@id": "#blown-away-youtube-audio"
+      },
+      "instrument": {
+        "@id": "#extract-blown-away-solo-cac9410"
+      },
+      "result": {
+        "@id": "#blown-away-original-solo-clip"
+      }
+    },
+    {
+      "@id": "#direct-user-handoff-volki",
+      "@type": "Dataset",
+      "name": "Аудиофайлы «Волков Океана», переданные пользователем",
+      "description": "Файлы были предоставлены напрямую при начале работы. Предшествующий URL, команда получения и история перекодирования неизвестны."
+    },
+    {
+      "@id": "#volki-full-mix",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Атом-76 — Волки Океана — полная запись",
+      "localPath": "tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки Океана.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "15052666",
+      "duration": "PT5M35.660408S",
+      "sha256": "37633b1684794052d0e1ca5ad333fd9aa2fc2cbb3fc0fa464110c42457429bbc",
+      "identifier": "sha256:37633b1684794052d0e1ca5ad333fd9aa2fc2cbb3fc0fa464110c42457429bbc",
+      "about": {
+        "@id": "https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533"
+      }
+    },
+    {
+      "@id": "#volki-instrumental-reference",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Атом-76 — Волки Океана — инструментальный референс",
+      "description": "Вероятный YouTube ID 2Goi7VNlL7I присутствует только в имени переданного файла и не был проверен.",
+      "localPath": "tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus",
+      "encodingFormat": "audio/ogg",
+      "contentSize": "5501716",
+      "duration": "PT5M35.7675S",
+      "sha256": "6774e9f2206b78351e18114a201ad6989595d14386bd21b3d2dbed011307f7a4",
+      "identifier": [
+        "sha256:6774e9f2206b78351e18114a201ad6989595d14386bd21b3d2dbed011307f7a4",
+        "unverified-filename-youtube-id:2Goi7VNlL7I"
+      ],
+      "isBasedOn": {
+        "@id": "https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533"
+      }
+    },
+    {
+      "@id": "#receive-volki-reference-audio",
+      "@type": "CreateAction",
+      "name": "Receive user-supplied Волки Океана reference audio",
+      "description": "Imported from files supplied directly by the user; no upstream acquisition or conversion command is known.",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "object": {
+        "@id": "#direct-user-handoff-volki"
+      },
+      "result": [
+        {
+          "@id": "#volki-full-mix"
+        },
+        {
+          "@id": "#volki-instrumental-reference"
+        }
+      ]
+    },
+    {
+      "@id": "https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533",
+      "@type": "MusicRecording",
+      "name": "Волки Океана",
+      "byArtist": {
+        "@id": "https://musicbrainz.org/artist/1344ed95-93b9-4b48-b125-4e885117ab4b"
+      }
+    },
+    {
+      "@id": "https://musicbrainz.org/artist/1344ed95-93b9-4b48-b125-4e885117ab4b",
+      "@type": "MusicGroup",
+      "name": "Атом-76"
+    },
+    {
+      "@id": "tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly",
+      "@type": [
+        "File",
+        "SoftwareSourceCode"
+      ],
+      "name": "Волки Океана — LilyPond score",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#legacy-volki-audio-toolchain",
+      "@type": "SoftwareApplication",
+      "name": "Unrecorded legacy LilyPond-to-MP3 audition toolchain",
+      "version": "unknown"
+    },
+    {
+      "@id": "#volki-legacy-audition-renders",
+      "@type": "CreateAction",
+      "name": "Render legacy Волки Океана audition clips",
+      "description": "The clips were generated during transcription work before executable provenance was introduced. Their note source is retained, but the exact command, tool versions and producing Git commit were not recorded.",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "object": {
+        "@id": "tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly"
+      },
+      "instrument": {
+        "@id": "#legacy-volki-audio-toolchain"
+      },
+      "result": [
+        {
+          "@id": "#volki-early-solo-draft"
+        },
+        {
+          "@id": "#volki-early-solo-extra-e7"
+        },
+        {
+          "@id": "#volki-guitar-break-draft"
+        },
+        {
+          "@id": "#volki-intro-synth"
+        },
+        {
+          "@id": "#volki-synth-solo-repeated"
+        }
+      ]
+    },
+    {
+      "@id": "#volki-early-solo-draft",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Волки Океана — раннее соло — прежний черновик",
+      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-00m58.80-01m10.80-draft.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "154059",
+      "duration": "PT6.6S",
+      "sha256": "a781b8b66dea91b4686f9838b4a4ab70dab92c4bbe15088faa17127351c9af6c",
+      "identifier": "sha256:a781b8b66dea91b4686f9838b4a4ab70dab92c4bbe15088faa17127351c9af6c"
+    },
+    {
+      "@id": "#volki-early-solo-extra-e7",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Волки Океана — раннее соло — кандидат extra E7",
+      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-candidate-extra-e7.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "271033",
+      "duration": "PT12.4S",
+      "sha256": "de2b86df7efa59037234e76013d1c0236a1f8e13e1c2bccdd5a289cea770d484",
+      "identifier": "sha256:de2b86df7efa59037234e76013d1c0236a1f8e13e1c2bccdd5a289cea770d484"
+    },
+    {
+      "@id": "#side-conversation-volki-early-solo-variant-g4-d5",
+      "@type": "CreativeWork",
+      "name": "Вариант нот раннего соло G4–D5 из параллельной рабочей сессии",
+      "description": "Отдельный исходный файл с нотами или командой генерации в репозитории не сохранён."
+    },
+    {
+      "@id": "#generate-volki-early-solo-variant-g4-d5",
+      "@type": "CreateAction",
+      "name": "Generate Волки Океана early solo G4–D5 variant",
+      "description": "Generated in a parallel working session; the exact command, tool versions and producing Git commit were not recorded.",
+      "endTime": "2026-08-03T10:40:49+01:00",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "object": {
+        "@id": "#side-conversation-volki-early-solo-variant-g4-d5"
+      },
+      "instrument": {
+        "@id": "#legacy-volki-audio-toolchain"
+      },
+      "result": {
+        "@id": "#volki-early-solo-variant-g4-d5"
+      }
+    },
+    {
+      "@id": "#volki-early-solo-variant-g4-d5",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Волки Океана — раннее соло — вариант G4–D5",
+      "description": "Создан в параллельной рабочей сессии; точная команда и версии инструментов в той сессии не были записаны.",
+      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-variant-g4-d5.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "260427",
+      "duration": "PT14.63678S",
+      "sha256": "1a65e9295bed68d579c21c2ce1a260ca16b8c8fb7f4fbc1ca419e6af06db1cb4",
+      "identifier": "sha256:1a65e9295bed68d579c21c2ce1a260ca16b8c8fb7f4fbc1ca419e6af06db1cb4"
+    },
+    {
+      "@id": "#volki-guitar-break-draft",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Волки Океана — проигрыш гитары — черновик",
+      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "144676",
+      "duration": "PT6.6S",
+      "sha256": "ee904f04048a1bee22b45be29006f513690e5e867b68fd7fe86e28a44be36701",
+      "identifier": "sha256:ee904f04048a1bee22b45be29006f513690e5e867b68fd7fe86e28a44be36701"
+    },
+    {
+      "@id": "#volki-intro-synth",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Волки Океана — вступление — прослушивание",
+      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "244591",
+      "duration": "PT10.9S",
+      "sha256": "4be574b1b95fa1d2fdab5060c95e07e2d6e2ee27030df92d691b300470b51719",
+      "identifier": "sha256:4be574b1b95fa1d2fdab5060c95e07e2d6e2ee27030df92d691b300470b51719"
+    },
+    {
+      "@id": "#volki-synth-solo-repeated",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Волки Океана — повторяющееся синтезаторное соло — прослушивание",
+      "localPath": "build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "269174",
+      "duration": "PT12.4S",
+      "sha256": "33e7795384c224a02683762a254c11c067747cc5da8a2830476df41cf09ce85a",
+      "identifier": "sha256:33e7795384c224a02683762a254c11c067747cc5da8a2830476df41cf09ce85a"
+    },
+    {
+      "@id": "tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly",
+      "@type": [
+        "File",
+        "SoftwareSourceCode"
+      ],
+      "name": "Blown Away — LilyPond solo score",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "#legacy-blown-away-audio-toolchain",
+      "@type": "SoftwareApplication",
+      "name": "Unrecorded legacy LilyPond-to-MP3 audition toolchain",
+      "version": "unknown"
+    },
+    {
+      "@id": "#blown-away-legacy-audition-render",
+      "@type": "CreateAction",
+      "name": "Render legacy Blown Away transcription audition",
+      "description": "This audition was generated before executable provenance was introduced. The LilyPond note source is retained, but the exact command, tool versions and producing Git commit were not recorded.",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "object": {
+        "@id": "tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly"
+      },
+      "instrument": {
+        "@id": "#legacy-blown-away-audio-toolchain"
+      },
+      "result": {
+        "@id": "#blown-away-solo-audition"
+      }
+    },
+    {
+      "@id": "#blown-away-solo-audition",
+      "@type": [
+        "File",
+        "AudioObject"
+      ],
+      "name": "Blown Away — imported solo transcription audition",
+      "localPath": "build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3",
+      "encodingFormat": "audio/mpeg",
+      "contentSize": "223399",
+      "duration": "PT12.000979S",
+      "sha256": "1ec1da0d5733ff3aef20ee95692799f24184cea13c579fa3c4eb5a3852bed80c",
+      "identifier": "sha256:1ec1da0d5733ff3aef20ee95692799f24184cea13c579fa3c4eb5a3852bed80c"
+    },
+    {
+      "@id": "https://musicbrainz.org/recording/e889154d-ae2d-43f0-bd2d-df87d068c0f3",
+      "@type": "MusicRecording",
+      "name": "Blown Away",
+      "byArtist": {
+        "@id": "https://musicbrainz.org/artist/3523a07d-e1e1-47af-8590-7a439e13f361"
+      }
+    },
+    {
+      "@id": "https://musicbrainz.org/artist/3523a07d-e1e1-47af-8590-7a439e13f361",
+      "@type": "MusicGroup",
+      "name": "Мои Ракеты Вверх"
+    }
+  ]
+}

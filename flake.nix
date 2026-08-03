@@ -15,6 +15,7 @@
       pkgsFor = system: import nixpkgs { inherit system; };
 
       tracksDirectory = ./tracks;
+      roCrateMetadata = ./ro-crate-metadata.json;
       trackIds = builtins.attrNames (
         lib.filterAttrs (_: kind: kind == "directory") (builtins.readDir tracksDirectory)
       );
@@ -69,6 +70,7 @@
           }
           ''
             jq --exit-status \
+              --slurpfile crate ${roCrateMetadata} \
               --arg track_id "${trackId}" '
               .schemaVersion == 1
               and .canonicalRecording.musicbrainz.recordingMbid == $track_id
@@ -83,8 +85,82 @@
                 and (.durationSeconds | numbers | . > 0)
                 and (.sha256 | strings | test("^[0-9a-f]{64}$"))
                 and (.identity.status | strings | length > 0)
+                and .provenance.roCratePath == "../../../ro-crate-metadata.json"
+                and (.provenance.entityId as $entity_id
+                  | any($crate[0]["@graph"][]; .["@id"] == $entity_id))
               ] | all)
             ' ${track.metadataPath} >/dev/null
+            touch "$out"
+          '';
+
+      provenanceFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+        in
+        pkgs.runCommand "ro-crate-metadata-check"
+          {
+            nativeBuildInputs = [ pkgs.jq ];
+          }
+          ''
+            jq --exit-status '
+              def types:
+                .["@type"] | if type == "array" then . else [.] end;
+              def refs:
+                if type == "array" then . else [.] end | map(.["@id"]);
+
+              .["@graph"] as $graph
+              | ($graph | map(.["@id"])) as $ids
+              | ($graph
+                  | map(select(.["@id"] == "./"))
+                  | first) as $root
+              | ($root.hasPart | refs) as $root_parts
+              | .["@context"] == "https://w3id.org/ro/crate/1.3/context"
+              and ($ids | length) == ($ids | unique | length)
+              and any($graph[];
+                .["@id"] == "ro-crate-metadata.json"
+                and .["@type"] == "CreativeWork"
+                and .about["@id"] == "./"
+                and .conformsTo["@id"] == "https://w3id.org/ro/crate/1.3")
+              and ($root["@type"] == "Dataset")
+              and ($root.name | strings | length > 0)
+              and ($root.description | strings | length > 0)
+              and ($root.datePublished | strings
+                | test("^[0-9]{4}-[0-9]{2}-[0-9]{2}$"))
+              and ([
+                $graph[]
+                | select(types | index("AudioObject"))
+                | . as $artifact
+                | (.localPath | strings | length > 0)
+                  and (.encodingFormat | strings | startswith("audio/"))
+                  and (.contentSize | strings | test("^[0-9]+$"))
+                  and (.duration | strings | test("^PT"))
+                  and (.sha256 | strings | test("^[0-9a-f]{64}$"))
+                  and ($root_parts | index($artifact["@id"]) != null)
+                  and any($graph[];
+                    .["@type"] == "CreateAction"
+                    and (.result | refs | index($artifact["@id"]) != null))
+              ] | all)
+              and ([
+                $graph[]
+                | select(.["@type"] == "CreateAction")
+                | (.name | strings | length > 0)
+                  and (.description | strings | length > 0)
+                  and (.object["@id"] | strings | length > 0)
+                  and (.result | refs | length > 0)
+              ] | all)
+              and any($graph[];
+                .["@id"] == "#download-blown-away-youtube-audio"
+                and .description == "nix run .#fetch-blown-away-reference"
+                and .instrument["@id"] == "#fetch-blown-away-reference-cac9410")
+              and any($graph[];
+                .["@id"] == "#extract-blown-away-original-solo"
+                and .description == "nix run .#extract-blown-away-solo"
+                and .instrument["@id"] == "#extract-blown-away-solo-cac9410")
+              and any($graph[];
+                .["@id"] == "#git-commit-cac9410"
+                and .value == "cac941078530dc1b5f2027bf5d9c167beeb9a55e")
+            ' ${roCrateMetadata} >/dev/null
             touch "$out"
           '';
 
@@ -280,7 +356,11 @@
             }) trackIds
           );
         in
-        scoreChecks // metadataChecks
+        scoreChecks
+        // metadataChecks
+        // {
+          provenance = provenanceFor system;
+        }
       );
 
       formatter = forAllSystems (system: (pkgsFor system).nixfmt);
