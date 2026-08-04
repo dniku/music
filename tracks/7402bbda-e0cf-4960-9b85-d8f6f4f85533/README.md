@@ -24,7 +24,10 @@
 
 ## Аудиореференсы
 
-Записи хранятся локально в `reference/audio/` и не добавляются в обычный Git. Их имена, длительности и контрольные суммы зафиксированы в [`reference/README.md`](reference/README.md), а MusicBrainz и локальные идентификаторы — в [`reference/recordings.json`](reference/recordings.json).
+Записи хранятся в DVC, а в обычный Git добавлены только `*.dvc`-указатели. Их
+имена, длительности и контрольные суммы зафиксированы в
+[`reference/README.md`](reference/README.md), а MusicBrainz и локальные
+идентификаторы — в [`reference/recordings.json`](reference/recordings.json).
 
 ## Состояние
 
@@ -34,16 +37,20 @@
 
 ## Рендеринг
 
-Из корня репозитория PDF собирается в `build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf`. Партитура рассчитана на две страницы портретной A4 и набрана по восемь коротких тактов в системе; две половины бриджа сохраняют группировку по семь тактов. Для команды можно использовать удобный алиас:
+Из корня репозитория PDF собирается в
+`build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf`. Партитура рассчитана
+на две страницы портретной A4 и набрана по восемь коротких тактов в системе;
+две половины бриджа сохраняют группировку по семь тактов. Основная команда
+воспроизводит также все отдельные прослушивания и оригинальный фрагмент:
 
 ```console
-nix run .#render-atom-76--volki-okeana
+nix run .#dvc -- repro tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/dvc.yaml
 ```
 
-Каноническая команда по Recording MBID:
+Только партитура:
 
 ```console
-nix run .#render-7402bbda-e0cf-4960-9b85-d8f6f4f85533
+nix run .#dvc -- repro tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/dvc.yaml:render-score
 ```
 
 Проверить воспроизводимую сборку в Nix store:
@@ -52,7 +59,8 @@ nix run .#render-7402bbda-e0cf-4960-9b85-d8f6f4f85533
 nix flake check
 ```
 
-Для диагностического PNG можно передать LilyPond дополнительные параметры:
+Для диагностического PNG низкоуровневой команде можно передать дополнительные
+параметры LilyPond:
 
 ```console
 nix run .#render-atom-76--volki-okeana -- --png -dresolution=144

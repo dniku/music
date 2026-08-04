@@ -17,17 +17,19 @@
 
 ## Рендеринг
 
-Из корня репозитория:
+Воспроизвести партитуру, MP3-транскрипцию, оригинальный фрагмент и оба
+стереосравнения:
 
 ```console
-nix run .#render-moi-rakety-vverh--blown-away
+nix run .#dvc -- repro tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/dvc.yaml
 ```
 
-Каноническая команда по Recording MBID:
+Только партитура:
 
 ```console
-nix run .#render-e889154d-ae2d-43f0-bd2d-df87d068c0f3
+nix run .#dvc -- repro tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/dvc.yaml:render-score
 ```
 
 PDF и MIDI создаются в
-`build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/`.
+`build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/`, а отдельные аудиофайлы — в
+его подкаталоге `solos/`.
