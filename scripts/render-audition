@@ -1,0 +1,63 @@
+if (( $# < 3 || $# > 4 )); then
+  echo "usage: render-audition SOURCE OUTPUT_PDF OUTPUT_MP3 [DURATION]" >&2
+  exit 2
+fi
+
+source_path="$(realpath "$1")"
+output_pdf="$(realpath --canonicalize-missing "$2")"
+output_mp3="$(realpath --canonicalize-missing "$3")"
+duration="${4:-}"
+source_directory="$(dirname "$source_path")"
+source_name="$(basename "$source_path")"
+
+mkdir -p /tmp/codex
+temporary_directory="$(mktemp --directory /tmp/codex/music-audition.XXXXXX)"
+trap 'rm --recursive --force -- "$temporary_directory"' EXIT
+
+export SOURCE_DATE_EPOCH=946684800
+
+(
+  cd "$source_directory"
+  lilypond --output="$temporary_directory/audition" "$source_name"
+)
+
+test -s "$temporary_directory/audition.pdf"
+test -s "$temporary_directory/audition.midi"
+
+qpdf \
+  --empty \
+  --pages "$temporary_directory/audition.pdf" 1-z \
+  -- \
+  --remove-info \
+  --remove-metadata \
+  --static-id \
+  "$temporary_directory/audition.normalized.pdf"
+mv -- \
+  "$temporary_directory/audition.normalized.pdf" \
+  "$temporary_directory/audition.pdf"
+
+timidity \
+  "$temporary_directory/audition.midi" \
+  --output-mode=w \
+  --output-file="$temporary_directory/audition.wav"
+
+duration_arguments=()
+if [[ -n "$duration" ]]; then
+  duration_arguments=(-t "$duration")
+fi
+
+ffmpeg \
+  -nostdin \
+  -hide_banner \
+  -loglevel warning \
+  -i "$temporary_directory/audition.wav" \
+  -map_metadata -1 \
+  -codec:a libmp3lame \
+  -q:a 2 \
+  "${duration_arguments[@]}" \
+  -y \
+  "$temporary_directory/audition.mp3"
+
+mkdir -p "$(dirname "$output_pdf")" "$(dirname "$output_mp3")"
+cp -- "$temporary_directory/audition.pdf" "$output_pdf"
+mv -- "$temporary_directory/audition.mp3" "$output_mp3"

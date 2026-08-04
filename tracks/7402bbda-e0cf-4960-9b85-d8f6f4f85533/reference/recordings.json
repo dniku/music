@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "verifiedAt": "2026-08-01",
   "canonicalRecording": {
     "title": "Волки Океана",
@@ -36,9 +36,6 @@
           "track number",
           "duration"
         ]
-      },
-      "provenance": {
-        "sidecarPath": "audio/03. Волки Океана.mp3.provenance.json"
       }
     },
     {
@@ -56,9 +53,6 @@
         "kind": "youtubeVideoIdFromFilename",
         "value": "2Goi7VNlL7I",
         "verified": false
-      },
-      "provenance": {
-        "sidecarPath": "audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus.provenance.json"
       }
     }
   ]

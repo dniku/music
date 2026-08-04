@@ -5,6 +5,11 @@
 *.nix text eol=lf
 *.json text eol=lf
 *.tsv text eol=lf
+*.yaml text eol=lf
+*.dvc text eol=lf
+
+# DVC preserves spaces when folding long commands and paths in generated locks.
+dvc.lock whitespace=-trailing-space
 
 *.mp3 binary
 *.opus binary

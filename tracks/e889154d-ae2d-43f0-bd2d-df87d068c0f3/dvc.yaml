@@ -1,0 +1,119 @@
+artifacts:
+  blown-away-full-mix:
+    path: tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
+    type: audio-reference
+    desc: YouTube-аудиопоток format 251 без перекодирования
+    labels: [reference, full-mix, youtube]
+  blown-away-score:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.pdf
+    type: score
+    desc: Основная транскрипция соло
+    labels: [score, lilypond]
+  blown-away-score-midi:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi
+    type: midi
+    desc: MIDI основной транскрипции соло
+    labels: [midi, transcription]
+  blown-away-solo:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
+    type: audition
+    desc: Прослушивание основной транскрипции соло
+    labels: [audition, guitar]
+  blown-away-original-solo:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+    type: audio-reference
+    desc: Оригинальный диапазон соло 2:22.70–2:33.60
+    labels: [reference, excerpt]
+  blown-away-comparison:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right.mp3
+    type: comparison
+    desc: Оригинал слева, основная транскрипция справа
+    labels: [comparison, stereo]
+  blown-away-comparison-slow:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right-slow.mp3
+    type: comparison
+    desc: Стереосравнение, замедленное до 75 процентов
+    labels: [comparison, stereo, slowed]
+
+stages:
+  fetch-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#fetch-youtube-audio --
+      https://www.youtube.com/watch?v=nDxJJ_aEt2g 251
+      e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30
+      tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/fetch-youtube-audio
+    outs:
+      - tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-e889154d-ae2d-43f0-bd2d-df87d068c0f3
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.pdf
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi
+  render-solo-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
+      10.9
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
+  extract-solo-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#extract-audio --
+      tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
+      00:02:22.700 00:00:10.900
+      'Blown Away — original solo 2:22.70–2:33.60'
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/extract-audio
+      - tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+  compare-solo:
+    wdir: ../..
+    cmd: >-
+      nix run .#stereo-compare --
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/stereo-compare
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right.mp3
+  slow-comparison:
+    wdir: ../..
+    cmd: >-
+      nix run .#slow-audio --
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right.mp3
+      0.75
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right-slow.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/slow-audio
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right.mp3
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right-slow.mp3

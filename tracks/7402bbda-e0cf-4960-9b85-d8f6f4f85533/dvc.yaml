@@ -1,0 +1,163 @@
+artifacts:
+  volki-okeana-full-mix:
+    path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки Океана.mp3
+    type: audio-reference
+    desc: Пользовательская полная запись с вокалом
+    labels: [reference, full-mix]
+  volki-okeana-instrumental:
+    path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus
+    type: audio-reference
+    desc: Пользовательский инструментальный или караоке-микс
+    labels: [reference, instrumental]
+  volki-okeana-score:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf
+    type: score
+    desc: Основная нотная сетка с текстом
+    labels: [score, lilypond]
+  volki-okeana-score-midi:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.midi
+    type: midi
+    desc: MIDI установленных сольных партий из основной партитуры
+    labels: [midi, transcription]
+  volki-okeana-original-early-solo:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/original-00m58.80-01m10.80.mp3
+    type: audio-reference
+    desc: Оригинальный диапазон раннего соло 0:58.80–1:10.80
+    labels: [reference, excerpt]
+  volki-okeana-intro:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.mp3
+    type: audition
+    desc: Прослушивание вступления
+    labels: [audition, synth]
+  volki-okeana-early-solo:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.mp3
+    type: audition
+    desc: Прослушивание принятого раннего соло
+    labels: [audition, synth]
+  volki-okeana-early-solo-mordents:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.mp3
+    type: audition
+    desc: Альтернативное раннее соло с мордентами
+    labels: [audition, synth, alternate]
+  volki-okeana-synth-solo:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.mp3
+    type: audition
+    desc: Прослушивание повторяющегося синтезаторного соло
+    labels: [audition, synth]
+  volki-okeana-guitar-break:
+    path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.mp3
+    type: audition
+    desc: Прослушивание чернового гитарного проигрыша на 3:11
+    labels: [audition, guitar, draft]
+
+stages:
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-7402bbda-e0cf-4960-9b85-d8f6f4f85533
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.midi
+  extract-early-solo-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#extract-audio --
+      'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки Океана.mp3'
+      00:00:58.800 00:00:12.000
+      'Волки Океана — оригинальное раннее соло 0:58.80–1:10.80'
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/original-00m58.80-01m10.80.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/extract-audio
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки Океана.mp3
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/original-00m58.80-01m10.80.mp3
+  render-intro:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.pdf
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.mp3
+      10.9
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.pdf
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.mp3
+  render-early-solo:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.pdf
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.mp3
+      12.4
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.pdf
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.mp3
+  render-early-solo-mordents:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.pdf
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.mp3
+      14.63678
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.pdf
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.mp3
+  render-synth-solo:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.pdf
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.mp3
+      12.4
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.pdf
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.mp3
+  render-guitar-break:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.pdf
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.mp3
+      6.6
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
+    outs:
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.pdf
+      - build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.mp3

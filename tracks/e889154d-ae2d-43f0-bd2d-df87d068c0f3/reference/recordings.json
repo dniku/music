@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "verifiedAt": "2026-08-03",
   "canonicalRecording": {
     "title": "Blown Away",
@@ -46,10 +46,7 @@
           "startSeconds": 142.7,
           "endSeconds": 153.6
         }
-      ],
-      "provenance": {
-        "sidecarPath": "audio/youtube-nDxJJ_aEt2g.webm.provenance.json"
-      }
+      ]
     }
   ]
 }

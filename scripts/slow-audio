@@ -1,0 +1,26 @@
+if (( $# != 3 )); then
+  echo "usage: slow-audio INPUT_AUDIO TEMPO_FACTOR OUTPUT_MP3" >&2
+  exit 2
+fi
+
+input_audio="$1"
+tempo_factor="$2"
+output_mp3="$3"
+temporary_output="$output_mp3.partial.mp3"
+
+mkdir -p "$(dirname "$output_mp3")"
+rm --force -- "$temporary_output"
+
+ffmpeg \
+  -nostdin \
+  -hide_banner \
+  -loglevel warning \
+  -i "$input_audio" \
+  -filter:a "atempo=$tempo_factor" \
+  -map_metadata -1 \
+  -codec:a libmp3lame \
+  -q:a 2 \
+  -y \
+  "$temporary_output"
+
+mv -- "$temporary_output" "$output_mp3"

@@ -1,0 +1,30 @@
+if (( $# != 4 )); then
+  echo "usage: fetch-youtube-audio URL FORMAT EXPECTED_SHA256 OUTPUT" >&2
+  exit 2
+fi
+
+url="$1"
+format="$2"
+expected_sha256="$3"
+output_path="$4"
+temporary_output="$output_path.partial"
+
+mkdir -p "$(dirname "$output_path")"
+rm --force -- "$temporary_output"
+
+yt-dlp \
+  --no-playlist \
+  --format "$format" \
+  --no-overwrites \
+  --output "$temporary_output" \
+  "$url"
+
+actual_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
+if [[ "$actual_sha256" != "$expected_sha256" ]]; then
+  echo "SHA-256 mismatch for downloaded audio" >&2
+  echo "expected: $expected_sha256" >&2
+  echo "actual:   $actual_sha256" >&2
+  exit 1
+fi
+
+mv -- "$temporary_output" "$output_path"

@@ -14,15 +14,7 @@
       forAllSystems = lib.genAttrs systems;
       pkgsFor = system: import nixpkgs { inherit system; };
 
-      repositoryRoot = ./.;
       tracksDirectory = ./tracks;
-      artifactProvenanceSchema = ./artifact-provenance.schema.json;
-      provenanceSidecars = lib.filter (path: lib.hasSuffix ".provenance.json" (toString path)) (
-        lib.filesystem.listFilesRecursive repositoryRoot
-      );
-      provenanceSidecarPaths = map (
-        path: lib.removePrefix "${toString repositoryRoot}/" (toString path)
-      ) provenanceSidecars;
       trackIds = builtins.attrNames (
         lib.filterAttrs (_: kind: kind == "directory") (builtins.readDir tracksDirectory)
       );
@@ -30,11 +22,12 @@
       tracks = lib.genAttrs trackIds (
         trackId:
         let
-          metadataPath = tracksDirectory + "/${trackId}/reference/recordings.json";
+          directory = tracksDirectory + "/${trackId}";
+          metadataPath = directory + "/reference/recordings.json";
         in
         {
-          score = tracksDirectory + "/${trackId}/score.ly";
-          inherit metadataPath;
+          score = directory + "/score.ly";
+          inherit directory metadataPath;
         }
       );
       trackAliases =
@@ -56,11 +49,27 @@
         in
         pkgs.runCommand "${trackId}-score"
           {
-            nativeBuildInputs = [ pkgs.lilypond ];
+            nativeBuildInputs = [
+              pkgs.lilypond
+              pkgs.qpdf
+            ];
           }
           ''
             mkdir -p "$out"
-            lilypond --output="$out/score" ${track.score}
+            export SOURCE_DATE_EPOCH=946684800
+            lilypond \
+              --include=${track.directory} \
+              --output="$out/score" \
+              ${track.score}
+            qpdf \
+              --empty \
+              --pages "$out/score.pdf" 1-z \
+              -- \
+              --remove-info \
+              --remove-metadata \
+              --static-id \
+              "$out/score.normalized.pdf"
+            mv -- "$out/score.normalized.pdf" "$out/score.pdf"
             test -s "$out/score.pdf"
             test -s "$out/score.midi"
           '';
@@ -78,7 +87,7 @@
           ''
             jq --exit-status \
               --arg track_id "${trackId}" '
-              .schemaVersion == 1
+              .schemaVersion == 2
               and .canonicalRecording.musicbrainz.recordingMbid == $track_id
               and ($track_id
                 | test("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"))
@@ -91,55 +100,8 @@
                 and (.durationSeconds | numbers | . > 0)
                 and (.sha256 | strings | test("^[0-9a-f]{64}$"))
                 and (.identity.status | strings | length > 0)
-                and (.provenance.sidecarPath
-                  | strings
-                  | test("^audio/.+\\.provenance\\.json$"))
               ] | all)
             ' ${track.metadataPath} >/dev/null
-            touch "$out"
-          '';
-
-      provenanceFor =
-        system:
-        let
-          pkgs = pkgsFor system;
-          sidecarManifest = pkgs.writeText "artifact-provenance-sidecars" (
-            lib.concatStringsSep "\n" provenanceSidecarPaths
-          );
-        in
-        pkgs.runCommand "artifact-provenance-sidecars-check"
-          {
-            nativeBuildInputs = [
-              pkgs.check-jsonschema
-              pkgs.coreutils
-              pkgs.jq
-            ];
-            src = repositoryRoot;
-          }
-          ''
-            sidecar_count=0
-            while IFS= read -r relative_sidecar; do
-              [[ -n "$relative_sidecar" ]] || continue
-              sidecar="$src/$relative_sidecar"
-              sidecar_count=$((sidecar_count + 1))
-              check-jsonschema \
-                --schemafile ${artifactProvenanceSchema} \
-                "$sidecar"
-
-              artifact_name="$(jq --raw-output '.artifact.path' "$sidecar")"
-              expected_name="$artifact_name.provenance.json"
-              actual_name="$(basename "$sidecar")"
-              if [[ "$actual_name" != "$expected_name" ]]; then
-                echo "Sidecar name mismatch: $sidecar" >&2
-                echo "expected basename: $expected_name" >&2
-                exit 1
-              fi
-            done < ${sidecarManifest}
-
-            if (( sidecar_count == 0 )); then
-              echo "No artifact provenance sidecars found" >&2
-              exit 1
-            fi
             touch "$out"
           '';
 
@@ -156,6 +118,7 @@
       renderCommandsFor = trackId: ''
         track_build_directory="build/${trackId}"
         mkdir -p "$track_build_directory"
+        export SOURCE_DATE_EPOCH=946684800
         rm --force -- \
           "$track_build_directory/score.pdf" \
           "$track_build_directory/score.midi" \
@@ -164,6 +127,17 @@
         lilypond \
           --output="$track_build_directory/score" \
           "tracks/${trackId}/score.ly"
+        qpdf \
+          --empty \
+          --pages "$track_build_directory/score.pdf" 1-z \
+          -- \
+          --remove-info \
+          --remove-metadata \
+          --static-id \
+          "$track_build_directory/score.normalized.pdf"
+        mv -- \
+          "$track_build_directory/score.normalized.pdf" \
+          "$track_build_directory/score.pdf"
         if (( $# > 0 )); then
           lilypond \
             "$@" \
@@ -178,7 +152,10 @@
           pkgs = pkgsFor system;
           application = pkgs.writeShellApplication {
             name = applicationName;
-            runtimeInputs = [ pkgs.lilypond ];
+            runtimeInputs = [
+              pkgs.lilypond
+              pkgs.qpdf
+            ];
             text = lib.concatMapStringsSep "\n" renderCommandsFor selectedTracks;
           };
         in
@@ -204,20 +181,10 @@
         in
         canonicalApps // aliasApps;
 
-      provenanceAppsFor =
+      artifactAppsFor =
         system:
         let
           pkgs = pkgsFor system;
-          blownAwayTrackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
-          blownAwaySourcePath = "tracks/${blownAwayTrackId}/reference/audio/youtube-nDxJJ_aEt2g.webm";
-          blownAwaySourceSha256 = "e5c03bed98e78f063fadad2bb7cfb761a44c4d525b6a07a8b63141e9c9d92f30";
-          blownAwaySoloPath = "build/${blownAwayTrackId}/solos/original-02m22.70-02m33.60.mp3";
-          blownAwaySoloSha256 = "47abee71a626ce79ef1c25e148a8972c2d4fdd7682fc57d9dbd66116957c8709";
-          volkiTrackId = "7402bbda-e0cf-4960-9b85-d8f6f4f85533";
-          volkiSourcePath = "tracks/${volkiTrackId}/reference/audio/03. Волки Океана.mp3";
-          volkiSourceSha256 = "37633b1684794052d0e1ca5ad333fd9aa2fc2cbb3fc0fa464110c42457429bbc";
-          volkiEarlySoloPath = "build/${volkiTrackId}/solos/original-00m58.80-01m10.80.mp3";
-          volkiEarlySoloSha256 = "3129d75f0863eb8771ec69e178d2639109d112ad09598febd59e34af9a3086f6";
           appFor =
             name: description: runtimeInputs: text:
             let
@@ -230,12 +197,20 @@
               program = "${application}/bin/${name}";
               meta.description = description;
             };
+          scriptAppFor =
+            name: description: runtimeInputs: script:
+            appFor name description runtimeInputs (builtins.readFile script);
         in
         {
-          verify-provenance =
-            appFor "verify-provenance" "Validate provenance sidecars and their adjacent local audio artifacts"
+          dvc = {
+            type = "app";
+            program = lib.getExe pkgs.dvc;
+            meta.description = "Run the pinned DVC command-line client";
+          };
+
+          verify-references =
+            appFor "verify-references" "Validate reference audio against recordings.json"
               [
-                pkgs.check-jsonschema
                 pkgs.coreutils
                 pkgs.ffmpeg
                 pkgs.findutils
@@ -243,222 +218,108 @@
                 pkgs.jq
               ]
               ''
-                mapfile -d $'\0' sidecars < <(
-                  find tracks build \
+                mapfile -d $'\0' metadata_files < <(
+                  find tracks \
                     -type f \
-                    -name '*.provenance.json' \
+                    -path '*/reference/recordings.json' \
                     -print0 \
                     | sort --zero-terminated
                 )
 
-                if (( ''${#sidecars[@]} == 0 )); then
-                  echo "No artifact provenance sidecars found" >&2
+                if (( ''${#metadata_files[@]} == 0 )); then
+                  echo "No recording metadata found" >&2
                   exit 1
                 fi
 
-                mapfile -d $'\0' audio_artifacts < <(
-                  find tracks build \
-                    -type f \
-                    \( \
-                      -name '*.mp3' \
-                      -o -name '*.opus' \
-                      -o -name '*.webm' \
-                      -o -name '*.wav' \
-                    \) \
-                    -print0 \
-                    | sort --zero-terminated
-                )
+                reference_count=0
+                for metadata_file in "''${metadata_files[@]}"; do
+                  reference_directory="$(dirname "$metadata_file")"
+                  while IFS= read -r asset; do
+                    relative_path="$(jq --raw-output '.path' <<<"$asset")"
+                    artifact_path="$reference_directory/$relative_path"
+                    reference_count=$((reference_count + 1))
 
-                for artifact_path in "''${audio_artifacts[@]}"; do
-                  sidecar="$artifact_path.provenance.json"
-                  if [[ ! -f "$sidecar" ]]; then
-                    echo "Missing provenance sidecar for $artifact_path" >&2
-                    exit 1
-                  fi
+                    if [[ ! -f "$artifact_path" ]]; then
+                      echo "Missing reference artifact: $artifact_path" >&2
+                      exit 1
+                    fi
+
+                    expected_sha256="$(jq --raw-output '.sha256' <<<"$asset")"
+                    actual_sha256="$(sha256sum "$artifact_path" | cut --delimiter=' ' --fields=1)"
+                    if [[ "$actual_sha256" != "$expected_sha256" ]]; then
+                      echo "SHA-256 mismatch for $artifact_path" >&2
+                      echo "expected: $expected_sha256" >&2
+                      echo "actual:   $actual_sha256" >&2
+                      exit 1
+                    fi
+
+                    expected_duration="$(jq --raw-output '.durationSeconds' <<<"$asset")"
+                    actual_duration="$(
+                      ffprobe \
+                        -v error \
+                        -show_entries format=duration \
+                        -of default=noprint_wrappers=1:nokey=1 \
+                        "$artifact_path"
+                    )"
+                    if ! awk \
+                      -v expected="$expected_duration" \
+                      -v actual="$actual_duration" '
+                        BEGIN {
+                          difference = expected - actual
+                          if (difference < 0) difference = -difference
+                          exit difference > 0.002
+                        }
+                      '; then
+                      echo "Duration mismatch for $artifact_path" >&2
+                      echo "expected: $expected_duration" >&2
+                      echo "actual:   $actual_duration" >&2
+                      exit 1
+                    fi
+                  done < <(jq --compact-output '.assets[]' "$metadata_file")
                 done
 
-                for sidecar in "''${sidecars[@]}"; do
-                  check-jsonschema \
-                    --schemafile ${artifactProvenanceSchema} \
-                    "$sidecar"
-
-                  artifact_name="$(jq --raw-output '.artifact.path' "$sidecar")"
-                  artifact_path="$(dirname "$sidecar")/$artifact_name"
-                  if [[ ! -f "$artifact_path" ]]; then
-                    echo "Missing artifact for $sidecar: $artifact_path" >&2
-                    exit 1
-                  fi
-
-                  expected_sha256="$(jq --raw-output '.artifact.sha256' "$sidecar")"
-                  actual_sha256="$(sha256sum "$artifact_path" | cut --delimiter=' ' --fields=1)"
-                  if [[ "$actual_sha256" != "$expected_sha256" ]]; then
-                    echo "SHA-256 mismatch for $artifact_path" >&2
-                    echo "expected: $expected_sha256" >&2
-                    echo "actual:   $actual_sha256" >&2
-                    exit 1
-                  fi
-
-                  expected_size="$(jq --raw-output '.artifact.sizeBytes' "$sidecar")"
-                  actual_size="$(stat --format='%s' "$artifact_path")"
-                  if [[ "$actual_size" != "$expected_size" ]]; then
-                    echo "Size mismatch for $artifact_path" >&2
-                    echo "expected: $expected_size" >&2
-                    echo "actual:   $actual_size" >&2
-                    exit 1
-                  fi
-
-                  expected_duration="$(jq --raw-output '.artifact.durationSeconds' "$sidecar")"
-                  actual_duration="$(
-                    ffprobe \
-                      -v error \
-                      -show_entries format=duration \
-                      -of default=noprint_wrappers=1:nokey=1 \
-                      "$artifact_path"
-                  )"
-                  if ! awk \
-                    -v expected="$expected_duration" \
-                    -v actual="$actual_duration" '
-                      BEGIN {
-                        difference = expected - actual
-                        if (difference < 0) difference = -difference
-                        exit difference > 0.002
-                      }
-                    '; then
-                    echo "Duration mismatch for $artifact_path" >&2
-                    echo "expected: $expected_duration" >&2
-                    echo "actual:   $actual_duration" >&2
-                    exit 1
-                  fi
-                done
-
-                echo "Verified ''${#sidecars[@]} audio artifacts and provenance sidecars"
+                echo "Verified $reference_count reference audio artifacts"
               '';
 
-          fetch-blown-away-reference =
-            appFor "fetch-blown-away-reference" "Fetch and verify the Blown Away YouTube audio reference"
+          fetch-youtube-audio =
+            scriptAppFor "fetch-youtube-audio" "Fetch and SHA-256 verify a YouTube audio stream"
               [
                 pkgs.coreutils
                 pkgs.yt-dlp
               ]
-              ''
-                output_path=${lib.escapeShellArg blownAwaySourcePath}
-                expected_sha256=${lib.escapeShellArg blownAwaySourceSha256}
+              ./scripts/fetch-youtube-audio;
 
-                mkdir -p "$(dirname "$output_path")"
-                yt-dlp \
-                  --no-playlist \
-                  --format 251 \
-                  --no-overwrites \
-                  --output "$output_path" \
-                  'https://www.youtube.com/watch?v=nDxJJ_aEt2g'
+          extract-audio = scriptAppFor "extract-audio" "Extract an exact audio range with FFmpeg" [
+            pkgs.coreutils
+            pkgs.ffmpeg
+          ] ./scripts/extract-audio;
 
-                actual_sha256="$(sha256sum "$output_path" | cut --delimiter=' ' --fields=1)"
-                if [[ "$actual_sha256" != "$expected_sha256" ]]; then
-                  echo "SHA-256 mismatch for $output_path" >&2
-                  echo "expected: $expected_sha256" >&2
-                  echo "actual:   $actual_sha256" >&2
-                  exit 1
-                fi
-              '';
+          render-audition = scriptAppFor "render-audition" "Render a LilyPond audition to PDF and MP3" [
+            pkgs.coreutils
+            pkgs.ffmpeg
+            pkgs.lilypond
+            pkgs.qpdf
+            pkgs.timidity
+          ] ./scripts/render-audition;
 
-          extract-blown-away-solo =
-            appFor "extract-blown-away-solo" "Extract and verify the original Blown Away solo audition clip"
+          render-midi-audition = scriptAppFor "render-midi-audition" "Render a MIDI file to an MP3 audition" [
+            pkgs.coreutils
+            pkgs.ffmpeg
+            pkgs.timidity
+          ] ./scripts/render-midi-audition;
+
+          stereo-compare =
+            scriptAppFor "stereo-compare" "Place two audio files in the left and right channels"
               [
                 pkgs.coreutils
                 pkgs.ffmpeg
               ]
-              ''
-                input_path=${lib.escapeShellArg blownAwaySourcePath}
-                expected_input_sha256=${lib.escapeShellArg blownAwaySourceSha256}
-                output_path=${lib.escapeShellArg blownAwaySoloPath}
-                expected_output_sha256=${lib.escapeShellArg blownAwaySoloSha256}
-                temporary_output="''${output_path%.mp3}.tmp.mp3"
+              ./scripts/stereo-compare;
 
-                actual_input_sha256="$(sha256sum "$input_path" | cut --delimiter=' ' --fields=1)"
-                if [[ "$actual_input_sha256" != "$expected_input_sha256" ]]; then
-                  echo "SHA-256 mismatch for $input_path" >&2
-                  echo "expected: $expected_input_sha256" >&2
-                  echo "actual:   $actual_input_sha256" >&2
-                  exit 1
-                fi
-
-                mkdir -p "$(dirname "$output_path")"
-                rm --force -- "$temporary_output"
-                ffmpeg \
-                  -nostdin \
-                  -hide_banner \
-                  -loglevel warning \
-                  -i "$input_path" \
-                  -ss 00:02:22.700 \
-                  -t 00:00:10.900 \
-                  -map 0:a:0 \
-                  -vn \
-                  -codec:a libmp3lame \
-                  -q:a 2 \
-                  -metadata 'title=Blown Away — original solo 2:22.70–2:33.60' \
-                  -metadata 'source=https://www.youtube.com/watch?v=nDxJJ_aEt2g' \
-                  -y \
-                  "$temporary_output"
-
-                actual_output_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
-                if [[ "$actual_output_sha256" != "$expected_output_sha256" ]]; then
-                  echo "SHA-256 mismatch for generated solo" >&2
-                  echo "expected: $expected_output_sha256" >&2
-                  echo "actual:   $actual_output_sha256" >&2
-                  rm --force -- "$temporary_output"
-                  exit 1
-                fi
-                mv -- "$temporary_output" "$output_path"
-              '';
-
-          extract-volki-early-solo =
-            appFor "extract-volki-early-solo" "Extract and verify the original Volki Okeana early solo clip"
-              [
-                pkgs.coreutils
-                pkgs.ffmpeg
-              ]
-              ''
-                input_path=${lib.escapeShellArg volkiSourcePath}
-                expected_input_sha256=${lib.escapeShellArg volkiSourceSha256}
-                output_path=${lib.escapeShellArg volkiEarlySoloPath}
-                expected_output_sha256=${lib.escapeShellArg volkiEarlySoloSha256}
-                temporary_output="''${output_path%.mp3}.tmp.mp3"
-
-                actual_input_sha256="$(sha256sum "$input_path" | cut --delimiter=' ' --fields=1)"
-                if [[ "$actual_input_sha256" != "$expected_input_sha256" ]]; then
-                  echo "SHA-256 mismatch for $input_path" >&2
-                  echo "expected: $expected_input_sha256" >&2
-                  echo "actual:   $actual_input_sha256" >&2
-                  exit 1
-                fi
-
-                mkdir -p "$(dirname "$output_path")"
-                rm --force -- "$temporary_output"
-                ffmpeg \
-                  -nostdin \
-                  -hide_banner \
-                  -loglevel warning \
-                  -i "$input_path" \
-                  -ss 00:00:58.800 \
-                  -t 00:00:12.000 \
-                  -map 0:a:0 \
-                  -vn \
-                  -codec:a libmp3lame \
-                  -q:a 2 \
-                  -metadata 'title=Волки Океана — оригинальное раннее соло 0:58.80–1:10.80' \
-                  -y \
-                  "$temporary_output"
-
-                actual_output_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
-                if [[ "$actual_output_sha256" != "$expected_output_sha256" ]]; then
-                  echo "SHA-256 mismatch for generated early solo" >&2
-                  echo "expected: $expected_output_sha256" >&2
-                  echo "actual:   $actual_output_sha256" >&2
-                  rm --force -- "$temporary_output"
-                  exit 1
-                fi
-                mv -- "$temporary_output" "$output_path"
-              '';
+          slow-audio = scriptAppFor "slow-audio" "Change audio tempo while preserving pitch" [
+            pkgs.coreutils
+            pkgs.ffmpeg
+          ] ./scripts/slow-audio;
         };
     in
     {
@@ -468,7 +329,7 @@
           renderAll = renderAppFor system "render-music" trackIds;
         in
         renderTrackAppsFor system
-        // provenanceAppsFor system
+        // artifactAppsFor system
         // {
           default = renderAll;
           render = renderAll;
@@ -491,11 +352,7 @@
             }) trackIds
           );
         in
-        scoreChecks
-        // metadataChecks
-        // {
-          provenance = provenanceFor system;
-        }
+        scoreChecks // metadataChecks
       );
 
       formatter = forAllSystems (system: (pkgsFor system).nixfmt);

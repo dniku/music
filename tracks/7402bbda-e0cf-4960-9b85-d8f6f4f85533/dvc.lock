@@ -1,0 +1,245 @@
+schema: '2.0'
+stages:
+  render-score:
+    cmd: nix run .#render-7402bbda-e0cf-4960-9b85-d8f6f4f85533
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      hash: md5
+      md5: 93a7acbe6e7690ece7e04716a4be2d5a
+      size: 1287
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
+      hash: md5
+      md5: 057d73979d1ff618d317e330aa9066f3
+      size: 9243
+    outs:
+    - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.midi
+      hash: md5
+      md5: 43e98a325b4f2dd52f207c54c53c3281
+      size: 1120
+    - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf
+      hash: md5
+      md5: c526d0cb29136515b315c09454182ac9
+      size: 295719
+  extract-early-solo-reference:
+    cmd: nix run .#extract-audio -- 
+      'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
+      Океана.mp3' 00:00:58.800 00:00:12.000 'Волки Океана — оригинальное раннее 
+      соло 0:58.80–1:10.80' 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/original-00m58.80-01m10.80.mp3
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/extract-audio
+      hash: md5
+      md5: 7b093548b1799bbbc49fd7b42539dd6a
+      size: 587
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. 
+        Волки Океана.mp3
+      hash: md5
+      md5: 10cb5a23d6de7dce3a358e1199a03ad2
+      size: 15052666
+    outs:
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/original-00m58.80-01m10.80.mp3
+      hash: md5
+      md5: 68d2c9dcb7378661d8f02009ca655650
+      size: 300715
+  render-intro:
+    cmd: nix run .#render-audition -- 
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.pdf 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.mp3 10.9
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/render-audition
+      hash: md5
+      md5: 496da5cbed5128ce76be3c9c45e85ea0
+      size: 1657
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      hash: md5
+      md5: 93a7acbe6e7690ece7e04716a4be2d5a
+      size: 1287
+    - path: 
+        tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
+      hash: md5
+      md5: e973e255b20fd6b2684ef7335cdbbd9b
+      size: 356
+    outs:
+    - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.mp3
+      hash: md5
+      md5: 5d1403b5b493a0fb313824a34f3c2554
+      size: 223133
+    - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.pdf
+      hash: md5
+      md5: 32121f663e24c0d8d862846f10ddd0dc
+      size: 76855
+  render-early-solo:
+    cmd: nix run .#render-audition -- 
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.pdf 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.mp3 12.4
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/render-audition
+      hash: md5
+      md5: 496da5cbed5128ce76be3c9c45e85ea0
+      size: 1657
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      hash: md5
+      md5: 93a7acbe6e7690ece7e04716a4be2d5a
+      size: 1287
+    - path: 
+        tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
+      hash: md5
+      md5: 6f5ae076e12899db45be55ac6f11bbf0
+      size: 275
+    outs:
+    - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.mp3
+      hash: md5
+      md5: 77e3c800d42a8a79c48af8f2a8e3bfb5
+      size: 237449
+    - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.pdf
+      hash: md5
+      md5: f47a3f3d0db126863b34da2e0e84f03d
+      size: 64861
+  render-early-solo-mordents:
+    cmd: nix run .#render-audition -- 
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.pdf 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.mp3 
+      14.63678
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/render-audition
+      hash: md5
+      md5: 496da5cbed5128ce76be3c9c45e85ea0
+      size: 1657
+    - path: 
+        tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
+      hash: md5
+      md5: 21be275e012a853993d03f83c8ec125a
+      size: 739
+    outs:
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.mp3
+      hash: md5
+      md5: 73187cc044cdbe884e7cdcdcc07d7855
+      size: 252772
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo-mordents.pdf
+      hash: md5
+      md5: 0bef957e49651f55483f349cf1d9c146
+      size: 59350
+  render-synth-solo:
+    cmd: nix run .#render-audition -- 
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.pdf 
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.mp3 
+      12.4
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/render-audition
+      hash: md5
+      md5: 496da5cbed5128ce76be3c9c45e85ea0
+      size: 1657
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      hash: md5
+      md5: 93a7acbe6e7690ece7e04716a4be2d5a
+      size: 1287
+    - path: 
+        tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
+      hash: md5
+      md5: 2df06405f1a3cca1c0940d560c612347
+      size: 293
+    outs:
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.mp3
+      hash: md5
+      md5: a68558791f4ccb6bf3b4eef76ab3d46e
+      size: 248224
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.pdf
+      hash: md5
+      md5: 7a40768cbf2ef1882b74fbfd7b756560
+      size: 71721
+  render-guitar-break:
+    cmd: nix run .#render-audition -- 
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.pdf
+      build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.mp3
+      6.6
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/render-audition
+      hash: md5
+      md5: 496da5cbed5128ce76be3c9c45e85ea0
+      size: 1657
+    - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
+      hash: md5
+      md5: 93a7acbe6e7690ece7e04716a4be2d5a
+      size: 1287
+    - path: 
+        tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
+      hash: md5
+      md5: 8376a60b564bc93cf2cbc5142616774b
+      size: 386
+    outs:
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.mp3
+      hash: md5
+      md5: a78402d1f7b23a97565dc6900816ab8e
+      size: 134406
+    - path: 
+        build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.pdf
+      hash: md5
+      md5: 57ea49d9d2cc591d8d884157ee027b9f
+      size: 80173

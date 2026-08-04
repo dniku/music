@@ -1,0 +1,37 @@
+if (( $# < 2 || $# > 3 )); then
+  echo "usage: render-midi-audition INPUT_MIDI OUTPUT_MP3 [DURATION]" >&2
+  exit 2
+fi
+
+input_midi="$(realpath "$1")"
+output_mp3="$(realpath --canonicalize-missing "$2")"
+duration="${3:-}"
+
+mkdir -p /tmp/codex
+temporary_directory="$(mktemp --directory /tmp/codex/music-midi.XXXXXX)"
+trap 'rm --recursive --force -- "$temporary_directory"' EXIT
+
+timidity \
+  "$input_midi" \
+  --output-mode=w \
+  --output-file="$temporary_directory/audition.wav"
+
+duration_arguments=()
+if [[ -n "$duration" ]]; then
+  duration_arguments=(-t "$duration")
+fi
+
+ffmpeg \
+  -nostdin \
+  -hide_banner \
+  -loglevel warning \
+  -i "$temporary_directory/audition.wav" \
+  -map_metadata -1 \
+  -codec:a libmp3lame \
+  -q:a 2 \
+  "${duration_arguments[@]}" \
+  -y \
+  "$temporary_directory/audition.mp3"
+
+mkdir -p "$(dirname "$output_mp3")"
+mv -- "$temporary_directory/audition.mp3" "$output_mp3"
