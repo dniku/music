@@ -15,24 +15,29 @@
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Blown Away"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Соло — транскрипция из MusicXML · ♩ = 120"
+    "Соло — рабочая транскрипция · ♩ = 171"
   composer = \markup \override #'(font-name . "DejaVu Sans")
     "Мои Ракеты Вверх"
   tagline = ##f
 }
 
-% Converted with musicxml2ly and cleaned by hand: the source contained an empty
-% bass staff and 27 trailing empty measures. The source did not specify tempo.
+% The pitch sequence originated in the user-supplied MusicXML. Durations were
+% revised against the reference recording and promoted from rhythm candidate 2.
 soloNotes = \absolute {
   \key g \major
   \time 4/4
-  \tempo 4 = 120
+  \tempo 4 = 171
+  \cadenzaOn
 
-  e'4 e' fis' e' |
-  fis' g' fis' fis' |
-  e' c' fis' g' |
-  fis' c'' b' c'' |
-  b' e'' es'' e'' |
+  e'4. e'4
+  fis'8 e' fis' g' fis'4 fis'8 e'
+  c'2.
+  fis'4 g' fis'2~ fis'8
+  c''8 b' c'' b'2~ b'8
+  e''4.
+  es''1~ es''4.
+  e''1.
+
   \bar "|."
 }
 
