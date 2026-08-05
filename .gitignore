@@ -18,3 +18,6 @@
 
 # Local development state.
 /.direnv/
+
+# Durable local DVC remote. Restic backs it up; Git tracks only DVC metadata.
+/artifact-store/
