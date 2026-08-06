@@ -165,3 +165,72 @@ stages:
       hash: md5
       md5: 9ff514e3d4ddddc8498869d22427de92
       size: 344838
+  render-shorter-penultimate:
+    cmd: nix run .#render-audition -- 
+      tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/sources/solos/shorter-penultimate.ly
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.pdf 
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3 
+      10.9
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/render-audition
+      hash: md5
+      md5: 496da5cbed5128ce76be3c9c45e85ea0
+      size: 1657
+    - path: 
+        tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/sources/solos/shorter-penultimate.ly
+      hash: md5
+      md5: 354c12cbb5f8774237c030185f3a853c
+      size: 1124
+    outs:
+    - path: 
+        build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3
+      hash: md5
+      md5: e16d8a653df8c14708baaa3c02c928db
+      size: 201589
+    - path: 
+        build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.pdf
+      hash: md5
+      md5: 0a60c7cb4ca6a9fd5ddaa14f85a2d532
+      size: 70473
+  compare-shorter-penultimate:
+    cmd: nix run .#stereo-compare -- 
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3 
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-shorter-penultimate-right.mp3
+    deps:
+    - path: 
+        build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+      hash: md5
+      md5: dbee200e7a0da779681817af74f0adf1
+      size: 264391
+    - path: 
+        build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3
+      hash: md5
+      md5: e16d8a653df8c14708baaa3c02c928db
+      size: 201589
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: ae28e8e105ce9e68721c16c78ad09826
+      size: 12539
+    - path: scripts/stereo-compare
+      hash: md5
+      md5: 69a81979aa23926344bb8093b9cdde8f
+      size: 725
+    outs:
+    - path: 
+        build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-shorter-penultimate-right.mp3
+      hash: md5
+      md5: f1dc98ab171d1aabd2abe35fbbf617bf
+      size: 263064

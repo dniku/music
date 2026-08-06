@@ -29,6 +29,11 @@ artifacts:
     type: comparison
     desc: Оригинал слева, основная транскрипция справа
     labels: [comparison, stereo]
+  blown-away-shorter-penultimate-comparison:
+    path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-shorter-penultimate-right.mp3
+    type: comparison
+    desc: Оригинал слева, вариант с укороченной предпоследней нотой справа
+    labels: [comparison, stereo, alternate]
   blown-away-comparison-slow:
     path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right-slow.mp3
     type: comparison
@@ -73,6 +78,22 @@ stages:
       - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi
     outs:
       - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
+  render-shorter-penultimate:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/sources/solos/shorter-penultimate.ly
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.pdf
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3
+      10.9
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/sources/solos/shorter-penultimate.ly
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.pdf
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3
   extract-solo-reference:
     wdir: ../..
     cmd: >-
@@ -103,6 +124,21 @@ stages:
       - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/blown-away-solo.mp3
     outs:
       - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-transcription-right.mp3
+  compare-shorter-penultimate:
+    wdir: ../..
+    cmd: >-
+      nix run .#stereo-compare --
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3
+      build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-shorter-penultimate-right.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/stereo-compare
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/shorter-penultimate.mp3
+    outs:
+      - build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/comparison-original-left-shorter-penultimate-right.mp3
   slow-comparison:
     wdir: ../..
     cmd: >-
