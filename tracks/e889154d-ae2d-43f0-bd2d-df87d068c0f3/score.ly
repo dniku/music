@@ -35,8 +35,10 @@ soloNotes = \absolute {
   fis'4 g' fis'2~ fis'8
   c''8 b' c'' b'2~ b'8
   e''4.
-  es''1~ es''4.
+  % Accepted after A/B comparison: the penultimate note is one whole note.
+  es''1
   e''1.
+  r4.
 
   \bar "|."
 }
