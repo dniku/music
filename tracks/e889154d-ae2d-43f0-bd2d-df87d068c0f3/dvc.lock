@@ -37,8 +37,8 @@ stages:
       size: 12539
     - path: tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly
       hash: md5
-      md5: d32d46875759767e50c281e4e9b78157
-      size: 1189
+      md5: 08b8cba4d47566fee5dc4a3fff3e159e
+      size: 1411
     outs:
     - path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi
       hash: md5
@@ -46,8 +46,8 @@ stages:
       size: 329
     - path: build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.pdf
       hash: md5
-      md5: 92a7065032c7221afeba03ba84206a29
-      size: 69766
+      md5: 99c325784afdc85d05b04d16096e39c5
+      size: 70554
   render-solo-audition:
     cmd: nix run .#render-midi-audition -- 
       build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.midi 

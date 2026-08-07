@@ -27,20 +27,17 @@ soloNotes = \absolute {
   \key g \major
   \time 4/4
   \tempo 4 = 171
-  \cadenzaOn
+  \partial 4.
 
-  e'4. e'4
-  fis'8 e' fis' g' fis'4 fis'8 e'
-  c'2.
-  fis'4 g' fis'2~ fis'8
-  c''8 b' c'' b'2~ b'8
-  e''4.
+  e'4. |
+  e'4 fis'8 e' fis' g' fis'4 |
+  fis'8 e' c'2. |
+  fis'4 g' fis'2~ |
+  fis'8 c'' b' c'' b'2~ |
   % Accepted after A/B comparison: the penultimate note is one whole note.
-  es''1
-  e''1.
-  r4.
-
-  \bar "|."
+  b'8 e''4. es''2~ |
+  es''2 e''2~ |
+  e''1
 }
 
 \score {
@@ -48,12 +45,23 @@ soloNotes = \absolute {
     midiInstrument = "overdriven guitar"
   } {
     \soloNotes
+    \bar "|."
   }
 
   \layout {
     indent = #0
     ragged-right = ##f
   }
+}
 
+% Keep the 10.9-second comparison window without printing its trailing silence.
+\score {
+  \new Staff \with {
+    midiInstrument = "overdriven guitar"
+  } {
+    \soloNotes
+    \cadenzaOn
+    r4.
+  }
   \midi { }
 }
