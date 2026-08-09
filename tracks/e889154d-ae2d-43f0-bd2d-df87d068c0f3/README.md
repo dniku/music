@@ -17,7 +17,7 @@
 Аудиореференс с YouTube и точный диапазон оригинального соло `2:22.70–2:33.60`
 описаны в [`reference/README.md`](reference/README.md). Готовый фрагмент для
 прослушивания находится в
-[`build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3`](../../build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/solos/original-02m22.70-02m33.60.mp3).
+[`build/moi-rakety-vverh--blown-away/solos/original-02m22.70-02m33.60.mp3`](../../build/moi-rakety-vverh--blown-away/solos/original-02m22.70-02m33.60.mp3).
 
 ## Рендеринг
 
@@ -35,5 +35,5 @@ nix run .#dvc -- repro tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/dvc.yaml:rend
 ```
 
 PDF и MIDI создаются в
-`build/e889154d-ae2d-43f0-bd2d-df87d068c0f3/`, а отдельные аудиофайлы — в
+`build/moi-rakety-vverh--blown-away/`, а отдельные аудиофайлы — в
 его подкаталоге `solos/`.

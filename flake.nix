@@ -35,11 +35,26 @@
           aliases = builtins.attrNames aliasCatalog.aliases;
           aliasedTrackIds = builtins.attrValues aliasCatalog.aliases;
         in
-        assert aliasCatalog.schemaVersion == 1;
+        assert aliasCatalog.schemaVersion == 2;
         assert lib.all (alias: alias != "default" && !(builtins.elem alias trackIds)) aliases;
         assert lib.all (alias: builtins.match "^[a-z0-9]+(-+[a-z0-9]+)*$" alias != null) aliases;
         assert lib.all (trackId: builtins.elem trackId trackIds) aliasedTrackIds;
         aliasCatalog.aliases;
+
+      primaryAliasesByTrackId =
+        let
+          primaryTrackIds = builtins.attrNames aliasCatalog.primaryAliases;
+        in
+        assert lib.all (trackId: builtins.hasAttr trackId aliasCatalog.primaryAliases) trackIds;
+        assert lib.all (trackId: builtins.elem trackId trackIds) primaryTrackIds;
+        assert lib.all (
+          trackId:
+          let
+            primaryAlias = aliasCatalog.primaryAliases.${trackId};
+          in
+          builtins.hasAttr primaryAlias trackAliases && trackAliases.${primaryAlias} == trackId
+        ) trackIds;
+        aliasCatalog.primaryAliases;
 
       scoreFor =
         system: trackId:
@@ -115,36 +130,41 @@
         in
         pkgs.linkFarm "music-scores" (lib.mapAttrsToList (name: path: { inherit name path; }) scores);
 
-      renderCommandsFor = trackId: ''
-        track_build_directory="build/${trackId}"
-        mkdir -p "$track_build_directory"
-        export SOURCE_DATE_EPOCH=946684800
-        rm --force -- \
-          "$track_build_directory/score.pdf" \
-          "$track_build_directory/score.midi" \
-          "$track_build_directory/score.png" \
-          "$track_build_directory"/score-page{1..99}.png
-        lilypond \
-          --output="$track_build_directory/score" \
-          "tracks/${trackId}/score.ly"
-        qpdf \
-          --empty \
-          --pages "$track_build_directory/score.pdf" 1-z \
-          -- \
-          --remove-info \
-          --remove-metadata \
-          --static-id \
-          "$track_build_directory/score.normalized.pdf"
-        mv -- \
-          "$track_build_directory/score.normalized.pdf" \
-          "$track_build_directory/score.pdf"
-        if (( $# > 0 )); then
+      renderCommandsFor =
+        trackId:
+        let
+          buildAlias = primaryAliasesByTrackId.${trackId};
+        in
+        ''
+          track_build_directory="build/${buildAlias}"
+          mkdir -p "$track_build_directory"
+          export SOURCE_DATE_EPOCH=946684800
+          rm --force -- \
+            "$track_build_directory/score.pdf" \
+            "$track_build_directory/score.midi" \
+            "$track_build_directory/score.png" \
+            "$track_build_directory"/score-page{1..99}.png
           lilypond \
-            "$@" \
             --output="$track_build_directory/score" \
             "tracks/${trackId}/score.ly"
-        fi
-      '';
+          qpdf \
+            --empty \
+            --pages "$track_build_directory/score.pdf" 1-z \
+            -- \
+            --remove-info \
+            --remove-metadata \
+            --static-id \
+            "$track_build_directory/score.normalized.pdf"
+          mv -- \
+            "$track_build_directory/score.normalized.pdf" \
+            "$track_build_directory/score.pdf"
+          if (( $# > 0 )); then
+            lilypond \
+              "$@" \
+              --output="$track_build_directory/score" \
+              "tracks/${trackId}/score.ly"
+          fi
+        '';
 
       renderAppFor =
         system: applicationName: selectedTracks:
