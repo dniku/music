@@ -34,6 +34,10 @@ verseLine = {
   c'1 | c' | c' | s2. c'4 |
 }
 
+postIntroAlignment = {
+  \repeat unfold 32 { s1 | }
+}
+
 earlySoloCue = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Раннее соло 0:58.80–1:10.80"
@@ -69,6 +73,7 @@ guitarBreakCue = {
 vocalGuide = {
   \global
   \introAlignment
+  \postIntroAlignment
   \set Score.currentBarNumber = #1
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
@@ -106,6 +111,7 @@ soloDisplayGuide = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Вступление 0:00.00–0:12.30"
   \introNotes
+  \postIntroAlignment
 
   \repeat unfold 32 { s1 | } % Verse 1
   \earlySoloNotes
@@ -124,15 +130,30 @@ soloDisplayGuide = {
 }
 
 lineBreaks = {
+  \omit Score.BarNumber
   \introAlignment
   \break
 
-  % Page 1 ends with the first confirmed solo; page 2 starts with verse 3.
-  \repeat unfold 12 {
+  % Four eight-measure systems for further transcription after the intro.
+  \repeat unfold 4 {
+    s1 | s | s | s | s | s | s | s | \break
+  }
+  \undo \omit Score.BarNumber
+
+  % Page 1: verse 1 and the early solo.
+  \repeat unfold 5 {
     s1 | s | s | s | s | s | s | s | \break
   }
   \pageBreak
-  \repeat unfold 6 {
+
+  % Page 2: verse 2, chorus 1, solo 1, and verse 3.
+  \repeat unfold 11 {
+    s1 | s | s | s | s | s | s | s | \break
+  }
+  \pageBreak
+
+  % Page 3 starts with chorus 2.
+  \repeat unfold 2 {
     s1 | s | s | s | s | s | s | s | \break
   }
   % Preserve the two seven-measure halves of the bridge.
@@ -178,8 +199,27 @@ guitarBreakHarmony = \chordmode {
   \repeat unfold 4 { s1 | }
 }
 
+postIntroEmHarmony = \chordmode {
+  \set chordChanges = ##f
+  e1:m |
+  \set chordChanges = ##t
+  e1:m | e:m | e:m |
+}
+
+postIntroHarmony = \chordmode {
+  \postIntroEmHarmony
+  g1 | b:m | a | d |
+  \postIntroEmHarmony
+  s1 | s | s | s |
+  \postIntroEmHarmony
+  g1 | b:m | a | d |
+  \postIntroEmHarmony
+  s1 | s | s | s |
+}
+
 allChords = \chordmode {
   \introAlignment
+  \postIntroHarmony
   \verseHarmony
   \soloHarmony
   \verseHarmony
@@ -225,9 +265,25 @@ guitarBreakChordVoicingSpacers = {
   \repeat unfold 4 { s1 | }
 }
 
+postIntroEmVoicing = \absolute {
+  <e' g' b'>1 | s1 | s | s |
+}
+
+postIntroProgressionVoicings = \absolute {
+  <g' b' d''>1 | <b d' fis'> | <a cis' e'> | <d' fis' a'> |
+}
+
+postIntroChordVoicings = \absolute {
+  \postIntroEmVoicing \postIntroProgressionVoicings
+  \postIntroEmVoicing s1 | s | s | s |
+  \postIntroEmVoicing \postIntroProgressionVoicings
+  \postIntroEmVoicing s1 | s | s | s |
+}
+
 allChordVoicings = {
   \global
   \introAlignment
+  \postIntroChordVoicings
   \verseChordVoicings
   \soloChordVoicingSpacers
   \verseChordVoicings
