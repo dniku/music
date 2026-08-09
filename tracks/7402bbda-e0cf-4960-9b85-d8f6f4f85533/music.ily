@@ -9,7 +9,7 @@ introNotes = \fixed c' {
   \repeat percent 6 {
     e8 b g fis a b g fis |
   }
-  e8 b g fis a g fis e |
+  e8 b g fis b g fis e |
 }
 
 introMusic = {
