@@ -74,7 +74,6 @@ vocalGuide = {
   \global
   \introAlignment
   \postIntroAlignment
-  \set Score.currentBarNumber = #1
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
   \repeat unfold 8 { \verseLine }
@@ -107,7 +106,6 @@ vocalGuide = {
 
 soloDisplayGuide = {
   \global
-  \once \omit Score.BarNumber
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Вступление 0:00.00–0:12.30"
   \introNotes
@@ -130,7 +128,6 @@ soloDisplayGuide = {
 }
 
 lineBreaks = {
-  \omit Score.BarNumber
   \introAlignment
   \break
 
@@ -138,8 +135,6 @@ lineBreaks = {
   \repeat unfold 4 {
     s1 | s | s | s | s | s | s | s | \break
   }
-  \undo \omit Score.BarNumber
-
   % Page 1: verse 1 and the early solo.
   \repeat unfold 5 {
     s1 | s | s | s | s | s | s | s | \break
@@ -413,6 +408,7 @@ barLyrics = \lyricmode {
     \context {
       \Score
       barNumberVisibility = #all-bar-numbers-visible
+      \override BarNumber.break-visibility = #end-of-line-invisible
       \override BarNumber.font-size = #-2
       \override RehearsalMark.self-alignment-X = #LEFT
     }

@@ -5,7 +5,6 @@ global = {
 }
 
 introNotes = \fixed c' {
-  \set countPercentRepeats = ##t
   \repeat percent 6 {
     e8 b g fis a b g fis |
   }
