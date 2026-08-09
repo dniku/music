@@ -128,6 +128,26 @@ soloDisplayGuide = {
   \soloNotes
 }
 
+lowerHandGuide = {
+  \global
+  \clef bass
+  \introAlignment
+  \postIntroAlignment
+  \repeat unfold 32 { s1 | } % Verse 1
+  \repeat unfold 8 { s1 | } % Early solo
+  \repeat unfold 32 { s1 | } % Verse 2
+  \repeat unfold 16 { s1 | } % Chorus 1
+  \repeat unfold 8 { s1 | } % Solo 1
+  \repeat unfold 32 { s1 | } % Verse 3
+  \repeat unfold 16 { s1 | } % Chorus 2
+  \repeat unfold 14 { s1 | } % Bridge
+  \repeat unfold 8 { s1 | } % Solo 2
+  \repeat unfold 4 { s1 | } % Guitar break
+  \repeat unfold 32 { s1 | } % Finale
+  \repeat unfold 8 { s1 | } % Solo 3
+  \bar "|."
+}
+
 lineBreaks = {
   \introAlignment
   \break
@@ -136,26 +156,28 @@ lineBreaks = {
   \repeat unfold 4 {
     s1 | s | s | s | s | s | s | s | \break
   }
-  % Page 1: verse 1 and the early solo.
-  \repeat unfold 5 {
+  % Page 1 ends after verse 1.
+  \repeat unfold 4 {
     s1 | s | s | s | s | s | s | s | \break
   }
   \pageBreak
 
-  % Page 2: verse 2, chorus 1, solo 1, and verse 3.
-  \repeat unfold 11 {
+  % Page 2: early solo, verse 2, chorus 1, and solo 1.
+  \repeat unfold 8 {
     s1 | s | s | s | s | s | s | s | \break
   }
   \pageBreak
 
-  % Page 3 starts with chorus 2.
-  \repeat unfold 2 {
+  % Page 3: verse 3, chorus 2, and bridge.
+  \repeat unfold 6 {
     s1 | s | s | s | s | s | s | s | \break
   }
-  % Preserve the two seven-measure halves of the bridge.
   \repeat unfold 2 {
     s1 | s | s | s | s | s | s | \break
   }
+  \pageBreak
+
+  % Page 4: solo 2, guitar break, finale, and solo 3.
   s1 | s | s | s | s | s | s | s | \break
   s1 | s | s | s | \break
   \repeat unfold 4 {
@@ -378,31 +400,37 @@ barLyrics = \lyricmode {
       \allChords
     }
 
-    \new Staff <<
-      \new Voice = "lyricsGuide" {
-        \voiceTwo
-        \hideNotes
-        \vocalGuide
+    \new PianoStaff <<
+      \new Staff = "rightHand" <<
+        \new Voice = "lyricsGuide" {
+          \voiceTwo
+          \hideNotes
+          \vocalGuide
+        }
+
+        \new Voice {
+          \voiceOne
+          \allChordVoicings
+        }
+
+        \new Voice {
+          \voiceOne
+          \soloDisplayGuide
+        }
+
+        \new Voice {
+          \lineBreaks
+        }
+      >>
+
+      \new Lyrics \lyricsto "lyricsGuide" {
+        \barLyrics
       }
 
-      \new Voice {
-        \voiceOne
-        \allChordVoicings
-      }
-
-      \new Voice {
-        \voiceOne
-        \soloDisplayGuide
-      }
-
-      \new Voice {
-        \lineBreaks
+      \new Staff = "leftHand" {
+        \lowerHandGuide
       }
     >>
-
-    \new Lyrics \lyricsto "lyricsGuide" {
-      \barLyrics
-    }
   >>
 
   \layout {
