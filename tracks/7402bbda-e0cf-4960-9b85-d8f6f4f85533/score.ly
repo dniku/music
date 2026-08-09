@@ -274,27 +274,53 @@ allChords = \chordmode {
   \soloHarmony
 }
 
-verseChordVoicings = \absolute {
+emFourBarVoicing = \absolute {
+  \repeat unfold 3 { <e' g' b'>1~ | }
+  <e' g' b'>1 |
+}
+
+emTwoBarVoicing = \absolute {
+  <e' g' b'>1~ | <e' g' b'>1 |
+}
+
+gTwoBarVoicing = \absolute {
+  <g' b' d''>1~ | <g' b' d''>1 |
+}
+
+dTwoBarVoicing = \absolute {
+  <d' fis' a'>1~ | <d' fis' a'>1 |
+}
+
+bSevenTwoBarVoicing = \absolute {
+  <b dis' fis' a'>1~ | <b dis' fis' a'>1 |
+}
+
+cTwoBarVoicing = \absolute {
+  <c' e' g'>1~ | <c' e' g'>1 |
+}
+
+verseChordVoicings = {
   \repeat unfold 4 {
-    <e' g' b'>1 | s1 | s | s |
-    <g' b' d''>1 | s1 | <d' fis' a'>1 | s1 |
+    \emFourBarVoicing
+    \gTwoBarVoicing
+    \dTwoBarVoicing
   }
 }
 
 chorusChordVoicings = \absolute {
-  <e' g' b'>1 | s1 | <b dis' fis' a'>1 | s1 |
+  \emTwoBarVoicing \bSevenTwoBarVoicing
   <c' e' g'>1 | <g' b' d''> | <c' e' g'> | <d' fis' a'> |
-  <e' g' b'>1 | s1 | <b dis' fis' a'>1 | s1 |
-  <c' e' g'>1 | <g' b' d''> | <d' fis' a'> | s1 |
+  \emTwoBarVoicing \bSevenTwoBarVoicing
+  <c' e' g'>1 | <g' b' d''> | \dTwoBarVoicing
 }
 
 bridgeChordVoicings = \absolute {
-  <e' g' b'>1 | s1 |
-  <c' e' g'>1 | s1 |
-  <g' b' d''>1 | <d' fis' a'> | s1 |
-  <e' g' b'>1 | s1 |
-  <c' e' g'>1 | s1 |
-  <g' b' d''>1 | <d' fis' a'> | s1 |
+  \emTwoBarVoicing
+  \cTwoBarVoicing
+  <g' b' d''>1 | \dTwoBarVoicing
+  \emTwoBarVoicing
+  \cTwoBarVoicing
+  <g' b' d''>1 | \dTwoBarVoicing
 }
 
 soloChordVoicingSpacers = {
@@ -305,9 +331,7 @@ guitarBreakChordVoicingSpacers = {
   \repeat unfold 4 { s1 | }
 }
 
-postIntroEmVoicing = \absolute {
-  <e' g' b'>1 | s1 | s | s |
-}
+postIntroEmVoicing = \emFourBarVoicing
 
 postIntroProgressionVoicings = \absolute {
   <d' g' b'>1 | <d' fis' b'> | <cis' e' a'> | <d' fis' a'> |
