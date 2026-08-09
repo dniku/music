@@ -445,5 +445,9 @@ barLyrics = \lyricmode {
       \override LyricText.self-alignment-X = #LEFT
       \override LyricSpace.minimum-distance = #1.2
     }
+    \context {
+      \Staff
+      \override TimeSignature.break-visibility = #end-of-line-invisible
+    }
   }
 }

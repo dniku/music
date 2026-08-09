@@ -1,5 +1,6 @@
 global = {
   \key e \minor
+  \numericTimeSignature
   \time 4/4
   \tempo 4 = 165
 }
@@ -9,7 +10,13 @@ introNotes = \fixed c' {
   \repeat percent 6 {
     e8 b g fis a b g fis |
   }
-  e8 b g fis b g fis e |
+  e8 b g fis b g fis e~ |
+
+  % Hold the final E through an extra half-measure before bar 8.
+  \set Score.currentBarNumber = #7
+  \time 2/4
+  e2 |
+  \time 4/4
 }
 
 introMusic = {
@@ -20,6 +27,7 @@ introMusic = {
 
 introAlignment = {
   \repeat unfold 7 { s1 | }
+  s2 |
 }
 
 soloNotes = \absolute {
