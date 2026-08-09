@@ -8,8 +8,8 @@
   bottom-margin = 6\mm
   left-margin = 8\mm
   right-margin = 8\mm
-  system-system-spacing.basic-distance = #9
-  system-system-spacing.minimum-distance = #7
+  system-system-spacing.basic-distance = #8
+  system-system-spacing.minimum-distance = #6
   system-system-spacing.padding = #0.5
   ragged-bottom = ##t
   ragged-last-bottom = ##t
@@ -36,6 +36,24 @@ verseLine = {
 
 postIntroAlignment = {
   \repeat unfold 32 { s1 | }
+}
+
+postIntroRightHandPattern = \absolute {
+  \ottava #1
+  <b'' e'''>1~ | <b'' e'''> |
+  <g'' b''>1~ | <g'' b''> |
+  <d''' g'''>1 |
+  <des''' ges'''> |
+  <d''' g'''> |
+  <g'' b''> |
+  \ottava #0
+}
+
+postIntroRightHandNotes = {
+  \repeat unfold 8 { s1 | } % Measures 8–15
+  \postIntroRightHandPattern % Measures 16–23
+  \repeat unfold 8 { s1 | } % Measures 24–31
+  \postIntroRightHandPattern % Measures 32–39
 }
 
 earlySoloCue = {
@@ -110,7 +128,7 @@ soloDisplayGuide = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Вступление 0:00.00–0:12.30"
   \introNotes
-  \postIntroAlignment
+  \postIntroRightHandNotes
 
   \repeat unfold 32 { s1 | } % Verse 1
   \earlySoloNotes
