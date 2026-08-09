@@ -17,8 +17,8 @@ stages:
       size: 1287
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
-      md5: b6db9e178efaf75ab99b1dd25259516f
-      size: 11423
+      md5: 9cd5bfaeb8688fc0f252cf81c1658451
+      size: 11397
     outs:
     - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.midi
       hash: md5
@@ -26,8 +26,8 @@ stages:
       size: 1120
     - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf
       hash: md5
-      md5: 68c3f5211fb928fb19e0b17c78901007
-      size: 328664
+      md5: 9e4f787c5fd18ffcb53f29421d05e9d2
+      size: 330262
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 

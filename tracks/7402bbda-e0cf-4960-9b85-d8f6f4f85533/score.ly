@@ -224,21 +224,19 @@ postIntroEmHarmony = \chordmode {
   e1:m | e:m | e:m |
 }
 
-postIntroUnknownProgression = \chordmode {
-  \set chordChanges = ##f
-  g1 | s1 | g1 | e:m |
-  \set chordChanges = ##t
+postIntroAlternatingProgression = \chordmode {
+  g1 | fis | g | e:m |
 }
 
 postIntroHarmony = \chordmode {
   \postIntroEmHarmony
   g1 | b:m | a | d |
   \postIntroEmHarmony
-  \postIntroUnknownProgression
+  \postIntroAlternatingProgression
   \postIntroEmHarmony
   g1 | b:m | a | d |
   \postIntroEmHarmony
-  \postIntroUnknownProgression
+  \postIntroAlternatingProgression
 }
 
 allChords = \chordmode {
@@ -297,15 +295,15 @@ postIntroProgressionVoicings = \absolute {
   <d' g' b'>1 | <d' fis' b'> | <cis' e' a'> | <d' fis' a'> |
 }
 
-postIntroUnknownProgressionVoicings = \absolute {
-  <d' g' b'>1 | s1^\markup "?" | <d' g' b'> | <e' g' b'> |
+postIntroAlternatingProgressionVoicings = \absolute {
+  <d' g' b'>1 | <cis' fis' ais'> | <d' g' b'> | <e' g' b'> |
 }
 
 postIntroChordVoicings = \absolute {
   \postIntroEmVoicing \postIntroProgressionVoicings
-  \postIntroEmVoicing \postIntroUnknownProgressionVoicings
+  \postIntroEmVoicing \postIntroAlternatingProgressionVoicings
   \postIntroEmVoicing \postIntroProgressionVoicings
-  \postIntroEmVoicing \postIntroUnknownProgressionVoicings
+  \postIntroEmVoicing \postIntroAlternatingProgressionVoicings
 }
 
 allChordVoicings = {
