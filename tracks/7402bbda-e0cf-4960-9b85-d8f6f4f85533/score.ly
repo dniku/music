@@ -50,10 +50,10 @@ postIntroRightHandPattern = \absolute {
 }
 
 postIntroRightHandNotes = {
-  \repeat unfold 8 { s1 | } % Measures 8–15
-  \postIntroRightHandPattern % Measures 16–23
-  \repeat unfold 8 { s1 | } % Measures 24–31
-  \postIntroRightHandPattern % Measures 32–39
+  \repeat unfold 8 { s1 | } % Measures 9–16
+  \postIntroRightHandPattern % Measures 17–24
+  \repeat unfold 8 { s1 | } % Measures 25–32
+  \postIntroRightHandPattern % Measures 33–40
 }
 
 earlySoloCue = {

@@ -13,11 +13,11 @@ stages:
       size: 12539
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 124907cf7eec4f31a365f75657b1559a
-      size: 1451
+      md5: 98f0bf2ec63b49d01792a4bec7d293c9
+      size: 1418
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
-      md5: dc5261613a77efbab4f655b9aedb4bfe
+      md5: af123d1077eaa0d989b127b12f40c9c6
       size: 11959
     outs:
     - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.midi
@@ -26,8 +26,8 @@ stages:
       size: 1129
     - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.pdf
       hash: md5
-      md5: 37bc9ce2ece51222fd3b9c8a5bb438de
-      size: 342167
+      md5: bdddb787ef3dbc7e79389f91f41dedfb
+      size: 342154
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
@@ -78,8 +78,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 124907cf7eec4f31a365f75657b1559a
-      size: 1451
+      md5: 98f0bf2ec63b49d01792a4bec7d293c9
+      size: 1418
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
       hash: md5
@@ -92,7 +92,7 @@ stages:
       size: 225430
     - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/intro-synth.pdf
       hash: md5
-      md5: a45ffa621591420874a646cae37bfe6a
+      md5: 264712bbc39c73392eef4b3e4a0891ca
       size: 78406
   render-early-solo:
     cmd: nix run .#render-audition -- 
@@ -114,8 +114,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 124907cf7eec4f31a365f75657b1559a
-      size: 1451
+      md5: 98f0bf2ec63b49d01792a4bec7d293c9
+      size: 1418
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
       hash: md5
@@ -128,7 +128,7 @@ stages:
       size: 237449
     - path: build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/early-solo.pdf
       hash: md5
-      md5: 39ab6cab4cc9ee410e68f43f36ed6180
+      md5: 496ebaca2d2c2bd9d9d0486472e4ac7a
       size: 64897
   render-early-solo-mordents:
     cmd: nix run .#render-audition -- 
@@ -186,8 +186,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 124907cf7eec4f31a365f75657b1559a
-      size: 1451
+      md5: 98f0bf2ec63b49d01792a4bec7d293c9
+      size: 1418
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
       hash: md5
@@ -202,7 +202,7 @@ stages:
     - path: 
         build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/synth-solo-repeated.pdf
       hash: md5
-      md5: c501eaf464abaaea95e45643facf813f
+      md5: 59ef698f35566afd6042a14b52d4013b
       size: 71770
   render-guitar-break:
     cmd: nix run .#render-audition -- 
@@ -225,8 +225,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 124907cf7eec4f31a365f75657b1559a
-      size: 1451
+      md5: 98f0bf2ec63b49d01792a4bec7d293c9
+      size: 1418
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
       hash: md5
@@ -241,5 +241,5 @@ stages:
     - path: 
         build/7402bbda-e0cf-4960-9b85-d8f6f4f85533/solos/guitar-break-03m11-draft.pdf
       hash: md5
-      md5: d4e528fcf2f2a3806050dbe6b60664da
+      md5: 32078a36d341d5618533b23aa14bb1ea
       size: 80212

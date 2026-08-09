@@ -12,8 +12,7 @@ introNotes = \fixed c' {
   }
   e8 b g fis b g fis e~ |
 
-  % Hold the final E through an extra half-measure before bar 8.
-  \set Score.currentBarNumber = #7
+  % Hold the final E through measure 8, a half-measure transition.
   \time 2/4
   e2 |
   \time 4/4
