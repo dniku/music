@@ -21,7 +21,6 @@
     \context {
       \Score
       barNumberVisibility = #all-bar-numbers-visible
-      \override BarNumber.break-visibility = #end-of-line-invisible
       \override BarNumber.font-size = #-2
     }
   }
