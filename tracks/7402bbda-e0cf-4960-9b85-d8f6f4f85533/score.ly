@@ -130,7 +130,7 @@ soloDisplayGuide = {
 
 lowerHandGuide = {
   \global
-  \clef bass
+  \clef treble
   \introAlignment
   \postIntroAlignment
   \repeat unfold 32 { s1 | } % Verse 1
@@ -408,11 +408,6 @@ barLyrics = \lyricmode {
 
         \new Voice {
           \voiceOne
-          \allChordVoicings
-        }
-
-        \new Voice {
-          \voiceOne
           \soloDisplayGuide
         }
 
@@ -425,9 +420,16 @@ barLyrics = \lyricmode {
         \barLyrics
       }
 
-      \new Staff = "leftHand" {
-        \lowerHandGuide
-      }
+      \new Staff = "leftHand" <<
+        \new Voice {
+          \lowerHandGuide
+        }
+
+        \new Voice {
+          \voiceOne
+          \allChordVoicings
+        }
+      >>
     >>
   >>
 
