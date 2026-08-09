@@ -270,7 +270,7 @@ postIntroEmVoicing = \absolute {
 }
 
 postIntroProgressionVoicings = \absolute {
-  <g' b' d''>1 | <b d' fis'> | <a cis' e'> | <d' fis' a'> |
+  <d' g' b'>1 | <d' fis' b'> | <cis' e' a'> | <d' fis' a'> |
 }
 
 postIntroChordVoicings = \absolute {
