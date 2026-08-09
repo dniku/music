@@ -73,6 +73,7 @@ guitarBreakCue = {
 vocalGuide = {
   \global
   \introAlignment
+  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Проигрыш"
   \postIntroAlignment
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
