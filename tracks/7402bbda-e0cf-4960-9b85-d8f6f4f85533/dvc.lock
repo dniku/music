@@ -233,3 +233,27 @@ stages:
       hash: md5
       md5: 32078a36d341d5618533b23aa14bb1ea
       size: 80212
+  fetch-instrumental-reference:
+    cmd: nix run .#fetch-youtube-audio -- 
+      https://www.youtube.com/watch?v=2Goi7VNlL7I 251 
+      9e07f7837e66556e575b9a28e3a944369d9c7e1a2a2e0e294976a32a9c90069a 
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/youtube-2Goi7VNlL7I.webm
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
+      size: 13300
+    - path: scripts/fetch-youtube-audio
+      hash: md5
+      md5: 3f1e74083aaa34ecbcd7cc254c1045b9
+      size: 714
+    outs:
+    - path: 
+        tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/youtube-2Goi7VNlL7I.webm
+      hash: md5
+      md5: 8e323c5db296c093926e68739ee3bc68
+      size: 5577383

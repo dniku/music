@@ -5,10 +5,10 @@ artifacts:
     desc: Пользовательская полная запись с вокалом
     labels: [reference, full-mix]
   volki-okeana-instrumental:
-    path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus
+    path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/youtube-2Goi7VNlL7I.webm
     type: audio-reference
-    desc: Пользовательский инструментальный или караоке-микс
-    labels: [reference, instrumental]
+    desc: YouTube-аудиопоток format 251 без перекодирования
+    labels: [reference, instrumental, youtube]
   volki-okeana-score:
     path: build/atom-76--volki-okeana/score.pdf
     type: score
@@ -51,6 +51,19 @@ artifacts:
     labels: [audition, guitar, draft]
 
 stages:
+  fetch-instrumental-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#fetch-youtube-audio --
+      https://www.youtube.com/watch?v=2Goi7VNlL7I 251
+      9e07f7837e66556e575b9a28e3a944369d9c7e1a2a2e0e294976a32a9c90069a
+      tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/youtube-2Goi7VNlL7I.webm
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/fetch-youtube-audio
+    outs:
+      - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/youtube-2Goi7VNlL7I.webm
   render-score:
     wdir: ../..
     cmd: nix run .#render-7402bbda-e0cf-4960-9b85-d8f6f4f85533

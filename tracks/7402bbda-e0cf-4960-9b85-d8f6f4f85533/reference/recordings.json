@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "verifiedAt": "2026-08-01",
+  "verifiedAt": "2026-08-11",
   "canonicalRecording": {
     "title": "Волки Океана",
     "artist": "Атом-76",
@@ -39,20 +39,20 @@
       }
     },
     {
-      "path": "audio/Атом_76_Волки_Океана_Караоке_2Goi7VNlL7I.opus",
+      "path": "audio/youtube-2Goi7VNlL7I.webm",
       "role": "instrumental_reference",
-      "durationSeconds": 335.7675,
-      "sha256": "6774e9f2206b78351e18114a201ad6989595d14386bd21b3d2dbed011307f7a4",
+      "durationSeconds": 335.761,
+      "sha256": "9e07f7837e66556e575b9a28e3a944369d9c7e1a2a2e0e294976a32a9c90069a",
       "identity": {
         "status": "unmatched_variant",
         "recordingMbid": null,
         "relatedRecordingMbid": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
         "reason": "An instrumental or karaoke mix is a distinct recording and no matching MusicBrainz recording was found."
       },
-      "sourceHint": {
-        "kind": "youtubeVideoIdFromFilename",
-        "value": "2Goi7VNlL7I",
-        "verified": false
+      "source": {
+        "kind": "youtube",
+        "videoId": "2Goi7VNlL7I",
+        "url": "https://www.youtube.com/watch?v=2Goi7VNlL7I"
       }
     }
   ]
