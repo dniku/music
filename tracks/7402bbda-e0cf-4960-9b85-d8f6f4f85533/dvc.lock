@@ -150,17 +150,17 @@ stages:
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
       hash: md5
-      md5: 6e5da3fceefbe27c8ccd71cc321fcf3b
-      size: 874
+      md5: 6d88d44152a72a8aa88017070a30c061
+      size: 886
     outs:
     - path: build/atom-76--volki-okeana/solos/early-solo-mordents.mp3
       hash: md5
-      md5: 73187cc044cdbe884e7cdcdcc07d7855
-      size: 252772
+      md5: 63319d01ddeb164e3288da556cbe7d01
+      size: 241401
     - path: build/atom-76--volki-okeana/solos/early-solo-mordents.pdf
       hash: md5
-      md5: 61540a7c8c0384f8dec275e998a334ab
-      size: 59463
+      md5: f336b04486387722ea586eb682f9785a
+      size: 60044
   render-synth-solo:
     cmd: nix run .#render-audition -- 
       tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly

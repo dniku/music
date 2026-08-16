@@ -4,14 +4,17 @@ melody = \relative c'' {
   \clef treble
   \key e \minor
   \time 4/4
-  e'4 b4 e,2 | R1 |
-  e4 g8 b e2\mordent |
-  g,4 b8 d~ d2\mordent |
+  e'2 b | e,1 |
+  R1 | R |
+  r2 e2 |
+  g4 b e2\mordent |
+  r2 g,2 |
+  b4 d d2\mordent |
 }
 
 harmonies = \chordmode {
-  e1:m | g2 d |
-  e1:m | g2 d |
+  e1:m | e:m | g1 | d |
+  e1:m | e:m | g1 | d |
 }
 
 \header {
@@ -44,6 +47,6 @@ harmonies = \chordmode {
 \score {
   \new Staff \with {
     midiInstrument = "lead 2 (sawtooth)"
-  } \scaleDurations 2/1 { \melody }
+  } \melody
   \midi { \tempo 4 = 165 }
 }
