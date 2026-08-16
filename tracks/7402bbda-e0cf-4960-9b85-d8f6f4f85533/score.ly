@@ -88,8 +88,6 @@ postIntroAlignment = {
 }
 
 earlySoloCue = {
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Раннее соло 0:58.80–1:10.80"
   \repeat unfold 8 { s1 | }
 }
 
@@ -127,6 +125,8 @@ vocalGuide = {
   \repeat unfold 8 { \verseLine }
   \earlySoloCue
 
+
+  \repeat unfold 8 { s1 | }
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 2"
   \repeat unfold 8 { \verseLine }
 
@@ -163,12 +163,12 @@ introPreBassRight = \fixed c' {
 introRight = {
     \clef "treble_8"
     \part "002" "Вступление 2 / 00:12-00:36"
-    \repeat unfold 8 { s1 | }
 
+    \repeat unfold 8 { s1 | } \break
     <b e'>1~ | <b e'> | <g b>1~ | <g b> |
-    <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
+    <d' g'>1 | <des' ges'> | <d' g'> | <g b> | \break
 
-    \repeat unfold 8 { s1 | }
+    \repeat unfold 8 { s1 | } \break
 
     <b e'>1~ | <b e'> | <g b>1~ | <g b> |
     <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
@@ -176,29 +176,30 @@ introRight = {
 }
 
 firstVerseRight = {
-    \break
+    \pageBreak
     \part "002" "Куплет / 00:36-00:59"
-    \repeat unfold 32 { s1 | }
+    % TODO здесь есть ксилофон
+    \repeat unfold 4 { \repeat unfold 8 { s1 | } \break }
 }
 
 firstBridgeRight = {
-  \part "001" "Проигрыш 1 / 00:59-01:11"
-  e''2 b' |
-  e'1 |
-  r1 |
-  r1 |
-  r2 e'2 |
-  g'4 b' e''2 |
-  r2 e'2 |
-  g'4 b' d''2 |
-  \bar "|."
+    \clef "treble_8"
+    \part "001" "Проигрыш 1 / 00:59-01:11"
+    e'1 | b | e~ | e |
+    s1 | s1 | s1 | s1 | \break
+    e| g2 b | e'1~ | e' |
+    g~ | g | b | d'2 d' |
+    \clef treble
 }
 
 rightHandNotes = {
-  \introPreBassRight
-  \introRight
-  \firstVerseRight
-  \firstBridgeRight
+    \introPreBassRight
+    \introRight
+    \firstVerseRight
+    \firstBridgeRight
+
+    \break
+    \pageBreak
 
   \repeat unfold 32 { s1 | } % Verse 2
   \repeat unfold 16 { s1 | } % Chorus 1
@@ -366,6 +367,7 @@ leftHand = {
     \repeat unfold 7 { s1 | } s2 |
     \introLeft
     \versesLeft
+
   \chorusChordVoicings
   \soloChordVoicingSpacers
   \verseChordVoicings
