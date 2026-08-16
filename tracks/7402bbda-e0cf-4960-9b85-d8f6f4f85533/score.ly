@@ -1,34 +1,92 @@
 \version "2.24.0"
 
-#(set-global-staff-size 16)
+% номер звука на синтезаторе - название midiInstrument
+% https://lilypond.org/doc/v2.24/Documentation/notation/midi-instruments
+#(define instruments '(
+    ("001" . "lead 2 (sawtooth)")
+    ("002" . "pad 2 (warm)")
+    ("003" . "acoustic grand")
+))
 
-\paper {
-  #(set-paper-size "a4")
-  top-margin = 6\mm
-  bottom-margin = 6\mm
-  left-margin = 8\mm
-  right-margin = 8\mm
-  system-system-spacing.basic-distance = #8
-  system-system-spacing.minimum-distance = #6
-  system-system-spacing.padding = #0.5
-  ragged-bottom = ##t
-  ragged-last-bottom = ##t
-  oddFooterMarkup = ##f
-  evenFooterMarkup = ##f
+\paper { ragged-bottom = ##t ragged-last-bottom = ##t }
+\header { title = "Волки Океана" composer = "Атом-76" }
+
+global = { \key e \minor \time 4/4 \tempo 4 = 165 }
+
+introNotes = \fixed c' {
+  \textMark \markup { \box "Вступление 1 (00:00-00:12)" }
+  \set countPercentRepeats = ##t
+  \repeat percent 6 { e8 b g fis a b g fis | }
+  e8 b g fis b g fis \tieDown e~ \tieNeutral |
+  \time 2/4 e2 | \time 4/4
 }
 
-\header {
-  title = \markup \override #'(font-name . "DejaVu Sans") \bold "Волки Океана"
-  subtitle = \markup \override #'(font-name . "DejaVu Sans") {
-    "Нотная сетка · 4/4 · "
-    \note { 4 } #1
-    " = 165"
+introMusic = {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \introNotes
+}
+
+introAlignment = {
+  \repeat unfold 7 { s1 | }
+  s2 |
+}
+
+soloNotes = \absolute {
+  \ottava #1
+
+  e''8 d'' e'' fis'' e'' d'' e'' fis'' |
+  e'' d'' e'' fis'' g'' fis'' e'' d'' |
+  g''1 |
+  d'' |
+  \bar "||"
+
+  g''8 fis'' g'' a'' b'' a'' g'' fis'' |
+  b'' a'' g'' fis'' e'' d'' e'' fis'' |
+  d''1 |
+  e'' |
+  \ottava #0
+}
+
+soloMusic = {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \soloNotes
+  \bar "|."
+}
+
+earlySoloNotes = \absolute {
+  e''2 b' |
+  e'1 |
+  r1 |
+  r1 |
+  r2 e'2 |
+  g'4 b' e''2 |
+  r2 e'2 |
+  g'4 b' d''2 |
+}
+
+earlySoloMusic = {
+  \global
+  \set Staff.midiInstrument = "lead 2 (sawtooth)"
+  \earlySoloNotes
+  \bar "|."
+}
+
+guitarBreakDraftNotes = \absolute {
+  \repeat unfold 2 {
+    \tuplet 3/2 { e''8 g'' b'' }
+    \tuplet 3/2 { e''' b'' g'' }
+    \tuplet 3/2 { e'' b' g' }
+    \tuplet 3/2 { e' g' b' } |
   }
-  composer = \markup \override #'(font-name . "DejaVu Sans") "Атом-76"
-  tagline = ##f
+  \repeat unfold 2 {
+    \tuplet 3/2 { d''8 fis'' a'' }
+    \tuplet 3/2 { d''' a'' fis'' }
+    \tuplet 3/2 { d'' a' fis' }
+    \tuplet 3/2 { d' fis' a' } |
+  }
 }
-
-\include "music.ily"
 
 verseLine = {
   c'1 | c' | c' | s2. c'4 |
@@ -91,7 +149,7 @@ guitarBreakCue = {
 vocalGuide = {
   \global
   \introAlignment
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Проигрыш"
+  \textMark \markup { \box "Вступление 2 (00:12-00:36)" }
   \postIntroAlignment
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
@@ -124,9 +182,6 @@ vocalGuide = {
 }
 
 soloDisplayGuide = {
-  \global
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Вступление 0:00.00–0:12.30"
   \introNotes
   \postIntroRightHandNotes
 
@@ -421,7 +476,6 @@ barLyrics = \lyricmode {
   -- "рёд, на" "абор" -- "даж!" \skip 1
 }
 
-% Keep one useful MIDI file containing the established synthesizer parts.
 \score {
   \new Staff {
     \unfoldRepeats {
@@ -435,10 +489,6 @@ barLyrics = \lyricmode {
 
 \score {
   <<
-    \new ChordNames {
-      \set chordChanges = ##t
-      \allChords
-    }
 
     \new PianoStaff <<
       \new Staff = "rightHand" <<
@@ -463,15 +513,13 @@ barLyrics = \lyricmode {
       }
 
       \new Staff = "leftHand" <<
-        \new Voice {
-          \lowerHandGuide
-        }
+        \new Voice { \lowerHandGuide }
 
-        \new Voice {
-          \voiceOne
-          \allChordVoicings
-        }
+        \new Voice { \voiceOne \allChordVoicings }
       >>
+
+    \new ChordNames { \set chordChanges = ##t \allChords }
+
     >>
   >>
 
@@ -479,13 +527,10 @@ barLyrics = \lyricmode {
     \context {
       \Score
       barNumberVisibility = #all-bar-numbers-visible
-      \override BarNumber.font-size = #-2
       \override RehearsalMark.self-alignment-X = #LEFT
     }
     \context {
       \Lyrics
-      \override LyricText.font-name = "DejaVu Sans"
-      \override LyricText.font-size = #-2
       \override LyricText.self-alignment-X = #LEFT
       \override LyricSpace.minimum-distance = #1.2
     }
