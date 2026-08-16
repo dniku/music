@@ -1,4 +1,16 @@
 \version "2.24.0"
+\paper { indent = 0 }
+
+\layout {
+    \context { \Lyrics \override
+        LyricSpace.minimum-distance = #1.2
+    }
+    \context { \Staff \override
+        TimeSignature.break-visibility = #end-of-line-invisible
+    }
+}
+
+global = { \key e \minor \time 4/4 \tempo 4 = 165 }
 
 % номер звука на синтезаторе - название midiInstrument
 % https://lilypond.org/doc/v2.24/Documentation/notation/midi-instruments
@@ -8,23 +20,27 @@
     ("003" . "acoustic grand")
 ))
 
-\paper { ragged-bottom = ##t ragged-last-bottom = ##t }
-\header { title = "Волки Океана" composer = "Атом-76" }
+part = #(define-music-function (idx text) (string? string?) #{
+   \set Staff.midiInstrument = #(cdr (assoc idx instruments))
+   \textMark \markup { \box { #text \bold { #idx } } }
+#})
 
-global = { \key e \minor \time 4/4 \tempo 4 = 165 }
+#(define (legend) #{
+    \markup { \vcenter { \column {
+        #@(map
+            (lambda (entry) (
+                string-append (car entry) " - " (cdr entry))
+            )
+            instruments
+        )
+    }}}
+#})
 
-introNotes = \fixed c' {
-  \textMark \markup { \box "Вступление 1 (00:00-00:12)" }
-  \set countPercentRepeats = ##t
-  \repeat percent 6 { e8 b g fis a b g fis | }
-  e8 b g fis b g fis \tieDown e~ \tieNeutral |
-  \time 2/4 e2 | \time 4/4
-}
-
-introMusic = {
-  \global
-  \set Staff.midiInstrument = "lead 2 (sawtooth)"
-  \introNotes
+\header {
+    title = "Волки Океана"
+    composer = "Атом-76"
+    piece = \markup { "Левая рука всегда играет" \bold "002" }
+    opus = \markup \column { "Звуки:" \null #(legend) }
 }
 
 introAlignment = {
@@ -48,31 +64,6 @@ soloNotes = \absolute {
   \ottava #0
 }
 
-soloMusic = {
-  \global
-  \set Staff.midiInstrument = "lead 2 (sawtooth)"
-  \soloNotes
-  \bar "|."
-}
-
-earlySoloNotes = \absolute {
-  e''2 b' |
-  e'1 |
-  r1 |
-  r1 |
-  r2 e'2 |
-  g'4 b' e''2 |
-  r2 e'2 |
-  g'4 b' d''2 |
-}
-
-earlySoloMusic = {
-  \global
-  \set Staff.midiInstrument = "lead 2 (sawtooth)"
-  \earlySoloNotes
-  \bar "|."
-}
-
 guitarBreakDraftNotes = \absolute {
   \repeat unfold 2 {
     \tuplet 3/2 { e''8 g'' b'' }
@@ -94,24 +85,6 @@ verseLine = {
 
 postIntroAlignment = {
   \repeat unfold 32 { s1 | }
-}
-
-postIntroRightHandPattern = \absolute {
-  \ottava #1
-  <b'' e'''>1~ | <b'' e'''> |
-  <g'' b''>1~ | <g'' b''> |
-  <d''' g'''>1 |
-  <des''' ges'''> |
-  <d''' g'''> |
-  <g'' b''> |
-  \ottava #0
-}
-
-postIntroRightHandNotes = {
-  \repeat unfold 8 { s1 | } % Measures 9–16
-  \postIntroRightHandPattern % Measures 17–24
-  \repeat unfold 8 { s1 | } % Measures 25–32
-  \postIntroRightHandPattern % Measures 33–40
 }
 
 earlySoloCue = {
@@ -149,10 +122,8 @@ guitarBreakCue = {
 vocalGuide = {
   \global
   \introAlignment
-  \textMark \markup { \box "Вступление 2 (00:12-00:36)" }
   \postIntroAlignment
 
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
   \repeat unfold 8 { \verseLine }
   \earlySoloCue
 
@@ -181,12 +152,54 @@ vocalGuide = {
   \bar "|."
 }
 
-soloDisplayGuide = {
-  \introNotes
-  \postIntroRightHandNotes
+introPreBassRight = \fixed c' {
+    \part "001" "Вступление 1 / 00:00-00:12"
+    \set countPercentRepeats = ##t
+    \repeat percent 6 { e8 b g fis a b g fis | }
+    e8 b g fis b g fis \tieDown e~ \tieNeutral |
+    \time 2/4 e2 | \time 4/4
+}
 
-  \repeat unfold 32 { s1 | } % Verse 1
-  \earlySoloNotes
+introRight = {
+    \clef "treble_8"
+    \part "002" "Вступление 2 / 00:12-00:36"
+    \repeat unfold 8 { s1 | }
+
+    <b e'>1~ | <b e'> | <g b>1~ | <g b> |
+    <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
+
+    \repeat unfold 8 { s1 | }
+
+    <b e'>1~ | <b e'> | <g b>1~ | <g b> |
+    <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
+    \clef treble
+}
+
+firstVerseRight = {
+    \break
+    \part "002" "Куплет / 00:36-00:59"
+    \repeat unfold 32 { s1 | }
+}
+
+firstBridgeRight = {
+  \part "001" "Проигрыш 1 / 00:59-01:11"
+  e''2 b' |
+  e'1 |
+  r1 |
+  r1 |
+  r2 e'2 |
+  g'4 b' e''2 |
+  r2 e'2 |
+  g'4 b' d''2 |
+  \bar "|."
+}
+
+rightHandNotes = {
+  \introPreBassRight
+  \introRight
+  \firstVerseRight
+  \firstBridgeRight
+
   \repeat unfold 32 { s1 | } % Verse 2
   \repeat unfold 16 { s1 | } % Chorus 1
   \soloNotes
@@ -199,64 +212,6 @@ soloDisplayGuide = {
 
   \repeat unfold 32 { s1 | } % Finale
   \soloNotes
-}
-
-lowerHandGuide = {
-  \global
-  \clef treble
-  \introAlignment
-  \postIntroAlignment
-  \repeat unfold 32 { s1 | } % Verse 1
-  \repeat unfold 8 { s1 | } % Early solo
-  \repeat unfold 32 { s1 | } % Verse 2
-  \repeat unfold 16 { s1 | } % Chorus 1
-  \repeat unfold 8 { s1 | } % Solo 1
-  \repeat unfold 32 { s1 | } % Verse 3
-  \repeat unfold 16 { s1 | } % Chorus 2
-  \repeat unfold 14 { s1 | } % Bridge
-  \repeat unfold 8 { s1 | } % Solo 2
-  \repeat unfold 4 { s1 | } % Guitar break
-  \repeat unfold 32 { s1 | } % Finale
-  \repeat unfold 8 { s1 | } % Solo 3
-  \bar "|."
-}
-
-lineBreaks = {
-  \introAlignment
-  \break
-
-  % Four eight-measure systems for further transcription after the intro.
-  \repeat unfold 4 {
-    s1 | s | s | s | s | s | s | s | \break
-  }
-  % Page 1 ends after verse 1.
-  \repeat unfold 4 {
-    s1 | s | s | s | s | s | s | s | \break
-  }
-  \pageBreak
-
-  % Page 2: early solo, verse 2, chorus 1, and solo 1.
-  \repeat unfold 8 {
-    s1 | s | s | s | s | s | s | s | \break
-  }
-  \pageBreak
-
-  % Page 3: verse 3, chorus 2, and bridge.
-  \repeat unfold 6 {
-    s1 | s | s | s | s | s | s | s | \break
-  }
-  \repeat unfold 2 {
-    s1 | s | s | s | s | s | s | \break
-  }
-  \pageBreak
-
-  % Page 4: solo 2, guitar break, finale, and solo 3.
-  s1 | s | s | s | s | s | s | s | \break
-  s1 | s | s | s | \break
-  \repeat unfold 4 {
-    s1 | s | s | s | s | s | s | s | \break
-  }
-  s1 | s | s | s | s | s | s | s | \break
 }
 
 verseHarmony = \chordmode {
@@ -396,20 +351,21 @@ postIntroAlternatingProgressionVoicings = \absolute {
   <d' g' b'>1 | <cis' fis' ais'> | <d' g' b'> | <e' g' b'> |
 }
 
-postIntroChordVoicings = \absolute {
-  \postIntroEmVoicing \postIntroProgressionVoicings
-  \postIntroEmVoicing \postIntroAlternatingProgressionVoicings
-  \postIntroEmVoicing \postIntroProgressionVoicings
-  \postIntroEmVoicing \postIntroAlternatingProgressionVoicings
-}
+introLeft = \repeat unfold 2 { \chordmode {
+    e1:m~ | q~ | q~ | q | g | b:m/fis | a/e | d |
+    e1:m~ | q~ | q~ | q | g | f#      | g   | e:m |
+}}
 
-allChordVoicings = {
-  \global
-  \introAlignment
-  \postIntroChordVoicings
-  \verseChordVoicings
-  \soloChordVoicingSpacers
-  \verseChordVoicings
+% куплет 1, 2 строчки проигрыша, куплет 2
+versesLeft = \repeat unfold 10 { \chordmode {
+    e1:m~ | q~ | q~ | q | g~ | q | d~ | q |
+}}
+
+leftHand = {
+    \global
+    \repeat unfold 7 { s1 | } s2 |
+    \introLeft
+    \versesLeft
   \chorusChordVoicings
   \soloChordVoicingSpacers
   \verseChordVoicings
@@ -421,7 +377,7 @@ allChordVoicings = {
   \soloChordVoicingSpacers
 }
 
-barLyrics = \lyricmode {
+lyricsText = \lyricmode {
   "Только" "трусы перед" "бурей" "Уби"
   -- "рают" "пару" -- "са." \skip 1
   "А из" -- "бранники фор" -- "туны" "Держат"
@@ -476,67 +432,14 @@ barLyrics = \lyricmode {
   -- "рёд, на" "абор" -- "даж!" \skip 1
 }
 
-\score {
-  \new Staff {
-    \unfoldRepeats {
-      \introMusic
-      \earlySoloMusic
-      \soloMusic
-    }
-  }
-  \midi { }
-}
+rightHand = \new Staff = "rightHand" <<
+    \new Voice = "lyricsGuide" { \voiceTwo \hideNotes \vocalGuide }
+    \new Voice { \rightHandNotes }
+>>
 
-\score {
-  <<
-
-    \new PianoStaff <<
-      \new Staff = "rightHand" <<
-        \new Voice = "lyricsGuide" {
-          \voiceTwo
-          \hideNotes
-          \vocalGuide
-        }
-
-        \new Voice {
-          \voiceOne
-          \soloDisplayGuide
-        }
-
-        \new Voice {
-          \lineBreaks
-        }
-      >>
-
-      \new Lyrics \lyricsto "lyricsGuide" {
-        \barLyrics
-      }
-
-      \new Staff = "leftHand" <<
-        \new Voice { \lowerHandGuide }
-
-        \new Voice { \voiceOne \allChordVoicings }
-      >>
-
+\score { << \new PianoStaff <<
+    \rightHand
+    \new Lyrics \lyricsto "lyricsGuide" { \lyricsText }
+    \new Staff = "leftHand" << \new Voice { \leftHand } >>
     \new ChordNames { \set chordChanges = ##t \allChords }
-
-    >>
-  >>
-
-  \layout {
-    \context {
-      \Score
-      barNumberVisibility = #all-bar-numbers-visible
-      \override RehearsalMark.self-alignment-X = #LEFT
-    }
-    \context {
-      \Lyrics
-      \override LyricText.self-alignment-X = #LEFT
-      \override LyricSpace.minimum-distance = #1.2
-    }
-    \context {
-      \Staff
-      \override TimeSignature.break-visibility = #end-of-line-invisible
-    }
-  }
-}
+>> >> }
