@@ -17,8 +17,13 @@ artifacts:
   volki-okeana-score-midi:
     path: build/atom-76--volki-okeana/score.midi
     type: midi
-    desc: MIDI установленных сольных партий из основной партитуры
+    desc: MIDI полной основной партитуры
     labels: [midi, transcription]
+  volki-okeana-full-score-audition:
+    path: build/atom-76--volki-okeana/full-score.mp3
+    type: audition
+    desc: Прослушивание основной партитуры от начала до конца
+    labels: [audition, full-score, synth]
   volki-okeana-original-early-solo:
     path: build/atom-76--volki-okeana/solos/original-00m58.80-01m10.80.mp3
     type: audio-reference
@@ -75,6 +80,19 @@ stages:
     outs:
       - build/atom-76--volki-okeana/score.pdf
       - build/atom-76--volki-okeana/score.midi
+  render-full-score-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/atom-76--volki-okeana/score.midi
+      build/atom-76--volki-okeana/full-score.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/atom-76--volki-okeana/score.midi
+    outs:
+      - build/atom-76--volki-okeana/full-score.mp3
   extract-early-solo-reference:
     wdir: ../..
     cmd: >-

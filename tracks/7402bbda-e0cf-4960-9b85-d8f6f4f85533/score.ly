@@ -421,15 +421,19 @@ barLyrics = \lyricmode {
   -- "рёд, на" "абор" -- "даж!" \skip 1
 }
 
-% Keep one useful MIDI file containing the established synthesizer parts.
+% Render the complete notated timeline for full-score auditions.
 \score {
-  \new Staff {
-    \unfoldRepeats {
-      \introMusic
-      \earlySoloMusic
-      \soloMusic
+  \new PianoStaff <<
+    \new Staff {
+      \set Staff.midiInstrument = "lead 2 (sawtooth)"
+      \unfoldRepeats \soloDisplayGuide
     }
-  }
+
+    \new Staff {
+      \set Staff.midiInstrument = "electric piano 1"
+      \unfoldRepeats \allChordVoicings
+    }
+  >>
   \midi { }
 }
 

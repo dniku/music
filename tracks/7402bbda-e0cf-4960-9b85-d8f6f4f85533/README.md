@@ -80,6 +80,19 @@ nix run .#dvc -- repro tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/dvc.yaml
 nix run .#dvc -- repro tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/dvc.yaml:render-score
 ```
 
+Полное прослушивание партитуры создаётся в
+`build/atom-76--volki-okeana/full-score.mp3`:
+
+```console
+nix run .#dvc -- repro tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/dvc.yaml:render-full-score-audition
+```
+
+MP3 следует текущей нотной сетке без подрезки по референсу и длится около
+`6:05.9`. Это дольше исходной фонограммы (`5:35.7`), поэтому файл предназначен
+для прослушивания записанного материала, а не для синхронного наложения на
+оригинал. Верхний стан звучит тембром `lead 2 (sawtooth)`, нижний —
+`electric piano 1`.
+
 Проверить воспроизводимую сборку в Nix store:
 
 ```console
