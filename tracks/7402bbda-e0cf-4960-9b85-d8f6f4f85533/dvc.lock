@@ -13,21 +13,21 @@ stages:
       size: 13300
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 98f0bf2ec63b49d01792a4bec7d293c9
-      size: 1418
+      md5: 74ad53701e975672e1aeadd34b0aea95
+      size: 2106
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
-      md5: c4ba1ae4b03b5c72fca6e08e49918fe0
-      size: 12449
+      md5: af303b0fb2898d20b72f04d006693a1b
+      size: 12927
     outs:
     - path: build/atom-76--volki-okeana/score.midi
       hash: md5
-      md5: dfae629cb9a3ee8a6d1a608e2651d634
-      size: 4979
+      md5: b9e27ba31e75ca4ef2e2762d073b5f7d
+      size: 5122
     - path: build/atom-76--volki-okeana/score.pdf
       hash: md5
-      md5: 81c6db66651c90ceab4a303fbe410a4e
-      size: 526559
+      md5: 1d4b2cea66dcc2d78a9ea321e49b32e7
+      size: 537299
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
@@ -77,8 +77,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 98f0bf2ec63b49d01792a4bec7d293c9
-      size: 1418
+      md5: 74ad53701e975672e1aeadd34b0aea95
+      size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
       hash: md5
@@ -91,7 +91,7 @@ stages:
       size: 225430
     - path: build/atom-76--volki-okeana/solos/intro-synth.pdf
       hash: md5
-      md5: 264712bbc39c73392eef4b3e4a0891ca
+      md5: bac03d1d61c4c0087ecc13cc4e751953
       size: 78406
   render-early-solo:
     cmd: nix run .#render-audition -- 
@@ -113,8 +113,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 98f0bf2ec63b49d01792a4bec7d293c9
-      size: 1418
+      md5: 74ad53701e975672e1aeadd34b0aea95
+      size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
       hash: md5
@@ -123,12 +123,12 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/early-solo.mp3
       hash: md5
-      md5: 77e3c800d42a8a79c48af8f2a8e3bfb5
-      size: 237449
+      md5: afe17c5209f568a4c60a2b937efe16e1
+      size: 264479
     - path: build/atom-76--volki-okeana/solos/early-solo.pdf
       hash: md5
-      md5: 496ebaca2d2c2bd9d9d0486472e4ac7a
-      size: 64897
+      md5: 096317c012d2221580cf95c613974104
+      size: 64504
   render-early-solo-mordents:
     cmd: nix run .#render-audition -- 
       tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
@@ -181,8 +181,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 98f0bf2ec63b49d01792a4bec7d293c9
-      size: 1418
+      md5: 74ad53701e975672e1aeadd34b0aea95
+      size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
       hash: md5
@@ -195,7 +195,7 @@ stages:
       size: 248224
     - path: build/atom-76--volki-okeana/solos/synth-solo-repeated.pdf
       hash: md5
-      md5: 59ef698f35566afd6042a14b52d4013b
+      md5: ec49a7e6e2d5e03751f03cae96e5100f
       size: 71770
   render-guitar-break:
     cmd: nix run .#render-audition -- 
@@ -217,8 +217,8 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 98f0bf2ec63b49d01792a4bec7d293c9
-      size: 1418
+      md5: 74ad53701e975672e1aeadd34b0aea95
+      size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
       hash: md5
@@ -231,8 +231,8 @@ stages:
       size: 134406
     - path: build/atom-76--volki-okeana/solos/guitar-break-03m11-draft.pdf
       hash: md5
-      md5: 32078a36d341d5618533b23aa14bb1ea
-      size: 80212
+      md5: 1be3b615c586a1583b4049bd245a3445
+      size: 80252
   fetch-instrumental-reference:
     cmd: nix run .#fetch-youtube-audio -- 
       https://www.youtube.com/watch?v=2Goi7VNlL7I 251 
@@ -264,8 +264,8 @@ stages:
     deps:
     - path: build/atom-76--volki-okeana/score.midi
       hash: md5
-      md5: dfae629cb9a3ee8a6d1a608e2651d634
-      size: 4979
+      md5: b9e27ba31e75ca4ef2e2762d073b5f7d
+      size: 5122
     - path: flake.lock
       hash: md5
       md5: 2e457881a3463366e4c1ee8a5fc058d5
@@ -281,5 +281,5 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/full-score.mp3
       hash: md5
-      md5: cebf388bd36960e9885f27f016b5e06e
-      size: 5696024
+      md5: c684a6709fedcaf35b9fbb29fd76f32a
+      size: 5725869

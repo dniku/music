@@ -1,6 +1,6 @@
 \version "2.24.0"
 
-#(set-global-staff-size 16)
+#(set-global-staff-size 15)
 
 \paper {
   #(set-paper-size "a4")
@@ -17,6 +17,8 @@
   evenFooterMarkup = ##f
 }
 
+\include "music.ily"
+
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Волки Океана"
   subtitle = \markup \override #'(font-name . "DejaVu Sans") {
@@ -24,11 +26,15 @@
     \note { 4 } #1
     " = 165"
   }
+  subsubtitle = \markup \override #'(font-name . "DejaVu Sans") \small {
+    "Звуки: " #(instrument-legend)
+  }
   composer = \markup \override #'(font-name . "DejaVu Sans") "Атом-76"
+  piece = \markup \override #'(font-name . "DejaVu Sans") {
+    "Левая рука всегда играет " \bold "002"
+  }
   tagline = ##f
 }
-
-\include "music.ily"
 
 verseLine = {
   c'1 | c' | c' | s2. c'4 |
@@ -38,27 +44,44 @@ postIntroAlignment = {
   \repeat unfold 32 { s1 | }
 }
 
-postIntroRightHandPattern = \absolute {
-  \ottava #1
-  <b'' e'''>1~ | <b'' e'''> |
-  <g'' b''>1~ | <g'' b''> |
-  <d''' g'''>1 |
-  <des''' ges'''> |
-  <d''' g'''> |
-  <g'' b''> |
-  \ottava #0
+introPreBassRight = {
+  \part "001" "Вступление 1 / 00:00–00:12"
+  \introNotes
 }
 
-postIntroRightHandNotes = {
-  \repeat unfold 8 { s1 | } % Measures 9–16
-  \postIntroRightHandPattern % Measures 17–24
-  \repeat unfold 8 { s1 | } % Measures 25–32
-  \postIntroRightHandPattern % Measures 33–40
+introRight = {
+  \clef "treble_8"
+  \part "002" "Вступление 2 / 00:12–00:36"
+  \repeat unfold 8 { s1 | }
+
+  <b e'>1~ | <b e'> | <g b>1~ | <g b> |
+  <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
+
+  \repeat unfold 8 { s1 | }
+
+  <b e'>1~ | <b e'> | <g b>1~ | <g b> |
+  <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
+  \clef treble
+}
+
+firstVerseRight = {
+  \part "002" "Куплет / 00:36–00:59"
+  % TODO(Codeberg): здесь есть ксилофон.
+  \repeat unfold 32 { s1 | }
+}
+
+firstBridgeRight = {
+  \part "001" "Проигрыш 1 / 00:59–01:11"
+  \earlySoloNotes
+}
+
+secondVerseRight = {
+  \part "002" "Куплет 2 / 01:11–01:59"
+  % TODO(Codeberg): здесь есть ксилофон.
+  \repeat unfold 32 { s1 | }
 }
 
 earlySoloCue = {
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Раннее соло 0:58.80–1:10.80"
   \repeat unfold 8 { s1 | }
 }
 
@@ -91,14 +114,11 @@ guitarBreakCue = {
 vocalGuide = {
   \global
   \introAlignment
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Проигрыш"
   \postIntroAlignment
 
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 1"
   \repeat unfold 8 { \verseLine }
   \earlySoloCue
 
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box "Куплет 2"
   \repeat unfold 8 { \verseLine }
 
   \mark \markup \override #'(font-name . "DejaVu Sans") \box "Припев 1"
@@ -125,14 +145,12 @@ vocalGuide = {
 
 soloDisplayGuide = {
   \global
-  \mark \markup \override #'(font-name . "DejaVu Sans") \box
-    "Вступление 0:00.00–0:12.30"
-  \introNotes
-  \postIntroRightHandNotes
+  \introPreBassRight
+  \introRight
+  \firstVerseRight
+  \firstBridgeRight
+  \secondVerseRight
 
-  \repeat unfold 32 { s1 | } % Verse 1
-  \earlySoloNotes
-  \repeat unfold 32 { s1 | } % Verse 2
   \repeat unfold 16 { s1 | } % Chorus 1
   \soloNotes
 
@@ -231,6 +249,11 @@ soloHarmony = \chordmode {
   \repeat unfold 8 { s1 | }
 }
 
+earlyBridgeHarmony = \chordmode {
+  e1:m | e:m | g | d |
+  e1:m | e:m | g | d |
+}
+
 guitarBreakHarmony = \chordmode {
   \repeat unfold 4 { s1 | }
 }
@@ -248,11 +271,11 @@ postIntroAlternatingProgression = \chordmode {
 
 postIntroHarmony = \chordmode {
   \postIntroEmHarmony
-  g1 | b:m | a | d |
+  g1 | b:m/fis | a/e | d |
   \postIntroEmHarmony
   \postIntroAlternatingProgression
   \postIntroEmHarmony
-  g1 | b:m | a | d |
+  g1 | b:m/fis | a/e | d |
   \postIntroEmHarmony
   \postIntroAlternatingProgression
 }
@@ -261,7 +284,7 @@ allChords = \chordmode {
   \introAlignment
   \postIntroHarmony
   \verseHarmony
-  \soloHarmony
+  \earlyBridgeHarmony
   \verseHarmony
   \chorusHarmony
   \soloHarmony
@@ -327,6 +350,13 @@ soloChordVoicingSpacers = {
   \repeat unfold 8 { s1 | }
 }
 
+earlyBridgeChordVoicings = \absolute {
+  <e' g' b'>1~ | <e' g' b'> |
+  <g' b' d''>1 | <d' fis' a'> |
+  <e' g' b'>1~ | <e' g' b'> |
+  <g' b' d''>1 | <d' fis' a'> |
+}
+
 guitarBreakChordVoicingSpacers = {
   \repeat unfold 4 { s1 | }
 }
@@ -334,11 +364,11 @@ guitarBreakChordVoicingSpacers = {
 postIntroEmVoicing = \emFourBarVoicing
 
 postIntroProgressionVoicings = \absolute {
-  <d' g' b'>1 | <d' fis' b'> | <cis' e' a'> | <d' fis' a'> |
+  <g' b' d''>1 | <fis' b' d''> | <e' a' cis''> | <d' fis' a'> |
 }
 
 postIntroAlternatingProgressionVoicings = \absolute {
-  <d' g' b'>1 | <cis' fis' ais'> | <d' g' b'> | <e' g' b'> |
+  <g' b' d''>1 | <fis' ais' cis''> | <g' b' d''> | <e' g' b'> |
 }
 
 postIntroChordVoicings = \absolute {
@@ -353,7 +383,7 @@ allChordVoicings = {
   \introAlignment
   \postIntroChordVoicings
   \verseChordVoicings
-  \soloChordVoicingSpacers
+  \earlyBridgeChordVoicings
   \verseChordVoicings
   \chorusChordVoicings
   \soloChordVoicingSpacers
@@ -425,12 +455,12 @@ barLyrics = \lyricmode {
 \score {
   \new PianoStaff <<
     \new Staff {
-      \set Staff.midiInstrument = "lead 2 (sawtooth)"
+      \set Staff.midiInstrument = #(cdr (assoc "001" instruments))
       \unfoldRepeats \soloDisplayGuide
     }
 
     \new Staff {
-      \set Staff.midiInstrument = "electric piano 1"
+      \set Staff.midiInstrument = #(cdr (assoc "002" instruments))
       \unfoldRepeats \allChordVoicings
     }
   >>
