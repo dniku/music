@@ -49,20 +49,25 @@ introPreBassRight = {
   \introNotes
 }
 
+introRightPattern = \absolute {
+  \set fingeringOrientations = #'(left)
+  <b''-1 e'''-4>1~ | <b'' e'''> | <g''-1 b''-3>1~ | <g'' b''> |
+  <d'''-1 g'''-4>1 | <des'''-1 ges'''-4> |
+  <d'''-1 g'''-4> | <g''-1 b''-3> |
+}
+
 introRight = {
   \part "463" "Вступление 2 / 00:12–00:36"
   \repeat unfold 8 { s1 | }
 
   \ottava #1
-  <b'' e'''>1~ | <b'' e'''> | <g'' b''>1~ | <g'' b''> |
-  <d''' g'''>1 | <des''' ges'''> | <d''' g'''> | <g'' b''> |
+  \introRightPattern
   \ottava #0
 
   \repeat unfold 8 { s1 | }
 
   \ottava #1
-  <b'' e'''>1~ | <b'' e'''> | <g'' b''>1~ | <g'' b''> |
-  <d''' g'''>1 | <des''' ges'''> | <d''' g'''> | <g'' b''> |
+  \introRightPattern
   \ottava #0
 }
 
@@ -363,14 +368,22 @@ guitarBreakChordVoicingSpacers = {
   \repeat unfold 4 { s1 | }
 }
 
-postIntroEmVoicing = \emFourBarVoicing
+postIntroEmVoicing = \absolute {
+  \set fingeringOrientations = #'(left)
+  <e'-5 g'-3 b'-1>1~ | <e' g' b'>1~ |
+  <e' g' b'>1~ | <e' g' b'>1 |
+}
 
 postIntroProgressionVoicings = \absolute {
-  <g' b' d''>1 | <fis' b' d''> | <e' a' cis''> | <d' fis' a'> |
+  \set fingeringOrientations = #'(left)
+  <g'-5 b'-3 d''-1>1 | <fis'-5 b'-2 d''-1> |
+  <e'-5 a'-2 cis''-1> | <d'-5 fis'-3 a'-1> |
 }
 
 postIntroAlternatingProgressionVoicings = \absolute {
-  <g' b' d''>1 | <fis' ais' cis''> | <g' b' d''> | <e' g' b'> |
+  \set fingeringOrientations = #'(left)
+  <g'-5 b'-3 d''-1>1 | <fis'-5 ais'-3 cis''-1> |
+  <g'-5 b'-3 d''-1> | <e'-5 g'-3 b'-1> |
 }
 
 postIntroChordVoicings = \absolute {
