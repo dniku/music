@@ -51,9 +51,9 @@ introPreBassRight = {
 
 introRightPattern = \absolute {
   \set fingeringOrientations = #'(left)
-  <b''-1 e'''-4>1~ | <b'' e'''> | <g''-1 b''-3>1~ | <g'' b''> |
+  <b''-2 e'''-5>1~ | <b'' e'''> | <g''-1 b''-2>1~ | <g'' b''> |
   <d'''-1 g'''-4>1 | <des'''-1 ges'''-4> |
-  <d'''-1 g'''-4> | <g''-1 b''-3> |
+  <d'''-1 g'''-4> | <g''-1 b''-2> |
 }
 
 introRight = {
