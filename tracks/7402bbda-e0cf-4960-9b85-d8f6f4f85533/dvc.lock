@@ -13,11 +13,11 @@ stages:
       size: 13300
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 74ad53701e975672e1aeadd34b0aea95
+      md5: 5d718bf6a39bf84e7c03f85442966977
       size: 2106
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
-      md5: af303b0fb2898d20b72f04d006693a1b
+      md5: 6ff4db89efd5a0e8b9483cf5b1d8eea5
       size: 12927
     outs:
     - path: build/atom-76--volki-okeana/score.midi
@@ -26,8 +26,8 @@ stages:
       size: 5122
     - path: build/atom-76--volki-okeana/score.pdf
       hash: md5
-      md5: 1d4b2cea66dcc2d78a9ea321e49b32e7
-      size: 537299
+      md5: d8586f238d67652c9a3f35d73b851bb6
+      size: 537318
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
@@ -77,7 +77,7 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 74ad53701e975672e1aeadd34b0aea95
+      md5: 5d718bf6a39bf84e7c03f85442966977
       size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
@@ -113,7 +113,7 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 74ad53701e975672e1aeadd34b0aea95
+      md5: 5d718bf6a39bf84e7c03f85442966977
       size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
@@ -181,7 +181,7 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 74ad53701e975672e1aeadd34b0aea95
+      md5: 5d718bf6a39bf84e7c03f85442966977
       size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
@@ -217,7 +217,7 @@ stages:
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 74ad53701e975672e1aeadd34b0aea95
+      md5: 5d718bf6a39bf84e7c03f85442966977
       size: 2106
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly

@@ -7,9 +7,9 @@ global = {
 
 % Synthesizer program numbers used in the score and audition MIDI files.
 #(define instruments '(
-    ("001" . "lead 2 (sawtooth)")
-    ("002" . "pad 2 (warm)")
-    ("003" . "acoustic grand")
+    ("102" . "lead 2 (sawtooth)")
+    ("463" . "pad 2 (warm)")
+    ("001" . "acoustic grand")
 ))
 
 part = #(define-music-function (idx text) (string? string?) #{
@@ -41,7 +41,7 @@ introNotes = \fixed c' {
 
 introMusic = {
   \global
-  \set Staff.midiInstrument = #(cdr (assoc "001" instruments))
+  \set Staff.midiInstrument = #(cdr (assoc "102" instruments))
   \introNotes
 }
 
@@ -51,7 +51,7 @@ introAlignment = {
 }
 
 soloNotes = \absolute {
-  \set Staff.midiInstrument = #(cdr (assoc "001" instruments))
+  \set Staff.midiInstrument = #(cdr (assoc "102" instruments))
   \ottava #1
 
   e''8 d'' e'' fis'' e'' d'' e'' fis'' |
@@ -69,7 +69,7 @@ soloNotes = \absolute {
 
 soloMusic = {
   \global
-  \set Staff.midiInstrument = #(cdr (assoc "001" instruments))
+  \set Staff.midiInstrument = #(cdr (assoc "102" instruments))
   \soloNotes
   \bar "|."
 }
@@ -87,7 +87,7 @@ earlySoloNotes = \absolute {
 
 earlySoloMusic = {
   \global
-  \set Staff.midiInstrument = #(cdr (assoc "001" instruments))
+  \set Staff.midiInstrument = #(cdr (assoc "102" instruments))
   \earlySoloNotes
   \bar "|."
 }

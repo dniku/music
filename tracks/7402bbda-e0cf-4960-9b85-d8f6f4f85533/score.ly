@@ -31,7 +31,7 @@
   }
   composer = \markup \override #'(font-name . "DejaVu Sans") "Атом-76"
   piece = \markup \override #'(font-name . "DejaVu Sans") {
-    "Левая рука всегда играет " \bold "002"
+    "Левая рука всегда играет " \bold "463"
   }
   tagline = ##f
 }
@@ -45,13 +45,13 @@ postIntroAlignment = {
 }
 
 introPreBassRight = {
-  \part "001" "Вступление 1 / 00:00–00:12"
+  \part "102" "Вступление 1 / 00:00–00:12"
   \introNotes
 }
 
 introRight = {
   \clef "treble_8"
-  \part "002" "Вступление 2 / 00:12–00:36"
+  \part "463" "Вступление 2 / 00:12–00:36"
   \repeat unfold 8 { s1 | }
 
   <b e'>1~ | <b e'> | <g b>1~ | <g b> |
@@ -65,18 +65,18 @@ introRight = {
 }
 
 firstVerseRight = {
-  \part "002" "Куплет / 00:36–00:59"
+  \part "463" "Куплет / 00:36–00:59"
   % TODO(Codeberg): здесь есть ксилофон.
   \repeat unfold 32 { s1 | }
 }
 
 firstBridgeRight = {
-  \part "001" "Проигрыш 1 / 00:59–01:11"
+  \part "102" "Проигрыш 1 / 00:59–01:11"
   \earlySoloNotes
 }
 
 secondVerseRight = {
-  \part "002" "Куплет 2 / 01:11–01:59"
+  \part "463" "Куплет 2 / 01:11–01:59"
   % TODO(Codeberg): здесь есть ксилофон.
   \repeat unfold 32 { s1 | }
 }
@@ -455,12 +455,12 @@ barLyrics = \lyricmode {
 \score {
   \new PianoStaff <<
     \new Staff {
-      \set Staff.midiInstrument = #(cdr (assoc "001" instruments))
+      \set Staff.midiInstrument = #(cdr (assoc "102" instruments))
       \unfoldRepeats \soloDisplayGuide
     }
 
     \new Staff {
-      \set Staff.midiInstrument = #(cdr (assoc "002" instruments))
+      \set Staff.midiInstrument = #(cdr (assoc "463" instruments))
       \unfoldRepeats \allChordVoicings
     }
   >>
