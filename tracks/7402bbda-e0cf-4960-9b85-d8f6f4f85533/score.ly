@@ -50,18 +50,20 @@ introPreBassRight = {
 }
 
 introRight = {
-  \clef "treble_8"
   \part "463" "Вступление 2 / 00:12–00:36"
   \repeat unfold 8 { s1 | }
 
-  <b e'>1~ | <b e'> | <g b>1~ | <g b> |
-  <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
+  \ottava #1
+  <b'' e'''>1~ | <b'' e'''> | <g'' b''>1~ | <g'' b''> |
+  <d''' g'''>1 | <des''' ges'''> | <d''' g'''> | <g'' b''> |
+  \ottava #0
 
   \repeat unfold 8 { s1 | }
 
-  <b e'>1~ | <b e'> | <g b>1~ | <g b> |
-  <d' g'>1 | <des' ges'> | <d' g'> | <g b> |
-  \clef treble
+  \ottava #1
+  <b'' e'''>1~ | <b'' e'''> | <g'' b''>1~ | <g'' b''> |
+  <d''' g'''>1 | <des''' ges'''> | <d''' g'''> | <g'' b''> |
+  \ottava #0
 }
 
 firstVerseRight = {

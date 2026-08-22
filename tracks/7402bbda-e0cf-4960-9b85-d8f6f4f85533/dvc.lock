@@ -17,17 +17,17 @@ stages:
       size: 2106
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
-      md5: 6ff4db89efd5a0e8b9483cf5b1d8eea5
-      size: 12927
+      md5: 7a16d0fb736db174c82498113b00507e
+      size: 13009
     outs:
     - path: build/atom-76--volki-okeana/score.midi
       hash: md5
-      md5: b9e27ba31e75ca4ef2e2762d073b5f7d
+      md5: c5834c1c2f0445b936b6804a1229f4dc
       size: 5122
     - path: build/atom-76--volki-okeana/score.pdf
       hash: md5
-      md5: d8586f238d67652c9a3f35d73b851bb6
-      size: 537318
+      md5: 51f3b459c4550d05fbdbdd7793520d7f
+      size: 537817
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
@@ -264,7 +264,7 @@ stages:
     deps:
     - path: build/atom-76--volki-okeana/score.midi
       hash: md5
-      md5: b9e27ba31e75ca4ef2e2762d073b5f7d
+      md5: c5834c1c2f0445b936b6804a1229f4dc
       size: 5122
     - path: flake.lock
       hash: md5
@@ -281,5 +281,5 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/full-score.mp3
       hash: md5
-      md5: c684a6709fedcaf35b9fbb29fd76f32a
-      size: 5725869
+      md5: 8e2099e6ba8b4eba0e5f737b72d7b10e
+      size: 5754805
