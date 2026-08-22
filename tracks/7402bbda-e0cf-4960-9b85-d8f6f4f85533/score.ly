@@ -304,11 +304,6 @@ allChords = \chordmode {
   \soloHarmony
 }
 
-emFourBarVoicing = \absolute {
-  \repeat unfold 3 { <e' g' b'>1~ | }
-  <e' g' b'>1 |
-}
-
 emTwoBarVoicing = \absolute {
   <e' g' b'>1~ | <e' g' b'>1 |
 }
@@ -329,11 +324,13 @@ cTwoBarVoicing = \absolute {
   <c' e' g'>1~ | <c' e' g'>1 |
 }
 
-verseChordVoicings = {
+verseChordVoicings = \absolute {
+  \set fingeringOrientations = #'(left)
   \repeat unfold 4 {
-    \emFourBarVoicing
-    \gTwoBarVoicing
-    \dTwoBarVoicing
+    <e'-5 g'-3 b'-1>1~ | <e' g' b'>1~ |
+    <e' g' b'>1~ | <e' g' b'>1 |
+    <g'-5 b'-3 d''-1>1~ | <g' b' d''>1 |
+    <d'-5 fis'-3 a'-1>1~ | <d' fis' a'>1 |
   }
 }
 
