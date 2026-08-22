@@ -373,7 +373,7 @@ postIntroEmVoicing = \absolute {
 
 postIntroProgressionVoicings = \absolute {
   \set fingeringOrientations = #'(left)
-  <g'-5 b'-3 d''-1>1 | <fis'-5 b'-2 d''-1> |
+  <g'-4 b'-2 d''-1>1 | <fis'-5 b'-2 d''-1> |
   <e'-5 a'-2 cis''-1> | <d'-5 fis'-3 a'-1> |
 }
 
