@@ -27,7 +27,7 @@
     " = 165"
   }
   subsubtitle = \markup \override #'(font-name . "DejaVu Sans") \small {
-    "Звуки: " #(instrument-legend) "SplitPnt (fn 017) = 074"
+    "Звуки: " #(instrument-legend) "SplitPnt (fn 007) = 074"
   }
   composer = \markup \override #'(font-name . "DejaVu Sans") "Атом-76"
   piece = \markup \override #'(font-name . "DejaVu Sans") {
