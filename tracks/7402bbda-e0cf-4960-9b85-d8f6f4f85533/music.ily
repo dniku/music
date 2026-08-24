@@ -12,6 +12,8 @@ global = {
     ("001" . "acoustic grand")
 ))
 
+#(define em-dash (string (integer->char #x2014)))
+
 part = #(define-music-function (idx text) (string? string?) #{
   \set Staff.midiInstrument = #(cdr (assoc idx instruments))
   \textMark \markup { \box { #text \bold { #idx } } }
@@ -21,7 +23,7 @@ part = #(define-music-function (idx text) (string? string?) #{
   \markup \line {
     #@(map
       (lambda (entry)
-        (string-append (car entry) " — " (cdr entry) "   "))
+        (string-append (car entry) " " em-dash " " (cdr entry) "   "))
       instruments)
   }
 #})
