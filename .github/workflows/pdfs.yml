@@ -1,4 +1,4 @@
-name: Build score PDFs
+name: Build score artifacts
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build:
-    name: Render PDFs
+    name: Render scores
     runs-on: ubuntu-24.04
     timeout-minutes: 30
 
