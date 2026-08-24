@@ -35,6 +35,7 @@
           aliases = builtins.attrNames aliasCatalog.aliases;
           aliasedTrackIds = builtins.attrValues aliasCatalog.aliases;
           reservedAliases = [
+            "artifacts"
             "default"
             "pdfs"
           ];
@@ -139,13 +140,13 @@
         in
         pkgs.linkFarm "music-scores" (lib.mapAttrsToList (name: path: { inherit name path; }) scores);
 
-      pdfBundleFor =
-        system:
+      scoreBundleFor =
+        system: name: extensions:
         let
           pkgs = pkgsFor system;
           scores = scoresFor system;
         in
-        pkgs.runCommand "music-score-pdfs" { } (
+        pkgs.runCommand name { } (
           ''
             mkdir -p "$out"
           ''
@@ -154,11 +155,20 @@
             let
               alias = primaryAliasesByTrackId.${trackId};
             in
-            ''
-              cp -- ${scores.${trackId}}/score.pdf "$out/${alias}.pdf"
-            ''
+            lib.concatMapStrings (extension: ''
+              cp -- ${scores.${trackId}}/score.${extension} "$out/${alias}.${extension}"
+            '') extensions
           ) trackIds
         );
+
+      pdfBundleFor = system: scoreBundleFor system "music-score-pdfs" [ "pdf" ];
+
+      artifactBundleFor =
+        system:
+        scoreBundleFor system "music-score-artifacts" [
+          "midi"
+          "pdf"
+        ];
 
       renderCommandsFor =
         trackId:
@@ -416,6 +426,7 @@
         scores
         // aliasScores
         // {
+          artifacts = artifactBundleFor system;
           default = allScoresFor system;
           pdfs = pdfBundleFor system;
         }
