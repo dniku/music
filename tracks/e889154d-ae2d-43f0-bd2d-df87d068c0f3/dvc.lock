@@ -12,8 +12,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/fetch-youtube-audio
       hash: md5
       md5: 3f1e74083aaa34ecbcd7cc254c1045b9
@@ -33,8 +33,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly
       hash: md5
       md5: 08b8cba4d47566fee5dc4a3fff3e159e
@@ -46,8 +46,8 @@ stages:
       size: 329
     - path: build/moi-rakety-vverh--blown-away/score.pdf
       hash: md5
-      md5: 99c325784afdc85d05b04d16096e39c5
-      size: 70554
+      md5: 0e6c880dac672944e404dd107e5bb449
+      size: 95570
   render-solo-audition:
     cmd: nix run .#render-midi-audition -- 
       build/moi-rakety-vverh--blown-away/score.midi 
@@ -63,8 +63,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-midi-audition
       hash: md5
       md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
@@ -86,8 +86,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/extract-audio
       hash: md5
       md5: 7b093548b1799bbbc49fd7b42539dd6a
@@ -124,8 +124,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/stereo-compare
       hash: md5
       md5: 69a81979aa23926344bb8093b9cdde8f
@@ -153,8 +153,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/slow-audio
       hash: md5
       md5: 72932ba55d64b1528f9c0b11670fbf6e

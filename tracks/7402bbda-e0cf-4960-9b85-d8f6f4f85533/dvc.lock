@@ -9,12 +9,12 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 5d718bf6a39bf84e7c03f85442966977
-      size: 2106
+      md5: 316edec98a5bc90da25a292469ffc521
+      size: 2165
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
       md5: 4010eaa5b82092259ad0dd2c8356d2c8
@@ -26,8 +26,8 @@ stages:
       size: 5122
     - path: build/atom-76--volki-okeana/score.pdf
       hash: md5
-      md5: 8c77371b9a4c5c24878f8e287a8a18c4
-      size: 606508
+      md5: fda982c56806b705261196dcb9714063
+      size: 764007
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
@@ -41,8 +41,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/extract-audio
       hash: md5
       md5: 7b093548b1799bbbc49fd7b42539dd6a
@@ -69,16 +69,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-audition
       hash: md5
       md5: 496da5cbed5128ce76be3c9c45e85ea0
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 5d718bf6a39bf84e7c03f85442966977
-      size: 2106
+      md5: 316edec98a5bc90da25a292469ffc521
+      size: 2165
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
       hash: md5
@@ -105,16 +105,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-audition
       hash: md5
       md5: 496da5cbed5128ce76be3c9c45e85ea0
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 5d718bf6a39bf84e7c03f85442966977
-      size: 2106
+      md5: 316edec98a5bc90da25a292469ffc521
+      size: 2165
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
       hash: md5
@@ -141,8 +141,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-audition
       hash: md5
       md5: 496da5cbed5128ce76be3c9c45e85ea0
@@ -173,16 +173,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-audition
       hash: md5
       md5: 496da5cbed5128ce76be3c9c45e85ea0
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 5d718bf6a39bf84e7c03f85442966977
-      size: 2106
+      md5: 316edec98a5bc90da25a292469ffc521
+      size: 2165
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
       hash: md5
@@ -209,16 +209,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-audition
       hash: md5
       md5: 496da5cbed5128ce76be3c9c45e85ea0
       size: 1657
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
-      md5: 5d718bf6a39bf84e7c03f85442966977
-      size: 2106
+      md5: 316edec98a5bc90da25a292469ffc521
+      size: 2165
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
       hash: md5
@@ -245,8 +245,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/fetch-youtube-audio
       hash: md5
       md5: 3f1e74083aaa34ecbcd7cc254c1045b9
@@ -272,8 +272,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: aa4cb222ffc0f7ac19ec28ab0002d61f
-      size: 13300
+      md5: cbf57689ddc8097438e75187df28efdf
+      size: 15516
     - path: scripts/render-midi-audition
       hash: md5
       md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd

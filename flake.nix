@@ -24,10 +24,22 @@
         let
           directory = tracksDirectory + "/${trackId}";
           metadataPath = directory + "/reference/recordings.json";
+          scoreDirectory = builtins.path {
+            path = directory;
+            name = "${trackId}-score-source";
+            filter =
+              path: type:
+              path == toString directory
+              || (
+                type == "regular"
+                && builtins.dirOf path == toString directory
+                && (lib.hasSuffix ".ly" path || lib.hasSuffix ".ily" path)
+              );
+          };
         in
         {
-          score = directory + "/score.ly";
-          inherit directory metadataPath;
+          score = scoreDirectory + "/score.ly";
+          inherit directory metadataPath scoreDirectory;
         }
       );
       trackAliases =
@@ -83,7 +95,7 @@
             mkdir -p "$XDG_CACHE_HOME/fontconfig"
             export SOURCE_DATE_EPOCH=946684800
             lilypond \
-              --include=${track.directory} \
+              --include=${track.scoreDirectory} \
               --output="$out/score" \
               ${track.score}
             qpdf \
@@ -171,38 +183,51 @@
         ];
 
       renderCommandsFor =
-        trackId:
+        system: trackId:
         let
           buildAlias = primaryAliasesByTrackId.${trackId};
+          score = (scoresFor system).${trackId};
         in
         ''
           track_build_directory="build/${buildAlias}"
           mkdir -p "$track_build_directory"
-          export SOURCE_DATE_EPOCH=946684800
-          rm --force -- \
-            "$track_build_directory/score.pdf" \
-            "$track_build_directory/score.midi" \
-            "$track_build_directory/score.png" \
-            "$track_build_directory"/score-page{1..99}.png
-          lilypond \
-            --output="$track_build_directory/score" \
-            "tracks/${trackId}/score.ly"
-          qpdf \
-            --empty \
-            --pages "$track_build_directory/score.pdf" 1-z \
-            -- \
-            --remove-info \
-            --remove-metadata \
-            --static-id \
-            "$track_build_directory/score.normalized.pdf"
-          mv -- \
-            "$track_build_directory/score.normalized.pdf" \
+          install --mode=0644 -- \
+            ${score}/score.pdf \
             "$track_build_directory/score.pdf"
+          install --mode=0644 -- \
+            ${score}/score.midi \
+            "$track_build_directory/score.midi"
+
           if (( $# > 0 )); then
-            lilypond \
+            preview_directory="$(
+              mktemp \
+                --directory \
+                --tmpdir="$track_build_directory" \
+                .score-preview.XXXXXX
+            )"
+            rm --force -- \
+              "$track_build_directory/score.png" \
+              "$track_build_directory"/score-page{1..99}.png
+            if ! lilypond \
               "$@" \
-              --output="$track_build_directory/score" \
-              "tracks/${trackId}/score.ly"
+              --output="$preview_directory/score" \
+              "tracks/${trackId}/score.ly"; then
+              rm --recursive --force -- "$preview_directory"
+              exit 1
+            fi
+
+            while IFS= read -r -d "" preview_output; do
+              preview_name="$(basename "$preview_output")"
+              case "$preview_name" in
+                score.pdf | score.midi) ;;
+                *)
+                  install --mode=0644 -- \
+                    "$preview_output" \
+                    "$track_build_directory/$preview_name"
+                  ;;
+              esac
+            done < <(find "$preview_directory" -maxdepth 1 -type f -print0)
+            rm --recursive --force -- "$preview_directory"
           fi
         '';
 
@@ -213,16 +238,17 @@
           application = pkgs.writeShellApplication {
             name = applicationName;
             runtimeInputs = [
+              pkgs.coreutils
+              pkgs.findutils
               pkgs.lilypond
-              pkgs.qpdf
             ];
-            text = lib.concatMapStringsSep "\n" renderCommandsFor selectedTracks;
+            text = lib.concatMapStringsSep "\n" (renderCommandsFor system) selectedTracks;
           };
         in
         {
           type = "app";
           program = "${application}/bin/${applicationName}";
-          meta.description = "Render LilyPond scores into the local build directory";
+          meta.description = "Export reproducible scores into the local build directory";
         };
 
       renderTrackAppsFor =
