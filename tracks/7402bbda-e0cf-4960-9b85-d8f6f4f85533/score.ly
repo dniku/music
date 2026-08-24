@@ -40,7 +40,23 @@ verseLine = {
   c'1 | c' | c' | s2. c'4 |
 }
 
-postIntroAlignment = {
+fourBarAlignment = {
+  \repeat unfold 4 { s1 | }
+}
+
+eightBarAlignment = {
+  \repeat unfold 8 { s1 | }
+}
+
+fourteenBarAlignment = {
+  \repeat unfold 14 { s1 | }
+}
+
+sixteenBarAlignment = {
+  \repeat unfold 16 { s1 | }
+}
+
+thirtyTwoBarAlignment = {
   \repeat unfold 32 { s1 | }
 }
 
@@ -74,7 +90,7 @@ introRight = {
 firstVerseRight = {
   \part "463" "Куплет / 00:36–00:59"
   % TODO(Codeberg): здесь есть ксилофон.
-  \repeat unfold 32 { s1 | }
+  \thirtyTwoBarAlignment
 }
 
 firstBridgeRight = {
@@ -85,29 +101,25 @@ firstBridgeRight = {
 secondVerseRight = {
   \part "463" "Куплет 2 / 01:11–01:59"
   % TODO(Codeberg): здесь есть ксилофон.
-  \repeat unfold 32 { s1 | }
-}
-
-earlySoloCue = {
-  \repeat unfold 8 { s1 | }
+  \thirtyTwoBarAlignment
 }
 
 soloCueOne = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Соло 1:45.70–1:57.30"
-  \repeat unfold 8 { s1 | }
+  \eightBarAlignment
 }
 
 soloCueTwo = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Соло 2:43.90–2:55.50"
-  \repeat unfold 8 { s1 | }
+  \eightBarAlignment
 }
 
 soloCueThree = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Соло 5:15.20–5:26.80"
-  \repeat unfold 8 { s1 | }
+  \eightBarAlignment
 }
 
 guitarBreakCue = {
@@ -115,16 +127,16 @@ guitarBreakCue = {
     "Проигрыш гитары на 3:11"
     \tiny "Очень черновые ноты · требуют доработки"
   }
-  \repeat unfold 4 { s1 | }
+  \fourBarAlignment
 }
 
 vocalGuide = {
   \global
   \introAlignment
-  \postIntroAlignment
+  \thirtyTwoBarAlignment
 
   \repeat unfold 8 { \verseLine }
-  \earlySoloCue
+  \eightBarAlignment
 
   \repeat unfold 8 { \verseLine }
 
@@ -158,16 +170,16 @@ soloDisplayGuide = {
   \firstBridgeRight
   \secondVerseRight
 
-  \repeat unfold 16 { s1 | } % Chorus 1
+  \sixteenBarAlignment % Chorus 1
   \soloNotes
 
-  \repeat unfold 32 { s1 | } % Verse 3
-  \repeat unfold 16 { s1 | } % Chorus 2
-  \repeat unfold 14 { s1 | } % Bridge
+  \thirtyTwoBarAlignment % Verse 3
+  \sixteenBarAlignment % Chorus 2
+  \fourteenBarAlignment % Bridge
   \soloNotes
   \guitarBreakDraftNotes
 
-  \repeat unfold 32 { s1 | } % Finale
+  \thirtyTwoBarAlignment % Finale
   \soloNotes
 }
 
@@ -175,19 +187,19 @@ lowerHandGuide = {
   \global
   \clef treble
   \introAlignment
-  \postIntroAlignment
-  \repeat unfold 32 { s1 | } % Verse 1
-  \repeat unfold 8 { s1 | } % Early solo
-  \repeat unfold 32 { s1 | } % Verse 2
-  \repeat unfold 16 { s1 | } % Chorus 1
-  \repeat unfold 8 { s1 | } % Solo 1
-  \repeat unfold 32 { s1 | } % Verse 3
-  \repeat unfold 16 { s1 | } % Chorus 2
-  \repeat unfold 14 { s1 | } % Bridge
-  \repeat unfold 8 { s1 | } % Solo 2
-  \repeat unfold 4 { s1 | } % Guitar break
-  \repeat unfold 32 { s1 | } % Finale
-  \repeat unfold 8 { s1 | } % Solo 3
+  \thirtyTwoBarAlignment % Intro 2
+  \thirtyTwoBarAlignment % Verse 1
+  \eightBarAlignment % Early solo
+  \thirtyTwoBarAlignment % Verse 2
+  \sixteenBarAlignment % Chorus 1
+  \eightBarAlignment % Solo 1
+  \thirtyTwoBarAlignment % Verse 3
+  \sixteenBarAlignment % Chorus 2
+  \fourteenBarAlignment % Bridge
+  \eightBarAlignment % Solo 2
+  \fourBarAlignment % Guitar break
+  \thirtyTwoBarAlignment % Finale
+  \eightBarAlignment % Solo 3
   \bar "|."
 }
 
@@ -252,17 +264,9 @@ bridgeHarmony = \chordmode {
   g1 | d | d |
 }
 
-soloHarmony = \chordmode {
-  \repeat unfold 8 { s1 | }
-}
-
 earlyBridgeHarmony = \chordmode {
   e1:m | e:m | g | d |
   e1:m | e:m | g | d |
-}
-
-guitarBreakHarmony = \chordmode {
-  \repeat unfold 4 { s1 | }
 }
 
 postIntroEmHarmony = \chordmode {
@@ -294,14 +298,14 @@ allChords = \chordmode {
   \earlyBridgeHarmony
   \verseHarmony
   \chorusHarmony
-  \soloHarmony
+  \eightBarAlignment
   \verseHarmony
   \chorusHarmony
   \bridgeHarmony
-  \soloHarmony
-  \guitarBreakHarmony
+  \eightBarAlignment
+  \fourBarAlignment
   \verseHarmony
-  \soloHarmony
+  \eightBarAlignment
 }
 
 emTwoBarVoicing = \absolute {
@@ -350,19 +354,11 @@ bridgeChordVoicings = \absolute {
   <g' b' d''>1 | \dTwoBarVoicing
 }
 
-soloChordVoicingSpacers = {
-  \repeat unfold 8 { s1 | }
-}
-
 earlyBridgeChordVoicings = \absolute {
   <e' g' b'>1~ | <e' g' b'> |
   <g' b' d''>1 | <d' fis' a'> |
   <e' g' b'>1~ | <e' g' b'> |
   <g' b' d''>1 | <d' fis' a'> |
-}
-
-guitarBreakChordVoicingSpacers = {
-  \repeat unfold 4 { s1 | }
 }
 
 postIntroEmVoicing = \absolute {
@@ -398,14 +394,14 @@ allChordVoicings = {
   \earlyBridgeChordVoicings
   \verseChordVoicings
   \chorusChordVoicings
-  \soloChordVoicingSpacers
+  \eightBarAlignment
   \verseChordVoicings
   \chorusChordVoicings
   \bridgeChordVoicings
-  \soloChordVoicingSpacers
-  \guitarBreakChordVoicingSpacers
+  \eightBarAlignment
+  \fourBarAlignment
   \verseChordVoicings
-  \soloChordVoicingSpacers
+  \eightBarAlignment
 }
 
 barLyrics = \lyricmode {
