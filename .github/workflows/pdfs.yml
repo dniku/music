@@ -39,11 +39,18 @@ jobs:
           cp --dereference -- result-pdfs/*.pdf artifacts/
           sha256sum artifacts/*.pdf
 
-      - name: Upload score PDFs
+      - name: Upload Volki Okeana PDF
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: music-score-pdfs
-          path: artifacts/*.pdf
+          path: artifacts/atom-76--volki-okeana.pdf
           if-no-files-found: error
           retention-days: 90
-          compression-level: 0
+          archive: false
+
+      - name: Upload Blown Away PDF
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          path: artifacts/moi-rakety-vverh--blown-away.pdf
+          if-no-files-found: error
+          retention-days: 90
+          archive: false
