@@ -34,9 +34,15 @@
         let
           aliases = builtins.attrNames aliasCatalog.aliases;
           aliasedTrackIds = builtins.attrValues aliasCatalog.aliases;
+          reservedAliases = [
+            "default"
+            "pdfs"
+          ];
         in
         assert aliasCatalog.schemaVersion == 2;
-        assert lib.all (alias: alias != "default" && !(builtins.elem alias trackIds)) aliases;
+        assert lib.all (
+          alias: !(builtins.elem alias reservedAliases) && !(builtins.elem alias trackIds)
+        ) aliases;
         assert lib.all (alias: builtins.match "^[a-z0-9]+(-+[a-z0-9]+)*$" alias != null) aliases;
         assert lib.all (trackId: builtins.elem trackId trackIds) aliasedTrackIds;
         aliasCatalog.aliases;
@@ -64,6 +70,7 @@
         in
         pkgs.runCommand "${trackId}-score"
           {
+            FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ pkgs.dejavu_fonts ]; };
             nativeBuildInputs = [
               pkgs.lilypond
               pkgs.qpdf
@@ -71,6 +78,8 @@
           }
           ''
             mkdir -p "$out"
+            export XDG_CACHE_HOME="$TMPDIR/xdg-cache"
+            mkdir -p "$XDG_CACHE_HOME/fontconfig"
             export SOURCE_DATE_EPOCH=946684800
             lilypond \
               --include=${track.directory} \
@@ -129,6 +138,27 @@
           scores = scoresFor system;
         in
         pkgs.linkFarm "music-scores" (lib.mapAttrsToList (name: path: { inherit name path; }) scores);
+
+      pdfBundleFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+          scores = scoresFor system;
+        in
+        pkgs.runCommand "music-score-pdfs" { } (
+          ''
+            mkdir -p "$out"
+          ''
+          + lib.concatMapStrings (
+            trackId:
+            let
+              alias = primaryAliasesByTrackId.${trackId};
+            in
+            ''
+              cp -- ${scores.${trackId}}/score.pdf "$out/${alias}.pdf"
+            ''
+          ) trackIds
+        );
 
       renderCommandsFor =
         trackId:
@@ -387,6 +417,7 @@
         // aliasScores
         // {
           default = allScoresFor system;
+          pdfs = pdfBundleFor system;
         }
       );
     };
