@@ -19,6 +19,7 @@
         lib.filterAttrs (_: kind: kind == "directory") (builtins.readDir tracksDirectory)
       );
       aliasCatalog = builtins.fromJSON (builtins.readFile ./aliases.json);
+      aliasTrackIds = builtins.attrNames aliasCatalog.tracks;
       tracks = lib.genAttrs trackIds (
         trackId:
         let
@@ -44,36 +45,36 @@
       );
       trackAliases =
         let
-          aliases = builtins.attrNames aliasCatalog.aliases;
-          aliasedTrackIds = builtins.attrValues aliasCatalog.aliases;
+          aliasPairs = lib.concatMap (
+            trackId:
+            let
+              trackAliasConfig = aliasCatalog.tracks.${trackId};
+            in
+            map (alias: {
+              name = alias;
+              value = trackId;
+            }) ([ trackAliasConfig.primaryAlias ] ++ trackAliasConfig.aliases)
+          ) trackIds;
+          aliases = map (aliasPair: aliasPair.name) aliasPairs;
           reservedAliases = [
             "artifacts"
             "default"
             "pdfs"
           ];
         in
-        assert aliasCatalog.schemaVersion == 2;
+        assert aliasCatalog.schemaVersion == 3;
+        assert lib.all (trackId: builtins.hasAttr trackId aliasCatalog.tracks) trackIds;
+        assert lib.all (trackId: builtins.elem trackId trackIds) aliasTrackIds;
+        assert builtins.length aliases == builtins.length (lib.unique aliases);
         assert lib.all (
           alias: !(builtins.elem alias reservedAliases) && !(builtins.elem alias trackIds)
         ) aliases;
         assert lib.all (alias: builtins.match "^[a-z0-9]+(-+[a-z0-9]+)*$" alias != null) aliases;
-        assert lib.all (trackId: builtins.elem trackId trackIds) aliasedTrackIds;
-        aliasCatalog.aliases;
+        lib.listToAttrs aliasPairs;
 
-      primaryAliasesByTrackId =
-        let
-          primaryTrackIds = builtins.attrNames aliasCatalog.primaryAliases;
-        in
-        assert lib.all (trackId: builtins.hasAttr trackId aliasCatalog.primaryAliases) trackIds;
-        assert lib.all (trackId: builtins.elem trackId trackIds) primaryTrackIds;
-        assert lib.all (
-          trackId:
-          let
-            primaryAlias = aliasCatalog.primaryAliases.${trackId};
-          in
-          builtins.hasAttr primaryAlias trackAliases && trackAliases.${primaryAlias} == trackId
-        ) trackIds;
-        aliasCatalog.primaryAliases;
+      primaryAliasesByTrackId = lib.genAttrs trackIds (
+        trackId: aliasCatalog.tracks.${trackId}.primaryAlias
+      );
 
       scoreFor =
         system: trackId:

@@ -1,11 +1,13 @@
 {
-  "schemaVersion": 2,
-  "primaryAliases": {
-    "7402bbda-e0cf-4960-9b85-d8f6f4f85533": "atom-76--volki-okeana",
-    "e889154d-ae2d-43f0-bd2d-df87d068c0f3": "moi-rakety-vverh--blown-away"
-  },
-  "aliases": {
-    "atom-76--volki-okeana": "7402bbda-e0cf-4960-9b85-d8f6f4f85533",
-    "moi-rakety-vverh--blown-away": "e889154d-ae2d-43f0-bd2d-df87d068c0f3"
+  "schemaVersion": 3,
+  "tracks": {
+    "7402bbda-e0cf-4960-9b85-d8f6f4f85533": {
+      "primaryAlias": "atom-76--volki-okeana",
+      "aliases": []
+    },
+    "e889154d-ae2d-43f0-bd2d-df87d068c0f3": {
+      "primaryAlias": "moi-rakety-vverh--blown-away",
+      "aliases": []
+    }
   }
 }
