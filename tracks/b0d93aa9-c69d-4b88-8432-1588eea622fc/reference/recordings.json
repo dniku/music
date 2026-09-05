@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "verifiedAt": "2026-09-05",
+  "canonicalRecording": {
+    "title": "Lost in Space",
+    "artist": "Avantasia",
+    "musicbrainz": {
+      "recordingMbid": "b0d93aa9-c69d-4b88-8432-1588eea622fc",
+      "artistMbid": "2ecbc483-dee4-442f-8ce7-f3ab31c73f87",
+      "releaseMbid": "80f9324e-20e7-4a87-81ce-71761f8e2f7d",
+      "releaseGroupMbid": "ef62b154-5d51-4a6b-a697-e1c242e52494",
+      "releaseTrackMbid": "ff168bd6-7a4e-321f-8eec-2bfdb7398fb8",
+      "releaseTitle": "Lost in Space, Part 1",
+      "releaseYear": 2007,
+      "releaseCountry": "DE",
+      "trackNumber": 1,
+      "catalogDurationMs": 232000,
+      "isrc": "DED830703354",
+      "workMbid": "9e1f1a9f-e84b-4a30-ac25-db987679e0f6"
+    }
+  },
+  "assets": []
+}

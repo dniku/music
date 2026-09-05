@@ -1,6 +1,10 @@
 {
   "schemaVersion": 3,
   "tracks": {
+    "b0d93aa9-c69d-4b88-8432-1588eea622fc": {
+      "primaryAlias": "avantasia--lost-in-space",
+      "aliases": []
+    },
     "7402bbda-e0cf-4960-9b85-d8f6f4f85533": {
       "primaryAlias": "atom-76--volki-okeana",
       "aliases": []

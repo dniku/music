@@ -55,6 +55,14 @@ jobs:
           retention-days: 90
           archive: false
 
+      - name: Upload Lost in Space PDF
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          path: artifacts/avantasia--lost-in-space.pdf
+          if-no-files-found: error
+          retention-days: 90
+          archive: false
+
       - name: Upload Volki Okeana MIDI
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
@@ -67,6 +75,14 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           path: artifacts/moi-rakety-vverh--blown-away.midi
+          if-no-files-found: error
+          retention-days: 90
+          archive: false
+
+      - name: Upload Lost in Space MIDI
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          path: artifacts/avantasia--lost-in-space.midi
           if-no-files-found: error
           retention-days: 90
           archive: false

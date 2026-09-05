@@ -1,0 +1,11 @@
+stages:
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-b0d93aa9-c69d-4b88-8432-1588eea622fc
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly
+    outs:
+      - build/avantasia--lost-in-space/score.pdf
+      - build/avantasia--lost-in-space/score.midi
