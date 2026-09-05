@@ -17,8 +17,8 @@ stages:
       size: 2165
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly
       hash: md5
-      md5: bdcd28c6c33b39c63735ec209acc2033
-      size: 13173
+      md5: 679ac7d743ac1675472ab42383101c76
+      size: 13179
     outs:
     - path: build/atom-76--volki-okeana/score.midi
       hash: md5
@@ -26,8 +26,8 @@ stages:
       size: 5122
     - path: build/atom-76--volki-okeana/score.pdf
       hash: md5
-      md5: 638c481ad936d436e2bbaa42e08585da
-      size: 765919
+      md5: 0bf51ff991a50e268cdd22750209277d
+      size: 765963
   extract-early-solo-reference:
     cmd: nix run .#extract-audio -- 
       'tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/reference/audio/03. Волки 
