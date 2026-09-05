@@ -266,7 +266,7 @@ bridgeHarmony = \chordmode {
 
 earlyBridgeHarmony = \chordmode {
   e1:m | e:m | g | d |
-  e1:m | e:m | g | d |
+  e1:m | e:m | g | g2 d2 |
 }
 
 postIntroEmHarmony = \chordmode {
@@ -358,7 +358,7 @@ earlyBridgeChordVoicings = \absolute {
   <e' g' b'>1~ | <e' g' b'> |
   <g' b' d''>1 | <d' fis' a'> |
   <e' g' b'>1~ | <e' g' b'> |
-  <g' b' d''>1 | <d' fis' a'> |
+  <g' b' d''>1~ | <g' b' d''>2 <d' fis' a'>2 |
 }
 
 postIntroEmVoicing = \absolute {
