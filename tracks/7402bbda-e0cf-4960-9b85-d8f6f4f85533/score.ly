@@ -309,7 +309,7 @@ allChords = \chordmode {
 }
 
 emTwoBarVoicing = \absolute {
-  <e' g' b'>1~ | <e' g' b'>1 |
+  <e'-5 g'-3 b'-1>1~ | <e' g' b'>1 |
 }
 
 gTwoBarVoicing = \absolute {
@@ -317,15 +317,15 @@ gTwoBarVoicing = \absolute {
 }
 
 dTwoBarVoicing = \absolute {
-  <d' fis' a'>1~ | <d' fis' a'>1 |
+  <d'-5 fis'-3 a'-1>1~ | <d' fis' a'>1 |
 }
 
 bSevenTwoBarVoicing = \absolute {
-  <b dis' fis' a'>1~ | <b dis' fis' a'>1 |
+  <b-5 dis'-3 fis'-2 a'-1>1~ | <b dis' fis' a'>1 |
 }
 
 cTwoBarVoicing = \absolute {
-  <c' e' g'>1~ | <c' e' g'>1 |
+  <c'-5 e'-3 g'-1>1~ | <c' e' g'>1 |
 }
 
 verseChordVoicings = \absolute {
@@ -339,26 +339,30 @@ verseChordVoicings = \absolute {
 }
 
 chorusChordVoicings = \absolute {
+  \set fingeringOrientations = #'(left)
   \emTwoBarVoicing \bSevenTwoBarVoicing
-  <c' e' g'>1 | <g' b' d''> | <c' e' g'> | <d' fis' a'> |
+  <c'-5 e'-3 g'-1>1 | <g'-5 b'-3 d''-1> |
+  <c'-5 e'-3 g'-1> | <d'-5 fis'-3 a'-1> |
   \emTwoBarVoicing \bSevenTwoBarVoicing
-  <c' e' g'>1 | <g' b' d''> | \dTwoBarVoicing
+  <c'-5 e'-3 g'-1>1 | <g'-5 b'-3 d''-1> | \dTwoBarVoicing
 }
 
 bridgeChordVoicings = \absolute {
+  \set fingeringOrientations = #'(left)
   \emTwoBarVoicing
   \cTwoBarVoicing
-  <g' b' d''>1 | \dTwoBarVoicing
+  <g'-5 b'-3 d''-1>1 | \dTwoBarVoicing
   \emTwoBarVoicing
   \cTwoBarVoicing
-  <g' b' d''>1 | \dTwoBarVoicing
+  <g'-5 b'-3 d''-1>1 | \dTwoBarVoicing
 }
 
 earlyBridgeChordVoicings = \absolute {
-  <e' g' b'>1~ | <e' g' b'> |
-  <g' b' d''>1 | <d' fis' a'> |
-  <e' g' b'>1~ | <e' g' b'> |
-  <g' b' d''>1~ | <g' b' d''>2 <d' fis' a'>2 |
+  \set fingeringOrientations = #'(left)
+  <e'-5 g'-3 b'-1>1~ | <e' g' b'> |
+  <g'-5 b'-3 d''-1>1 | <d'-5 fis'-3 a'-1> |
+  <e'-5 g'-3 b'-1>1~ | <e' g' b'> |
+  <g'-5 b'-3 d''-1>1~ | <g' b' d''>2 <d'-5 fis'-3 a'-1>2 |
 }
 
 postIntroEmVoicing = \absolute {

@@ -54,19 +54,21 @@ introAlignment = {
 
 soloNotes = \absolute {
   \set Staff.midiInstrument = #(cdr (assoc "102" instruments))
+  \override Fingering.direction = #UP
   \ottava #1
 
-  e''8 d'' e'' fis'' e'' d'' e'' fis'' |
-  e'' d'' e'' fis'' g'' fis'' e'' d'' |
-  g''1 |
-  d'' |
+  e''8-2 d''-1 e''-2 fis''-3 e''-2 d''-1 e''-2 fis''-3 |
+  e''-2 d''-1 e''-2 fis''-3 g''-4 fis''-3 e''-2 d''-1 |
+  g''1-5 |
+  d''-1 |
   \bar "||"
 
-  g''8 fis'' g'' a'' b'' a'' g'' fis'' |
-  b'' a'' g'' fis'' e'' d'' e'' fis'' |
-  d''1 |
-  e'' |
+  g''8-2 fis''-1 g''-2 a''-3 b''-5 a''-4 g''-3 fis''-2 |
+  b''-5 a''-4 g''-3 fis''-2 e''-1 d''-3 e''-4 fis''-5 |
+  d''1-1 |
+  e''-2 |
   \ottava #0
+  \revert Fingering.direction
 }
 
 soloMusic = {
@@ -78,12 +80,14 @@ soloMusic = {
 
 earlySoloNotes = \absolute {
   \clef "treble_8"
-  e'2 b | e1 |
+  \override Fingering.direction = #UP
+  e'2-5 b-2 | e1-1 |
   R1 | R |
-  e2 g4 b |
-  e'1 |
-  g1 |
-  b2 d'4 d' |
+  e2-1 g4-2 b-4 |
+  e'1-5 |
+  g1-1 |
+  b2-2 d'4-4 d'-4 |
+  \revert Fingering.direction
   \clef treble
 }
 
