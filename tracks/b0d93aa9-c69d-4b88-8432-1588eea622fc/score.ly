@@ -31,7 +31,8 @@ global = {
 }
 
 % Only the pitches, octaves, and hand split are transcribed. Equal eighth
-% notes, bar lines, and tempo are temporary scaffolding.
+% notes, bar lines, and tempo are temporary scaffolding; the two hands are not
+% yet rhythmically synchronized.
 leftHandSoloNotes = \absolute {
   e'8 d'' e' cis'' e' b' e' d' |
   e' d'' e' cis'' e' b' e' b |
@@ -39,7 +40,8 @@ leftHandSoloNotes = \absolute {
 }
 
 rightHandSoloNotes = \absolute {
-  s1 | s1 |
+  s1 |
+  r8 d'''8( cis'''8 a''8) r2 |
   fis''8 a'' fis'' fis'' a'' fis'' s4 |
 }
 
