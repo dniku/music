@@ -18,7 +18,7 @@
   title = \markup \override #'(font-name . "DejaVu Sans") \bold
     "Lost in Space"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Начало соло · все длительности пока условно 1/8"
+    "Начало соло · ритм пока черновой"
   subsubtitle = \markup \override #'(font-name . "DejaVu Sans")
     "Прослушивание: ♩ = 122"
   composer = \markup \override #'(font-name . "DejaVu Sans") "Avantasia"
@@ -30,9 +30,9 @@ global = {
   \time 4/4
 }
 
-% Only the pitches, octaves, and hand split are transcribed. Equal eighth
-% notes, bar lines, and tempo are temporary scaffolding; the two hands are not
-% yet rhythmically synchronized.
+% Only the pitches, octaves, and hand split are transcribed. Rhythms, bar lines,
+% and tempo are temporary scaffolding; synchronization between the two hands is
+% only notated where it has been explicitly identified.
 leftHandSoloNotes = \absolute {
   e'8 d'' e' cis'' e' b' e' d' |
   e' d'' e' cis'' e' b' e' b |
@@ -41,7 +41,7 @@ leftHandSoloNotes = \absolute {
 
 rightHandSoloNotes = \absolute {
   s1 |
-  r8 d'''8( cis'''8 a''8) r2 |
+  r8 d'''4( cis'''4 b''4) r8 |
   fis''8 a'' fis'' fis'' a'' fis'' s4 |
 }
 
