@@ -34,15 +34,15 @@ global = {
 % and tempo are temporary scaffolding; synchronization between the two hands is
 % only notated where it has been explicitly identified.
 leftHandSoloNotes = \absolute {
-  e'8 d'' e' cis'' e' b' e' d' |
-  e' d'' e' cis'' e' b' e' b |
-  s1 |
+  r8 e'8 d'' e' cis'' e' b' e' |
+  d'8 e' d'' e' cis'' e' b' e' |
+  b8 s2.. |
 }
 
 rightHandSoloNotes = \absolute {
   s1 |
-  r8 d'''4( cis'''4 b''4) r8 |
-  fis''8 a'' fis'' fis'' a'' fis'' s4 |
+  r4 d'''4( cis'''4 b''4) |
+  r8 fis''8 a'' fis'' fis'' a'' fis'' s8 |
 }
 
 blankSystem = {
