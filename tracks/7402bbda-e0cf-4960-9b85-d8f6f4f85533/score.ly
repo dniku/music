@@ -65,9 +65,18 @@ introPreBassRight = {
   \introNotes
 }
 
+introRightEmPair = \absolute {
+  <b''-2 e'''-5>1~ | <b'' e'''> |
+}
+
+introRightGPair = \absolute {
+  <g''-1 b''-2>1~ | <g'' b''> |
+}
+
 introRightPattern = \absolute {
   \set fingeringOrientations = #'(left)
-  <b''-2 e'''-5>1~ | <b'' e'''> | <g''-1 b''-2>1~ | <g'' b''> |
+  \introRightEmPair
+  \introRightGPair
   <d'''-1 g'''-4>1 | <des'''-1 ges'''-4> |
   <d'''-1 g'''-4> | <g''-1 b''-2> |
 }
@@ -78,9 +87,12 @@ introRight = {
 
   \ottava #1
   \introRightPattern
+  % Measures 25–26 repeat 19–20; measures 27–28 repeat 17–18.
+  \introRightGPair
+  \introRightEmPair
   \ottava #0
 
-  \repeat unfold 8 { s1 | }
+  \repeat unfold 4 { s1 | }
 
   \ottava #1
   \introRightPattern
