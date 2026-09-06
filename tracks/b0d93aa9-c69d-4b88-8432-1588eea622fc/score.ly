@@ -33,16 +33,37 @@ global = {
 % Only the pitches, octaves, and hand split are transcribed. Rhythms, bar lines,
 % and tempo are temporary scaffolding; synchronization between the two hands is
 % only notated where it has been explicitly identified.
-leftHandSoloNotes = \absolute {
+leftHandSoloPhrase = \absolute {
   r8 e'8 d'' e' cis'' e' b' e' |
   d'8 e' d'' e' cis'' e' b' e' |
   b8 s2.. |
 }
 
-rightHandSoloNotes = \absolute {
+rightHandSoloPhraseStart = \absolute {
   s1 |
   r4 d'''4~ <d''' cis'''>4~ <d''' cis''' a''>4 |
+}
+
+rightHandSoloFirstEnding = \absolute {
   r8 fis''8 a'' fis'' r8 fis'' a'' fis'' |
+}
+
+rightHandSoloSecondEnding = \absolute {
+  r8 fis''8 a'' fis'' r8 a'' d'' d''' |
+}
+
+leftHandSoloNotes = {
+  \leftHandSoloPhrase
+  s1 |
+  \leftHandSoloPhrase
+}
+
+rightHandSoloNotes = {
+  \rightHandSoloPhraseStart
+  \rightHandSoloFirstEnding
+  s1 |
+  \rightHandSoloPhraseStart
+  \rightHandSoloSecondEnding
 }
 
 blankSystem = {
@@ -51,7 +72,7 @@ blankSystem = {
 }
 
 remainingBlankGrid = {
-  \repeat unfold 5 { s1 | }
+  s1 |
   \break
   \repeat unfold 3 { \blankSystem }
   \bar "|."
