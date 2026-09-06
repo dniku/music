@@ -9,3 +9,16 @@ stages:
     outs:
       - build/avantasia--lost-in-space/score.pdf
       - build/avantasia--lost-in-space/score.midi
+  render-solo-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/avantasia--lost-in-space/score.midi
+      build/avantasia--lost-in-space/solo.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/avantasia--lost-in-space/score.midi
+    outs:
+      - build/avantasia--lost-in-space/solo.mp3

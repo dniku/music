@@ -18,27 +18,43 @@
   title = \markup \override #'(font-name . "DejaVu Sans") \bold
     "Lost in Space"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Пустой шаблон"
+    "Начало соло · все длительности пока условно 1/8"
+  subsubtitle = \markup \override #'(font-name . "DejaVu Sans")
+    "Прослушивание: ♩ = 122"
   composer = \markup \override #'(font-name . "DejaVu Sans") "Avantasia"
   tagline = ##f
 }
 
-% The 4/4 grid is provisional until transcription establishes the real meter.
+global = {
+  \numericTimeSignature
+  \time 4/4
+}
+
+% Only the pitches and octaves are transcribed. Equal eighth notes, bar lines,
+% and tempo are temporary scaffolding for notation and audition.
+soloNotes = \absolute {
+  e'8 d'' e' cis'' e' b' e' d' |
+  e' d'' e' cis'' e' b' e' b |
+  fis'' a'' fis'' fis'' a'' fis'' s4 |
+}
+
 blankSystem = {
   \repeat unfold 8 { s1 | }
   \break
 }
 
-blankGrid = {
-  \numericTimeSignature
-  \time 4/4
-  \repeat unfold 4 { \blankSystem }
+layoutMusic = {
+  \global
+  \soloNotes
+  \repeat unfold 5 { s1 | }
+  \break
+  \repeat unfold 3 { \blankSystem }
   \bar "|."
 }
 
 \score {
   \new Staff {
-    \blankGrid
+    \layoutMusic
   }
 
   \layout {
@@ -48,8 +64,13 @@ blankGrid = {
 }
 
 \score {
-  \new Staff {
-    \blankGrid
+  \new Staff \with {
+    midiInstrument = "overdriven guitar"
+  } {
+    \global
+    \tempo 4 = 122
+    \soloNotes
+    \bar "|."
   }
   \midi { }
 }
