@@ -41,7 +41,7 @@ leftHandSoloNotes = \absolute {
 
 rightHandSoloNotes = \absolute {
   s1 |
-  r4 d'''4( cis'''4 a''4) |
+  r4 d'''4~ <d''' cis'''>4~ <d''' cis''' a''>4 |
   r8 fis''8 a'' fis'' fis'' a'' fis'' s8 |
 }
 
