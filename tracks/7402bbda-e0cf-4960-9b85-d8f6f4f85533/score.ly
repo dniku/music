@@ -73,12 +73,16 @@ introRightGPair = \absolute {
   <g''-1 b''-2>1~ | <g'' b''> |
 }
 
+introRightPatternEnding = \absolute {
+  <d'''-1 g'''-4>1 | <des'''-1 ges'''-4> |
+  <d'''-1 g'''-4> | <g''-1 b''-2> |
+}
+
 introRightPattern = \absolute {
   \set fingeringOrientations = #'(left)
   \introRightEmPair
   \introRightGPair
-  <d'''-1 g'''-4>1 | <des'''-1 ges'''-4> |
-  <d'''-1 g'''-4> | <g''-1 b''-2> |
+  \introRightPatternEnding
 }
 
 introRight = {
@@ -95,7 +99,9 @@ introRight = {
   \repeat unfold 4 { s1 | }
 
   \ottava #1
-  \introRightPattern
+  \introRightGPair
+  \introRightEmPair
+  \introRightPatternEnding
   \ottava #0
 }
 
