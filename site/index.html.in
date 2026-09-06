@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="@@SITE_DESCRIPTION@@">
+    <title>@@SITE_TITLE@@</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="page-header">
+      <p class="eyebrow">LilyPond · PDF · MIDI</p>
+      <h1>@@SITE_TITLE@@</h1>
+      <p class="lead">@@SITE_DESCRIPTION@@</p>
+    </header>
+
+    <main>
+      <div class="catalog-heading">
+        <h2>Партитуры</h2>
+        <span>@@TRACK_COUNT@@</span>
+      </div>
+      <div class="score-grid">
+@@TRACK_CARDS@@
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        Исходники и история изменений —
+        <a href="@@REPOSITORY_URL@@">в репозитории GitHub</a>.
+      </p>
+    </footer>
+  </body>
+</html>

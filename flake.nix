@@ -60,6 +60,7 @@
             "artifacts"
             "default"
             "pdfs"
+            "site"
           ];
         in
         assert aliasCatalog.schemaVersion == 3;
@@ -74,6 +75,29 @@
 
       primaryAliasesByTrackId = lib.genAttrs trackIds (
         trackId: aliasCatalog.tracks.${trackId}.primaryAlias
+      );
+
+      siteConfig = {
+        title = "Музыкальные транскрипции";
+        description = "Рабочие партитуры, партии и нотные разборы в PDF и MIDI.";
+        repositoryUrl = "https://github.com/dniku/music";
+      };
+
+      siteTracks = lib.sort (left: right: builtins.lessThan left.sortKey right.sortKey) (
+        map (
+          trackId:
+          let
+            metadata = builtins.fromJSON (builtins.readFile tracks.${trackId}.metadataPath);
+            recording = metadata.canonicalRecording;
+          in
+          {
+            inherit trackId;
+            alias = primaryAliasesByTrackId.${trackId};
+            inherit (recording) artist title;
+            releaseYear = recording.musicbrainz.releaseYear or null;
+            sortKey = "${recording.artist} — ${recording.title}";
+          }
+        ) trackIds
       );
 
       scoreFor =
@@ -182,6 +206,99 @@
           "midi"
           "pdf"
         ];
+
+      siteTrackCardFor =
+        track:
+        let
+          alias = lib.escapeXML track.alias;
+          artist = lib.escapeXML track.artist;
+          title = lib.escapeXML track.title;
+          releaseDetails =
+            (lib.optionalString (track.releaseYear != null) "${toString track.releaseYear} · ") + "PDF + MIDI";
+          recordingUrl = "https://musicbrainz.org/recording/${track.trackId}";
+          scoreUrl = "${siteConfig.repositoryUrl}/blob/main/tracks/${track.trackId}/score.ly";
+        in
+        ''
+          <article class="score-card">
+            <p class="score-card__artist">${artist}</p>
+            <h3>${title}</h3>
+            <p class="score-card__meta">${releaseDetails}</p>
+            <div class="score-card__actions">
+              <a class="button button--primary" href="scores/${alias}.pdf">Открыть PDF</a>
+              <a class="button" href="scores/${alias}.midi" download>Скачать MIDI</a>
+            </div>
+            <p class="score-card__links">
+              <a href="${recordingUrl}">MusicBrainz</a>
+              <a href="${scoreUrl}">Исходник LilyPond</a>
+            </p>
+          </article>
+        '';
+
+      siteFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+          artifacts = artifactBundleFor system;
+          trackCount = builtins.length siteTracks;
+          trackCards = lib.concatMapStringsSep "\n" siteTrackCardFor siteTracks;
+          index = pkgs.writeText "index.html" (
+            builtins.replaceStrings
+              [
+                "@@SITE_TITLE@@"
+                "@@SITE_DESCRIPTION@@"
+                "@@TRACK_COUNT@@"
+                "@@TRACK_CARDS@@"
+                "@@REPOSITORY_URL@@"
+              ]
+              [
+                (lib.escapeXML siteConfig.title)
+                (lib.escapeXML siteConfig.description)
+                (toString trackCount)
+                trackCards
+                siteConfig.repositoryUrl
+              ]
+              (builtins.readFile ./site/index.html.in)
+          );
+        in
+        pkgs.runCommand "music-pages"
+          {
+            nativeBuildInputs = [ pkgs.findutils ];
+          }
+          (
+            ''
+              mkdir -p "$out/scores"
+              install --mode=0644 -- ${index} "$out/index.html"
+              install --mode=0644 -- ${./site/styles.css} "$out/styles.css"
+            ''
+            + lib.concatMapStrings (track: ''
+              install --mode=0644 -- \
+                ${artifacts}/${track.alias}.pdf \
+                "$out/scores/${track.alias}.pdf"
+              install --mode=0644 -- \
+                ${artifacts}/${track.alias}.midi \
+                "$out/scores/${track.alias}.midi"
+            '') siteTracks
+            + ''
+              test "$(grep --count 'class="score-card"' "$out/index.html")" -eq ${toString trackCount}
+              test "$(find "$out/scores" -type f -name '*.pdf' | wc --lines)" -eq ${toString trackCount}
+              test "$(find "$out/scores" -type f -name '*.midi' | wc --lines)" -eq ${toString trackCount}
+
+              if find "$out" -type l -print -quit | grep --quiet .; then
+                echo "Site output contains a symbolic link" >&2
+                exit 1
+              fi
+              if find "$out" -type f -links +1 -print -quit | grep --quiet .; then
+                echo "Site output contains a hard link" >&2
+                exit 1
+              fi
+              if find "$out" -type f \
+                \( -iname '*.mp3' -o -iname '*.opus' -o -iname '*.wav' -o -iname '*.webm' \) \
+                -print -quit | grep --quiet .; then
+                echo "Site output contains reference audio" >&2
+                exit 1
+              fi
+            ''
+          );
 
       renderCommandsFor =
         system: trackId:
@@ -439,7 +556,11 @@
             }) trackIds
           );
         in
-        scoreChecks // metadataChecks
+        scoreChecks
+        // metadataChecks
+        // {
+          site = siteFor system;
+        }
       );
 
       formatter = forAllSystems (system: (pkgsFor system).nixfmt);
@@ -456,6 +577,7 @@
           artifacts = artifactBundleFor system;
           default = allScoresFor system;
           pdfs = pdfBundleFor system;
+          site = siteFor system;
         }
       );
     };
