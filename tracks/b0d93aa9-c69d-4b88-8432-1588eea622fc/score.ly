@@ -30,12 +30,17 @@ global = {
   \time 4/4
 }
 
-% Only the pitches and octaves are transcribed. Equal eighth notes, bar lines,
-% and tempo are temporary scaffolding for notation and audition.
-soloNotes = \absolute {
+% Only the pitches, octaves, and hand split are transcribed. Equal eighth
+% notes, bar lines, and tempo are temporary scaffolding.
+leftHandSoloNotes = \absolute {
   e'8 d'' e' cis'' e' b' e' d' |
   e' d'' e' cis'' e' b' e' b |
-  fis'' a'' fis'' fis'' a'' fis'' s4 |
+  s1 |
+}
+
+rightHandSoloNotes = \absolute {
+  s1 | s1 |
+  fis''8 a'' fis'' fis'' a'' fis'' s4 |
 }
 
 blankSystem = {
@@ -43,19 +48,40 @@ blankSystem = {
   \break
 }
 
-layoutMusic = {
-  \global
-  \soloNotes
+remainingBlankGrid = {
   \repeat unfold 5 { s1 | }
   \break
   \repeat unfold 3 { \blankSystem }
   \bar "|."
 }
 
+leftHandLayoutMusic = {
+  \global
+  \clef treble
+  \leftHandSoloNotes
+  \remainingBlankGrid
+}
+
+rightHandLayoutMusic = {
+  \global
+  \clef treble
+  \rightHandSoloNotes
+  \remainingBlankGrid
+}
+
 \score {
-  \new Staff {
-    \layoutMusic
-  }
+  \new PianoStaff <<
+    \new Staff \with {
+      instrumentName = "П. р."
+    } {
+      \rightHandLayoutMusic
+    }
+    \new Staff \with {
+      instrumentName = "Л. р."
+    } {
+      \leftHandLayoutMusic
+    }
+  >>
 
   \layout {
     indent = #0
@@ -64,13 +90,22 @@ layoutMusic = {
 }
 
 \score {
-  \new Staff \with {
-    midiInstrument = "overdriven guitar"
-  } {
-    \global
-    \tempo 4 = 122
-    \soloNotes
-    \bar "|."
-  }
+  \new PianoStaff <<
+    \new Staff \with {
+      midiInstrument = "overdriven guitar"
+    } {
+      \global
+      \tempo 4 = 122
+      \rightHandSoloNotes
+      \bar "|."
+    }
+    \new Staff \with {
+      midiInstrument = "overdriven guitar"
+    } {
+      \global
+      \leftHandSoloNotes
+      \bar "|."
+    }
+  >>
   \midi { }
 }
