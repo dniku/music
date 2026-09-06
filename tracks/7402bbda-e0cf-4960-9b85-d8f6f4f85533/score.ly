@@ -122,6 +122,23 @@ secondVerseRight = {
   \thirtyTwoBarAlignment
 }
 
+% These dyads duplicate the upper two notes of chorusChordVoicings two octaves
+% higher. Keeping the short derivation explicit is simpler than transforming
+% chord events with Scheme; ottava only lowers their printed staff position.
+chorusRightVoicings = \absolute {
+  \set Staff.midiInstrument = #(cdr (assoc "463" instruments))
+  \ottava #1
+  <g''' b'''>1~ | <g''' b'''> |
+  <fis''' a'''>1~ | <fis''' a'''> |
+  <e''' g'''>1 | <b''' d''''> |
+  <e''' g'''> | <fis''' a'''> |
+  <g''' b'''>1~ | <g''' b'''> |
+  <fis''' a'''>1~ | <fis''' a'''> |
+  <e''' g'''>1 | <b''' d''''> |
+  <fis''' a'''>1~ | <fis''' a'''> |
+  \ottava #0
+}
+
 soloCueOne = {
   \mark \markup \override #'(font-name . "DejaVu Sans") \box
     "Соло 1:45.70–1:57.30"
@@ -188,11 +205,11 @@ soloDisplayGuide = {
   \firstBridgeRight
   \secondVerseRight
 
-  \sixteenBarAlignment % Chorus 1
+  \chorusRightVoicings % Chorus 1
   \soloNotes
 
   \thirtyTwoBarAlignment % Verse 3
-  \sixteenBarAlignment % Chorus 2
+  \chorusRightVoicings % Chorus 2
   \fourteenBarAlignment % Bridge
   \soloNotes
   \guitarBreakDraftNotes
