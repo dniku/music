@@ -13,17 +13,17 @@ stages:
       size: 15551
     - path: tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly
       hash: md5
-      md5: cf8ace2399fcb25bcb1966932c851a39
-      size: 2549
+      md5: e1a547408dbafd5169244d1aa776c72e
+      size: 2546
     outs:
     - path: build/avantasia--lost-in-space/score.midi
       hash: md5
-      md5: e5d019dc3dd1a3caeef9ca4aef66d8b0
+      md5: 0496c0e9d52e59cb352828851103bb82
       size: 643
     - path: build/avantasia--lost-in-space/score.pdf
       hash: md5
-      md5: dd224427ff2cb8cf73f4c4c16d9df0ea
-      size: 104387
+      md5: f2d8c2bef89383301b7e9dac660b8e26
+      size: 104396
   render-solo-audition:
     cmd: nix run .#render-midi-audition -- 
       build/avantasia--lost-in-space/score.midi 
@@ -31,7 +31,7 @@ stages:
     deps:
     - path: build/avantasia--lost-in-space/score.midi
       hash: md5
-      md5: e5d019dc3dd1a3caeef9ca4aef66d8b0
+      md5: 0496c0e9d52e59cb352828851103bb82
       size: 643
     - path: flake.lock
       hash: md5
@@ -48,8 +48,8 @@ stages:
     outs:
     - path: build/avantasia--lost-in-space/solo.mp3
       hash: md5
-      md5: bb85a2f77d740b123da5a6b9882b4d7b
-      size: 262144
+      md5: 32f22afaa76e5e07fefa5d8d76eaef5a
+      size: 261124
   fetch-reference:
     cmd: nix run .#fetch-youtube-audio -- 
       https://www.youtube.com/watch?v=o26SlmROH5Q 251 

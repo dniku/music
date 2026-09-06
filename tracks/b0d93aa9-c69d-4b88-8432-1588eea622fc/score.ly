@@ -49,7 +49,7 @@ rightHandSoloFirstEnding = \absolute {
 }
 
 rightHandSoloSecondEnding = \absolute {
-  r8 fis''8 a'' fis'' r8 a'' d'' d''' |
+  r8 a''8 d'' d''' r8 a'' d'' d''' |
 }
 
 leftHandSoloNotes = {
