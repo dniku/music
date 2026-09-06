@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "verifiedAt": "2026-09-05",
+  "verifiedAt": "2026-09-06",
   "canonicalRecording": {
     "title": "Lost in Space",
     "artist": "Avantasia",
@@ -19,5 +19,27 @@
       "workMbid": "9e1f1a9f-e84b-4a30-ac25-db987679e0f6"
     }
   },
-  "assets": []
+  "assets": [
+    {
+      "path": "audio/youtube-o26SlmROH5Q.webm",
+      "role": "full_mix_reference",
+      "durationSeconds": 228.041,
+      "sha256": "347c79c178a498e5788550989e7d0f516cf6cd805fe91347d6aa43d8e368dd5d",
+      "identity": {
+        "status": "unmatched_variant",
+        "recordingMbid": null,
+        "relatedRecordingMbid": "8770a32e-b454-4591-9c6f-1bda8b709dcf",
+        "reason": "The official YouTube video corresponds to the separately cataloged video-clip version, but MusicBrainz does not link this URL to that Recording; the URL alone does not prove exact recording identity."
+      },
+      "source": {
+        "kind": "youtube",
+        "videoId": "o26SlmROH5Q",
+        "url": "https://www.youtube.com/watch?v=o26SlmROH5Q",
+        "title": "AVANTASIA - Lost In Space (OFFICIAL VIDEO)",
+        "channelName": "avantasiaofficial",
+        "channelId": "UCNEStAEX0fKYbZIXTAW8Juw",
+        "uploadDate": "2007-11-07"
+      }
+    }
+  ]
 }

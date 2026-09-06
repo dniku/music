@@ -5,7 +5,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -37,7 +37,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -55,8 +55,8 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/original-00m58.80-01m10.80.mp3
       hash: md5
-      md5: 68d2c9dcb7378661d8f02009ca655650
-      size: 300715
+      md5: e461176b0e2c0125c17995981ad7c5c5
+      size: 300714
   render-intro:
     cmd: nix run .#render-audition -- 
       tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly 
@@ -65,7 +65,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -87,8 +87,8 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/intro-synth.mp3
       hash: md5
-      md5: f78a6fa485f5064e957bed9fc4f6a11c
-      size: 225430
+      md5: a1520f453ae7ff792464f1fde944058a
+      size: 225429
     - path: build/atom-76--volki-okeana/solos/intro-synth.pdf
       hash: md5
       md5: 1ab570fb36a24c9ce9faa829b8e62177
@@ -101,7 +101,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -123,8 +123,8 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/early-solo.mp3
       hash: md5
-      md5: afe17c5209f568a4c60a2b937efe16e1
-      size: 264479
+      md5: 440fd535c703ed31f68e40497473e42b
+      size: 264478
     - path: build/atom-76--volki-okeana/solos/early-solo.pdf
       hash: md5
       md5: 7ab58febaf1561d756ba7b0853872568
@@ -137,7 +137,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -155,8 +155,8 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/early-solo-mordents.mp3
       hash: md5
-      md5: 63319d01ddeb164e3288da556cbe7d01
-      size: 241401
+      md5: 8c5f1d8d662bd0456c78b3a62b918604
+      size: 241400
     - path: build/atom-76--volki-okeana/solos/early-solo-mordents.pdf
       hash: md5
       md5: f336b04486387722ea586eb682f9785a
@@ -169,7 +169,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -191,8 +191,8 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/synth-solo-repeated.mp3
       hash: md5
-      md5: a68558791f4ccb6bf3b4eef76ab3d46e
-      size: 248224
+      md5: 5b5245ce1619cde547f2385d7991eb90
+      size: 248223
     - path: build/atom-76--volki-okeana/solos/synth-solo-repeated.pdf
       hash: md5
       md5: 4c930ecc8b9717b3ae417f9438daf6b9
@@ -205,7 +205,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -227,8 +227,8 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/solos/guitar-break-03m11-draft.mp3
       hash: md5
-      md5: a78402d1f7b23a97565dc6900816ab8e
-      size: 134406
+      md5: f8e22976454242619326899cf27a3ef9
+      size: 134405
     - path: build/atom-76--volki-okeana/solos/guitar-break-03m11-draft.pdf
       hash: md5
       md5: 0a4abef7422ed5b8827132ab72507df2
@@ -241,7 +241,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -268,7 +268,7 @@ stages:
       size: 5122
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -281,5 +281,5 @@ stages:
     outs:
     - path: build/atom-76--volki-okeana/full-score.mp3
       hash: md5
-      md5: d0e72908ddf611932ea686b7264069ad
-      size: 5752745
+      md5: af74a4e7172ef45dab32fc25ef71ffa1
+      size: 5752744

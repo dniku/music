@@ -5,7 +5,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -35,7 +35,7 @@ stages:
       size: 385
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -48,5 +48,29 @@ stages:
     outs:
     - path: build/avantasia--lost-in-space/solo.mp3
       hash: md5
-      md5: 80fbec35a711612575f1fa933c45100e
-      size: 126319
+      md5: d0cc18892d61fad46d47d3a874839520
+      size: 126318
+  fetch-reference:
+    cmd: nix run .#fetch-youtube-audio -- 
+      https://www.youtube.com/watch?v=o26SlmROH5Q 251 
+      347c79c178a498e5788550989e7d0f516cf6cd805fe91347d6aa43d8e368dd5d 
+      tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/audio/youtube-o26SlmROH5Q.webm
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: f8ac755fa3d87c5ff525cf68d8970c8d
+      size: 15551
+    - path: scripts/fetch-youtube-audio
+      hash: md5
+      md5: 3f1e74083aaa34ecbcd7cc254c1045b9
+      size: 714
+    outs:
+    - path: 
+        tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/audio/youtube-o26SlmROH5Q.webm
+      hash: md5
+      md5: 973815e59f51161371eff642d457a52f
+      size: 3608773

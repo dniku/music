@@ -8,7 +8,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -29,7 +29,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -59,7 +59,7 @@ stages:
       size: 329
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -72,8 +72,8 @@ stages:
     outs:
     - path: build/moi-rakety-vverh--blown-away/solos/blown-away-solo.mp3
       hash: md5
-      md5: e16d8a653df8c14708baaa3c02c928db
-      size: 201589
+      md5: 1407f5dd2a788d84bd22f24a57f40638
+      size: 201588
   extract-solo-reference:
     cmd: nix run .#extract-audio -- 
       tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
@@ -82,7 +82,7 @@ stages:
     deps:
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -101,8 +101,8 @@ stages:
     - path: 
         build/moi-rakety-vverh--blown-away/solos/original-02m22.70-02m33.60.mp3
       hash: md5
-      md5: dbee200e7a0da779681817af74f0adf1
-      size: 264391
+      md5: 5de52c732830a037499bc6662767bb95
+      size: 264390
   compare-solo:
     cmd: nix run .#stereo-compare -- 
       build/moi-rakety-vverh--blown-away/solos/original-02m22.70-02m33.60.mp3 
@@ -111,16 +111,16 @@ stages:
     deps:
     - path: build/moi-rakety-vverh--blown-away/solos/blown-away-solo.mp3
       hash: md5
-      md5: e16d8a653df8c14708baaa3c02c928db
-      size: 201589
+      md5: 1407f5dd2a788d84bd22f24a57f40638
+      size: 201588
     - path: 
         build/moi-rakety-vverh--blown-away/solos/original-02m22.70-02m33.60.mp3
       hash: md5
-      md5: dbee200e7a0da779681817af74f0adf1
-      size: 264391
+      md5: 5de52c732830a037499bc6662767bb95
+      size: 264390
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -134,8 +134,8 @@ stages:
     - path: 
         build/moi-rakety-vverh--blown-away/solos/comparison-original-left-transcription-right.mp3
       hash: md5
-      md5: f1dc98ab171d1aabd2abe35fbbf617bf
-      size: 263064
+      md5: 66b5eb31d53a981ebbfa46e8837990de
+      size: 263063
   slow-comparison:
     cmd: nix run .#slow-audio -- 
       build/moi-rakety-vverh--blown-away/solos/comparison-original-left-transcription-right.mp3
@@ -145,11 +145,11 @@ stages:
     - path: 
         build/moi-rakety-vverh--blown-away/solos/comparison-original-left-transcription-right.mp3
       hash: md5
-      md5: f1dc98ab171d1aabd2abe35fbbf617bf
-      size: 263064
+      md5: 66b5eb31d53a981ebbfa46e8837990de
+      size: 263063
     - path: flake.lock
       hash: md5
-      md5: 2e457881a3463366e4c1ee8a5fc058d5
+      md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
@@ -163,5 +163,5 @@ stages:
     - path: 
         build/moi-rakety-vverh--blown-away/solos/comparison-original-left-transcription-right-slow.mp3
       hash: md5
-      md5: 0a5e1da8ae8ace2f4d284e1cf1cff2b4
-      size: 343534
+      md5: 03cb9a3a3f9bc6ef844a1b2953077883
+      size: 343533

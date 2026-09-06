@@ -1,4 +1,17 @@
 stages:
+  fetch-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#fetch-youtube-audio --
+      https://www.youtube.com/watch?v=o26SlmROH5Q 251
+      347c79c178a498e5788550989e7d0f516cf6cd805fe91347d6aa43d8e368dd5d
+      tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/audio/youtube-o26SlmROH5Q.webm
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/fetch-youtube-audio
+    outs:
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/audio/youtube-o26SlmROH5Q.webm
   render-score:
     wdir: ../..
     cmd: nix run .#render-b0d93aa9-c69d-4b88-8432-1588eea622fc
