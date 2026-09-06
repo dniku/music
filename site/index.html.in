@@ -10,7 +10,7 @@
   </head>
   <body>
     <header class="page-header">
-      <p class="eyebrow">LilyPond · PDF · MIDI</p>
+      <p class="eyebrow">LilyPond · PDF · MIDI · MP3</p>
       <h1>@@SITE_TITLE@@</h1>
       <p class="lead">@@SITE_DESCRIPTION@@</p>
     </header>

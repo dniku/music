@@ -79,7 +79,7 @@
 
       siteConfig = {
         title = "Музыкальные транскрипции";
-        description = "Рабочие партитуры, партии и нотные разборы в PDF и MIDI.";
+        description = "Рабочие партитуры, партии и нотные разборы в PDF, MIDI и MP3.";
         repositoryUrl = "https://github.com/dniku/music";
       };
 
@@ -136,6 +136,40 @@
             test -s "$out/score.midi"
           '';
 
+      midiAuditionRendererFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+        in
+        pkgs.writeShellApplication {
+          name = "render-midi-audition";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.ffmpeg
+            pkgs.timidity
+          ];
+          text = builtins.readFile ./scripts/render-midi-audition;
+        };
+
+      scoreMp3For =
+        system: trackId:
+        let
+          pkgs = pkgsFor system;
+          score = scoreFor system trackId;
+          renderer = midiAuditionRendererFor system;
+        in
+        pkgs.runCommand "${trackId}-score-mp3"
+          {
+            nativeBuildInputs = [ renderer ];
+          }
+          ''
+            mkdir -p "$out"
+            render-midi-audition \
+              ${score}/score.midi \
+              "$out/score.mp3"
+            test -s "$out/score.mp3"
+          '';
+
       metadataFor =
         system: trackId:
         let
@@ -168,6 +202,7 @@
           '';
 
       scoresFor = system: lib.genAttrs trackIds (scoreFor system);
+      scoreMp3sFor = system: lib.genAttrs trackIds (scoreMp3For system);
 
       allScoresFor =
         system:
@@ -214,7 +249,8 @@
           artist = lib.escapeXML track.artist;
           title = lib.escapeXML track.title;
           releaseDetails =
-            (lib.optionalString (track.releaseYear != null) "${toString track.releaseYear} · ") + "PDF + MIDI";
+            (lib.optionalString (track.releaseYear != null) "${toString track.releaseYear} · ")
+            + "PDF + MIDI + MP3";
           recordingUrl = "https://musicbrainz.org/recording/${track.trackId}";
           scoreUrl = "${siteConfig.repositoryUrl}/blob/main/tracks/${track.trackId}/score.ly";
         in
@@ -226,6 +262,16 @@
             <div class="score-card__actions">
               <a class="button button--primary" href="scores/${alias}.pdf">Открыть PDF</a>
               <a class="button" href="scores/${alias}.midi" download>Скачать MIDI</a>
+            </div>
+            <div class="score-card__audio">
+              <div class="score-card__audio-heading">
+                <span>Синтез партитуры</span>
+                <a href="scores/${alias}.mp3" download>Скачать MP3</a>
+              </div>
+              <audio controls preload="none">
+                <source src="scores/${alias}.mp3" type="audio/mpeg">
+                <a href="scores/${alias}.mp3" download>Скачать MP3</a>
+              </audio>
             </div>
             <p class="score-card__links">
               <a href="${recordingUrl}">MusicBrainz</a>
@@ -239,6 +285,7 @@
         let
           pkgs = pkgsFor system;
           artifacts = artifactBundleFor system;
+          scoreMp3s = scoreMp3sFor system;
           trackCount = builtins.length siteTracks;
           trackCards = lib.concatMapStringsSep "\n" siteTrackCardFor siteTracks;
           index = pkgs.writeText "index.html" (
@@ -277,11 +324,16 @@
               install --mode=0644 -- \
                 ${artifacts}/${track.alias}.midi \
                 "$out/scores/${track.alias}.midi"
+              install --mode=0644 -- \
+                ${scoreMp3s.${track.trackId}}/score.mp3 \
+                "$out/scores/${track.alias}.mp3"
             '') siteTracks
             + ''
               test "$(grep --count 'class="score-card"' "$out/index.html")" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f -name '*.pdf' | wc --lines)" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f -name '*.midi' | wc --lines)" -eq ${toString trackCount}
+              test "$(find "$out/scores" -type f -name '*.mp3' | wc --lines)" -eq ${toString trackCount}
+              test "$(find "$out/scores" -type f | wc --lines)" -eq ${toString (3 * trackCount)}
 
               if find "$out" -type l -print -quit | grep --quiet .; then
                 echo "Site output contains a symbolic link" >&2
@@ -291,10 +343,10 @@
                 echo "Site output contains a hard link" >&2
                 exit 1
               fi
-              if find "$out" -type f \
-                \( -iname '*.mp3' -o -iname '*.opus' -o -iname '*.wav' -o -iname '*.webm' \) \
+              if find "$out/scores" -type f \
+                ! \( -name '*.pdf' -o -name '*.midi' -o -name '*.mp3' \) \
                 -print -quit | grep --quiet .; then
-                echo "Site output contains reference audio" >&2
+                echo "Site output contains an unexpected score artifact" >&2
                 exit 1
               fi
             ''
@@ -506,11 +558,11 @@
             pkgs.timidity
           ] ./scripts/render-audition;
 
-          render-midi-audition = scriptAppFor "render-midi-audition" "Render a MIDI file to an MP3 audition" [
-            pkgs.coreutils
-            pkgs.ffmpeg
-            pkgs.timidity
-          ] ./scripts/render-midi-audition;
+          render-midi-audition = {
+            type = "app";
+            program = "${midiAuditionRendererFor system}/bin/render-midi-audition";
+            meta.description = "Render a MIDI file to an MP3 audition";
+          };
 
           stereo-compare =
             scriptAppFor "stereo-compare" "Place two audio files in the left and right channels"

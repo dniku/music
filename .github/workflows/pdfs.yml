@@ -39,7 +39,8 @@ jobs:
       - name: Stage site and score artifacts
         run: |
           mkdir artifacts pages
-          cp --dereference -- result-site/scores/* artifacts/
+          cp --dereference -- result-site/scores/*.pdf artifacts/
+          cp --dereference -- result-site/scores/*.midi artifacts/
           cp --dereference --recursive -- result-site/. pages/
           sha256sum artifacts/*
 

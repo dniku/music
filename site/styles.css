@@ -178,6 +178,29 @@ h1 {
   color: var(--accent-text);
 }
 
+.score-card__audio {
+  padding-top: 1.25rem;
+  margin-top: 1.35rem;
+  border-top: 1px solid var(--line);
+}
+
+.score-card__audio-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.score-card__audio audio {
+  display: block;
+  width: 100%;
+  height: 2.5rem;
+}
+
 .score-card__links {
   display: flex;
   flex-wrap: wrap;
