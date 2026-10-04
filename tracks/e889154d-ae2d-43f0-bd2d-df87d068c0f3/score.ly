@@ -54,16 +54,72 @@ soloNotes = \absolute {
   }
 }
 
-% Lyrics and chord notes supplied by the user; preserve the wording as given.
+% Chord spellings use whole notes as diagrams, not as a rhythmic transcription.
+% Gm6/9 preserves the user's four pitch classes (G, A, E, Bb), omitting D.
+% Gm9 and C half-diminished use suggested compact voicings.
+gMinorSixNine = { <g' a' bes' e''>1^"Gm6/9" }
+gMinorNine = { <g' a' bes' d'' f''>1^"Gm9" }
+
+chordGuideSetup = {
+  \clef treble
+  \cadenzaOn
+  \accidentalStyle forget
+}
+
+chordGuideLayout = \layout {
+  indent = #0
+  line-width = 110\mm
+  ragged-right = ##f
+  \context {
+    \Staff
+    \omit TimeSignature
+  }
+  \context {
+    \Score
+    \omit BarNumber
+  }
+  \context {
+    \Voice
+    \override TextScript.font-name = #"DejaVu Sans"
+  }
+}
+
+\markup \override #'(font-name . "DejaVu Sans") "Куплет (по кругу):"
+\score {
+  \new Staff {
+    \chordGuideSetup
+    <e' gis' b'>1^"E" \bar "|"
+    <cis' e' gis'>1^"C#m" \bar "|"
+    <c' e' g'>1^"C" \bar "|."
+  }
+  \layout { \chordGuideLayout }
+}
+
+\markup \override #'(font-name . "DejaVu Sans") "Припев:"
+\score {
+  \new Staff {
+    \chordGuideSetup
+    \gMinorSixNine \bar "|"
+    \gMinorNine \bar "|"
+    \gMinorSixNine \bar "|"
+    \gMinorNine \bar "|."
+  }
+  \layout { \chordGuideLayout }
+}
+
+\markup \override #'(font-name . "DejaVu Sans") "Бридж (чередовать):"
+\score {
+  \new Staff {
+    \chordGuideSetup
+    \gMinorNine \bar "|"
+    <c' ees' ges' bes'>1^"Cø7" \bar "|."
+  }
+  \layout { \chordGuideLayout }
+}
+
+% Lyrics supplied by the user; preserve the wording as given.
 \markup \override #'(font-name . "DejaVu Sans") \fontsize #1
 \override #'(baseline-skip . 3.5) \column {
-  \vspace #1
-  \bold "Аккорды"
-  "Куплет: E — C#m — C (по кругу)"
-  "Припев: Gm6/9 — Gm9 — Gm6/9 — Gm9"
-  "Gm6/9 = G A E Bb"
-  "Бридж: Gm9 — Cø7 (полууменьшённый до), чередовать"
-
   \vspace #1
   \bold "Текст"
   "Wake me up before I hit the ground"
