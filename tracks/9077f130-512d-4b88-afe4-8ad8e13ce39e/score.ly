@@ -15,7 +15,7 @@
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Mother Earth"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Мелодия и аккорды · фрагмент по YTPA"
+    "Мелодия и аккорды · фрагмент"
   composer = \markup \override #'(font-name . "DejaVu Sans") "Within Temptation"
   copyright = \markup \tiny \with-url "https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ"
     "Play-Along this score on YouTube on https://ytpa.ch"
@@ -33,10 +33,19 @@
   }
 }
 
-% The source only supplies chord symbols, not accompaniment rhythms/voicings.
+% Play the imported chord events without inventing an accompaniment pattern.
 \score {
-  \new Staff \with {
-    midiInstrument = "acoustic grand"
-  } { \melody }
+  <<
+    \new Staff = "melody" \with {
+      midiInstrument = "acoustic grand"
+    } { \melody }
+    \new Staff = "chords" \with {
+      midiInstrument = "acoustic grand"
+    } {
+      \time 3/4
+      % Chord symbols have no register; use an octave below chordmode's default.
+      \transpose c c, { \harmonies }
+    }
+  >>
   \midi { }
 }
