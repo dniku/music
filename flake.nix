@@ -545,6 +545,11 @@
               ]
               ./scripts/fetch-youtube-audio;
 
+          fetch-file = scriptAppFor "fetch-file" "Fetch and SHA-256 verify a source file" [
+            pkgs.coreutils
+            pkgs.curl
+          ] ./scripts/fetch-file;
+
           extract-audio = scriptAppFor "extract-audio" "Extract an exact audio range with FFmpeg" [
             pkgs.coreutils
             pkgs.ffmpeg

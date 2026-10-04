@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "verifiedAt": "2026-10-04",
+  "canonicalRecording": {
+    "title": "Mother Earth",
+    "artist": "Within Temptation",
+    "musicbrainz": {
+      "recordingMbid": "9077f130-512d-4b88-afe4-8ad8e13ce39e",
+      "artistMbid": "eace2373-31c8-4aba-9a5c-7bce22dd140a",
+      "releaseMbid": "65850659-8d74-3ed6-81fa-79d7c7b97bf1",
+      "releaseGroupMbid": "2c78aedc-0407-38dd-bffd-1e58346fa183",
+      "releaseTrackMbid": "7bacfe53-63d6-33e7-8e0f-e2dc8d45063d",
+      "releaseTitle": "Mother Earth",
+      "releaseYear": 2000,
+      "releaseCountry": "NL",
+      "trackNumber": 1,
+      "catalogDurationMs": 330280,
+      "isrcs": ["DEC760200329", "NLR260700062"],
+      "workMbid": "9e5f6c77-6fa6-32e9-b1d3-1c5b63335089"
+    }
+  },
+  "assets": [
+    {
+      "path": "audio/youtube-FVbDZaUuNvQ.webm",
+      "role": "full_mix_reference",
+      "durationSeconds": 331.301,
+      "sha256": "3bd7c760bb30e5d7fe92f929ca71c2108c59b57793acd1f82a033bb0555fd007",
+      "identity": {
+        "status": "unmatched_variant",
+        "recordingMbid": null,
+        "relatedRecordingMbid": "9077f130-512d-4b88-afe4-8ad8e13ce39e",
+        "reason": "The official album upload has matching title, artist and approximate duration, but MusicBrainz does not link this URL to the Recording; exact recording/master identity has not been verified."
+      },
+      "source": {
+        "kind": "youtube",
+        "videoId": "FVbDZaUuNvQ",
+        "url": "https://www.youtube.com/watch?v=FVbDZaUuNvQ",
+        "title": "Mother Earth",
+        "channelName": "Within Temptation",
+        "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
+        "uploadDate": "2021-02-15"
+      }
+    }
+  ]
+}

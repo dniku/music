@@ -1,0 +1,64 @@
+stages:
+  fetch-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#fetch-youtube-audio --
+      https://www.youtube.com/watch?v=FVbDZaUuNvQ 251
+      3bd7c760bb30e5d7fe92f929ca71c2108c59b57793acd1f82a033bb0555fd007
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/fetch-youtube-audio
+    outs:
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+  fetch-score-source:
+    wdir: ../..
+    cmd: >-
+      nix run .#fetch-file --
+      https://ytpa.ch/mxl/Mother_Earth.musicxml
+      7978a1c8beb6b5634606057117582e087d9b69224a4da21e9074ae025ba58ead
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/fetch-file
+    outs:
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+  convert-score-source:
+    wdir: ../..
+    cmd: >-
+      mkdir -p build/within-temptation--mother-earth &&
+      nix shell --inputs-from . nixpkgs#lilypond --command
+      musicxml2ly --absolute --no-page-layout --no-stem-directions --midi
+      --output build/within-temptation--mother-earth/imported-score.ly
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+    deps:
+      - flake.lock
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+    outs:
+      - build/within-temptation--mother-earth/imported-score.ly
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-within-temptation--mother-earth
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/music.ily
+    outs:
+      - build/within-temptation--mother-earth/score.pdf
+      - build/within-temptation--mother-earth/score.midi
+  render-score-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/within-temptation--mother-earth/score.midi
+      build/within-temptation--mother-earth/score.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/within-temptation--mother-earth/score.midi
+    outs:
+      - build/within-temptation--mother-earth/score.mp3

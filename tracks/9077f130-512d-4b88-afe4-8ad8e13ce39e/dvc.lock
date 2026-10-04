@@ -1,0 +1,124 @@
+schema: '2.0'
+stages:
+  fetch-score-source:
+    cmd: nix run .#fetch-file -- https://ytpa.ch/mxl/Mother_Earth.musicxml 
+      7978a1c8beb6b5634606057117582e087d9b69224a4da21e9074ae025ba58ead 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: a80980f513f8b7f6d505a1d01e685406
+      size: 22351
+    - path: scripts/fetch-file
+      hash: md5
+      md5: 3f260f57c403694c5dc1c468d6a1e459
+      size: 739
+    outs:
+    - path: 
+        tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+      hash: md5
+      md5: 2e4bf627ebcca25e915fe6516298676c
+      size: 89843
+  fetch-reference:
+    cmd: nix run .#fetch-youtube-audio -- 
+      https://www.youtube.com/watch?v=FVbDZaUuNvQ 251 
+      3bd7c760bb30e5d7fe92f929ca71c2108c59b57793acd1f82a033bb0555fd007 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: a80980f513f8b7f6d505a1d01e685406
+      size: 22351
+    - path: scripts/fetch-youtube-audio
+      hash: md5
+      md5: 3f1e74083aaa34ecbcd7cc254c1045b9
+      size: 714
+    outs:
+    - path: 
+        tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      hash: md5
+      md5: 57c101db0e4bd9d7b646963c4878a774
+      size: 5394980
+  render-score:
+    cmd: nix run .#render-within-temptation--mother-earth
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: a80980f513f8b7f6d505a1d01e685406
+      size: 22351
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/music.ily
+      hash: md5
+      md5: a87be95fdee5cb74e3c7b1b8a4b45026
+      size: 7090
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
+      hash: md5
+      md5: 3084766f85972ea87413003d0d5fadc8
+      size: 974
+    outs:
+    - path: build/within-temptation--mother-earth/score.midi
+      hash: md5
+      md5: 3821f536523b54203686bedfacb150ed
+      size: 2662
+    - path: build/within-temptation--mother-earth/score.pdf
+      hash: md5
+      md5: 0f0d3e10b536348bee975b4d2e1bb336
+      size: 232667
+  convert-score-source:
+    cmd: mkdir -p build/within-temptation--mother-earth && nix shell 
+      --inputs-from . nixpkgs#lilypond --command musicxml2ly --absolute 
+      --no-page-layout --no-stem-directions --midi --output 
+      build/within-temptation--mother-earth/imported-score.ly 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: 
+        tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/notation/ytpa-mother-earth.musicxml
+      hash: md5
+      md5: 2e4bf627ebcca25e915fe6516298676c
+      size: 89843
+    outs:
+    - path: build/within-temptation--mother-earth/imported-score.ly
+      hash: md5
+      md5: fd68098e556cbd795df811d2aa7d5b58
+      size: 8658
+  render-score-audition:
+    cmd: nix run .#render-midi-audition -- 
+      build/within-temptation--mother-earth/score.midi 
+      build/within-temptation--mother-earth/score.mp3
+    deps:
+    - path: build/within-temptation--mother-earth/score.midi
+      hash: md5
+      md5: 3821f536523b54203686bedfacb150ed
+      size: 2662
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: a80980f513f8b7f6d505a1d01e685406
+      size: 22351
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
+      size: 901
+    outs:
+    - path: build/within-temptation--mother-earth/score.mp3
+      hash: md5
+      md5: 31bf0b7c5ddcdbbbb01f294878f1e03c
+      size: 1830837

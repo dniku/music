@@ -1,0 +1,24 @@
+if (( $# != 3 )); then
+  echo "usage: fetch-file URL EXPECTED_SHA256 OUTPUT" >&2
+  exit 2
+fi
+
+url="$1"
+expected_sha256="$2"
+output_path="$3"
+output_directory="$(dirname "$output_path")"
+
+mkdir -p "$output_directory"
+temporary_output="$(mktemp --tmpdir="$output_directory" .fetch-file.XXXXXX)"
+trap 'rm --force -- "$temporary_output"' EXIT
+
+curl --fail --location --silent --show-error --output "$temporary_output" "$url"
+actual_sha256="$(sha256sum "$temporary_output" | cut --delimiter=' ' --fields=1)"
+if [[ "$actual_sha256" != "$expected_sha256" ]]; then
+  echo "SHA-256 mismatch for downloaded file" >&2
+  echo "expected: $expected_sha256" >&2
+  echo "actual:   $actual_sha256" >&2
+  exit 1
+fi
+
+mv -- "$temporary_output" "$output_path"
