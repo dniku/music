@@ -34,7 +34,37 @@
   }
 }
 
-% Play the imported chord events without inventing an accompaniment pattern.
+% musicxml2ly uses skips between chord symbols, not accompaniment rests.
+% Derive MIDI-only held chords from that single source. Each skip becomes a
+% tied continuation; explicit chord symbols still start a new attack.
+heldHarmonies = #(let ((previous #f))
+  (music-map
+    (lambda (music)
+      (case (ly:music-property music 'name)
+        ((EventChord)
+          (if (null? (event-chord-notes music))
+              (ly:error "Expected explicit notes in the imported chord"))
+          (set! previous music)
+          music)
+        ((SkipEvent)
+          (if (not previous)
+              (ly:error "Cannot sustain a skip before the first chord"))
+          (let ((continuation (ly:music-deep-copy previous)))
+            (for-each
+              (lambda (note)
+                (set! (ly:music-property note 'duration)
+                      (ly:music-property music 'duration)))
+              (event-chord-notes continuation))
+            (set! (ly:music-property previous 'elements)
+                  (append (ly:music-property previous 'elements)
+                          (list (make-music 'TieEvent))))
+            (set! previous continuation)
+            continuation))
+        ((SimultaneousMusic RestEvent MultiMeasureRestMusic)
+          (ly:error "Expected one sequential chord-symbol stream with skips"))
+        (else music)))
+    (ly:music-deep-copy harmonies)))
+
 \score {
   <<
     \new Staff = "melody" \with {
@@ -45,7 +75,7 @@
     } {
       \time 3/4
       % Chord symbols have no register; use an octave below chordmode's default.
-      \transpose c c, { \harmonies }
+      \transpose c c, { \heldHarmonies }
     }
   >>
   \midi { }
