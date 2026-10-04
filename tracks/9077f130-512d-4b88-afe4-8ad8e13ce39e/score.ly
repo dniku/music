@@ -17,8 +17,9 @@
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
     "Мелодия и аккорды · фрагмент"
   composer = \markup \override #'(font-name . "DejaVu Sans") "Within Temptation"
-  copyright = \markup \tiny \with-url "https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ"
-    "Play-Along this score on YouTube on https://ytpa.ch"
+  copyright = \markup \tiny \override #'(font-name . "DejaVu Sans")
+    \with-url "https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ"
+    "На основе нот с ytpa.ch"
   tagline = ##f
 }
 

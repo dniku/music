@@ -17,6 +17,7 @@
 Сам MusicXML указывает первоисточник
 [MuseScore, score 30334265](https://musescore.com/user/83726533/scores/30334265)
 и пометку «Play-Along this score on YouTube on https://ytpa.ch».
-Эта пометка сохранена в PDF. Исходник скачан 4 октября 2026 года;
+В PDF источник указан как «На основе нот с ytpa.ch» со ссылкой на страницу пьесы.
+Исходник скачан 4 октября 2026 года;
 его SHA-256 закреплён в стадии `fetch-score-source`, а сохранённый файл
 `notation/ytpa-mother-earth.musicxml` находится в DVC-хранилище.
