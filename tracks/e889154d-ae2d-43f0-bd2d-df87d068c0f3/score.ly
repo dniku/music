@@ -15,7 +15,7 @@
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Blown Away"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Соло — рабочая транскрипция · ♩ = 171"
+    "Соло, текст и аккорды · ♩ = 171"
   composer = \markup \override #'(font-name . "DejaVu Sans")
     "Мои Ракеты Вверх"
   tagline = ##f
@@ -52,6 +52,40 @@ soloNotes = \absolute {
     indent = #0
     ragged-right = ##f
   }
+}
+
+% Lyrics and chord notes supplied by the user; preserve the wording as given.
+\markup \override #'(font-name . "DejaVu Sans") \fontsize #1
+\override #'(baseline-skip . 3.5) \column {
+  \vspace #1
+  \bold "Аккорды"
+  "Куплет: E — C#m — C (по кругу)"
+  "Припев: Gm6/9 — Gm9 — Gm6/9 — Gm9"
+  "Gm6/9 = G A E Bb"
+  "Бридж: Gm9 — Cø7 (полууменьшённый до), чередовать"
+
+  \vspace #1
+  \bold "Текст"
+  "Wake me up before I hit the ground"
+  "Be my smile when I got out"
+  "Read my lips when we have to hide"
+  "Say something in an awkward silence"
+
+  \vspace #0.6
+  "Be my hero, be my shame,"
+  "My killer when the war ends"
+
+  \vspace #0.6
+  "Be my friend when we got to hide"
+  "Be my mentor on the way down"
+  "Be my dream when I lost you"
+  "Be my guide when it comes true"
+
+  \vspace #0.6
+  "Wind has blown, my wind blows away"
+  "I 's [was] just sitting and staring at it night and day"
+  "Wind just passed and left me in my room"
+  "I got lost my summertimes in bloom"
 }
 
 % Keep the 10.9-second comparison window without printing its trailing silence.

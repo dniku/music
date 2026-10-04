@@ -33,12 +33,12 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: 13680c91cc5e9f4dd432400da8765b6b
+      size: 22175
     - path: tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly
       hash: md5
-      md5: 08b8cba4d47566fee5dc4a3fff3e159e
-      size: 1411
+      md5: 9edec449dea46e522e7ac46e750bb540
+      size: 2444
     outs:
     - path: build/moi-rakety-vverh--blown-away/score.midi
       hash: md5
@@ -46,8 +46,8 @@ stages:
       size: 329
     - path: build/moi-rakety-vverh--blown-away/score.pdf
       hash: md5
-      md5: 0e6c880dac672944e404dd107e5bb449
-      size: 95570
+      md5: 46ab0cdc0583a00c67368776c2938e79
+      size: 102195
   render-solo-audition:
     cmd: nix run .#render-midi-audition -- 
       build/moi-rakety-vverh--blown-away/score.midi 
