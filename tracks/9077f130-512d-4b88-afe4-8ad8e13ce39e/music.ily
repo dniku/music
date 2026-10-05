@@ -1,7 +1,7 @@
 % Imported from YTPA's Mother_Earth.musicxml with the pinned musicxml2ly.
 % See README.md and dvc.yaml for the baseline, its hash, and exact command.
 % Variable names and executable tempo were adjusted after import.
-% A, B, F#m, and G# roots are lowered an octave for the left-hand register.
+% Whole-chord octaves are chosen per phrase; chord types and inversions stay intact.
 % The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
 melody = {
@@ -204,8 +204,9 @@ harmonies = \chordmode {
   s2 s4 | % 10
   a,4 s4 s4 | % 11
   e2 s4 | % 12
-  fis,4:m s4 s4 | % 13
-  gis,4 s4 s4 | % 14
+  % Keep E-F#m-G# ascending, then return to the lower C#m at the cadence.
+  fis4:m s4 s4 | % 13
+  gis4 s4 s4 | % 14
   cis2.:m | % 15
   s2. \bar "||" % 16
   cis2:m s4 | % 17
@@ -222,10 +223,10 @@ harmonies = \chordmode {
   s2 s4 | % 26
   a,4 s4 s4 | % 27
   e2 s4 | % 28
-  fis,4:m s4 s4 | % 29
+  fis4:m s4 s4 | % 29
 
   \barNumberCheck #30
-  gis,4 s4 s4 | % 30
+  gis4 s4 s4 | % 30
   cis2.:m | % 31
   s2. \bar "||" % 32
   cis2:m s4 | % 33
@@ -242,7 +243,8 @@ harmonies = \chordmode {
   s2 s4 | % 42
   s4 s4 s4 | % 43
   e8 s4 s4 s8 | % 44
-  fis,2:m s4 | % 45
+  % F#m sits a step above the surrounding E chords, not a seventh below.
+  fis2:m s4 | % 45
   e2 s4 | % 46
   dis2 s4 | % 47
   gis,2. \bar "||" % 48
@@ -262,7 +264,7 @@ harmonies = \chordmode {
 
   \barNumberCheck #60
   e8 s4 s4 s8 | % 60
-  fis,2:m s4 | % 61
+  fis2:m s4 | % 61
   e2 s4 | % 62
   dis2 s4 | % 63
   gis,2. \bar "||" % 64
@@ -276,7 +278,8 @@ harmonies = \chordmode {
 
   \barNumberCheck #70
   s2. | % 70
-  gis,2. | % 71
+  % Continue the rising bass A-C#-E-G# before returning to the main register.
+  gis2. | % 71
   s2. \bar "||" % 72
   cis2:m s4 | % 73
   s2 s4 | % 74
@@ -292,8 +295,8 @@ harmonies = \chordmode {
   s2 s4 | % 82
   a,4 s4 s4 | % 83
   e2 s4 | % 84
-  fis,4:m s4 s4 | % 85
-  gis,4 s4 s4 | % 86
+  fis4:m s4 s4 | % 85
+  gis4 s4 s4 | % 86
   cis2.:m | % 87
   s2. \bar "||" % 88
   cis2.:m | % 89
