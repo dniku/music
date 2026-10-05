@@ -1,6 +1,7 @@
 % Imported from YTPA's Mother_Earth.musicxml with the pinned musicxml2ly.
 % See README.md and dvc.yaml for the baseline, its hash, and exact command.
-% Only variable names and the executable tempo differ from the musical output.
+% Variable names and executable tempo were adjusted after import.
+% A, B, F#m, and G# roots are lowered an octave for the left-hand register.
 
 melody = {
   \clef "treble" \time 3/4 \key e \major \tempo 4 = 220 cis''2 dis''4 | % 1
@@ -190,40 +191,40 @@ melody = {
 harmonies = \chordmode {
   cis2:m s4 | % 1
   s2 s4 | % 2
-  a4 s4 s4 | % 3
-  b2 s4 | % 4
+  a,4 s4 s4 | % 3
+  b,2 s4 | % 4
   cis2:m s4 | % 5
   s2 s4 | % 6
-  a4 s4 s4 | % 7
-  fis2:m s4 | % 8
+  a,4 s4 s4 | % 7
+  fis,2:m s4 | % 8
   cis2:m s4 | % 9
 
   \barNumberCheck #10
   s2 s4 | % 10
-  a4 s4 s4 | % 11
+  a,4 s4 s4 | % 11
   e2 s4 | % 12
-  fis4:m s4 s4 | % 13
-  gis4 s4 s4 | % 14
+  fis,4:m s4 s4 | % 13
+  gis,4 s4 s4 | % 14
   cis2.:m | % 15
   s2. \bar "||" % 16
   cis2:m s4 | % 17
   s2 s4 | % 18
-  a4 s4 s4 | % 19
+  a,4 s4 s4 | % 19
 
   \barNumberCheck #20
-  b2 s4 | % 20
+  b,2 s4 | % 20
   cis2:m s4 | % 21
   s2 s4 | % 22
-  a4 s4 s4 | % 23
-  fis2:m s4 | % 24
+  a,4 s4 s4 | % 23
+  fis,2:m s4 | % 24
   cis2:m s4 | % 25
   s2 s4 | % 26
-  a4 s4 s4 | % 27
+  a,4 s4 s4 | % 27
   e2 s4 | % 28
-  fis4:m s4 s4 | % 29
+  fis,4:m s4 s4 | % 29
 
   \barNumberCheck #30
-  gis4 s4 s4 | % 30
+  gis,4 s4 s4 | % 30
   cis2.:m | % 31
   s2. \bar "||" % 32
   cis2:m s4 | % 33
@@ -235,15 +236,15 @@ harmonies = \chordmode {
   s4 s4 s4 | % 39
 
   \barNumberCheck #40
-  e4 dis4 b4 | % 40
+  e4 dis4 b,4 | % 40
   cis2:m s4 | % 41
   s2 s4 | % 42
   s4 s4 s4 | % 43
   e8 s4 s4 s8 | % 44
-  fis2:m s4 | % 45
+  fis,2:m s4 | % 45
   e2 s4 | % 46
   dis2 s4 | % 47
-  gis2. \bar "||" % 48
+  gis,2. \bar "||" % 48
   cis2:m s4 | % 49
 
   \barNumberCheck #50
@@ -253,18 +254,18 @@ harmonies = \chordmode {
   cis2:m s4 | % 53
   s2 s4 | % 54
   s4 s4 s4 | % 55
-  e4 dis4 b4 | % 56
+  e4 dis4 b,4 | % 56
   cis2:m s4 | % 57
   s2 s4 | % 58
   s4 s4 s4 | % 59
 
   \barNumberCheck #60
   e8 s4 s4 s8 | % 60
-  fis2:m s4 | % 61
+  fis,2:m s4 | % 61
   e2 s4 | % 62
   dis2 s4 | % 63
-  gis2. \bar "||" % 64
-  a2. | % 65
+  gis,2. \bar "||" % 64
+  a,2. | % 65
   s2. | % 66
   cis2.:m | % 67
   s2. | % 68
@@ -272,24 +273,24 @@ harmonies = \chordmode {
 
   \barNumberCheck #70
   s2. | % 70
-  gis2. | % 71
+  gis,2. | % 71
   s2. \bar "||" % 72
   cis2:m s4 | % 73
   s2 s4 | % 74
-  a4 s4 s4 | % 75
-  b2 s4 | % 76
+  a,4 s4 s4 | % 75
+  b,2 s4 | % 76
   cis2:m s4 | % 77
   s2 s4 | % 78
-  a4 s4 s4 | % 79
+  a,4 s4 s4 | % 79
 
   \barNumberCheck #80
-  fis2:m s4 | % 80
+  fis,2:m s4 | % 80
   cis2:m s4 | % 81
   s2 s4 | % 82
-  a4 s4 s4 | % 83
+  a,4 s4 s4 | % 83
   e2 s4 | % 84
-  fis4:m s4 s4 | % 85
-  gis4 s4 s4 | % 86
+  fis,4:m s4 s4 | % 85
+  gis,4 s4 s4 | % 86
   cis2.:m | % 87
   s2. \bar "||" % 88
   cis2.:m | % 89
@@ -298,49 +299,49 @@ harmonies = \chordmode {
   s2 s4 | % 90
   s4 s2 | % 91
   s2. | % 92
-  a2 s4 | % 93
+  a,2 s4 | % 93
   s2 s4 | % 94
   e4 s4 s4 | % 95
-  b2 s4 | % 96
+  b,2 s4 | % 96
   cis4:m s2 | % 97
   s2 s4 | % 98
   s2 s4 | % 99
 
   \barNumberCheck #100
   s2 s4 | % 100
-  fis2:m s4 | % 101
+  fis,2:m s4 | % 101
   s4 s4 s4 | % 102
-  gis4 s2 | % 103
+  gis,4 s2 | % 103
   s2 s4 \bar "||" % 104
   cis2.:m | % 105
   s2 s4 | % 106
   s4 s2 | % 107
   s2. | % 108
-  a2 s4 | % 109
+  a,2 s4 | % 109
 
   \barNumberCheck #110
   s2 s4 | % 110
   e4 s4 s4 | % 111
-  b2 s4 | % 112
+  b,2 s4 | % 112
   cis4:m s4 s4 | % 113
   s2 s4 | % 114
   s2 s4 | % 115
   s2 s4 | % 116
-  fis2:m s4 | % 117
+  fis,2:m s4 | % 117
   s4 s4 s4 | % 118
-  gis4 s2 | % 119
+  gis,4 s2 | % 119
 
   \barNumberCheck #120
   s2 s4 \bar "||" % 120
   cis2.:m | % 121
   s2 s4 | % 122
-  gis2. | % 123
+  gis,2. | % 123
   s2. | % 124
-  b2. | % 125
+  b,2. | % 125
   s4 s4 s4 | % 126
-  fis2.:m | % 127
+  fis,2.:m | % 127
   s2. | % 128
-  fis2:m s4 | % 129
+  fis,2:m s4 | % 129
 
   \barNumberCheck #130
   s2 s4 | % 130
@@ -348,23 +349,23 @@ harmonies = \chordmode {
   s2. | % 132
   dis2 s4 | % 133
   s4 s4 s4 | % 134
-  gis2. | % 135
+  gis,2. | % 135
   s2. \bar "||" % 136
   cis2.:m | % 137
   s2 s4 | % 138
-  gis2. | % 139
+  gis,2. | % 139
 
   \barNumberCheck #140
   s2. | % 140
-  b2. | % 141
+  b,2. | % 141
   s4 s4 s4 | % 142
-  fis2.:m | % 143
+  fis,2.:m | % 143
   s2. | % 144
-  fis2:m s4 | % 145
+  fis,2:m s4 | % 145
   s2 s4 | % 146
   cis2:m s4 | % 147
   s2. | % 148
-  gis2 s4 | % 149
+  gis,2 s4 | % 149
 
   \barNumberCheck #150
   s2 s4 | % 150
