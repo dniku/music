@@ -2,6 +2,7 @@
 % See README.md and dvc.yaml for the baseline, its hash, and exact command.
 % Variable names and executable tempo were adjusted after import.
 % A, B, F#m, and G# roots are lowered an octave for the left-hand register.
+% The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
 melody = {
   \clef "treble" \time 3/4 \key e \major \tempo 4 = 220 cis''2 dis''4 | % 1
@@ -269,7 +270,9 @@ harmonies = \chordmode {
   s2. | % 66
   cis2.:m | % 67
   s2. | % 68
-  cis2.:m/+e | % 69
+  % /e creates an inversion; /+e adds a fourth note. The raised root keeps
+  % the inversion's bass at E3 after the staff's octave-down transposition.
+  cis'2.:m/e | % 69
 
   \barNumberCheck #70
   s2. | % 70
