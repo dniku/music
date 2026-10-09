@@ -40,6 +40,29 @@
         "channelId": "UCNEStAEX0fKYbZIXTAW8Juw",
         "uploadDate": "2007-11-07"
       }
+    },
+    {
+      "path": "video/youtube-_-DEer9afE0.mp4",
+      "role": "piano_roll_reference",
+      "durationSeconds": 233.85,
+      "sha256": "3eb051ccd61c4777ae03ff72e25e8df68bc25506c2f496a8bf4c4ceffe93c1cc",
+      "identity": {
+        "status": "separate_arrangement",
+        "recordingMbid": null,
+        "reason": "Alejandro Ríos's piano arrangement, not the canonical Avantasia studio recording."
+      },
+      "source": {
+        "kind": "youtube",
+        "videoId": "_-DEer9afE0",
+        "url": "https://www.youtube.com/watch?v=_-DEer9afE0",
+        "title": "Lost In Space - Avantasia (Visual Piano Tutorial/Best Version)",
+        "channelName": "Alejandro Ríos Pianista",
+        "channelId": "UCuvm4lVeqF5I0-XLnLtueuw",
+        "uploadDate": "2025-04-02",
+        "downloadedAt": "2026-10-09",
+        "formatId": "299",
+        "note": "Video-only AVC, 1920×1080 at 60 fps; used for visual note recovery."
+      }
     }
   ]
 }

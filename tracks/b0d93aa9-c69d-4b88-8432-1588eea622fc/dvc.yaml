@@ -1,4 +1,59 @@
 stages:
+  fetch-piano-roll:
+    wdir: ../..
+    # The existing fetcher accepts any yt-dlp format, including video-only 299.
+    cmd: >-
+      nix run .#fetch-youtube-audio --
+      https://www.youtube.com/watch?v=_-DEer9afE0 299
+      3eb051ccd61c4777ae03ff72e25e8df68bc25506c2f496a8bf4c4ceffe93c1cc
+      tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/video/youtube-_-DEer9afE0.mp4
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/fetch-youtube-audio
+    outs:
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/video/youtube-_-DEer9afE0.mp4
+  recover-piano-roll:
+    wdir: ../..
+    cmd: >-
+      nix run .#recover-lost-in-space-piano-roll --
+      tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/video/youtube-_-DEer9afE0.mp4
+      tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ily
+      build/avantasia--lost-in-space/piano-roll-events.json
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll/recover.py
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll/test_recover.py
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/reference/video/youtube-_-DEer9afE0.mp4
+    outs:
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ily:
+          cache: false
+      - build/avantasia--lost-in-space/piano-roll-events.json
+  render-piano-roll:
+    wdir: ../..
+    cmd: nix run .#render-lost-in-space-piano-roll
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ly
+      - tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ily
+    outs:
+      - build/avantasia--lost-in-space/piano-roll.pdf
+      - build/avantasia--lost-in-space/piano-roll.midi
+  render-piano-roll-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/avantasia--lost-in-space/piano-roll.midi
+      build/avantasia--lost-in-space/piano-roll.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/avantasia--lost-in-space/piano-roll.midi
+    outs:
+      - build/avantasia--lost-in-space/piano-roll.mp3
   fetch-reference:
     wdir: ../..
     cmd: >-

@@ -39,7 +39,6 @@
           };
         in
         {
-          score = scoreDirectory + "/score.ly";
           inherit directory metadataPath scoreDirectory;
         }
       );
@@ -100,13 +99,12 @@
         ) trackIds
       );
 
-      scoreFor =
-        system: trackId:
+      scoreSourceFor =
+        system: name: directory: source:
         let
           pkgs = pkgsFor system;
-          track = tracks.${trackId};
         in
-        pkgs.runCommand "${trackId}-score"
+        pkgs.runCommand name
           {
             FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ pkgs.dejavu_fonts ]; };
             nativeBuildInputs = [
@@ -120,9 +118,9 @@
             mkdir -p "$XDG_CACHE_HOME/fontconfig"
             export SOURCE_DATE_EPOCH=946684800
             lilypond \
-              --include=${track.scoreDirectory} \
+              --include=${directory} \
               --output="$out/score" \
-              ${track.score}
+              ${directory}/${source}
             qpdf \
               --empty \
               --pages "$out/score.pdf" 1-z \
@@ -135,6 +133,47 @@
             test -s "$out/score.pdf"
             test -s "$out/score.midi"
           '';
+
+      scoreFor =
+        system: trackId:
+        scoreSourceFor system "${trackId}-score" tracks.${trackId}.scoreDirectory "score.ly";
+
+      pianoRoll = {
+        trackId = "b0d93aa9-c69d-4b88-8432-1588eea622fc";
+        name = "lost-in-space-piano-roll";
+      };
+      pianoRollScoreFor =
+        system:
+        scoreSourceFor system pianoRoll.name tracks.${pianoRoll.trackId}.scoreDirectory "piano-roll.ly";
+      pianoRollRecoveryFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+        in
+        pkgs.stdenvNoCC.mkDerivation {
+          pname = "recover-${pianoRoll.name}";
+          version = "1";
+          src = tracks.${pianoRoll.trackId}.directory + "/piano-roll";
+          nativeBuildInputs = [
+            pkgs.python3
+            pkgs.ruff
+            pkgs.pyrefly
+            pkgs.makeWrapper
+          ];
+          doCheck = true;
+          checkPhase = ''
+            ruff format --check .
+            ruff check .
+            pyrefly check recover.py test_recover.py
+            python3 -m unittest discover --pattern 'test_*.py'
+          '';
+          installPhase = ''
+            install -Dm644 recover.py "$out/lib/recover.py"
+            makeWrapper ${pkgs.python3}/bin/python3 "$out/bin/recover-${pianoRoll.name}" \
+              --add-flags "$out/lib/recover.py" \
+              --prefix PATH : ${lib.makeBinPath [ pkgs.ffmpeg ]}
+          '';
+        };
 
       midiAuditionRendererFor =
         system:
@@ -458,6 +497,23 @@
             appFor name description runtimeInputs (builtins.readFile script);
         in
         {
+          "recover-${pianoRoll.name}" = {
+            type = "app";
+            program = "${pianoRollRecoveryFor system}/bin/recover-${pianoRoll.name}";
+            meta.description = "Recover the calibrated Lost in Space piano-roll video";
+          };
+
+          "render-${pianoRoll.name}" =
+            appFor "render-${pianoRoll.name}" "Export the separate piano-roll arrangement" [ pkgs.coreutils ]
+              ''
+                directory="build/${primaryAliasesByTrackId.${pianoRoll.trackId}}"
+                mkdir -p "$directory"
+                for extension in pdf midi; do
+                  install --mode=0644 -- ${pianoRollScoreFor system}/score."$extension" \
+                    "$directory/piano-roll.$extension"
+                done
+              '';
+
           dvc = {
             type = "app";
             program = lib.getExe pkgs.dvc;
@@ -617,6 +673,8 @@
         // metadataChecks
         // {
           site = siteFor system;
+          piano-roll-recovery = pianoRollRecoveryFor system;
+          piano-roll-score = pianoRollScoreFor system;
         }
       );
 
@@ -631,6 +689,7 @@
         scores
         // aliasScores
         // {
+          "${pianoRoll.name}" = pianoRollScoreFor system;
           artifacts = artifactBundleFor system;
           default = allScoresFor system;
           pdfs = pdfBundleFor system;
