@@ -3,179 +3,179 @@ pianoRollTempo = { \tempo 4 = 120 }
 
 pianoRollLeft = \absolute {
   \key d \major
-  a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 | % 1
+  a,,8 a,8 a,,8 a,8 a,,8 a,8 a,,8 a,8 | % 1
   \barNumberCheck #2
-  g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 | % 2
+  g,,8 g,8 g,,8 g,8 g,,8 g,8 g,,8 g,8 | % 2
   \barNumberCheck #3
-  b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 | % 3
+  b,,8 b,8 b,,8 b,8 b,,8 b,8 b,,8 b,8 | % 3
   \barNumberCheck #4
-  b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 | % 4
+  b,,8 b,8 b,,8 b,8 b,,8 b,8 b,,8 b,8 | % 4
   \barNumberCheck #5
-  a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 | % 5
+  a,,8 a,8 a,,8 a,8 a,,8 a,8 a,,8 a,8 | % 5
   \barNumberCheck #6
-  g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 | % 6
+  g,,8 g,8 g,,8 g,8 g,,8 g,8 g,,8 g,8 | % 6
   \barNumberCheck #7
-  d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 | % 7
+  d,8 d8 d,8 d8 d,8 d8 d,8 d8 | % 7
   \barNumberCheck #8
-  d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 | % 8
+  d,8 d8 d,8 d8 d,8 d8 d,8 d8 | % 8
   \barNumberCheck #9
-  a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 | % 9
+  a,,8 a,8 a,,8 a,8 a,,8 a,8 a,,8 a,8 | % 9
   \barNumberCheck #10
-  g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 | % 10
+  g,,8 g,8 g,,8 g,8 g,,8 g,8 g,,8 g,8 | % 10
   \barNumberCheck #11
-  b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 | % 11
+  b,,8 b,8 b,,8 b,8 b,,8 b,8 b,,8 b,8 | % 11
   \barNumberCheck #12
-  b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 b,,16 r16 b,16 r16 | % 12
+  b,,8 b,8 b,,8 b,8 b,,8 b,8 b,,8 b,8 | % 12
   \barNumberCheck #13
-  a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 a,,16 r16 a,16 r16 | % 13
+  a,,8 a,8 a,,8 a,8 a,,8 a,8 a,,8 a,8 | % 13
   \barNumberCheck #14
-  g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 g,,16 r16 g,16 r16 | % 14
+  g,,8 g,8 g,,8 g,8 g,,8 g,8 g,,8 g,8 | % 14
   \barNumberCheck #15
-  d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 | % 15
+  d,8 d8 d,8 d8 d,8 d8 d,8 d8 | % 15
   \barNumberCheck #16
-  d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 d,16 r16 d16 r16 | % 16
+  d,8 d8 d,8 d8 d,8 d8 d,8 d8 | % 16
   \barNumberCheck #17
-  a,,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 17
+  a,,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 17
   \barNumberCheck #18
-  g,,16 r16 g,16 r16 d16 r16 g,16 r16 cis16 r16 g,16 r16 d16 r16 g,16 r16 | % 18
+  g,,8 g,8 d8 g,8 cis8 g,8 d8 g,8 | % 18
   \barNumberCheck #19
-  b,,16 r16 b,16 r16 d16 r16 b,16 r16 cis16 r16 b,16 r16 d16 r16 b,16 r16 | % 19
+  b,,8 b,8 d8 b,8 cis8 b,8 d8 b,8 | % 19
   \barNumberCheck #20
-  b,,16 r16 b,16 r16 d16 r16 b,16 r16 cis16 r16 b,16 r16 d16 r16 b,16 r16 | % 20
+  b,,8 b,8 d8 b,8 cis8 b,8 d8 b,8 | % 20
   \barNumberCheck #21
-  a,,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 21
+  a,,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 21
   \barNumberCheck #22
-  g,,16 r16 g,16 r16 d16 r16 g,16 r16 cis16 r16 g,16 r16 d16 r16 g,16 r16 | % 22
+  g,,8 g,8 d8 g,8 cis8 g,8 d8 g,8 | % 22
   \barNumberCheck #23
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 23
+  d,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 23
   \barNumberCheck #24
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 24
+  d,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 24
   \barNumberCheck #25
   \key d \minor
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 d,16 r16 | % 25
+  d,8 a,8 d8 a,8 f8 a,8 d8 d,8 | % 25
   \barNumberCheck #26
-  bes,,16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 f,16 r16 | % 26
+  bes,,8 f,8 bes,8 f,8 d8 f,8 bes,8 f,8 | % 26
   \barNumberCheck #27
-  f,16 r16 c16 r16 f16 r16 c16 r16 a16 r16 c16 r16 f16 r16 c16 r16 | % 27
+  f,8 c8 f8 c8 a8 c8 f8 c8 | % 27
   \barNumberCheck #28
-  f,16 r16 c16 r16 f16 r16 c16 r16 a16 r16 c16 r16 f16 r16 f,16 r16 | % 28
+  f,8 c8 f8 c8 a8 c8 f8 f,8 | % 28
   \barNumberCheck #29
-  bes,,16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 f,16 r16 | % 29
+  bes,,8 f,8 bes,8 f,8 d8 f,8 bes,8 f,8 | % 29
   \barNumberCheck #30
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 30
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 30
   \barNumberCheck #31
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 a,16 r16 | % 31
+  d,8 a,8 d8 a,8 f8 a,8 d8 a,8 | % 31
   \barNumberCheck #32
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 <c, c>16 r16 <c, c>16 r16 <bes,, bes,>16 r16 | % 32
+  d,8 a,8 d8 a,8 f8 <c, c>8 <c, c>8 <bes,, bes,>8 | % 32
   \barNumberCheck #33
-  <bes,, bes,>16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 bes,,16 r16 | % 33
+  <bes,, bes,>8 f,8 bes,8 f,8 d8 f,8 bes,8 bes,,8 | % 33
   \barNumberCheck #34
-  g,,16 r16 d,16 r16 g,16 r16 d,16 r16 bes,16 r16 d,16 r16 g,16 r16 d,16 r16 | % 34
+  g,,8 d,8 g,8 d,8 bes,8 d,8 g,8 d,8 | % 34
   \barNumberCheck #35
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 a,16 r16 | % 35
+  d,8 a,8 d8 a,8 f8 a,8 d8 a,8 | % 35
   \barNumberCheck #36
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 a,16 r16 | % 36
+  d,8 a,8 d8 a,8 f8 a,8 d8 a,8 | % 36
   \barNumberCheck #37
-  bes,,16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 f,16 r16 | % 37
+  bes,,8 f,8 bes,8 f,8 d8 f,8 bes,8 f,8 | % 37
   \barNumberCheck #38
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 38
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 38
   \barNumberCheck #39
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 d16 r16 a,16 r16 d16 r16 a,16 r16 | % 39
+  d,8 a,8 d8 a,8 d8 a,8 d8 a,8 | % 39
   \barNumberCheck #40
   \key d \major
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 d16 r16 a,16 r16 d16 r16 a,16 r16 | % 40
+  d,8 a,8 d8 a,8 d8 a,8 d8 a,8 | % 40
   \barNumberCheck #41
-  a,,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 41
+  a,,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 41
   \barNumberCheck #42
-  g,,16 r16 g,16 r16 d16 r16 g,16 r16 cis16 r16 g,16 r16 d16 r16 g,16 r16 | % 42
+  g,,8 g,8 d8 g,8 cis8 g,8 d8 g,8 | % 42
   \barNumberCheck #43
-  b,,16 r16 b,16 r16 d16 r16 b,16 r16 cis16 r16 b,16 r16 d16 r16 b,16 r16 | % 43
+  b,,8 b,8 d8 b,8 cis8 b,8 d8 b,8 | % 43
   \barNumberCheck #44
-  b,,16 r16 b,16 r16 d16 r16 b,16 r16 cis16 r16 b,16 r16 d16 r16 b,16 r16 | % 44
+  b,,8 b,8 d8 b,8 cis8 b,8 d8 b,8 | % 44
   \barNumberCheck #45
-  a,,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 45
+  a,,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 45
   \barNumberCheck #46
-  g,,16 r16 g,16 r16 d16 r16 g,16 r16 cis16 r16 g,16 r16 d16 r16 g,16 r16 | % 46
+  g,,8 g,8 d8 g,8 cis8 g,8 d8 g,8 | % 46
   \barNumberCheck #47
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 47
+  d,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 47
   \barNumberCheck #48
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 48
+  d,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 48
   \barNumberCheck #49
-  a,,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 49
+  a,,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 49
   \barNumberCheck #50
-  g,,16 r16 g,16 r16 d16 r16 g,16 r16 cis16 r16 g,16 r16 d16 r16 g,16 r16 | % 50
+  g,,8 g,8 d8 g,8 cis8 g,8 d8 g,8 | % 50
   \barNumberCheck #51
-  b,,16 r16 b,16 r16 d16 r16 b,16 r16 cis16 r16 b,16 r16 d16 r16 b,16 r16 | % 51
+  b,,8 b,8 d8 b,8 cis8 b,8 d8 b,8 | % 51
   \barNumberCheck #52
-  b,,16 r16 b,16 r16 d16 r16 b,16 r16 cis16 r16 b,16 r16 d16 r16 b,16 r16 | % 52
+  b,,8 b,8 d8 b,8 cis8 b,8 d8 b,8 | % 52
   \barNumberCheck #53
-  a,,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 53
+  a,,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 53
   \barNumberCheck #54
-  g,,16 r16 g,16 r16 d16 r16 g,16 r16 cis16 r16 g,16 r16 d16 r16 g,16 r16 | % 54
+  g,,8 g,8 d8 g,8 cis8 g,8 d8 g,8 | % 54
   \barNumberCheck #55
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 55
+  d,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 55
   \barNumberCheck #56
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 cis16 r16 a,16 r16 d16 r16 a,16 r16 | % 56
+  d,8 a,8 d8 a,8 cis8 a,8 d8 a,8 | % 56
   \barNumberCheck #57
   \key d \minor
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 d,16 r16 | % 57
+  d,8 a,8 d8 a,8 f8 a,8 d8 d,8 | % 57
   \barNumberCheck #58
-  bes,,16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 f,16 r16 | % 58
+  bes,,8 f,8 bes,8 f,8 d8 f,8 bes,8 f,8 | % 58
   \barNumberCheck #59
-  f,16 r16 c16 r16 f16 r16 c16 r16 a16 r16 c16 r16 f16 r16 c16 r16 | % 59
+  f,8 c8 f8 c8 a8 c8 f8 c8 | % 59
   \barNumberCheck #60
-  f,16 r16 c16 r16 f16 r16 c16 r16 a16 r16 c16 r16 f16 r16 f,16 r16 | % 60
+  f,8 c8 f8 c8 a8 c8 f8 f,8 | % 60
   \barNumberCheck #61
-  bes,,16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 f,16 r16 | % 61
+  bes,,8 f,8 bes,8 f,8 d8 f,8 bes,8 f,8 | % 61
   \barNumberCheck #62
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 62
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 62
   \barNumberCheck #63
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 a,16 r16 | % 63
+  d,8 a,8 d8 a,8 f8 a,8 d8 a,8 | % 63
   \barNumberCheck #64
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 <c, c>16 r16 <c, c>16 r16 <bes,, bes,>16 r16 | % 64
+  d,8 a,8 d8 a,8 f8 <c, c>8 <c, c>8 <bes,, bes,>8 | % 64
   \barNumberCheck #65
-  <bes,, bes,>16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 bes,,16 r16 | % 65
+  <bes,, bes,>8 f,8 bes,8 f,8 d8 f,8 bes,8 bes,,8 | % 65
   \barNumberCheck #66
-  g,,16 r16 d,16 r16 g,16 r16 d,16 r16 bes,16 r16 d,16 r16 g,16 r16 d,16 r16 | % 66
+  g,,8 d,8 g,8 d,8 bes,8 d,8 g,8 d,8 | % 66
   \barNumberCheck #67
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 a,16 r16 | % 67
+  d,8 a,8 d8 a,8 f8 a,8 d8 a,8 | % 67
   \barNumberCheck #68
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 f16 r16 a,16 r16 d16 r16 a,16 r16 | % 68
+  d,8 a,8 d8 a,8 f8 a,8 d8 a,8 | % 68
   \barNumberCheck #69
-  bes,,16 r16 f,16 r16 bes,16 r16 f,16 r16 d16 r16 f,16 r16 bes,16 r16 f,16 r16 | % 69
+  bes,,8 f,8 bes,8 f,8 d8 f,8 bes,8 f,8 | % 69
   \barNumberCheck #70
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 70
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 70
   \barNumberCheck #71
-  <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 | % 71
+  <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 | % 71
   \barNumberCheck #72
-  <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r16 <d, a, d>16 r8. <d, a, d>16 r8. | % 72
+  <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 <d, a, d>8 r8 <d, a, d>8 r8 | % 72
   \barNumberCheck #73
-  g,,16 r16 g,16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 | % 73
+  g,,8 g,8 g,8 g8 g,8 g8 g,8 g8 | % 73
   \barNumberCheck #74
-  g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 | % 74
+  g,8 g8 g,8 g8 g,8 g8 g,8 g8 | % 74
   \barNumberCheck #75
-  f,,16 r16 f,16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 | % 75
+  f,,8 f,8 f,8 f8 f,8 f8 f,8 f8 | % 75
   \barNumberCheck #76
-  f,16 r16 f16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 | % 76
+  f,8 f8 f,8 f8 f,8 f8 f,8 f8 | % 76
   \barNumberCheck #77
-  g,,16 r16 g,16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 | % 77
+  g,,8 g,8 g,8 g8 g,8 g8 g,8 g8 | % 77
   \barNumberCheck #78
-  g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 | % 78
+  g,8 g8 g,8 g8 g,8 g8 g,8 g8 | % 78
   \barNumberCheck #79
-  f,,16 r16 f,16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 | % 79
+  f,,8 f,8 f,8 f8 f,8 f8 f,8 f8 | % 79
   \barNumberCheck #80
-  f,16 r16 f16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 f,16 r16 f16 r16 | % 80
+  f,8 f8 f,8 f8 f,8 f8 f,8 f8 | % 80
   \barNumberCheck #81
-  g,,16 r16 g,16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 | % 81
+  g,,8 g,8 g,8 g8 g,8 g8 g,8 g8 | % 81
   \barNumberCheck #82
-  g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 g,16 r16 g16 r16 | % 82
+  g,8 g8 g,8 g8 g,8 g8 g,8 g8 | % 82
   \barNumberCheck #83
-  <bes,, bes,>16 r8. r4 r4 r4 | % 83
+  <bes,, bes,>8 r8 r4 r4 r4 | % 83
   \barNumberCheck #84
   R1 | % 84
   \barNumberCheck #85
   \ottava #-1
-  <bes,,, bes,,>16 r8. r4 r4 r4 | % 85
+  <bes,,, bes,,>8 r8 r4 r4 r4 | % 85
   \barNumberCheck #86
   \ottava #0
   R1 | % 86
@@ -185,43 +185,43 @@ pianoRollLeft = \absolute {
   R1 | % 88
   \barNumberCheck #89
   \key e \minor
-  e,16 r16 b,16 r16 e16 r16 b,16 r16 g16 r16 b,16 r16 e16 r16 e,16 r16 | % 89
+  e,8 b,8 e8 b,8 g8 b,8 e8 e,8 | % 89
   \barNumberCheck #90
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 90
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 90
   \barNumberCheck #91
-  g,16 r16 d16 r16 g16 r16 d16 r16 b16 r16 d16 r16 g16 r16 d16 r16 | % 91
+  g,8 d8 g8 d8 b8 d8 g8 d8 | % 91
   \barNumberCheck #92
-  g,16 r16 d16 r16 g16 r16 d16 r16 b16 r16 d16 r16 g16 r16 g,16 r16 | % 92
+  g,8 d8 g8 d8 b8 d8 g8 g,8 | % 92
   \barNumberCheck #93
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 93
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 93
   \barNumberCheck #94
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 fis16 r16 a,16 r16 d16 r16 a,16 r16 | % 94
+  d,8 a,8 d8 a,8 fis8 a,8 d8 a,8 | % 94
   \barNumberCheck #95
-  e,16 r16 b,16 r16 e16 r16 b,16 r16 g16 r16 b,16 r16 e16 r16 b,16 r16 | % 95
+  e,8 b,8 e8 b,8 g8 b,8 e8 b,8 | % 95
   \barNumberCheck #96
-  e,16 r16 b,16 r16 e16 r16 b,16 r16 g16 r16 <d, d>16 r16 <d, d>16 r16 <c, c>16 r16 | % 96
+  e,8 b,8 e8 b,8 g8 <d, d>8 <d, d>8 <c, c>8 | % 96
   \barNumberCheck #97
-  <c, c>16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 c,16 r16 | % 97
+  <c, c>8 g,8 c8 g,8 e8 g,8 c8 c,8 | % 97
   \barNumberCheck #98
-  a,,16 r16 e,16 r16 a,16 r16 e,16 r16 c16 r16 e,16 r16 a,16 r16 e,16 r16 | % 98
+  a,,8 e,8 a,8 e,8 c8 e,8 a,8 e,8 | % 98
   \barNumberCheck #99
-  e,16 r16 b,16 r16 e16 r16 b,16 r16 g16 r16 b,16 r16 e16 r16 b,16 r16 | % 99
+  e,8 b,8 e8 b,8 g8 b,8 e8 b,8 | % 99
   \barNumberCheck #100
-  e,16 r16 b,16 r16 e16 r16 b,16 r16 g16 r16 b,16 r16 e16 r16 b,16 r16 | % 100
+  e,8 b,8 e8 b,8 g8 b,8 e8 b,8 | % 100
   \barNumberCheck #101
-  c,16 r16 g,16 r16 c16 r16 g,16 r16 e16 r16 g,16 r16 c16 r16 g,16 r16 | % 101
+  c,8 g,8 c8 g,8 e8 g,8 c8 g,8 | % 101
   \barNumberCheck #102
-  d,16 r16 a,16 r16 d16 r16 a,16 r16 fis16 r16 a,16 r16 d16 r16 a,16 r16 | % 102
+  d,8 a,8 d8 a,8 fis8 a,8 d8 a,8 | % 102
   \barNumberCheck #103
-  e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 | % 103
+  e,,8 e,8 e,,8 e,8 e,,8 e,8 e,,8 e,8 | % 103
   \barNumberCheck #104
-  e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 | % 104
+  e,,8 e,8 e,,8 e,8 e,,8 e,8 e,,8 e,8 | % 104
   \barNumberCheck #105
-  e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 | % 105
+  e,,8 e,8 e,,8 e,8 e,,8 e,8 e,,8 e,8 | % 105
   \barNumberCheck #106
-  e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 e,,16 r16 e,16 r16 | % 106
+  e,,8 e,8 e,,8 e,8 e,,8 e,8 e,,8 e,8 | % 106
   \barNumberCheck #107
-  e,,16 r8. r4 r4 r4 | % 107
+  e,,8 r8 r4 r4 r4 | % 107
   \barNumberCheck #108
   \bar "|."
 }
@@ -229,233 +229,233 @@ pianoRollLeft = \absolute {
 pianoRollRight = \absolute {
   \key d \major
   \mark \markup \box "0:05.70"
-  r8 e'16 r16 d''16 r16 e'16 r16 cis''16 r16 e'16 r16 a'16 r16 d'16 r16 | % 1
+  r8 e'8 d''8 e'8 cis''8 e'8 a'8 d'8 | % 1
   \barNumberCheck #2
-  r8 d'16 r16 d''16 r16 d'16 r16 cis''16 r16 d'16 r16 a'16 r16 fis'16 r16 | % 2
+  r8 d'8 d''8 d'8 cis''8 d'8 a'8 fis'8 | % 2
   \barNumberCheck #3
-  b16 r16 fis'16 r16 a'16 r16 fis'16 r16 r8 fis'16 r16 a'16 r16 fis'16 r16 | % 3
+  b8 fis'8 a'8 fis'8 r8 fis'8 a'8 fis'8 | % 3
   \barNumberCheck #4
-  r8 fis'16 r16 a'16 r16 fis'16 r16 r8 fis'16 r16 a'16 r16 fis'16 r16 | % 4
+  r8 fis'8 a'8 fis'8 r8 fis'8 a'8 fis'8 | % 4
   \barNumberCheck #5
-  r8 e'16 r16 d''16 r16 e'16 r16 cis''16 r16 e'16 r16 a'16 r16 d'16 r16 | % 5
+  r8 e'8 d''8 e'8 cis''8 e'8 a'8 d'8 | % 5
   \barNumberCheck #6
-  r8 d'16 r16 d''16 r16 d'16 r16 cis''16 r16 d'16 r16 a'16 r16 fis'16 r16 | % 6
+  r8 d'8 d''8 d'8 cis''8 d'8 a'8 fis'8 | % 6
   \barNumberCheck #7
-  a16 r8. r4 r4 r4 | % 7
+  a8 r8 r4 r4 r4 | % 7
   \barNumberCheck #8
-  r4 r8 d'16 r16 b'16 r16 b'16 r16 r8 a'16 r16 | % 8
+  r4 r8 d'8 b'8 b'8 r8 a'8 | % 8
   \barNumberCheck #9
   \mark \markup \box "0:21.70"
-  r4 r4 r4 g'16 r16 g'16 r16 | % 9
+  r4 r4 r4 g'8 g'8 | % 9
   \barNumberCheck #10
-  r8 fis'16 r16 r4 r4 g'16 r16 g'16 r16 | % 10
+  r8 fis'8 r4 r4 g'8 g'8 | % 10
   \barNumberCheck #11
-  r4 fis'16 r8. r4 r4 | % 11
+  r4 fis'8 r8 r4 r4 | % 11
   \barNumberCheck #12
-  r4 r8 d'16 r16 b'16 r16 b'16 r16 r8 a'16 r16 | % 12
+  r4 r8 d'8 b'8 b'8 r8 a'8 | % 12
   \barNumberCheck #13
-  r4 r4 r4 g'16 r16 g'16 r16 | % 13
+  r4 r4 r4 g'8 g'8 | % 13
   \barNumberCheck #14
-  r4 fis'16 r16 g'16 r16 r8 fis'16 r16 r8 fis'16 r16 | % 14
+  r4 fis'8 g'8 r8 fis'8 r8 fis'8 | % 14
   \barNumberCheck #15
   R1 | % 15
   \barNumberCheck #16
-  r4 r8 b16 r16 fis'16 r16 fis'16 r16 r8 e'16 r16 | % 16
+  r4 r8 b8 fis'8 fis'8 r8 e'8 | % 16
   \barNumberCheck #17
-  r4 r4 r4 a'16 r16 b'16 r16 | % 17
+  r4 r4 r4 a'8 b'8 | % 17
   \barNumberCheck #18
-  r8 a'16 r16 r8 b'16 r16 r8 g'16 r16 r8 g'16 r16 | % 18
+  r8 a'8 r8 b'8 r8 g'8 r8 g'8 | % 18
   \barNumberCheck #19
-  r8 fis'16 r16 r4 r4 r4 | % 19
+  r8 fis'8 r4 r4 r4 | % 19
   \barNumberCheck #20
-  r4 r4 d''16 r16 d''16 r16 r8 e''16 r16 | % 20
+  r4 r4 d''8 d''8 r8 e''8 | % 20
   \barNumberCheck #21
-  r8 cis''16 r16 r4 r4 cis''16 r16 d''16 r16 | % 21
+  r8 cis''8 r4 r4 cis''8 d''8 | % 21
   \barNumberCheck #22
-  r4 cis''16 r16 d''16 r16 r4 cis''16 r16 d''16 r16 | % 22
+  r4 cis''8 d''8 r4 cis''8 d''8 | % 22
   \barNumberCheck #23
-  r4 cis''16 r16 d''16 r16 r4 cis''16 r16 d''16 r16 | % 23
+  r4 cis''8 d''8 r4 cis''8 d''8 | % 23
   \barNumberCheck #24
   R1 | % 24
   \barNumberCheck #25
   \key d \minor
   \mark \markup \box "0:53.70"
-  r4 <f' a'>16 r8. <e' a'>16 r16 <f' a'>16 r16 r8 <d' f' bes'>16 r16 | % 25
+  r4 <f' a'>8 r8 <e' a'>8 <f' a'>8 r8 <d' f' bes'>8 | % 25
   \barNumberCheck #26
-  r4 <f' bes'>16 r8. <e' bes'>16 r16 <f' bes'>16 r16 r8 <c' f' a'>16 r16 | % 26
+  r4 <f' bes'>8 r8 <e' bes'>8 <f' bes'>8 r8 <c' f' a'>8 | % 26
   \barNumberCheck #27
-  r8 f'16 r16 f''16 r16 e''16 r16 r8 c''16 r16 r8 a'16 r16 | % 27
+  r8 f'8 f''8 e''8 r8 c''8 r8 a'8 | % 27
   \barNumberCheck #28
-  r4 g'16 r8. <f' f''>16 r16 <f' f''>16 r16 <f' f''>16 r8. | % 28
+  r4 g'8 r8 <f' f''>8 <f' f''>8 <f' f''>8 r8 | % 28
   \barNumberCheck #29
-  <e' e''>16 r8. r8 <f' f''>16 r16 r4 <c'' c'''>16 r8. | % 29
+  <e' e''>8 r8 r8 <f' f''>8 r4 <c'' c'''>8 r8 | % 29
   \barNumberCheck #30
-  r4 <f' f''>16 r8. <e' e''>16 r8. <f' f''>16 r16 <e' e''>16 r16 | % 30
+  r4 <f' f''>8 r8 <e' e''>8 r8 <f' f''>8 <e' e''>8 | % 30
   \barNumberCheck #31
-  r8 <d' d''>16 r16 r4 r4 r4 | % 31
+  r8 <d' d''>8 r4 r4 r4 | % 31
   \barNumberCheck #32
   R1 | % 32
   \barNumberCheck #33
-  r4 <f' a'>16 r8. <e' a'>16 r16 <f' a'>16 r16 r8 <d' g' bes'>16 r16 | % 33
+  r4 <f' a'>8 r8 <e' a'>8 <f' a'>8 r8 <d' g' bes'>8 | % 33
   \barNumberCheck #34
-  r4 <f' bes'>16 r8. <e' bes'>16 r16 <f' bes'>16 r16 r8 <d' f' a'>16 r16 | % 34
+  r4 <f' bes'>8 r8 <e' bes'>8 <f' bes'>8 r8 <d' f' a'>8 | % 34
   \barNumberCheck #35
-  r8 f'16 r16 f''16 r16 e''16 r16 r8 c''16 r16 r8 a'16 r16 | % 35
+  r8 f'8 f''8 e''8 r8 c''8 r8 a'8 | % 35
   \barNumberCheck #36
-  r4 g'16 r8. <f' f''>16 r16 <f' f''>16 r16 <f' f''>16 r8. | % 36
+  r4 g'8 r8 <f' f''>8 <f' f''>8 <f' f''>8 r8 | % 36
   \barNumberCheck #37
-  <e' e''>16 r8. r8 <f' f''>16 r16 r4 <c'' c'''>16 r8. | % 37
+  <e' e''>8 r8 r8 <f' f''>8 r4 <c'' c'''>8 r8 | % 37
   \barNumberCheck #38
-  r4 <f' f''>16 r8. <e' e''>16 r8. <f' f''>16 r16 <e' e''>16 r16 | % 38
+  r4 <f' f''>8 r8 <e' e''>8 r8 <f' f''>8 <e' e''>8 | % 38
   \barNumberCheck #39
-  r8 <d' d''>16 r16 r4 r4 r4 | % 39
+  r8 <d' d''>8 r4 r4 r4 | % 39
   \barNumberCheck #40
   \key d \major
   \mark \markup \box "1:23.70"
-  r4 r8 d'16 r16 <b' d''>16 r16 <b' d''>16 r16 r8 <a' cis''>16 r16 | % 40
+  r4 r8 d'8 <b' d''>8 <b' d''>8 r8 <a' cis''>8 | % 40
   \barNumberCheck #41
-  r4 r4 r4 <fis' a'>16 r16 <g' b'>16 r16 | % 41
+  r4 r4 r4 <fis' a'>8 <g' b'>8 | % 41
   \barNumberCheck #42
-  r4 <fis' a'>16 r16 <g' b'>16 r16 r4 <fis' a'>16 r16 <g' b'>16 r16 | % 42
+  r4 <fis' a'>8 <g' b'>8 r4 <fis' a'>8 <g' b'>8 | % 42
   \barNumberCheck #43
-  r8 <fis' a'>16 r16 r4 r4 r4 | % 43
+  r8 <fis' a'>8 r4 r4 r4 | % 43
   \barNumberCheck #44
-  r4 r8 d'16 r16 <b' d''>16 r16 <b' d''>16 r16 r8 <a' cis''>16 r16 | % 44
+  r4 r8 d'8 <b' d''>8 <b' d''>8 r8 <a' cis''>8 | % 44
   \barNumberCheck #45
-  r4 r4 r8 <fis' a'>16 r16 <fis' a'>16 r16 <g' b'>16 r16 | % 45
+  r4 r4 r8 <fis' a'>8 <fis' a'>8 <g' b'>8 | % 45
   \barNumberCheck #46
-  r4 <fis' a'>16 r16 <g' b'>16 r16 r4 <fis' a'>16 r16 <fis' a'>16 r16 | % 46
+  r4 <fis' a'>8 <g' b'>8 r4 <fis' a'>8 <fis' a'>8 | % 46
   \barNumberCheck #47
   R1 | % 47
   \barNumberCheck #48
-  r4 r8 a'16 r16 d''16 r8. d''16 r16 e''16 r16 | % 48
+  r4 r8 a'8 d''8 r8 d''8 e''8 | % 48
   \barNumberCheck #49
-  cis''16 r8. r4 r8 d''16 r16 cis''16 r16 d''16 r16 | % 49
+  cis''8 r8 r4 r8 d''8 cis''8 d''8 | % 49
   \barNumberCheck #50
-  r4 cis''16 r16 d''16 r16 r8 cis''16 r16 r8 cis''16 r16 | % 50
+  r4 cis''8 d''8 r8 cis''8 r8 cis''8 | % 50
   \barNumberCheck #51
-  r8 b'16 r16 r4 r4 r4 | % 51
+  r8 b'8 r4 r4 r4 | % 51
   \barNumberCheck #52
-  r4 r4 d''16 r8 d''16 r8 e''16 r16 | % 52
+  r4 r4 d''8 r16 d''16 r8 e''8 | % 52
   \barNumberCheck #53
-  r8 cis''16 r16 r4 r4 cis''16 r16 d''16 r16 | % 53
+  r8 cis''8 r4 r4 cis''8 d''8 | % 53
   \barNumberCheck #54
-  r4 cis''16 r16 d''16 r16 r4 <cis'' e''>16 r16 <d'' fis''>16 r16 | % 54
+  r4 cis''8 d''8 r4 <cis'' e''>8 <d'' fis''>8 | % 54
   \barNumberCheck #55
-  r4 <cis'' e''>16 r16 <d'' fis''>16 r16 r4 <cis'' e''>16 r16 <d'' fis''>16 r16 | % 55
+  r4 <cis'' e''>8 <d'' fis''>8 r4 <cis'' e''>8 <d'' fis''>8 | % 55
   \barNumberCheck #56
   R1 | % 56
   \barNumberCheck #57
   \key d \minor
   \mark \markup \box "1:57.70"
-  r4 <f' a'>16 r8. <e' a'>16 r16 <f' a'>16 r16 r8 <d' f' bes'>16 r16 | % 57
+  r4 <f' a'>8 r8 <e' a'>8 <f' a'>8 r8 <d' f' bes'>8 | % 57
   \barNumberCheck #58
-  r4 <f' bes'>16 r8. <e' bes'>16 r16 <f' bes'>16 r16 r8 <c' f' a'>16 r16 | % 58
+  r4 <f' bes'>8 r8 <e' bes'>8 <f' bes'>8 r8 <c' f' a'>8 | % 58
   \barNumberCheck #59
-  r8 f'16 r16 f''16 r16 e''16 r16 r8 c''16 r16 r8 a'16 r16 | % 59
+  r8 f'8 f''8 e''8 r8 c''8 r8 a'8 | % 59
   \barNumberCheck #60
-  r4 g'16 r8. <f' f''>16 r16 <f' f''>16 r16 <f' f''>16 r8. | % 60
+  r4 g'8 r8 <f' f''>8 <f' f''>8 <f' f''>8 r8 | % 60
   \barNumberCheck #61
-  <e' e''>16 r8. r8 <f' f''>16 r16 r4 <c'' c'''>16 r8. | % 61
+  <e' e''>8 r8 r8 <f' f''>8 r4 <c'' c'''>8 r8 | % 61
   \barNumberCheck #62
-  r4 <f' f''>16 r8. <e' e''>16 r8. <f' f''>16 r16 <e' e''>16 r16 | % 62
+  r4 <f' f''>8 r8 <e' e''>8 r8 <f' f''>8 <e' e''>8 | % 62
   \barNumberCheck #63
-  r8 <d' d''>16 r16 r4 r4 r4 | % 63
+  r8 <d' d''>8 r4 r4 r4 | % 63
   \barNumberCheck #64
   R1 | % 64
   \barNumberCheck #65
-  r4 <f' a'>16 r8. <e' a'>16 r16 <f' a'>16 r16 r8 <d' g' bes'>16 r16 | % 65
+  r4 <f' a'>8 r8 <e' a'>8 <f' a'>8 r8 <d' g' bes'>8 | % 65
   \barNumberCheck #66
-  r4 <f' bes'>16 r8. <e' bes'>16 r16 <f' bes'>16 r16 r8 <d' f' a'>16 r16 | % 66
+  r4 <f' bes'>8 r8 <e' bes'>8 <f' bes'>8 r8 <d' f' a'>8 | % 66
   \barNumberCheck #67
-  r8 f'16 r16 f''16 r16 e''16 r16 r8 c''16 r16 r8 a'16 r16 | % 67
+  r8 f'8 f''8 e''8 r8 c''8 r8 a'8 | % 67
   \barNumberCheck #68
-  r4 g'16 r8. <f' f''>16 r16 <f' f''>16 r16 <f' f''>16 r8. | % 68
+  r4 g'8 r8 <f' f''>8 <f' f''>8 <f' f''>8 r8 | % 68
   \barNumberCheck #69
-  <e' e''>16 r8. r8 <f' f''>16 r16 r4 <c'' c'''>16 r8. | % 69
+  <e' e''>8 r8 r8 <f' f''>8 r4 <c'' c'''>8 r8 | % 69
   \barNumberCheck #70
-  r4 <f' f''>16 r8. <e' e''>16 r8. <f' f''>16 r16 <e' e''>16 r16 | % 70
+  r4 <f' f''>8 r8 <e' e''>8 r8 <f' f''>8 <e' e''>8 | % 70
   \barNumberCheck #71
-  r8 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 | % 71
+  r8 <d' d''>8 <d' d''>8 <d' d''>8 <d' d''>8 <d' d''>8 <d' d''>8 <d' d''>8 | % 71
   \barNumberCheck #72
-  <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r16 <d' d''>16 r8. <d' d''>16 r8. | % 72
+  <d' d''>8 <d' d''>8 <d' d''>8 <d' d''>8 <d' d''>8 r8 <d' d''>8 r8 | % 72
   \barNumberCheck #73
   \mark \markup \box "2:29.70"
-  e'16 r8. r8 f'16 r16 r4 c''16 r8. | % 73
+  e'8 r8 r8 f'8 r4 c''8 r8 | % 73
   \barNumberCheck #74
-  r8 f'16 r16 r4 e'16 r8. f'16 r8. | % 74
+  r8 f'8 r4 e'8 r8 f'8 r8 | % 74
   \barNumberCheck #75
-  e'16 r8. r8 f'16 r16 r4 c'16 r8. | % 75
+  e'8 r8 r8 f'8 r4 c'8 r8 | % 75
   \barNumberCheck #76
-  r8 f'16 r16 r4 e'16 r8. f'16 r8. | % 76
+  r8 f'8 r4 e'8 r8 f'8 r8 | % 76
   \barNumberCheck #77
-  e'16 r8. r8 f'16 r16 r4 c''16 r8. | % 77
+  e'8 r8 r8 f'8 r4 c''8 r8 | % 77
   \barNumberCheck #78
-  r8 f'16 r16 r4 e'16 r8. f'16 r8. | % 78
+  r8 f'8 r4 e'8 r8 f'8 r8 | % 78
   \barNumberCheck #79
-  e'16 r8. r8 f'16 r16 r4 e'16 r8. | % 79
+  e'8 r8 r8 f'8 r4 e'8 r8 | % 79
   \barNumberCheck #80
-  r8 f'16 r16 r4 e'16 r8. f'16 r8. | % 80
+  r8 f'8 r4 e'8 r8 f'8 r8 | % 80
   \barNumberCheck #81
-  e'16 r8. r8 f'16 r16 r4 c''16 r16 d''16 r16 | % 81
+  e'8 r8 r8 f'8 r4 c''8 d''8 | % 81
   \barNumberCheck #82
-  c''16 r16 f'16 r16 r4 e'16 r8. f'16 r8. | % 82
+  c''8 f'8 r4 e'8 r8 f'8 r8 | % 82
   \barNumberCheck #83
   \mark \markup \box "2:49.70"
   \ottava #1
-  \tuplet 3/2 { bes'''16. r32 bes''16. r32 bes'''16. r32 } \tuplet 3/2 { a'''16. r32 a''16. r32 a'''16. r32 } \tuplet 3/2 { g'''16. r32 g''16. r32 g'''16. r32 } \tuplet 3/2 { f'''16. r32 f''16. r32 f'''16. r32 } | % 83
+  \tuplet 3/2 { bes'''8 bes''8 bes'''8 } \tuplet 3/2 { a'''8 a''8 a'''8 } \tuplet 3/2 { g'''8 g''8 g'''8 } \tuplet 3/2 { f'''8 f''8 f'''8 } | % 83
   \barNumberCheck #84
-  \tuplet 3/2 { e'''16. r32 e''16. r32 e'''16. r32 } \tuplet 3/2 { d'''16. r32 d''16. r32 d'''16. r32 } \tuplet 3/2 { c'''16. r32 c''16. r32 c'''16. r32 } \tuplet 3/2 { bes''16. r32 bes'16. r32 bes''16. r32 } | % 84
+  \tuplet 3/2 { e'''8 e''8 e'''8 } \tuplet 3/2 { d'''8 d''8 d'''8 } \tuplet 3/2 { c'''8 c''8 c'''8 } \tuplet 3/2 { bes''8 bes'8 bes''8 } | % 84
   \barNumberCheck #85
   \ottava #0
-  \tuplet 3/2 { a''16. r32 a'16. r32 a''16. r32 } \tuplet 3/2 { g''16. r32 g'16. r32 g''16. r32 } \tuplet 3/2 { f''16. r32 f'16. r32 f''16. r32 } \tuplet 3/2 { e''16. r32 e'16. r32 e''16. r32 } | % 85
+  \tuplet 3/2 { a''8 a'8 a''8 } \tuplet 3/2 { g''8 g'8 g''8 } \tuplet 3/2 { f''8 f'8 f''8 } \tuplet 3/2 { e''8 e'8 e''8 } | % 85
   \barNumberCheck #86
-  \tuplet 3/2 { d''16. r32 d'16. r32 d''16. r32 } \tuplet 3/2 { c''16. r32 c'16. r32 c''16. r32 } bes'16 r8. r4 | % 86
+  \tuplet 3/2 { d''8 d'8 d''8 } \tuplet 3/2 { c''8 c'8 c''8 } bes'8 r8 r4 | % 86
   \barNumberCheck #87
-  r4 f'16 r8. e'16 r16 f'16 r16 r8 d'16 r16 | % 87
+  r4 f'8 r8 e'8 f'8 r8 d'8 | % 87
   \barNumberCheck #88
-  r4 f'16 r8. e'16 r16 f'16 r16 r4 | % 88
+  r4 f'8 r8 e'8 f'8 r4 | % 88
   \barNumberCheck #89
   \key e \minor
   \mark \markup \box "3:01.70"
-  r4 <g' b'>16 r8. <fis' b'>16 r16 <g' b'>16 r16 r8 <e' g' c''>16 r16 | % 89
+  r4 <g' b'>8 r8 <fis' b'>8 <g' b'>8 r8 <e' g' c''>8 | % 89
   \barNumberCheck #90
-  r4 <g' c''>16 r8. <fis' c''>16 r16 <g' c''>16 r16 r8 <d' g' b'>16 r16 | % 90
+  r4 <g' c''>8 r8 <fis' c''>8 <g' c''>8 r8 <d' g' b'>8 | % 90
   \barNumberCheck #91
-  r8 g'16 r16 g''16 r16 fis''16 r16 r8 d''16 r16 r8 b'16 r16 | % 91
+  r8 g'8 g''8 fis''8 r8 d''8 r8 b'8 | % 91
   \barNumberCheck #92
-  r4 a'16 r8. <g' g''>16 r16 <g' g''>16 r16 <g' g''>16 r8. | % 92
+  r4 a'8 r8 <g' g''>8 <g' g''>8 <g' g''>8 r8 | % 92
   \barNumberCheck #93
-  <fis' fis''>16 r8. r8 <g' g''>16 r16 r4 <d'' d'''>16 r8. | % 93
+  <fis' fis''>8 r8 r8 <g' g''>8 r4 <d'' d'''>8 r8 | % 93
   \barNumberCheck #94
-  r4 <g' g''>16 r8. <fis' fis''>16 r8. <g' g''>16 r16 <fis' fis''>16 r16 | % 94
+  r4 <g' g''>8 r8 <fis' fis''>8 r8 <g' g''>8 <fis' fis''>8 | % 94
   \barNumberCheck #95
-  r8 <e' e''>16 r16 r4 r4 r4 | % 95
+  r8 <e' e''>8 r4 r4 r4 | % 95
   \barNumberCheck #96
   R1 | % 96
   \barNumberCheck #97
-  r4 <g' b'>16 r8. <fis' b'>16 r16 <g' b'>16 r16 r8 <e' a' c''>16 r16 | % 97
+  r4 <g' b'>8 r8 <fis' b'>8 <g' b'>8 r8 <e' a' c''>8 | % 97
   \barNumberCheck #98
-  r4 <g' c''>16 r8. <fis' c''>16 r16 <g' c''>16 r16 r8 <e' g' b'>16 r16 | % 98
+  r4 <g' c''>8 r8 <fis' c''>8 <g' c''>8 r8 <e' g' b'>8 | % 98
   \barNumberCheck #99
-  r8 g'16 r16 g''16 r16 fis''16 r16 r8 d''16 r16 r8 b'16 r16 | % 99
+  r8 g'8 g''8 fis''8 r8 d''8 r8 b'8 | % 99
   \barNumberCheck #100
-  r4 a'16 r8. <g' g''>16 r16 <g' g''>16 r16 <g' g''>16 r8. | % 100
+  r4 a'8 r8 <g' g''>8 <g' g''>8 <g' g''>8 r8 | % 100
   \barNumberCheck #101
-  <fis' fis''>16 r8. r8 <g' g''>16 r16 r4 <d'' d'''>16 r8. | % 101
+  <fis' fis''>8 r8 r8 <g' g''>8 r4 <d'' d'''>8 r8 | % 101
   \barNumberCheck #102
-  r4 <g' g''>16 r8. <fis' fis''>16 r8. <g' g''>16 r16 <fis' fis''>16 r16 | % 102
+  r4 <g' g''>8 r8 <fis' fis''>8 r8 <g' g''>8 <fis' fis''>8 | % 102
   \barNumberCheck #103
   \mark \markup \box "3:29.70"
-  r8 <e' e''>16 r16 r4 r4 g''16 r16 fis''16 r16 | % 103
+  r8 <e' e''>8 r4 r4 g''8 fis''8 | % 103
   \barNumberCheck #104
   \ottava #1
-  r8 e''16 r16 r4 r4 g'''16 r16 fis'''16 r16 | % 104
+  r8 e''8 r4 r4 g'''8 fis'''8 | % 104
   \barNumberCheck #105
   \ottava #2
-  r8 e'''16 r16 r4 r4 g''''16 r16 fis''''16 r16 | % 105
+  r8 e'''8 r4 r4 g''''8 fis''''8 | % 105
   \barNumberCheck #106
-  r8 e''''16 r16 r4 r4 r4 | % 106
+  r8 e''''8 r4 r4 r4 | % 106
   \barNumberCheck #107
   \ottava #0
   R1 | % 107

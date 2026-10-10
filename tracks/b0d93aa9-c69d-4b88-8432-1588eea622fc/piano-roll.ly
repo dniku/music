@@ -15,7 +15,7 @@
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
     "Piano roll Alejandro Ríos · черновая транскрипция"
   subsubtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Короткие нажатия и паузы сохранены буквально; педаль и динамика не восстановлены"
+    "Ритмическая запись упрощена; педаль и динамика не восстановлены"
   composer = "Avantasia · Tobias Sammet"
   arranger = \markup \override #'(font-name . "DejaVu Sans") "Аранжировка: Alejandro Ríos"
   copyright = \markup \tiny \override #'(font-name . "DejaVu Sans")

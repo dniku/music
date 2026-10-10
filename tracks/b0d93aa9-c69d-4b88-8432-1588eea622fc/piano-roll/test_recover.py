@@ -68,24 +68,39 @@ class RecoveryTests(unittest.TestCase):
     def test_normal_beat(self) -> None:
         self.assertEqual(
             beat_music([Note(0, Hand.LEFT, 33), Note(6, Hand.LEFT, 45)], 0, False),
-            "a,,16 r16 a,16 r16",
+            "a,,8 a,8",
         )
         self.assertEqual(beat_music([], 0, False), "r4")
 
-    def test_triplet_with_literal_gate(self) -> None:
+    def test_triplet_without_release_rests(self) -> None:
         notes = [Note(start, Hand.RIGHT, 72) for start in (0, 4, 8)]
         self.assertEqual(
             beat_music(notes, 0, False),
-            r"\tuplet 3/2 { c''16. r32 c''16. r32 c''16. r32 }",
+            r"\tuplet 3/2 { c''8 c''8 c''8 }",
         )
 
     def test_chord_and_invalid_overlap(self) -> None:
         self.assertEqual(
             beat_music([Note(0, Hand.RIGHT, p) for p in (60, 64, 67)], 0, False),
-            "<c' e' g'>16 r8.",
+            "<c' e' g'>8 r8",
         )
         with self.assertRaises(AssertionError):
             beat_music([Note(0, Hand.RIGHT, 60), Note(1, Hand.RIGHT, 64)], 0, False)
+
+    def test_initial_rest_and_beat_boundary_are_preserved(self) -> None:
+        self.assertEqual(beat_music([Note(18, Hand.RIGHT, 60)], 12, False), "r8 c'8")
+
+    def test_isolated_note_does_not_fill_the_following_silence(self) -> None:
+        self.assertEqual(beat_music([Note(0, Hand.RIGHT, 60)], 0, False), "c'8 r8")
+        self.assertEqual(beat_music([], 12, False), "r4")
+
+    def test_real_sixteenth_in_bar_52_is_preserved(self) -> None:
+        notes = [Note(0, Hand.RIGHT, 60), Note(9, Hand.RIGHT, 62)]
+        self.assertEqual(beat_music(notes, 0, False), "c'8 r16 d'16")
+
+    def test_extension_never_overlaps_next_attack(self) -> None:
+        notes = [Note(0, Hand.RIGHT, 60), Note(3, Hand.RIGHT, 62)]
+        self.assertEqual(beat_music(notes, 0, False), "c'16 d'8 r16")
 
     def test_scanline_disagreement_must_be_explicit(self) -> None:
         with self.assertRaises(AssertionError):

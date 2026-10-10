@@ -194,22 +194,30 @@ def rest(units: int, triplet: bool) -> str:
 
 
 def beat_music(notes: list[Note], beat: int, flats: bool) -> str:
+    """Expand visual gates into eighths without moving attacks or crossing beats."""
     groups: dict[int, list[int]] = {}
     for note in notes:
         groups.setdefault(note.start - beat, []).append(note.pitch)
     triplet = any(offset % 3 for offset in groups)
+    quarter = SOURCE.units_per_quarter
+    eighth = quarter // (3 if triplet else 2)
+    onsets = sorted(groups)
     result: list[str] = []
     cursor = 0
-    for offset, pitches in sorted(groups.items()):
-        assert offset >= cursor and offset + SOURCE.gate_units <= 12
+    for index, offset in enumerate(onsets):
+        next_onset = onsets[index + 1] if index + 1 < len(onsets) else quarter
+        # Fill only the short release gap, not the whole silence until the next
+        # note. A real sixteenth (bar 52) must retain its off-grid attack.
+        length = min(eighth, next_onset - offset, quarter - offset)
+        assert offset >= cursor and length >= SOURCE.gate_units
         if offset > cursor:
             result.append(rest(offset - cursor, triplet))
-        names = [pitch_name(pitch, flats) for pitch in sorted(pitches)]
+        names = [pitch_name(pitch, flats) for pitch in sorted(groups[offset])]
         head = names[0] if len(names) == 1 else "<" + " ".join(names) + ">"
-        result.append(head + duration(SOURCE.gate_units, triplet))
-        cursor = offset + SOURCE.gate_units
-    if cursor < 12:
-        result.append(rest(12 - cursor, triplet))
+        result.append(head + duration(length, triplet))
+        cursor = offset + length
+    if cursor < quarter:
+        result.append(rest(quarter - cursor, triplet))
     music = " ".join(result)
     return r"\tuplet 3/2 { " + music + " }" if triplet else music
 
