@@ -14,17 +14,16 @@
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Lost in Space"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Piano roll Alejandro Ríos · черновая транскрипция"
+    "Черновая транскрипция piano roll"
   subsubtitle = \markup \override #'(font-name . "DejaVu Sans")
     \center-column {
       "Ритмическая запись упрощена; педаль и динамика не восстановлены"
       \small "Текст привязан к фразам приблизительно, не послогово"
     }
   composer = "Avantasia"
-  arranger = \markup \override #'(font-name . "DejaVu Sans") "Аранжировка: Alejandro Ríos"
   copyright = \markup \tiny \override #'(font-name . "DejaVu Sans")
     \with-url "https://www.youtube.com/watch?v=_-DEer9afE0"
-    "Источник: YouTube _-DEer9afE0 · рамки над нотами — время в видео"
+    "На основе piano roll Alejandro Ríos · рамки над нотами — время в видео"
   tagline = ##f
 }
 

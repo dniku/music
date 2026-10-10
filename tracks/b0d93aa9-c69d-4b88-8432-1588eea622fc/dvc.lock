@@ -144,8 +144,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: 635151b9d4dcc88309dee24f642ab881
-      size: 24622
+      md5: 2130518f9208e42c41b5eb23c0cc3597
+      size: 25377
     - path: tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll-lyrics.ily
       hash: md5
       md5: 5270180a68baf0b342031ba514819e6c
@@ -156,8 +156,8 @@ stages:
       size: 14675
     - path: tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ly
       hash: md5
-      md5: 058a842da3210af80ea098d33dc45ea1
-      size: 2027
+      md5: 6ad4220b033bcc86377e990e0f19e4ef
+      size: 1912
     outs:
     - path: build/avantasia--lost-in-space/piano-roll.midi
       hash: md5
@@ -165,8 +165,8 @@ stages:
       size: 12965
     - path: build/avantasia--lost-in-space/piano-roll.pdf
       hash: md5
-      md5: fdc376decda56d129b80ea69f561e057
-      size: 737555
+      md5: de749500a44c55fd49eaa40360f84ed9
+      size: 736413
   render-piano-roll-audition:
     cmd: nix run .#render-midi-audition -- 
       build/avantasia--lost-in-space/piano-roll.midi 

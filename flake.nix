@@ -45,13 +45,11 @@
             if trackId == pianoRoll.trackId then
               {
                 inherit (pianoRoll) name source;
-                description = "Piano roll · Alejandro Ríos";
               }
             else
               {
                 name = "${trackId}-score";
                 source = "score.ly";
-                description = "";
               };
         }
       );
@@ -106,7 +104,7 @@
             inherit trackId;
             alias = primaryAliasesByTrackId.${trackId};
             inherit (recording) artist title;
-            inherit (tracks.${trackId}.publication) source description;
+            inherit (tracks.${trackId}.publication) source;
             releaseYear = recording.musicbrainz.releaseYear or null;
             sortKey = "${recording.artist} — ${recording.title}";
           }
@@ -311,8 +309,7 @@
           title = lib.escapeXML track.title;
           releaseDetails =
             (lib.optionalString (track.releaseYear != null) "${toString track.releaseYear} · ")
-            + "PDF + MIDI + MP3"
-            + lib.optionalString (track.description != "") "<br>${lib.escapeXML track.description}";
+            + "PDF + MIDI + MP3";
           recordingUrl = "https://musicbrainz.org/recording/${track.trackId}";
           scoreUrl = "${siteConfig.repositoryUrl}/blob/main/tracks/${track.trackId}/${track.source}";
         in
