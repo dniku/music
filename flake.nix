@@ -40,6 +40,19 @@
         in
         {
           inherit directory metadataPath scoreDirectory;
+          # Publishing a fuller arrangement must not overwrite the local draft.
+          publication =
+            if trackId == pianoRoll.trackId then
+              {
+                inherit (pianoRoll) name source;
+                description = "Piano roll · Alejandro Ríos";
+              }
+            else
+              {
+                name = "${trackId}-score";
+                source = "score.ly";
+                description = "";
+              };
         }
       );
       trackAliases =
@@ -93,6 +106,7 @@
             inherit trackId;
             alias = primaryAliasesByTrackId.${trackId};
             inherit (recording) artist title;
+            inherit (tracks.${trackId}.publication) source description;
             releaseYear = recording.musicbrainz.releaseYear or null;
             sortKey = "${recording.artist} — ${recording.title}";
           }
@@ -138,13 +152,21 @@
         system: trackId:
         scoreSourceFor system "${trackId}-score" tracks.${trackId}.scoreDirectory "score.ly";
 
+      publishedScoreFor =
+        system: trackId:
+        let
+          track = tracks.${trackId};
+        in
+        scoreSourceFor system track.publication.name track.scoreDirectory track.publication.source;
+
       pianoRoll = {
         trackId = "b0d93aa9-c69d-4b88-8432-1588eea622fc";
         name = "lost-in-space-piano-roll";
+        source = "piano-roll.ly";
       };
       pianoRollScoreFor =
         system:
-        scoreSourceFor system pianoRoll.name tracks.${pianoRoll.trackId}.scoreDirectory "piano-roll.ly";
+        scoreSourceFor system pianoRoll.name tracks.${pianoRoll.trackId}.scoreDirectory pianoRoll.source;
       pianoRollRecoveryFor =
         system:
         let
@@ -190,11 +212,11 @@
           text = builtins.readFile ./scripts/render-midi-audition;
         };
 
-      scoreMp3For =
+      publishedScoreMp3For =
         system: trackId:
         let
           pkgs = pkgsFor system;
-          score = scoreFor system trackId;
+          score = publishedScoreFor system trackId;
           renderer = midiAuditionRendererFor system;
         in
         pkgs.runCommand "${trackId}-score-mp3"
@@ -241,7 +263,7 @@
           '';
 
       scoresFor = system: lib.genAttrs trackIds (scoreFor system);
-      scoreMp3sFor = system: lib.genAttrs trackIds (scoreMp3For system);
+      publishedScoreMp3sFor = system: lib.genAttrs trackIds (publishedScoreMp3For system);
 
       allScoresFor =
         system:
@@ -255,7 +277,7 @@
         system: name: extensions:
         let
           pkgs = pkgsFor system;
-          scores = scoresFor system;
+          scores = lib.genAttrs trackIds (publishedScoreFor system);
         in
         pkgs.runCommand name { } (
           ''
@@ -289,9 +311,10 @@
           title = lib.escapeXML track.title;
           releaseDetails =
             (lib.optionalString (track.releaseYear != null) "${toString track.releaseYear} · ")
-            + "PDF + MIDI + MP3";
+            + "PDF + MIDI + MP3"
+            + lib.optionalString (track.description != "") "<br>${lib.escapeXML track.description}";
           recordingUrl = "https://musicbrainz.org/recording/${track.trackId}";
-          scoreUrl = "${siteConfig.repositoryUrl}/blob/main/tracks/${track.trackId}/score.ly";
+          scoreUrl = "${siteConfig.repositoryUrl}/blob/main/tracks/${track.trackId}/${track.source}";
         in
         ''
           <article class="score-card">
@@ -324,7 +347,7 @@
         let
           pkgs = pkgsFor system;
           artifacts = artifactBundleFor system;
-          scoreMp3s = scoreMp3sFor system;
+          scoreMp3s = publishedScoreMp3sFor system;
           trackCount = builtins.length siteTracks;
           trackCards = lib.concatMapStringsSep "\n" siteTrackCardFor siteTracks;
           index = pkgs.writeText "index.html" (

@@ -11,7 +11,7 @@
 
 | Основной ID | Алиас | Трек | Партитура |
 | --- | --- | --- | --- |
-| [MusicBrainz Recording `b0d9…22fc`](https://musicbrainz.org/recording/b0d93aa9-c69d-4b88-8432-1588eea622fc) | `avantasia--lost-in-space` | Avantasia — «Lost in Space» | [`score.ly`](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly) |
+| [MusicBrainz Recording `b0d9…22fc`](https://musicbrainz.org/recording/b0d93aa9-c69d-4b88-8432-1588eea622fc) | `avantasia--lost-in-space` | Avantasia — «Lost in Space» | [`piano-roll.ly`](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ly) · [черновик соло](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly) |
 | [MusicBrainz Recording `7402…5533`](https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533) | `atom-76--volki-okeana` | Атом-76 — «Волки Океана» | [`score.ly`](tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly) |
 | [MusicBrainz Recording `e889…c0f3`](https://musicbrainz.org/recording/e889154d-ae2d-43f0-bd2d-df87d068c0f3) | `moi-rakety-vverh--blown-away` | Мои Ракеты Вверх — «Blown Away» | [`score.ly`](tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly) |
 | [MusicBrainz Recording `9077…e39e`](https://musicbrainz.org/recording/9077f130-512d-4b88-afe4-8ad8e13ce39e) | `within-temptation--mother-earth` | Within Temptation — «Mother Earth» | [`score.ly`](tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly) |
@@ -134,6 +134,12 @@ PDF и MIDI вместе собираются аналогичным output:
 ```console
 nix build .#artifacts
 ```
+
+Выбор публикуемой партитуры задан в `tracks.<ID>.publication` внутри
+`flake.nix` и общий для `pdfs`, `artifacts` и `site`, включая MP3 и ссылку
+на исходник в карточке. Обычно это `score.ly`; для Lost in Space —
+`piano-roll.ly`. Локальные команды `render-<алиас>` и пакеты по алиасу
+по-прежнему собирают `score.ly`, поэтому прежний черновик не теряется.
 
 Полный статический сайт с PDF, MIDI и синтезированными из MIDI MP3 собирается
 воспроизводимо:
