@@ -28,6 +28,7 @@
 global = {
   \numericTimeSignature
   \time 4/4
+  \key d \major
 }
 
 % Only the pitches, octaves, and hand split are transcribed. Rhythms, bar lines,
