@@ -1,5 +1,6 @@
 \version "2.24.0"
 \include "piano-roll.ily"
+\include "piano-roll-lyrics.ily"
 
 #(set-global-staff-size 16)
 \paper {
@@ -15,8 +16,11 @@
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
     "Piano roll Alejandro Ríos · черновая транскрипция"
   subsubtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Ритмическая запись упрощена; педаль и динамика не восстановлены"
-  composer = "Avantasia · Tobias Sammet"
+    \center-column {
+      "Ритмическая запись упрощена; педаль и динамика не восстановлены"
+      \small "Текст привязан к фразам приблизительно, не послогово"
+    }
+  composer = "Avantasia"
   arranger = \markup \override #'(font-name . "DejaVu Sans") "Аранжировка: Alejandro Ríos"
   copyright = \markup \tiny \override #'(font-name . "DejaVu Sans")
     \with-url "https://www.youtube.com/watch?v=_-DEer9afE0"
@@ -32,6 +36,12 @@ pianoRollMusic = \new PianoStaff <<
     \pianoRollTempo
     \pianoRollRight
   }
+  \tag #'layout \new Lyrics \with {
+    alignAboveContext = "right"
+    \override LyricText.font-name = "DejaVu Sans"
+    \override LyricText.font-size = #-2
+    \override LyricText.self-alignment-X = #LEFT
+  } \pianoRollLyrics
   \new Staff = "left" \with { midiInstrument = "acoustic grand" } {
     \clef bass
     \numericTimeSignature
@@ -41,10 +51,15 @@ pianoRollMusic = \new PianoStaff <<
 >>
 
 \score {
-  \pianoRollMusic
+  \keepWithTag #'layout \pianoRollMusic
   \layout {
     indent = #0
     ragged-right = ##f
   }
+}
+
+% Keep the existing MIDI byte-for-byte: the phrase guide is PDF-only.
+\score {
+  \removeWithTag #'layout \pianoRollMusic
   \midi { }
 }
