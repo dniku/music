@@ -388,6 +388,26 @@
                 "$out/scores/${track.alias}.mp3"
             '') siteTracks
             + ''
+              # Hash the built files, not their sources or the Git revision.
+              # Keep stable filenames for CI and existing direct download links.
+              for artifact in "$out"/scores/*; do
+                artifact_file="$(basename -- "$artifact")"
+                artifact_hash="$(sha256sum -- "$artifact" | cut --delimiter=' ' --fields=1)"
+                artifact_url="scores/$artifact_file"
+                substituteInPlace "$out/index.html" \
+                  --replace-fail "\"$artifact_url\"" "\"$artifact_url?v=$artifact_hash\""
+              done
+
+              # Check every download and audio-player URL against the final bytes.
+              while IFS= read -r artifact_url; do
+                artifact_path="''${artifact_url%%\?*}"
+                artifact_hash="$(sha256sum -- "$out/$artifact_path" | cut --delimiter=' ' --fields=1)"
+                test "$artifact_url" = "$artifact_path?v=$artifact_hash"
+              done < <(
+                grep --only-matching --extended-regexp '(href|src)="scores/[^"]+"' "$out/index.html" \
+                  | cut --delimiter='"' --fields=2
+              )
+
               test "$(grep --count 'class="score-card"' "$out/index.html")" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f -name '*.pdf' | wc --lines)" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f -name '*.midi' | wc --lines)" -eq ${toString trackCount}
