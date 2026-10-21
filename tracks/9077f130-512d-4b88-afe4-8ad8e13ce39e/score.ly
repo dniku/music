@@ -37,7 +37,7 @@ heldHarmonies = #(let ((previous #f) (chords '()))
           (if (null? (event-chord-notes music))
               (ly:error "Expected explicit notes in the imported chord"))
           (set! previous (ly:music-deep-copy music))
-          ;; Closed LH triads: 5-3-1; second inversions and F#m/A: 5-2-1.
+          ;; Closed LH triads: 5-3-1; second inversions, F#m/A and B: 5-2-1.
           ;; A -> F#m/A keeps the outer fingers and moves the middle finger.
           ;; F#m/C# -> G#/B#: 5-2-1 -> 4-2-1.
           (let* ((notes (sort (event-chord-notes previous)
@@ -60,7 +60,9 @@ heldHarmonies = #(let ((previous #f) (chords '()))
                       (if (or gis-over-bis?
                               (= (- (cadr pitches) (car pitches)) 5)
                               (equal? (map (lambda (p) (modulo p 12)) pitches)
-                                      '(9 1 6)))
+                                      '(9 1 6))
+                              (equal? (map (lambda (p) (modulo p 12)) pitches)
+                                      '(11 3 6)))
                           2 3)
                       1)))
           (set! chords (cons previous chords)))
