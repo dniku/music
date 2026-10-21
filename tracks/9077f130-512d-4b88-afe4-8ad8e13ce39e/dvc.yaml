@@ -61,3 +61,48 @@ stages:
       - build/within-temptation--mother-earth/score.midi
     outs:
       - build/within-temptation--mother-earth/score.mp3
+  align-score:
+    wdir: ../..
+    cmd: >-
+      nix run .#align-midi --
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json
+      build/within-temptation--mother-earth/score.midi
+      build/within-temptation--mother-earth/aligned.midi
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/midi-alignment
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json
+      - build/within-temptation--mother-earth/score.midi
+    outs:
+      - build/within-temptation--mother-earth/aligned.midi
+      - build/within-temptation--mother-earth/aligned.bars.tsv
+  render-aligned-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/within-temptation--mother-earth/aligned.midi
+      build/within-temptation--mother-earth/aligned.mp3
+      331.301
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/within-temptation--mother-earth/aligned.midi
+    outs:
+      - build/within-temptation--mother-earth/aligned.mp3
+  compare-aligned:
+    wdir: ../..
+    cmd: >-
+      nix run .#stereo-compare --
+      build/within-temptation--mother-earth/aligned.mp3
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      build/within-temptation--mother-earth/aligned-comparison.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/stereo-compare
+      - build/within-temptation--mother-earth/aligned.mp3
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+    outs:
+      - build/within-temptation--mother-earth/aligned-comparison.mp3

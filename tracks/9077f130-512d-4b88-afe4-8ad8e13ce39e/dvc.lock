@@ -56,21 +56,21 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: 6ec4efdc6121b7db433cce64d07cec93
-      size: 26513
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
     - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
       hash: md5
-      md5: c6ae05a82c40e94b7543015a790d8853
-      size: 13481
+      md5: 2b61c95350d3bbd4749d3101392fabec
+      size: 14657
     outs:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
-      md5: 50cd2622b8d18ce58ee67d3b19388c2f
-      size: 5076
+      md5: 5d26b31f7c21c044e6ff507502a2eee9
+      size: 5352
     - path: build/within-temptation--mother-earth/score.pdf
       hash: md5
-      md5: a576f1d81f4290be696772826c1b8047
-      size: 478426
+      md5: f91b0f9ce5cc3f74e8212f9d6d94d83b
+      size: 527485
   convert-score-source:
     cmd: mkdir -p build/within-temptation--mother-earth && nix shell 
       --inputs-from . nixpkgs#lilypond --command musicxml2ly --absolute 
@@ -118,3 +118,97 @@ stages:
       hash: md5
       md5: 04270e929a2ff121a5945980053bad88
       size: 1806280
+  align-score:
+    cmd: nix run .#align-midi -- 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json 
+      build/within-temptation--mother-earth/score.midi 
+      build/within-temptation--mother-earth/aligned.midi
+    deps:
+    - path: build/within-temptation--mother-earth/score.midi
+      hash: md5
+      md5: 5d26b31f7c21c044e6ff507502a2eee9
+      size: 5352
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
+    - path: scripts/midi-alignment
+      hash: md5
+      md5: cba988fdfabea5e5dac0ab2401f7f179.dir
+      size: 14817
+      nfiles: 5
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json
+      hash: md5
+      md5: 8d6c08032a245f64fb8a558822198f72
+      size: 2477
+    outs:
+    - path: build/within-temptation--mother-earth/aligned.bars.tsv
+      hash: md5
+      md5: 815cd592fea8c2002433cc7156f003d5
+      size: 20856
+    - path: build/within-temptation--mother-earth/aligned.midi
+      hash: md5
+      md5: a56bea1bf077aa929c74cdaf1f9afe14
+      size: 9388
+  render-aligned-audition:
+    cmd: nix run .#render-midi-audition -- 
+      build/within-temptation--mother-earth/aligned.midi 
+      build/within-temptation--mother-earth/aligned.mp3 331.301
+    deps:
+    - path: build/within-temptation--mother-earth/aligned.midi
+      hash: md5
+      md5: a56bea1bf077aa929c74cdaf1f9afe14
+      size: 9388
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: adef65c8a0906bb70cc59fab01a1e0de
+      size: 1016
+    outs:
+    - path: build/within-temptation--mother-earth/aligned.mp3
+      hash: md5
+      md5: 17d4d17790a80b40ca2867aa4a6e5bbe
+      size: 4048720
+  compare-aligned:
+    cmd: nix run .#stereo-compare -- 
+      build/within-temptation--mother-earth/aligned.mp3 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      build/within-temptation--mother-earth/aligned-comparison.mp3
+    deps:
+    - path: build/within-temptation--mother-earth/aligned.mp3
+      hash: md5
+      md5: 17d4d17790a80b40ca2867aa4a6e5bbe
+      size: 4048720
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
+    - path: scripts/stereo-compare
+      hash: md5
+      md5: 69a81979aa23926344bb8093b9cdde8f
+      size: 725
+    - path: 
+        tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      hash: md5
+      md5: 57c101db0e4bd9d7b646963c4878a774
+      size: 5394980
+    outs:
+    - path: build/within-temptation--mother-earth/aligned-comparison.mp3
+      hash: md5
+      md5: eeda4411ad60233d4fb462bfec2ca6dc
+      size: 6787867

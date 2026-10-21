@@ -195,6 +195,38 @@
           '';
         };
 
+      midiAlignmentFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+          python = pkgs.python3.withPackages (ps: [ ps.mido ]);
+        in
+        pkgs.stdenvNoCC.mkDerivation {
+          pname = "align-midi";
+          version = "1";
+          src = ./scripts/midi-alignment;
+          nativeBuildInputs = [
+            python
+            (midiAuditionRendererFor system)
+            pkgs.ffmpeg
+            pkgs.ruff
+            pkgs.pyrefly
+            pkgs.makeWrapper
+          ];
+          doCheck = true;
+          checkPhase = ''
+            ruff format --check .
+            ruff check .
+            pyrefly check align.py test_align.py
+            python3 -m unittest discover
+          '';
+          installPhase = ''
+            install -Dm644 align.py "$out/lib/align.py"
+            makeWrapper ${python}/bin/python3 "$out/bin/align-midi" \
+              --add-flags "$out/lib/align.py"
+          '';
+        };
+
       midiAuditionRendererFor =
         system:
         let
@@ -537,6 +569,11 @@
             appFor name description runtimeInputs (builtins.readFile script);
         in
         {
+          align-midi = {
+            type = "app";
+            program = "${midiAlignmentFor system}/bin/align-midi";
+            meta.description = "Place score excerpts on a reference recording timeline";
+          };
           "recover-${pianoRoll.name}" = {
             type = "app";
             program = "${pianoRollRecoveryFor system}/bin/recover-${pianoRoll.name}";
@@ -714,6 +751,7 @@
           site = siteFor system;
           piano-roll-recovery = pianoRollRecoveryFor system;
           piano-roll-score = pianoRollScoreFor system;
+          midi-alignment = midiAlignmentFor system;
         }
       );
 

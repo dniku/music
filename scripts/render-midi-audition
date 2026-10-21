@@ -13,12 +13,14 @@ trap 'rm --recursive --force -- "$temporary_directory"' EXIT
 
 timidity \
   "$input_midi" \
+  --preserve-silence \
   --output-mode=w \
   --output-file="$temporary_directory/audition.wav"
 
 duration_arguments=()
 if [[ -n "$duration" ]]; then
-  duration_arguments=(-t "$duration")
+  # Preserve requested trailing silence even when TiMidity stops at the last note.
+  duration_arguments=(-af apad -t "$duration")
 fi
 
 ffmpeg \

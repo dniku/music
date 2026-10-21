@@ -7,7 +7,12 @@
 % The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
 melody = {
-  \clef "treble" \time 3/4 \key e \major \tempo 4 = 220 cis''2-2 dis''4-3 | % 1
+  \clef "treble" \time 3/4 \key e \major \tempo 4 = 220
+  % Approximate section starts in reference video FVbDZaUuNvQ; see alignment.json.
+  \override Score.RehearsalMark.font-size = #-3
+  \override Score.RehearsalMark.self-alignment-X = #LEFT
+  \mark \markup "0:00.45 / 3:05.59"
+  cis''2-2 dis''4-3 | % 1
   e''2-4 dis''4-3 | % 2
   e''4-4 dis''4-3 cis''4-2 | % 3
   b'2-1 b'4-1 | % 4
@@ -25,6 +30,7 @@ melody = {
   e''4-3 dis''4-2 cis''4-1 | % 14
   cis''2.-1 ~ | % 15
   cis''2. \bar "||" % 16
+  \mark \markup "0:14.16"
   cis''2-2 dis''4-3 | % 17
   e''2-4 dis''4-3 | % 18
   e''4-4 dis''4-3 cis''4-2 | % 19
@@ -45,6 +51,7 @@ melody = {
   e''4-3 dis''4-2 cis''4-1 | % 30
   cis''2.-1 ~ | % 31
   cis''2. \bar "||" % 32
+  \mark \markup "0:27.88 / 4:19.31"
   cis''2-2 dis''4-3 | % 33
   e''2-4 dis''4-3 | % 34
   e''4-4 dis''4-3 cis''4-2 | % 35
@@ -63,6 +70,7 @@ melody = {
   e''2-3 e''4-3 | % 46
   dis''2-2 dis''4-2 | % 47
   gis''2.-5 \bar "||" % 48
+  \mark \markup "0:41.59 / 4:33.02"
   cis''2-2 dis''4-3 | % 49
 
   \barNumberCheck #50
@@ -83,6 +91,7 @@ melody = {
   e''2-3 e''4-3 | % 62
   fisis''2-4 fisis''4-4 | % 63
   gis''2.-5 \bar "||" % 64
+  \mark \markup "0:55.31"
   a'2.-1 ~ | % 65
   a'2. | % 66
   cis''2.-2 ~ | % 67
@@ -93,6 +102,7 @@ melody = {
   e''2. | % 70
   gis''2.-5 ~ | % 71
   gis''2. \bar "||" % 72
+  \mark \markup "1:02.16"
   cis''2-2 dis''4-3 | % 73
   e''2-4 dis''4-3 | % 74
   e''4-4 dis''4-3 cis''4-2 | % 75
@@ -111,6 +121,7 @@ melody = {
   e''4-3 dis''4-2 cis''4-1 | % 86
   cis''2.-1 ~ | % 87
   cis''2. \bar "||" % 88
+  \mark \markup "1:15.88 / 2:10.74"
   R2. | % 89
 
   \barNumberCheck #90
@@ -131,6 +142,7 @@ melody = {
   cis''4-5 b'4-4 cis''4-5 | % 102
   cis''4-5 ( b'2-4 ) | % 103
   gis'2-2 ( fis'4-1 ) \bar "||" % 104
+  \mark \markup "1:29.59 / 2:24.45"
   R2. | % 105
   cis''2-5 b'4-4 | % 106
   cis''4-5 ( b'2-4 ) ( | % 107
@@ -151,6 +163,7 @@ melody = {
 
   \barNumberCheck #120
   gis'2-2 ( fis'4-1 ) \bar "||" % 120
+  \mark \markup \column { "1:43.31 / 2:38.16" "2:51.88 / 4:46.74" }
   R2. | % 121
   e''2-3 dis''4-2 | % 122
   dis''2.-2 ~ | % 123
@@ -169,6 +182,7 @@ melody = {
   dis''4-4 ais'4-1 cis''4-3 | % 134
   bis'2.-2 ~ | % 135
   bis'2. \bar "||" % 136
+  \mark \markup "1:57.02 / 5:00.45"
   R2. | % 137
   e''2-3 dis''4-2 | % 138
   dis''2.-2 ~ | % 139
@@ -179,10 +193,12 @@ melody = {
   dis''4-2 e''4-3 cis''4-1 ~ | % 142
   cis''2. ~ | % 143
   cis''2. | % 144
+  \mark \markup \column { "2:03.88 / 5:07.31" "5:10.74 / 5:14.16" }
   r2 cis''4-1 | % 145
   cis''2-1 dis''4-2 | % 146
   e''2-3 cis''4-1 | % 147
   cis''2.-1 | % 148
+  \mark \markup "2:07.31 / 5:17.59"
   r2 bis'4-2 | % 149
 
   \barNumberCheck #150
@@ -399,7 +415,11 @@ harmonies = \chordmode {
   copyright = \markup \tiny \override #'(font-name . "DejaVu Sans")
     \with-url "https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ"
     "На основе нот с ytpa.ch"
-  tagline = ##f
+  tagline = \markup \override #'(font-name . "DejaVu Sans") \fontsize #-3 \column {
+    \line { "Тайминги ≈ начала фрагментов в YouTube FVbDZaUuNvQ; / — повторные появления (с вариациями)." }
+    \line { "Не записан: 3:19–4:19 — средний раздел с хором." }
+    \line { "Финал: такты 145–148 («until the end of time») сыграть 3 раза, затем 149–152. В первом припеве — без повторов." }
+  }
 }
 
 % musicxml2ly uses skips between chord symbols, not accompaniment rests.
