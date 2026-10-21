@@ -1,7 +1,7 @@
 % Imported from YTPA's Mother_Earth.musicxml with the pinned musicxml2ly.
 % See README.md and dvc.yaml for the baseline, its hash, and exact command.
 % Variable names and executable tempo were adjusted after import.
-% Whole-chord octaves are chosen per phrase; chord types and inversions stay intact.
+% Whole-chord octaves and selected inversions are chosen per phrase; see README.md.
 % The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
 melody = {
@@ -197,16 +197,15 @@ harmonies = \chordmode {
   cis2:m s4 | % 5
   s2 s4 | % 6
   a,4 s4 s4 | % 7
-  fis,2:m s4 | % 8
+  fis2:m/a s4 | % 8
   cis2:m s4 | % 9
 
   \barNumberCheck #10
   s2 s4 | % 10
   a,4 s4 s4 | % 11
-  e2 s4 | % 12
-  % Keep E-F#m-G# ascending, then return to the lower C#m at the cadence.
-  fis4:m s4 s4 | % 13
-  gis4 s4 s4 | % 14
+  e2/b s4 | % 12
+  fis4:m/cis s4 s4 | % 13
+  gis4/bis s4 s4 | % 14
   cis2.:m | % 15
   s2. \bar "||" % 16
   cis2:m s4 | % 17
@@ -218,7 +217,7 @@ harmonies = \chordmode {
   cis2:m s4 | % 21
   s2 s4 | % 22
   a,4 s4 s4 | % 23
-  fis,2:m s4 | % 24
+  fis2:m/a s4 | % 24
   cis2:m s4 | % 25
   s2 s4 | % 26
   a,4 s4 s4 | % 27
@@ -243,8 +242,7 @@ harmonies = \chordmode {
   s2 s4 | % 42
   s4 s4 s4 | % 43
   e8 s4 s4 s8 | % 44
-  % F#m sits a step above the surrounding E chords, not a seventh below.
-  fis2:m s4 | % 45
+  fis2:m/cis s4 | % 45
   e2 s4 | % 46
   dis2 s4 | % 47
   gis,2. \bar "||" % 48
