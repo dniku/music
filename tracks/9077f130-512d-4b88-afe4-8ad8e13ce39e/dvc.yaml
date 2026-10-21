@@ -45,7 +45,6 @@ stages:
       - flake.nix
       - flake.lock
       - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
-      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/music.ily
     outs:
       - build/within-temptation--mother-earth/score.pdf
       - build/within-temptation--mother-earth/score.midi

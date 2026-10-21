@@ -1,7 +1,6 @@
 # Within Temptation — «Mother Earth»
 
-Редактируемые партии — [music.ily](music.ily), оформление и генерация
-аккомпанемента — [score.ly](score.ly). Происхождение исходников —
+Вся редактируемая партитура — [score.ly](score.ly). Происхождение исходников —
 [reference/README.md](reference/README.md).
 
 Это фрагмент песни. Темп взят из исходных нот; синхронизация с аудиозаписью
