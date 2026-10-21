@@ -63,6 +63,7 @@ stages:
       - flake.nix
       - flake.lock
       - scripts/render-audition
+      - scripts/render-midi-audition
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/intro-synth.ly
     outs:
@@ -80,6 +81,7 @@ stages:
       - flake.nix
       - flake.lock
       - scripts/render-audition
+      - scripts/render-midi-audition
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo.ly
     outs:
@@ -97,6 +99,7 @@ stages:
       - flake.nix
       - flake.lock
       - scripts/render-audition
+      - scripts/render-midi-audition
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
     outs:
       - build/atom-76--volki-okeana/solos/early-solo-mordents.pdf
@@ -113,6 +116,7 @@ stages:
       - flake.nix
       - flake.lock
       - scripts/render-audition
+      - scripts/render-midi-audition
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/synth-solo-repeated.ly
     outs:
@@ -130,6 +134,7 @@ stages:
       - flake.nix
       - flake.lock
       - scripts/render-audition
+      - scripts/render-midi-audition
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       - tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/guitar-break-03m11-draft.ly
     outs:

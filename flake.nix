@@ -653,10 +653,9 @@
 
           render-audition = scriptAppFor "render-audition" "Render a LilyPond audition to PDF and MP3" [
             pkgs.coreutils
-            pkgs.ffmpeg
             pkgs.lilypond
             pkgs.qpdf
-            pkgs.timidity
+            (midiAuditionRendererFor system)
           ] ./scripts/render-audition;
 
           render-midi-audition = {

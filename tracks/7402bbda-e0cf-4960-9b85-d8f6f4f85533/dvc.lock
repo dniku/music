@@ -69,12 +69,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: a5d8a484e6131c475ba321d00e1fab20
+      size: 26508
     - path: scripts/render-audition
       hash: md5
-      md5: 496da5cbed5128ce76be3c9c45e85ea0
-      size: 1657
+      md5: 8250a841776d7c8e46d54d33bc35d389
+      size: 1299
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
+      size: 901
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
       md5: e8a71e4d2f3f82e20532f048c09a5444
@@ -105,12 +109,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: a5d8a484e6131c475ba321d00e1fab20
+      size: 26508
     - path: scripts/render-audition
       hash: md5
-      md5: 496da5cbed5128ce76be3c9c45e85ea0
-      size: 1657
+      md5: 8250a841776d7c8e46d54d33bc35d389
+      size: 1299
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
+      size: 901
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
       md5: e8a71e4d2f3f82e20532f048c09a5444
@@ -141,12 +149,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: a5d8a484e6131c475ba321d00e1fab20
+      size: 26508
     - path: scripts/render-audition
       hash: md5
-      md5: 496da5cbed5128ce76be3c9c45e85ea0
-      size: 1657
+      md5: 8250a841776d7c8e46d54d33bc35d389
+      size: 1299
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
+      size: 901
     - path: 
         tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/sources/solos/early-solo-mordents.ly
       hash: md5
@@ -173,12 +185,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: a5d8a484e6131c475ba321d00e1fab20
+      size: 26508
     - path: scripts/render-audition
       hash: md5
-      md5: 496da5cbed5128ce76be3c9c45e85ea0
-      size: 1657
+      md5: 8250a841776d7c8e46d54d33bc35d389
+      size: 1299
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
+      size: 901
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
       md5: e8a71e4d2f3f82e20532f048c09a5444
@@ -209,12 +225,16 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: a5d8a484e6131c475ba321d00e1fab20
+      size: 26508
     - path: scripts/render-audition
       hash: md5
-      md5: 496da5cbed5128ce76be3c9c45e85ea0
-      size: 1657
+      md5: 8250a841776d7c8e46d54d33bc35d389
+      size: 1299
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
+      size: 901
     - path: tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/music.ily
       hash: md5
       md5: e8a71e4d2f3f82e20532f048c09a5444
