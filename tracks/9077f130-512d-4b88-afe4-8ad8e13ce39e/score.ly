@@ -36,6 +36,28 @@ heldHarmonies = #(let ((previous #f) (chords '()))
           (if (null? (event-chord-notes music))
               (ly:error "Expected explicit notes in the imported chord"))
           (set! previous (ly:music-deep-copy music))
+          ;; Closed LH triads: 5-3-1; second inversions and F#m/A: 5-2-1.
+          ;; A -> F#m/A keeps the outer fingers and moves the middle finger.
+          (let* ((notes (sort (event-chord-notes previous)
+                         (lambda (a b)
+                           (ly:pitch<? (ly:music-property a 'pitch)
+                                       (ly:music-property b 'pitch)))))
+                 (pitches (map (lambda (note)
+                                 (ly:pitch-semitones
+                                   (ly:music-property note 'pitch))) notes)))
+            (if (not (= (length notes) 3))
+                (ly:error "Expected a three-note accompaniment chord"))
+            (for-each
+              (lambda (note finger)
+                (set! (ly:music-property note 'articulations)
+                      (cons (make-music 'FingeringEvent 'digit finger)
+                            (ly:music-property note 'articulations))))
+              notes (list 5
+                      (if (or (= (- (cadr pitches) (car pitches)) 5)
+                              (equal? (map (lambda (p) (modulo p 12)) pitches)
+                                      '(9 1 6)))
+                          2 3)
+                      1)))
           (set! chords (cons previous chords)))
         ((SkipEvent)
           (if (not previous)
@@ -56,13 +78,14 @@ heldHarmonies = #(let ((previous #f) (chords '()))
 pianoMusic = \new PianoStaff <<
   \new Staff = "melody" \with {
     midiInstrument = "acoustic grand"
-  } { \melody }
+  } { \override Fingering.direction = #UP \melody }
   \new Staff = "chords" \with {
     midiInstrument = "acoustic grand"
   } {
     \clef bass
     \key e \major
     \time 3/4
+    \set fingeringOrientations = #'(left)
     % Chord symbols have no register; use an octave below chordmode's default.
     \transpose c c, { \heldHarmonies }
   }

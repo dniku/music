@@ -5,187 +5,187 @@
 % The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
 melody = {
-  \clef "treble" \time 3/4 \key e \major \tempo 4 = 220 cis''2 dis''4 | % 1
-  e''2 dis''4 | % 2
-  e''4 dis''4 cis''4 | % 3
-  b'2 b'4 | % 4
-  cis''2 dis''4 | % 5
-  e''2 dis''4 | % 6
-  fis''4 e''4 dis''4 | % 7
-  gis''2 fis''4 | % 8
-  cis''2 dis''4 | % 9
+  \clef "treble" \time 3/4 \key e \major \tempo 4 = 220 cis''2-2 dis''4-3 | % 1
+  e''2-4 dis''4-3 | % 2
+  e''4-4 dis''4-3 cis''4-2 | % 3
+  b'2-1 b'4-1 | % 4
+  cis''2-2 dis''4-3 | % 5
+  e''2-4 dis''4-3 | % 6
+  fis''4-4 e''4-3 dis''4-2 | % 7
+  gis''2-5 fis''4-4 | % 8
+  cis''2-2 dis''4-3 | % 9
 
   \barNumberCheck #10
-  e''2 dis''4 | % 10
-  e''4 dis''4 cis''4 | % 11
-  b'2 b'4 | % 12
-  fis''4 e''4 dis''4 | % 13
-  e''4 dis''4 cis''4 | % 14
-  cis''2. ~ | % 15
+  e''2-4 dis''4-3 | % 10
+  e''4-4 dis''4-3 cis''4-2 | % 11
+  b'2-1 b'4-1 | % 12
+  fis''4-4 e''4-3 dis''4-2 | % 13
+  e''4-3 dis''4-2 cis''4-1 | % 14
+  cis''2.-1 ~ | % 15
   cis''2. \bar "||" % 16
-  cis''2 dis''4 | % 17
-  e''2 dis''4 | % 18
-  e''4 dis''4 cis''4 | % 19
+  cis''2-2 dis''4-3 | % 17
+  e''2-4 dis''4-3 | % 18
+  e''4-4 dis''4-3 cis''4-2 | % 19
 
   \barNumberCheck #20
-  b'2 b'4 | % 20
-  cis''2 dis''4 | % 21
-  e''2 dis''4 | % 22
-  fis''4 e''4 dis''4 | % 23
-  gis''2 fis''4 | % 24
-  cis''2 dis''4 | % 25
-  e''2 dis''4 | % 26
-  e''4 dis''4 cis''4 | % 27
-  b'2 b'4 | % 28
-  fis''4 e''4 dis''4 | % 29
+  b'2-1 b'4-1 | % 20
+  cis''2-2 dis''4-3 | % 21
+  e''2-4 dis''4-3 | % 22
+  fis''4-4 e''4-3 dis''4-2 | % 23
+  gis''2-5 fis''4-4 | % 24
+  cis''2-2 dis''4-3 | % 25
+  e''2-4 dis''4-3 | % 26
+  e''4-4 dis''4-3 cis''4-2 | % 27
+  b'2-1 b'4-1 | % 28
+  fis''4-4 e''4-3 dis''4-2 | % 29
 
   \barNumberCheck #30
-  e''4 dis''4 cis''4 | % 30
-  cis''2. ~ | % 31
+  e''4-3 dis''4-2 cis''4-1 | % 30
+  cis''2.-1 ~ | % 31
   cis''2. \bar "||" % 32
-  cis''2 dis''4 | % 33
-  e''2 dis''4 | % 34
-  e''4 dis''4 cis''4 | % 35
-  b'8 b'4 b'4 b'8 | % 36
-  cis''2 dis''4 | % 37
-  e''2 dis''4 | % 38
-  gis''4 cis''4 dis''4 | % 39
+  cis''2-2 dis''4-3 | % 33
+  e''2-4 dis''4-3 | % 34
+  e''4-4 dis''4-3 cis''4-2 | % 35
+  b'8-1 b'4-1 b'4-1 b'8-1 | % 36
+  cis''2-2 dis''4-3 | % 37
+  e''2-4 dis''4-3 | % 38
+  gis''4-5 cis''4-2 dis''4-3 | % 39
 
   \barNumberCheck #40
-  e''4 dis''4 b'4 | % 40
-  cis''2 dis''4 | % 41
-  e''2 dis''4 | % 42
-  e''4 dis''4 cis''4 | % 43
-  b'8 b'4 b'4 b'8 | % 44
-  fis''2 fis''4 | % 45
-  e''2 e''4 | % 46
-  dis''2 dis''4 | % 47
-  gis''2. \bar "||" % 48
-  cis''2 dis''4 | % 49
+  e''4-4 dis''4-3 b'4-1 | % 40
+  cis''2-2 dis''4-3 | % 41
+  e''2-4 dis''4-3 | % 42
+  e''4-4 dis''4-3 cis''4-2 | % 43
+  b'8-1 b'4-1 b'4-1 b'8-1 | % 44
+  fis''2-4 fis''4-4 | % 45
+  e''2-3 e''4-3 | % 46
+  dis''2-2 dis''4-2 | % 47
+  gis''2.-5 \bar "||" % 48
+  cis''2-2 dis''4-3 | % 49
 
   \barNumberCheck #50
-  e''2 dis''4 | % 50
-  e''4 dis''4 cis''4 | % 51
-  b'8 b'4 b'4 b'8 | % 52
-  cis''2 dis''4 | % 53
-  e''2 dis''4 | % 54
-  gis''4 cis''4 dis''4 | % 55
-  e''4 dis''4 b'4 | % 56
-  cis''2 dis''4 | % 57
-  e''2 dis''4 | % 58
-  e''4 dis''4 cis''4 | % 59
+  e''2-4 dis''4-3 | % 50
+  e''4-4 dis''4-3 cis''4-2 | % 51
+  b'8-1 b'4-1 b'4-1 b'8-1 | % 52
+  cis''2-2 dis''4-3 | % 53
+  e''2-4 dis''4-3 | % 54
+  gis''4-5 cis''4-2 dis''4-3 | % 55
+  e''4-4 dis''4-3 b'4-1 | % 56
+  cis''2-2 dis''4-3 | % 57
+  e''2-4 dis''4-3 | % 58
+  e''4-4 dis''4-3 cis''4-2 | % 59
 
   \barNumberCheck #60
-  b'8 b'4 b'4 b'8 | % 60
-  fis''2 fis''4 | % 61
-  e''2 e''4 | % 62
-  fisis''2 fisis''4 | % 63
-  gis''2. \bar "||" % 64
-  a'2. ~ | % 65
+  b'8-1 b'4-1 b'4-1 b'8-1 | % 60
+  fis''2-4 fis''4-4 | % 61
+  e''2-3 e''4-3 | % 62
+  fisis''2-4 fisis''4-4 | % 63
+  gis''2.-5 \bar "||" % 64
+  a'2.-1 ~ | % 65
   a'2. | % 66
-  cis''2. ~ | % 67
+  cis''2.-2 ~ | % 67
   cis''2. | % 68
-  e''2. ~ | % 69
+  e''2.-3 ~ | % 69
 
   \barNumberCheck #70
   e''2. | % 70
-  gis''2. ~ | % 71
+  gis''2.-5 ~ | % 71
   gis''2. \bar "||" % 72
-  cis''2 dis''4 | % 73
-  e''2 dis''4 | % 74
-  e''4 dis''4 cis''4 | % 75
-  b'2 b'4 | % 76
-  cis''2 dis''4 | % 77
-  e''2 dis''4 | % 78
-  fis''4 e''4 dis''4 | % 79
+  cis''2-2 dis''4-3 | % 73
+  e''2-4 dis''4-3 | % 74
+  e''4-4 dis''4-3 cis''4-2 | % 75
+  b'2-1 b'4-1 | % 76
+  cis''2-2 dis''4-3 | % 77
+  e''2-4 dis''4-3 | % 78
+  fis''4-4 e''4-3 dis''4-2 | % 79
 
   \barNumberCheck #80
-  gis''2 fis''4 | % 80
-  cis''2 dis''4 | % 81
-  e''2 dis''4 | % 82
-  e''4 dis''4 cis''4 | % 83
-  b'2 b'4 | % 84
-  fis''4 e''4 dis''4 | % 85
-  e''4 dis''4 cis''4 | % 86
-  cis''2. ~ | % 87
+  gis''2-5 fis''4-4 | % 80
+  cis''2-2 dis''4-3 | % 81
+  e''2-4 dis''4-3 | % 82
+  e''4-4 dis''4-3 cis''4-2 | % 83
+  b'2-1 b'4-1 | % 84
+  fis''4-4 e''4-3 dis''4-2 | % 85
+  e''4-3 dis''4-2 cis''4-1 | % 86
+  cis''2.-1 ~ | % 87
   cis''2. \bar "||" % 88
   R2. | % 89
 
   \barNumberCheck #90
-  cis''2 b'4 | % 90
-  cis''4 b'2 | % 91
-  cis''2. | % 92
-  r2 a'4 | % 93
-  a'2 b'4 | % 94
-  gis'4 ( fis'4 ) fis'4 | % 95
-  fis'2 gis'4 | % 96
-  a'4 ( gis'2 ) | % 97
-  cis'2 dis'4 | % 98
-  e'2 fis'4 | % 99
+  cis''2-5 b'4-4 | % 90
+  cis''4-5 b'2-4 | % 91
+  cis''2.-5 | % 92
+  r2 a'4-3 | % 93
+  a'2-3 b'4-4 | % 94
+  gis'4-2 ( fis'4-1 ) fis'4-1 | % 95
+  fis'2-1 gis'4-2 | % 96
+  a'4-3 ( gis'2-2 ) | % 97
+  cis'2-1 dis'4-2 | % 98
+  e'2-3 fis'4-4 | % 99
 
   \barNumberCheck #100
-  gis'2 ( fis'4 ) | % 100
-  r2 cis''4 | % 101
-  cis''4 b'4 cis''4 | % 102
-  cis''4 ( b'2 ) | % 103
-  gis'2 ( fis'4 ) \bar "||" % 104
+  gis'2-5 ( fis'4-4 ) | % 100
+  r2 cis''4-5 | % 101
+  cis''4-5 b'4-4 cis''4-5 | % 102
+  cis''4-5 ( b'2-4 ) | % 103
+  gis'2-2 ( fis'4-1 ) \bar "||" % 104
   R2. | % 105
-  cis''2 b'4 | % 106
-  cis''4 ( b'2 ) ( | % 107
-  cis''2. ) | % 108
-  r2 a'4 | % 109
+  cis''2-5 b'4-4 | % 106
+  cis''4-5 ( b'2-4 ) ( | % 107
+  cis''2.-5 ) | % 108
+  r2 a'4-3 | % 109
 
   \barNumberCheck #110
-  a'2 b'4 | % 110
-  gis'4 ( fis'4 ) fis'4 | % 111
-  fis'2 gis'4 | % 112
-  a'4 ( gis'4 ) cis'4 | % 113
-  cis'2 dis'4 | % 114
-  e'2 fis'4 | % 115
-  gis'2 ( fis'4 ) | % 116
-  r2 cis''4 | % 117
-  cis''4 b'4 cis''4 | % 118
-  cis''4 ( b'2 ) | % 119
+  a'2-3 b'4-4 | % 110
+  gis'4-2 ( fis'4-1 ) fis'4-1 | % 111
+  fis'2-1 gis'4-2 | % 112
+  a'4-3 ( gis'4-2 ) cis'4-1 | % 113
+  cis'2-1 dis'4-2 | % 114
+  e'2-3 fis'4-4 | % 115
+  gis'2-5 ( fis'4-4 ) | % 116
+  r2 cis''4-5 | % 117
+  cis''4-5 b'4-4 cis''4-5 | % 118
+  cis''4-5 ( b'2-4 ) | % 119
 
   \barNumberCheck #120
-  gis'2 ( fis'4 ) \bar "||" % 120
+  gis'2-2 ( fis'4-1 ) \bar "||" % 120
   R2. | % 121
-  e''2 dis''4 | % 122
-  dis''2. ~ | % 123
+  e''2-3 dis''4-2 | % 122
+  dis''2.-2 ~ | % 123
   dis''2. | % 124
-  fis''2. | % 125
-  dis''4 e''4 cis''4 ~ | % 126
+  fis''2.-4 | % 125
+  dis''4-2 e''4-3 cis''4-1 ~ | % 126
   cis''2. ~ | % 127
   cis''2. | % 128
-  r2 cis''4 | % 129
+  r2 cis''4-1 | % 129
 
   \barNumberCheck #130
-  cis''2 dis''4 | % 130
-  e''2 cis''4 | % 131
-  cis''2. | % 132
-  r2 dis''4 | % 133
-  dis''4 ais'4 cis''4 | % 134
-  bis'2. ~ | % 135
+  cis''2-1 dis''4-2 | % 130
+  e''2-3 cis''4-1 | % 131
+  cis''2.-1 | % 132
+  r2 dis''4-4 | % 133
+  dis''4-4 ais'4-1 cis''4-3 | % 134
+  bis'2.-2 ~ | % 135
   bis'2. \bar "||" % 136
   R2. | % 137
-  e''2 dis''4 | % 138
-  dis''2. ~ | % 139
+  e''2-3 dis''4-2 | % 138
+  dis''2.-2 ~ | % 139
 
   \barNumberCheck #140
   dis''2. | % 140
-  fis''2. | % 141
-  dis''4 e''4 cis''4 ~ | % 142
+  fis''2.-4 | % 141
+  dis''4-2 e''4-3 cis''4-1 ~ | % 142
   cis''2. ~ | % 143
   cis''2. | % 144
-  r2 cis''4 | % 145
-  cis''2 dis''4 | % 146
-  e''2 cis''4 | % 147
-  cis''2. | % 148
-  r2 bis'4 | % 149
+  r2 cis''4-1 | % 145
+  cis''2-1 dis''4-2 | % 146
+  e''2-3 cis''4-1 | % 147
+  cis''2.-1 | % 148
+  r2 bis'4-2 | % 149
 
   \barNumberCheck #150
-  bis'2 cis''4 | % 150
-  cis''2. ~ | % 151
+  bis'2-2 cis''4-3 | % 150
+  cis''2.-3 ~ | % 151
   cis''2. \bar "||"
 }
 
