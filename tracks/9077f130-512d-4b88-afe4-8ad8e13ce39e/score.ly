@@ -11,6 +11,7 @@
   left-margin = 12\mm
   right-margin = 12\mm
   systems-per-page = #6
+  page-count = #2
 }
 
 \header {
@@ -26,8 +27,8 @@
 
 % musicxml2ly uses skips between chord symbols, not accompaniment rests.
 % Sum each chord's following skips, preserving every explicit chord attack.
-% Bar checks belong to the source grid; Completion_heads_engraver splits these
-% sustained durations into canonical tied notes at the actual bar boundaries.
+% Split sustained chords at the 3/4 bar boundaries explicitly, so only the
+% attack carries fingerings (not each continuation created by completion).
 heldHarmonies = #(let ((previous #f) (chords '()))
   (for-each
     (lambda (music)
@@ -70,10 +71,36 @@ heldHarmonies = #(let ((previous #f) (chords '()))
                                      (ly:music-length music)))))
             (event-chord-notes previous)))))
     (extract-named-music harmonies '(EventChord SkipEvent)))
-  (let ((result (make-sequential-music (reverse chords))))
-    (if (not (equal? (ly:music-length result) (ly:music-length harmonies)))
-        (ly:error "Expected one sequential chord-symbol stream with skips"))
-    result))
+  (let ((position 0) (parts '()))
+    (for-each
+      (lambda (chord)
+        (let loop ((remaining (ly:moment-main (ly:music-length chord)))
+                   (attack #t))
+          (let* ((in-bar (- position (* 3/4 (floor (/ position 3/4)))))
+                 (length (min remaining (- 3/4 in-bar)))
+                 (part (ly:music-deep-copy chord)))
+            (for-each
+              (lambda (note)
+                (set! (ly:music-property note 'duration)
+                      (make-duration-of-length (ly:make-moment length)))
+                (if (not attack)
+                    (set! (ly:music-property note 'articulations)
+                          (filter (lambda (a)
+                                    (not (music-is-of-type? a 'fingering-event)))
+                                  (ly:music-property note 'articulations))))
+                (if (> remaining length)
+                    (set! (ly:music-property note 'articulations)
+                          (cons (make-music 'TieEvent)
+                                (ly:music-property note 'articulations)))))
+              (event-chord-notes part))
+            (set! parts (cons part parts))
+            (set! position (+ position length))
+            (if (> remaining length) (loop (- remaining length) #f)))))
+      (reverse chords))
+    (let ((result (make-sequential-music (reverse parts))))
+      (if (not (equal? (ly:music-length result) (ly:music-length harmonies)))
+          (ly:error "Expected one sequential chord-symbol stream with skips"))
+      result)))
 
 pianoMusic = \new PianoStaff <<
   \new Staff = "melody" \with {
@@ -86,6 +113,8 @@ pianoMusic = \new PianoStaff <<
     \key e \major
     \time 3/4
     \set fingeringOrientations = #'(left)
+    \override Fingering.font-size = #-6
+    \override Fingering.padding = #0.2
     % Chord symbols have no register; use an octave below chordmode's default.
     \transpose c c, { \heldHarmonies }
   }
