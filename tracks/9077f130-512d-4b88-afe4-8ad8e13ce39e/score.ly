@@ -411,8 +411,6 @@ heldHarmonies = #(let ((previous #f) (chords '()))
     (lambda (music)
       (case (ly:music-property music 'name)
         ((EventChord)
-          (if (null? (event-chord-notes music))
-              (ly:error "Expected explicit notes in the imported chord"))
           (set! previous (ly:music-deep-copy music))
           ;; Closed LH triads: 5-3-1; second inversions, F#m/A and B: 5-2-1.
           ;; A -> F#m/A keeps the outer fingers and moves the middle finger.
@@ -424,8 +422,7 @@ heldHarmonies = #(let ((previous #f) (chords '()))
                  (pitches (map (lambda (note)
                                  (ly:pitch-semitones
                                    (ly:music-property note 'pitch))) notes))
-                 (gis-over-bis?
-                   (equal? (map (lambda (p) (modulo p 12)) pitches) '(0 3 8))))
+                 (pitch-classes (map (lambda (p) (modulo p 12)) pitches)))
             (if (not (= (length notes) 3))
                 (ly:error "Expected a three-note accompaniment chord"))
             (for-each
@@ -433,15 +430,12 @@ heldHarmonies = #(let ((previous #f) (chords '()))
                 (set! (ly:music-property note 'articulations)
                       (cons (make-music 'FingeringEvent 'digit finger)
                             (ly:music-property note 'articulations))))
-              notes (list (if gis-over-bis? 4 5)
-                      (if (or gis-over-bis?
-                              (= (- (cadr pitches) (car pitches)) 5)
-                              (equal? (map (lambda (p) (modulo p 12)) pitches)
-                                      '(9 1 6))
-                              (equal? (map (lambda (p) (modulo p 12)) pitches)
-                                      '(11 3 6)))
-                          2 3)
-                      1)))
+              notes (cond
+                      ((equal? pitch-classes '(0 3 8)) '(4 2 1)) ; G#/B#
+                      ((or (= (- (cadr pitches) (car pitches)) 5)
+                           (member pitch-classes '((9 1 6) (11 3 6))))
+                       '(5 2 1)) ; Second inversions, F#m/A, B.
+                      (else '(5 3 1)))))
           (set! chords (cons previous chords)))
         ((SkipEvent)
           (if (not previous)
@@ -511,12 +505,6 @@ pianoMusic = \new PianoStaff <<
   \layout {
     indent = #0
     ragged-right = ##f
-    \context {
-      \Voice
-      \remove Note_heads_engraver
-      \consists Completion_heads_engraver
-      completionFactor = #1
-    }
   }
 }
 
