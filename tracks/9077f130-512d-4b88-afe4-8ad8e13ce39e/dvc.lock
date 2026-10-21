@@ -64,8 +64,8 @@ stages:
       size: 8098
     - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
       hash: md5
-      md5: e895691c1a59b4fecf1c03742d782a75
-      size: 5483
+      md5: 1ac6e94e7e74928de24e1865d04e6567
+      size: 5705
     outs:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
@@ -73,8 +73,8 @@ stages:
       size: 5076
     - path: build/within-temptation--mother-earth/score.pdf
       hash: md5
-      md5: fed9fd0565cf5a27b2acaf53c33ea1f5
-      size: 479289
+      md5: d4b2a33d0986fbe7037122ae0bf02e97
+      size: 479245
   convert-score-source:
     cmd: mkdir -p build/within-temptation--mother-earth && nix shell 
       --inputs-from . nixpkgs#lilypond --command musicxml2ly --absolute 

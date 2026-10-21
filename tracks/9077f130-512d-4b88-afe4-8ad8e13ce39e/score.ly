@@ -39,13 +39,16 @@ heldHarmonies = #(let ((previous #f) (chords '()))
           (set! previous (ly:music-deep-copy music))
           ;; Closed LH triads: 5-3-1; second inversions and F#m/A: 5-2-1.
           ;; A -> F#m/A keeps the outer fingers and moves the middle finger.
+          ;; F#m/C# -> G#/B#: 5-2-1 -> 4-2-1.
           (let* ((notes (sort (event-chord-notes previous)
                          (lambda (a b)
                            (ly:pitch<? (ly:music-property a 'pitch)
                                        (ly:music-property b 'pitch)))))
                  (pitches (map (lambda (note)
                                  (ly:pitch-semitones
-                                   (ly:music-property note 'pitch))) notes)))
+                                   (ly:music-property note 'pitch))) notes))
+                 (gis-over-bis?
+                   (equal? (map (lambda (p) (modulo p 12)) pitches) '(0 3 8))))
             (if (not (= (length notes) 3))
                 (ly:error "Expected a three-note accompaniment chord"))
             (for-each
@@ -53,8 +56,9 @@ heldHarmonies = #(let ((previous #f) (chords '()))
                 (set! (ly:music-property note 'articulations)
                       (cons (make-music 'FingeringEvent 'digit finger)
                             (ly:music-property note 'articulations))))
-              notes (list 5
-                      (if (or (= (- (cadr pitches) (car pitches)) 5)
+              notes (list (if gis-over-bis? 4 5)
+                      (if (or gis-over-bis?
+                              (= (- (cadr pitches) (car pitches)) 5)
                               (equal? (map (lambda (p) (modulo p 12)) pitches)
                                       '(9 1 6)))
                           2 3)
