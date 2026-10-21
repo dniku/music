@@ -41,7 +41,6 @@ tracks/
       lyrics-with-bar-marks.txt
       solos/                       # LilyPond-источники отдельных партий
     reference/
-      README.md
       recordings.json
       audio/
         <recording>.<ext>          # данные в DVC-кеше, не в обычном Git

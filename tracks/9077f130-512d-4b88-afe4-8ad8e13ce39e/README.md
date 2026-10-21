@@ -1,7 +1,6 @@
 # Within Temptation — «Mother Earth»
 
-Вся редактируемая партитура — [score.ly](score.ly). Происхождение исходников —
-[reference/README.md](reference/README.md).
+Вся редактируемая партитура — [score.ly](score.ly).
 
 Это фрагмент песни. Темп взят из исходных нот; синхронизация с аудиозаписью
 ещё не проверена. Левая рука и аппликатура — наша редакция для самостоятельной
@@ -16,3 +15,15 @@
 `convert-score-source` в [dvc.yaml](dvc.yaml). При переносе в редактируемую
 партию текстовое указание темпа заменено исполняемой командой: импорт
 оставлял MIDI на техническом темпе, отличном от указанного в нотах.
+
+## Источники
+
+Идентификаторы и аудиоисточник — в [recordings.json](reference/recordings.json).
+Точная идентичность мастера YouTube и связанной записи MusicBrainz
+не подтверждена.
+
+[Страница YTPA](https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ) предоставляет
+[MusicXML](https://ytpa.ch/mxl/Mother_Earth.musicxml), который указывает
+первоисточником [MuseScore, score 30334265](https://musescore.com/user/83726533/scores/30334265).
+Исходник сохранён без изменений через DVC; получение и проверяемый хеш —
+в стадии `fetch-score-source` файла [dvc.yaml](dvc.yaml).
