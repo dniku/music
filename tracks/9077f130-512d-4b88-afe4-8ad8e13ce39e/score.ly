@@ -6,13 +6,10 @@
 % Whole-chord octaves and selected inversions are chosen per phrase; see README.md.
 % The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
-melody = {
-  \clef "treble" \time 3/4 \key e \major \tempo 4 = 220
-  % Approximate section starts in reference video FVbDZaUuNvQ; see alignment.json.
-  \override Score.RehearsalMark.font-size = #-3
-  \override Score.RehearsalMark.self-alignment-X = #LEFT
-  \mark \markup "0:00.45 / 3:05.59"
-  cis''2-2 dis''4-3 | % 1
+% Tags identify the original source phrases; comments retain source-bar numbers.
+sourceMelody = {
+  \tag #'theme {
+cis''2-2 dis''4-3 | % 1
   e''2-4 dis''4-3 | % 2
   e''4-4 dis''4-3 cis''4-2 | % 3
   b'2-1 b'4-1 | % 4
@@ -22,7 +19,6 @@ melody = {
   gis''2-5 fis''4-4 | % 8
   cis''2-2 dis''4-3 | % 9
 
-  \barNumberCheck #10
   e''2-4 dis''4-3 | % 10
   e''4-4 dis''4-3 cis''4-2 | % 11
   b'2-1 b'4-1 | % 12
@@ -30,12 +26,12 @@ melody = {
   e''4-3 dis''4-2 cis''4-1 | % 14
   cis''2.-1 ~ | % 15
   cis''2. \bar "||" % 16
-  \mark \markup "0:14.16"
-  cis''2-2 dis''4-3 | % 17
+  }
+  \tag #'themeRepeat {
+cis''2-2 dis''4-3 | % 17
   e''2-4 dis''4-3 | % 18
   e''4-4 dis''4-3 cis''4-2 | % 19
 
-  \barNumberCheck #20
   b'2-1 b'4-1 | % 20
   cis''2-2 dis''4-3 | % 21
   e''2-4 dis''4-3 | % 22
@@ -47,12 +43,12 @@ melody = {
   b'2-1 b'4-1 | % 28
   fis''4-4 e''4-3 dis''4-2 | % 29
 
-  \barNumberCheck #30
   e''4-3 dis''4-2 cis''4-1 | % 30
   cis''2.-1 ~ | % 31
   cis''2. \bar "||" % 32
-  \mark \markup "0:27.88 / 4:19.31"
-  cis''2-2 dis''4-3 | % 33
+  }
+  \tag #'variant {
+cis''2-2 dis''4-3 | % 33
   e''2-4 dis''4-3 | % 34
   e''4-4 dis''4-3 cis''4-2 | % 35
   b'8-1 b'4-1 b'4-1 b'8-1 | % 36
@@ -60,7 +56,6 @@ melody = {
   e''2-4 dis''4-3 | % 38
   gis''4-5 cis''4-2 dis''4-3 | % 39
 
-  \barNumberCheck #40
   e''4-4 dis''4-3 b'4-1 | % 40
   cis''2-2 dis''4-3 | % 41
   e''2-4 dis''4-3 | % 42
@@ -70,10 +65,9 @@ melody = {
   e''2-3 e''4-3 | % 46
   dis''2-2 dis''4-2 | % 47
   gis''2.-5 \bar "||" % 48
-  \mark \markup "0:41.59 / 4:33.02"
+
   cis''2-2 dis''4-3 | % 49
 
-  \barNumberCheck #50
   e''2-4 dis''4-3 | % 50
   e''4-4 dis''4-3 cis''4-2 | % 51
   b'8-1 b'4-1 b'4-1 b'8-1 | % 52
@@ -85,25 +79,25 @@ melody = {
   e''2-4 dis''4-3 | % 58
   e''4-4 dis''4-3 cis''4-2 | % 59
 
-  \barNumberCheck #60
   b'8-1 b'4-1 b'4-1 b'8-1 | % 60
   fis''2-4 fis''4-4 | % 61
   e''2-3 e''4-3 | % 62
   fisis''2-4 fisis''4-4 | % 63
   gis''2.-5 \bar "||" % 64
-  \mark \markup "0:55.31"
-  a'2.-1 ~ | % 65
+  }
+  \tag #'rise {
+a'2.-1 ~ | % 65
   a'2. | % 66
   cis''2.-2 ~ | % 67
   cis''2. | % 68
   e''2.-3 ~ | % 69
 
-  \barNumberCheck #70
   e''2. | % 70
   gis''2.-5 ~ | % 71
   gis''2. \bar "||" % 72
-  \mark \markup "1:02.16"
-  cis''2-2 dis''4-3 | % 73
+  }
+  \tag #'themeReturn {
+cis''2-2 dis''4-3 | % 73
   e''2-4 dis''4-3 | % 74
   e''4-4 dis''4-3 cis''4-2 | % 75
   b'2-1 b'4-1 | % 76
@@ -111,7 +105,6 @@ melody = {
   e''2-4 dis''4-3 | % 78
   fis''4-4 e''4-3 dis''4-2 | % 79
 
-  \barNumberCheck #80
   gis''2-5 fis''4-4 | % 80
   cis''2-2 dis''4-3 | % 81
   e''2-4 dis''4-3 | % 82
@@ -121,10 +114,10 @@ melody = {
   e''4-3 dis''4-2 cis''4-1 | % 86
   cis''2.-1 ~ | % 87
   cis''2. \bar "||" % 88
-  \mark \markup "1:15.88 / 2:10.74"
-  R2. | % 89
+  }
+  \tag #'verse {
+R2. | % 89
 
-  \barNumberCheck #90
   cis''2-5 b'4-4 | % 90
   cis''4-5 b'2-4 | % 91
   cis''2.-5 | % 92
@@ -136,20 +129,18 @@ melody = {
   cis'2-1 dis'4-2 | % 98
   e'2-3 fis'4-4 | % 99
 
-  \barNumberCheck #100
   gis'2-5 ( fis'4-4 ) | % 100
   r2 cis''4-5 | % 101
   cis''4-5 b'4-4 cis''4-5 | % 102
   cis''4-5 ( b'2-4 ) | % 103
   gis'2-2 ( fis'4-1 ) \bar "||" % 104
-  \mark \markup "1:29.59 / 2:24.45"
+
   R2. | % 105
   cis''2-5 b'4-4 | % 106
   cis''4-5 ( b'2-4 ) ( | % 107
   cis''2.-5 ) | % 108
   r2 a'4-3 | % 109
 
-  \barNumberCheck #110
   a'2-3 b'4-4 | % 110
   gis'4-2 ( fis'4-1 ) fis'4-1 | % 111
   fis'2-1 gis'4-2 | % 112
@@ -161,10 +152,10 @@ melody = {
   cis''4-5 b'4-4 cis''4-5 | % 118
   cis''4-5 ( b'2-4 ) | % 119
 
-  \barNumberCheck #120
   gis'2-2 ( fis'4-1 ) \bar "||" % 120
-  \mark \markup \column { "1:43.31 / 2:38.16" "2:51.88 / 4:46.74" }
-  R2. | % 121
+  }
+  \tag #'chorusA {
+R2. | % 121
   e''2-3 dis''4-2 | % 122
   dis''2.-2 ~ | % 123
   dis''2. | % 124
@@ -174,7 +165,6 @@ melody = {
   cis''2. | % 128
   r2 cis''4-1 | % 129
 
-  \barNumberCheck #130
   cis''2-1 dis''4-2 | % 130
   e''2-3 cis''4-1 | % 131
   cis''2.-1 | % 132
@@ -182,33 +172,36 @@ melody = {
   dis''4-4 ais'4-1 cis''4-3 | % 134
   bis'2.-2 ~ | % 135
   bis'2. \bar "||" % 136
-  \mark \markup "1:57.02 / 5:00.45"
-  R2. | % 137
+  }
+  \tag #'chorusBStart {
+R2. | % 137
   e''2-3 dis''4-2 | % 138
   dis''2.-2 ~ | % 139
 
-  \barNumberCheck #140
   dis''2. | % 140
   fis''2.-4 | % 141
   dis''4-2 e''4-3 cis''4-1 ~ | % 142
   cis''2. ~ | % 143
   cis''2. | % 144
-  \mark \markup \column { "2:03.88 / 5:07.31" "5:10.74 / 5:14.16" }
-  r2 cis''4-1 | % 145
+  }
+  \tag #'chorusBLine {
+r2 cis''4-1 | % 145
   cis''2-1 dis''4-2 | % 146
   e''2-3 cis''4-1 | % 147
   cis''2.-1 | % 148
-  \mark \markup "2:07.31 / 5:17.59"
-  r2 bis'4-2 | % 149
+  }
+  \tag #'ending {
+r2 bis'4-2 | % 149
 
-  \barNumberCheck #150
   bis'2-2 cis''4-3 | % 150
   cis''2.-3 ~ | % 151
   cis''2. \bar "||"
+  }
 }
 
-harmonies = \chordmode {
-  cis2:m s4 | % 1
+sourceHarmonies = \chordmode {
+  \tag #'theme {
+cis2:m s4 | % 1
   s2 s4 | % 2
   a,4 s4 s4 | % 3
   b,2 s4 | % 4
@@ -218,7 +211,6 @@ harmonies = \chordmode {
   fis2:m/a s4 | % 8
   cis2:m s4 | % 9
 
-  \barNumberCheck #10
   s2 s4 | % 10
   a,4 s4 s4 | % 11
   e2/b s4 | % 12
@@ -226,11 +218,12 @@ harmonies = \chordmode {
   gis4/bis s4 s4 | % 14
   cis2.:m | % 15
   s2. \bar "||" % 16
-  cis2:m s4 | % 17
+  }
+  \tag #'themeRepeat {
+cis2:m s4 | % 17
   s2 s4 | % 18
   a,4 s4 s4 | % 19
 
-  \barNumberCheck #20
   b,2 s4 | % 20
   cis2:m s4 | % 21
   s2 s4 | % 22
@@ -242,11 +235,12 @@ harmonies = \chordmode {
   e2/b s4 | % 28
   fis4:m/cis s4 s4 | % 29
 
-  \barNumberCheck #30
   gis4/bis s4 s4 | % 30
   cis2.:m | % 31
   s2. \bar "||" % 32
-  cis2:m s4 | % 33
+  }
+  \tag #'variant {
+cis2:m s4 | % 33
   s2 s4 | % 34
   s4 s4 s4 | % 35
   e8 s4 s4 s8 | % 36
@@ -254,7 +248,6 @@ harmonies = \chordmode {
   s2 s4 | % 38
   s4 s4 s4 | % 39
 
-  \barNumberCheck #40
   e4 dis4 b,4 | % 40
   cis2:m s4 | % 41
   s2 s4 | % 42
@@ -266,7 +259,6 @@ harmonies = \chordmode {
   gis,2. \bar "||" % 48
   cis2:m s4 | % 49
 
-  \barNumberCheck #50
   s2 s4 | % 50
   s4 s4 s4 | % 51
   e8 s4 s4 s8 | % 52
@@ -278,13 +270,14 @@ harmonies = \chordmode {
   s2 s4 | % 58
   s4 s4 s4 | % 59
 
-  \barNumberCheck #60
   e8 s4 s4 s8 | % 60
   fis2:m/cis s4 | % 61
   e2 s4 | % 62
   dis2 s4 | % 63
   gis,2. \bar "||" % 64
-  a,2. | % 65
+  }
+  \tag #'rise {
+a,2. | % 65
   s2. | % 66
   cis2.:m | % 67
   s2. | % 68
@@ -292,12 +285,13 @@ harmonies = \chordmode {
   % the inversion's bass at E3 after the staff's octave-down transposition.
   cis'2.:m/e | % 69
 
-  \barNumberCheck #70
   s2. | % 70
   % Continue the rising bass A-C#-E-G# before returning to the main register.
   gis2. | % 71
   s2. \bar "||" % 72
-  cis2:m s4 | % 73
+  }
+  \tag #'themeReturn {
+cis2:m s4 | % 73
   s2 s4 | % 74
   a,4 s4 s4 | % 75
   b,2 s4 | % 76
@@ -305,7 +299,6 @@ harmonies = \chordmode {
   s2 s4 | % 78
   a,4 s4 s4 | % 79
 
-  \barNumberCheck #80
   fis2:m/a s4 | % 80
   cis2:m s4 | % 81
   s2 s4 | % 82
@@ -315,9 +308,10 @@ harmonies = \chordmode {
   gis4/bis s4 s4 | % 86
   cis2.:m | % 87
   s2. \bar "||" % 88
-  cis2.:m | % 89
+  }
+  \tag #'verse {
+cis2.:m | % 89
 
-  \barNumberCheck #90
   s2 s4 | % 90
   s4 s2 | % 91
   s2. | % 92
@@ -329,7 +323,6 @@ harmonies = \chordmode {
   s2 s4 | % 98
   s2 s4 | % 99
 
-  \barNumberCheck #100
   s2 s4 | % 100
   fis,2:m s4 | % 101
   s4 s4 s4 | % 102
@@ -341,7 +334,6 @@ harmonies = \chordmode {
   s2. | % 108
   a,2 s4 | % 109
 
-  \barNumberCheck #110
   s2 s4 | % 110
   e4 s4 s4 | % 111
   b,2 s4 | % 112
@@ -353,9 +345,10 @@ harmonies = \chordmode {
   s4 s4 s4 | % 118
   gis,4 s2 | % 119
 
-  \barNumberCheck #120
   s2 s4 \bar "||" % 120
-  cis2.:m | % 121
+  }
+  \tag #'chorusA {
+cis2.:m | % 121
   s2 s4 | % 122
   gis,2. | % 123
   s2. | % 124
@@ -365,7 +358,6 @@ harmonies = \chordmode {
   s2. | % 128
   fis,2:m s4 | % 129
 
-  \barNumberCheck #130
   s2 s4 | % 130
   cis2:m s4 | % 131
   s2. | % 132
@@ -373,26 +365,31 @@ harmonies = \chordmode {
   s4 s4 s4 | % 134
   gis,2. | % 135
   s2. \bar "||" % 136
-  cis2.:m | % 137
+  }
+  \tag #'chorusBStart {
+cis2.:m | % 137
   s2 s4 | % 138
   gis,2. | % 139
 
-  \barNumberCheck #140
   s2. | % 140
   b,2. | % 141
   s4 s4 s4 | % 142
   fis,2.:m | % 143
   s2. | % 144
-  fis,2:m s4 | % 145
+  }
+  \tag #'chorusBLine {
+fis,2:m s4 | % 145
   s2 s4 | % 146
   cis2:m s4 | % 147
   s2. | % 148
-  gis,2 s4 | % 149
+  }
+  \tag #'ending {
+gis,2 s4 | % 149
 
-  \barNumberCheck #150
   s2 s4 | % 150
   cis2.:m | % 151
   s2. \bar "||"
+  }
 }
 
 #(set-global-staff-size 18)
@@ -403,23 +400,117 @@ harmonies = \chordmode {
   bottom-margin = 10\mm
   left-margin = 12\mm
   right-margin = 12\mm
-  systems-per-page = #6
-  page-count = #2
+  ragged-bottom = ##t
+  page-count = 4
 }
 
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Mother Earth"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Мелодия и аккорды · фрагмент"
+    "Мелодия и аккорды · в порядке записи"
   composer = \markup \override #'(font-name . "DejaVu Sans") "Within Temptation"
   copyright = \markup \tiny \override #'(font-name . "DejaVu Sans")
     \with-url "https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ"
     "На основе нот с ytpa.ch"
   tagline = \markup \override #'(font-name . "DejaVu Sans") \fontsize #-3 \column {
-    \line { "Тайминги ≈ начала фрагментов в YouTube FVbDZaUuNvQ; / — повторные появления (с вариациями)." }
-    \line { "Не записан: 3:19–4:19 — средний раздел с хором." }
-    \line { "Финал: такты 145–148 («until the end of time») сыграть 3 раза, затем 149–152. В первом припеве — без повторов." }
+    \line { "Тайминги приблизительные, по YouTube FVbDZaUuNvQ. Повторы развёрнуты в порядке записи." }
+    \line { "Бридж: черновые трезвучия левой руки; хоровые голоса не записаны. Вокальный ритм местами упрощён." }
   }
+}
+
+\include "bridge.ily"
+
+inSongOrder = #(define-music-function (source bridge) (ly:music? ly:music?)
+#{
+  \keepWithTag #'(theme themeRepeat variant rise themeReturn) $(ly:music-deep-copy source)
+  \keepWithTag #'(verse) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusA chorusBStart chorusBLine ending) $(ly:music-deep-copy source)
+  \keepWithTag #'(verse) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusA) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusA) $(ly:music-deep-copy source)
+  \keepWithTag #'(theme) $(ly:music-deep-copy source)
+  $bridge
+  \keepWithTag #'(variant) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusA chorusBStart) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source)
+  \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source)
+  \keepWithTag #'(ending) $(ly:music-deep-copy source)
+#})
+
+melody = {
+  \clef treble \key e \major \time 3/4 \tempo 4 = 210
+  \inSongOrder \sourceMelody { R2.*70 }
+}
+harmonies = \inSongOrder \sourceHarmonies { \transpose c c' \bridgeMusic }
+
+sectionMarks = {
+  \override Score.RehearsalMark.self-alignment-X = #LEFT
+  \override Score.RehearsalMark.font-size = #-2
+  \barNumberCheck #1
+
+  \mark \markup "Вступление · 0:00.45"
+  s2.*16
+  \mark \markup "0:14.16"
+  s2.*16
+  \mark \markup "0:27.88"
+  s2.*16
+  \mark \markup "0:41.59"
+  s2.*16
+  \mark \markup "0:55.31"
+  s2.*8
+  \mark \markup "1:02.16"
+  s2.*16
+  \barNumberCheck #89
+  \break
+  \mark \markup "Куплет 1 · 1:15.88"
+  s2.*32
+  \barNumberCheck #121
+  \break
+  \mark \markup "Припев 1 · 1:43.31"
+  s2.*32
+  \barNumberCheck #153
+  \break
+  \mark \markup "Куплет 2 · 2:10.74"
+  s2.*32
+  \barNumberCheck #185
+  \break
+  \mark \markup "Припев 2 · 2:38.16"
+  s2.*32
+  \barNumberCheck #217
+  \break
+  \mark \markup "Тема · 3:05.59"
+  s2.*16
+  \barNumberCheck #233
+  \break
+  \mark \markup "Бридж · 3:19.31"
+  s2.*70
+  \barNumberCheck #303
+  \break
+  \mark \markup "Реприза · 4:19.31"
+  s2.*32
+  \barNumberCheck #335
+  \break
+  \mark \markup "Финальный припев · 4:46.74"
+  s2.*24
+  \barNumberCheck #359
+
+  \mark \markup "5:07.31 · 1/3"
+  s2.*4
+  \barNumberCheck #363
+
+  \mark \markup "5:10.74 · 2/3"
+  s2.*4
+  \barNumberCheck #367
+
+  \mark \markup "5:14.16 · 3/3"
+  s2.*4
+  \barNumberCheck #371
+
+  \mark \markup "Концовка · 5:17.59"
+  s2.*4
+  \barNumberCheck #375
+  \bar "|."
 }
 
 % musicxml2ly uses skips between chord symbols, not accompaniment rests.
@@ -496,13 +587,14 @@ heldHarmonies = #(let ((previous #f) (chords '()))
       (reverse chords))
     (let ((result (make-sequential-music (reverse parts))))
       (if (not (equal? (ly:music-length result) (ly:music-length harmonies)))
-          (ly:error "Expected one sequential chord-symbol stream with skips"))
+          (ly:error "Chord duration mismatch: built ~a, expected ~a"
+                    (ly:music-length result) (ly:music-length harmonies)))
       result)))
 
 pianoMusic = \new PianoStaff <<
   \new Staff = "melody" \with {
     midiInstrument = "acoustic grand"
-  } { \override Fingering.direction = #UP \melody }
+  } { \override Fingering.direction = #UP << \melody \sectionMarks >> }
   \new Staff = "chords" \with {
     midiInstrument = "acoustic grand"
   } {
@@ -519,12 +611,14 @@ pianoMusic = \new PianoStaff <<
 
 \score {
   <<
-    \new ChordNames { \harmonies }
+    \new ChordNames { \set chordChanges = ##t \harmonies }
     \pianoMusic
   >>
   \layout {
     indent = #0
     ragged-right = ##f
+    \context { \Staff \RemoveAllEmptyStaves }
+    \context { \PianoStaff \remove Keep_alive_together_engraver }
   }
 }
 

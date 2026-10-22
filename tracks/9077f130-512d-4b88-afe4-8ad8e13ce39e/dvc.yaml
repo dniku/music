@@ -1,4 +1,50 @@
 stages:
+  render-bridge-bass:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-audition --
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/drafts/bridge-bass.ly
+      build/within-temptation--mother-earth/bridge-bass.pdf
+      build/within-temptation--mother-earth/bridge-bass.mp3 60
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-audition
+      - scripts/render-midi-audition
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/drafts/bridge-bass.ly
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/bridge.ily
+    outs:
+      - build/within-temptation--mother-earth/bridge-bass.pdf
+      - build/within-temptation--mother-earth/bridge-bass.mp3
+  extract-bridge-reference:
+    wdir: ../..
+    cmd: >-
+      nix run .#extract-audio --
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      199.307 60 "Mother Earth — bridge reference"
+      build/within-temptation--mother-earth/bridge-reference.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/extract-audio
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+    outs:
+      - build/within-temptation--mother-earth/bridge-reference.mp3
+  compare-bridge-bass:
+    wdir: ../..
+    cmd: >-
+      nix run .#stereo-compare --
+      build/within-temptation--mother-earth/bridge-bass.mp3
+      build/within-temptation--mother-earth/bridge-reference.mp3
+      build/within-temptation--mother-earth/bridge-bass-comparison.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/stereo-compare
+      - build/within-temptation--mother-earth/bridge-bass.mp3
+      - build/within-temptation--mother-earth/bridge-reference.mp3
+    outs:
+      - build/within-temptation--mother-earth/bridge-bass-comparison.mp3
   fetch-reference:
     wdir: ../..
     cmd: >-
@@ -45,6 +91,7 @@ stages:
       - flake.nix
       - flake.lock
       - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/bridge.ily
     outs:
       - build/within-temptation--mother-earth/score.pdf
       - build/within-temptation--mother-earth/score.midi

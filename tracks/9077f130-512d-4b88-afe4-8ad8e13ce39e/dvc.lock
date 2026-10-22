@@ -58,19 +58,23 @@ stages:
       hash: md5
       md5: 5833658f4bfc5e0ae019524d41876af9
       size: 27729
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/bridge.ily
+      hash: md5
+      md5: 23de15d43afb31eeb460aa62e9aa820c
+      size: 1345
     - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
       hash: md5
-      md5: 2b61c95350d3bbd4749d3101392fabec
-      size: 14657
+      md5: e3d00a4de91d341c0f80af2bc7c425df
+      size: 16433
     outs:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
-      md5: 5d26b31f7c21c044e6ff507502a2eee9
-      size: 5352
+      md5: 6aa084ea23707b8d7325a3f5aafda110
+      size: 10477
     - path: build/within-temptation--mother-earth/score.pdf
       hash: md5
-      md5: f91b0f9ce5cc3f74e8212f9d6d94d83b
-      size: 527485
+      md5: 44746ea71839bb800200794702158dc2
+      size: 978836
   convert-score-source:
     cmd: mkdir -p build/within-temptation--mother-earth && nix shell 
       --inputs-from . nixpkgs#lilypond --command musicxml2ly --absolute 
@@ -99,25 +103,25 @@ stages:
     deps:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
-      md5: 50cd2622b8d18ce58ee67d3b19388c2f
-      size: 5076
+      md5: 6aa084ea23707b8d7325a3f5aafda110
+      size: 10477
     - path: flake.lock
       hash: md5
       md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
-      md5: 6ec4efdc6121b7db433cce64d07cec93
-      size: 26513
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
     - path: scripts/render-midi-audition
       hash: md5
-      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
-      size: 901
+      md5: adef65c8a0906bb70cc59fab01a1e0de
+      size: 1016
     outs:
     - path: build/within-temptation--mother-earth/score.mp3
       hash: md5
-      md5: 04270e929a2ff121a5945980053bad88
-      size: 1806280
+      md5: aefdece47f7c153f1df7c681383c884f
+      size: 4478212
   align-score:
     cmd: nix run .#align-midi -- 
       tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json 
@@ -126,8 +130,8 @@ stages:
     deps:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
-      md5: 5d26b31f7c21c044e6ff507502a2eee9
-      size: 5352
+      md5: 6aa084ea23707b8d7325a3f5aafda110
+      size: 10477
     - path: flake.lock
       hash: md5
       md5: 6a21cca91947c258cf9ac502091e3bde
@@ -143,17 +147,17 @@ stages:
       nfiles: 5
     - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json
       hash: md5
-      md5: 8d6c08032a245f64fb8a558822198f72
-      size: 2477
+      md5: 2b4016952bf51b8717af12fa1287c4f8
+      size: 2451
     outs:
     - path: build/within-temptation--mother-earth/aligned.bars.tsv
       hash: md5
-      md5: 815cd592fea8c2002433cc7156f003d5
-      size: 20856
+      md5: 7b210012e91b612e747bec475e3bcb90
+      size: 26699
     - path: build/within-temptation--mother-earth/aligned.midi
       hash: md5
-      md5: a56bea1bf077aa929c74cdaf1f9afe14
-      size: 9388
+      md5: 43ca548a3f80c3a882972a65846a7d4c
+      size: 9779
   render-aligned-audition:
     cmd: nix run .#render-midi-audition -- 
       build/within-temptation--mother-earth/aligned.midi 
@@ -161,8 +165,8 @@ stages:
     deps:
     - path: build/within-temptation--mother-earth/aligned.midi
       hash: md5
-      md5: a56bea1bf077aa929c74cdaf1f9afe14
-      size: 9388
+      md5: 43ca548a3f80c3a882972a65846a7d4c
+      size: 9779
     - path: flake.lock
       hash: md5
       md5: 6a21cca91947c258cf9ac502091e3bde
@@ -178,8 +182,8 @@ stages:
     outs:
     - path: build/within-temptation--mother-earth/aligned.mp3
       hash: md5
-      md5: 17d4d17790a80b40ca2867aa4a6e5bbe
-      size: 4048720
+      md5: bd8c48e496e44b1a0e70d9f39c74a1cb
+      size: 4505433
   compare-aligned:
     cmd: nix run .#stereo-compare -- 
       build/within-temptation--mother-earth/aligned.mp3 
@@ -188,8 +192,8 @@ stages:
     deps:
     - path: build/within-temptation--mother-earth/aligned.mp3
       hash: md5
-      md5: 17d4d17790a80b40ca2867aa4a6e5bbe
-      size: 4048720
+      md5: bd8c48e496e44b1a0e70d9f39c74a1cb
+      size: 4505433
     - path: flake.lock
       hash: md5
       md5: 6a21cca91947c258cf9ac502091e3bde
@@ -210,5 +214,103 @@ stages:
     outs:
     - path: build/within-temptation--mother-earth/aligned-comparison.mp3
       hash: md5
-      md5: eeda4411ad60233d4fb462bfec2ca6dc
-      size: 6787867
+      md5: b9300ea7282e655084e75917d0cb7448
+      size: 7112052
+  render-bridge-bass:
+    cmd: nix run .#render-audition -- 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/drafts/bridge-bass.ly 
+      build/within-temptation--mother-earth/bridge-bass.pdf 
+      build/within-temptation--mother-earth/bridge-bass.mp3 60
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
+    - path: scripts/render-audition
+      hash: md5
+      md5: 8250a841776d7c8e46d54d33bc35d389
+      size: 1299
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: adef65c8a0906bb70cc59fab01a1e0de
+      size: 1016
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/bridge.ily
+      hash: md5
+      md5: 23de15d43afb31eeb460aa62e9aa820c
+      size: 1345
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/drafts/bridge-bass.ly
+      hash: md5
+      md5: 77167f8a31e8c65cd8590f44dc760669
+      size: 1903
+    outs:
+    - path: build/within-temptation--mother-earth/bridge-bass.mp3
+      hash: md5
+      md5: 494f365f65917841300bf41e29574ad7
+      size: 723609
+    - path: build/within-temptation--mother-earth/bridge-bass.pdf
+      hash: md5
+      md5: a1b725522fabb2c96fd468881896d7e7
+      size: 179062
+  extract-bridge-reference:
+    cmd: nix run .#extract-audio -- 
+      tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      199.307 60 "Mother Earth — bridge reference" 
+      build/within-temptation--mother-earth/bridge-reference.mp3
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
+    - path: scripts/extract-audio
+      hash: md5
+      md5: 7b093548b1799bbbc49fd7b42539dd6a
+      size: 587
+    - path: 
+        tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/reference/audio/youtube-FVbDZaUuNvQ.webm
+      hash: md5
+      md5: 57c101db0e4bd9d7b646963c4878a774
+      size: 5394980
+    outs:
+    - path: build/within-temptation--mother-earth/bridge-reference.mp3
+      hash: md5
+      md5: a027a8f62ce12ca479c6be2c8bc752f2
+      size: 1411961
+  compare-bridge-bass:
+    cmd: nix run .#stereo-compare -- 
+      build/within-temptation--mother-earth/bridge-bass.mp3 
+      build/within-temptation--mother-earth/bridge-reference.mp3 
+      build/within-temptation--mother-earth/bridge-bass-comparison.mp3
+    deps:
+    - path: build/within-temptation--mother-earth/bridge-bass.mp3
+      hash: md5
+      md5: 494f365f65917841300bf41e29574ad7
+      size: 723609
+    - path: build/within-temptation--mother-earth/bridge-reference.mp3
+      hash: md5
+      md5: a027a8f62ce12ca479c6be2c8bc752f2
+      size: 1411961
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 5833658f4bfc5e0ae019524d41876af9
+      size: 27729
+    - path: scripts/stereo-compare
+      hash: md5
+      md5: 69a81979aa23926344bb8093b9cdde8f
+      size: 725
+    outs:
+    - path: build/within-temptation--mother-earth/bridge-bass-comparison.mp3
+      hash: md5
+      md5: bd3d7f39dc5a7503b9bb3ed7eb9704f4
+      size: 1173532
