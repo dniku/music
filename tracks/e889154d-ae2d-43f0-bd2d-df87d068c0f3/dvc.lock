@@ -33,47 +33,47 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: 13680c91cc5e9f4dd432400da8765b6b
-      size: 22175
+      md5: 85d35fff4baa073f6a20b1f47ff95b0a
+      size: 27891
     - path: tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly
       hash: md5
-      md5: 7ab447485051427f4072da5e5f453702
-      size: 3583
+      md5: 25f5c12cd7ae6a18ffb8dd7a3a488554
+      size: 3580
     outs:
     - path: build/moi-rakety-vverh--blown-away/score.midi
       hash: md5
-      md5: f55380c50b3840338924af66e7129430
-      size: 329
+      md5: 7c3f0a3675bb8e861c0edeb964a07c7c
+      size: 320
     - path: build/moi-rakety-vverh--blown-away/score.pdf
       hash: md5
-      md5: 1bffc4a159361415a90d5ebee50f5f39
-      size: 114787
+      md5: 83134e6d211c9a8121d7bd16c817e112
+      size: 155275
   render-solo-audition:
     cmd: nix run .#render-midi-audition -- 
       build/moi-rakety-vverh--blown-away/score.midi 
-      build/moi-rakety-vverh--blown-away/solos/blown-away-solo.mp3 10.9
+      build/moi-rakety-vverh--blown-away/solos/blown-away-solo.mp3
     deps:
     - path: build/moi-rakety-vverh--blown-away/score.midi
       hash: md5
-      md5: f55380c50b3840338924af66e7129430
-      size: 329
+      md5: 7c3f0a3675bb8e861c0edeb964a07c7c
+      size: 320
     - path: flake.lock
       hash: md5
       md5: 6a21cca91947c258cf9ac502091e3bde
       size: 567
     - path: flake.nix
       hash: md5
-      md5: f8ac755fa3d87c5ff525cf68d8970c8d
-      size: 15551
+      md5: 85d35fff4baa073f6a20b1f47ff95b0a
+      size: 27891
     - path: scripts/render-midi-audition
       hash: md5
-      md5: 0ee6e7c31c03a795a3141c1d3ad2e3dd
-      size: 901
+      md5: adef65c8a0906bb70cc59fab01a1e0de
+      size: 1016
     outs:
     - path: build/moi-rakety-vverh--blown-away/solos/blown-away-solo.mp3
       hash: md5
-      md5: 1407f5dd2a788d84bd22f24a57f40638
-      size: 201588
+      md5: 99c83b4a9b73f4228394b12d233a73e3
+      size: 228647
   extract-solo-reference:
     cmd: nix run .#extract-audio -- 
       tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/reference/audio/youtube-nDxJJ_aEt2g.webm
@@ -165,3 +165,58 @@ stages:
       hash: md5
       md5: 03cb9a3a3f9bc6ef844a1b2953077883
       size: 343533
+  render-solo-photo:
+    cmd: output=$(nix build --no-link --print-out-paths .#blown-away-solo-photo)
+      && mkdir -p build/moi-rakety-vverh--blown-away/solos && install 
+      --mode=0644 "$output/score.pdf" 
+      build/moi-rakety-vverh--blown-away/solos/solo-photo.pdf && install 
+      --mode=0644 "$output/score.midi" 
+      build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 85d35fff4baa073f6a20b1f47ff95b0a
+      size: 27891
+    - path: tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/drafts/solo-photo.ly
+      hash: md5
+      md5: e532d8ae2a764551157fd2bc40452473
+      size: 1672
+    outs:
+    - path: build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+      hash: md5
+      md5: 7c3f0a3675bb8e861c0edeb964a07c7c
+      size: 320
+    - path: build/moi-rakety-vverh--blown-away/solos/solo-photo.pdf
+      hash: md5
+      md5: 833c3c4432ee9b75a24bbddffb32c854
+      size: 123578
+  render-solo-photo-audition:
+    cmd: nix run .#render-midi-audition -- 
+      build/moi-rakety-vverh--blown-away/solos/solo-photo.midi 
+      build/moi-rakety-vverh--blown-away/solos/solo-photo.mp3
+    deps:
+    - path: build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+      hash: md5
+      md5: 7c3f0a3675bb8e861c0edeb964a07c7c
+      size: 320
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 85d35fff4baa073f6a20b1f47ff95b0a
+      size: 27891
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: adef65c8a0906bb70cc59fab01a1e0de
+      size: 1016
+    outs:
+    - path: build/moi-rakety-vverh--blown-away/solos/solo-photo.mp3
+      hash: md5
+      md5: 99c83b4a9b73f4228394b12d233a73e3
+      size: 228647

@@ -766,6 +766,8 @@
         scores
         // aliasScores
         // {
+          blown-away-solo-photo = scoreSourceFor system "blown-away-solo-photo"
+            ./tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/drafts "solo-photo.ly";
           "${pianoRoll.name}" = pianoRollScoreFor system;
           artifacts = artifactBundleFor system;
           default = allScoresFor system;

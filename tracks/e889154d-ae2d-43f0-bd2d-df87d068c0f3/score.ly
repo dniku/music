@@ -15,38 +15,41 @@
 \header {
   title = \markup \override #'(font-name . "DejaVu Sans") \bold "Blown Away"
   subtitle = \markup \override #'(font-name . "DejaVu Sans")
-    "Соло, текст и аккорды · ♩ = 171"
+    "Соло, текст и аккорды · ♩ = 85"
   composer = \markup \override #'(font-name . "DejaVu Sans")
     "Мои Ракеты Вверх"
   tagline = ##f
 }
 
-% The pitch sequence originated in the user-supplied MusicXML. Durations were
-% revised against the reference recording and promoted from rhythm candidate 2.
+% Promoted from the user's handwritten score and subsequent corrections,
+% retained as drafts/solo-photo.ly (2026-10-25).
 soloNotes = \absolute {
+  \clef treble
   \key g \major
   \time 4/4
-  \tempo 4 = 171
-  \partial 4.
-
-  e'4. |
-  e'4 fis'8 e' fis' g' fis'4 |
-  fis'8 e' c'2. |
-  fis'4 g' fis'2~ |
-  fis'8 c'' b' c'' b'2~ |
-  % Accepted after A/B comparison: the penultimate note is one whole note.
-  b'8 e''4. es''2~ |
-  es''2 e''2~ |
-  e''1
+  \tempo 4 = 85
+  e'4. fis'16 e'16
+  \tuplet 3/2 { fis'8 g'16 } fis'8
+  \tuplet 3/2 { fis'8 e'16 } c'8~ |
+  \barNumberCheck #2
+  \break
+  c'4 fis'16 g'8. fis'4 c''8 b'16 c''16 |
+  \barNumberCheck #3
+  \break
+  b'4. \acciaccatura dis''16 e''8 dis''4. e''8~ |
+  \barNumberCheck #4
+  e''1 |
+  \barNumberCheck #5
+  \bar "|."
 }
 
 \score {
   \new Staff \with {
     midiInstrument = "overdriven guitar"
-  } {
+  } <<
     \soloNotes
-    \bar "|."
-  }
+    { \repeat unfold 4 { s4 \bar "!" s4 \bar "!" s4 \bar "!" s4 } }
+  >>
 
   \layout {
     indent = #0
@@ -144,14 +147,11 @@ chordGuideLayout = \layout {
   "I got lost my summertimes in bloom"
 }
 
-% Keep the 10.9-second comparison window without printing its trailing silence.
 \score {
   \new Staff \with {
     midiInstrument = "overdriven guitar"
   } {
     \soloNotes
-    \cadenzaOn
-    r4.
   }
   \midi { }
 }

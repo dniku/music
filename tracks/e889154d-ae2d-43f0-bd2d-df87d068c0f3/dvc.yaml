@@ -1,4 +1,31 @@
 stages:
+  render-solo-photo:
+    wdir: ../..
+    cmd: >-
+      output=$(nix build --no-link --print-out-paths .#blown-away-solo-photo) &&
+      mkdir -p build/moi-rakety-vverh--blown-away/solos &&
+      install --mode=0644 "$output/score.pdf" build/moi-rakety-vverh--blown-away/solos/solo-photo.pdf &&
+      install --mode=0644 "$output/score.midi" build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/drafts/solo-photo.ly
+    outs:
+      - build/moi-rakety-vverh--blown-away/solos/solo-photo.pdf
+      - build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+  render-solo-photo-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+      build/moi-rakety-vverh--blown-away/solos/solo-photo.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/moi-rakety-vverh--blown-away/solos/solo-photo.midi
+    outs:
+      - build/moi-rakety-vverh--blown-away/solos/solo-photo.mp3
   fetch-reference:
     wdir: ../..
     cmd: >-
@@ -28,7 +55,6 @@ stages:
       nix run .#render-midi-audition --
       build/moi-rakety-vverh--blown-away/score.midi
       build/moi-rakety-vverh--blown-away/solos/blown-away-solo.mp3
-      10.9
     deps:
       - flake.nix
       - flake.lock
