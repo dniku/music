@@ -1,12 +1,8 @@
 # Avantasia — «Lost in Space»
 
-[piano-roll.ly](piano-roll.ly) — фортепианная аранжировка, восстановленная из
-видео; именно она публикуется на Pages. Метод и ограничения —
-[piano-roll/README.md](piano-roll/README.md).
+[score.ly](score.ly) — основная версия со вступлением, публикуемая на Pages и собираемая командой `render-avantasia--lost-in-space`. Ритм и синхронизация рук ещё черновые.
 
-[score.ly](score.ly) — прежний самостоятельный набросок соло.
-Ритм и синхронизация рук ещё черновые. Обычная локальная команда
-`render-avantasia--lost-in-space` собирает этот набросок, а не piano roll.
+[piano-roll.ly](piano-roll.ly) — отдельная черновая фортепианная аранжировка, восстановленная из видео. Она сохранена в репозитории и собирается командой `render-lost-in-space-piano-roll`, но не публикуется в карточке песни. Метод и ограничения — [piano-roll/README.md](piano-roll/README.md).
 
 ## Источники
 

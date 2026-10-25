@@ -40,17 +40,10 @@
         in
         {
           inherit directory metadataPath scoreDirectory;
-          # Publishing a fuller arrangement must not overwrite the local draft.
-          publication =
-            if trackId == pianoRoll.trackId then
-              {
-                inherit (pianoRoll) name source;
-              }
-            else
-              {
-                name = "${trackId}-score";
-                source = "score.ly";
-              };
+          publication = {
+            name = "${trackId}-score";
+            source = "score.ly";
+          };
         }
       );
       trackAliases =
