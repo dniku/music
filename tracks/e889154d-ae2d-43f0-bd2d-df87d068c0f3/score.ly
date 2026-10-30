@@ -28,7 +28,7 @@ soloNotes = \absolute {
   \key g \major
   \time 4/4
   \tempo 4 = 85
-  e'4. fis'16 e'16
+  e'4~ e'8 fis'16 e'16
   \tuplet 3/2 { fis'8 g'16 } fis'8
   \tuplet 3/2 { fis'8 e'16 } c'8~ |
   \barNumberCheck #2
@@ -36,7 +36,7 @@ soloNotes = \absolute {
   c'4 fis'16 g'8. fis'4 c''8 b'16 c''16 |
   \barNumberCheck #3
   \break
-  b'4. \acciaccatura dis''16 e''8 dis''4. e''8~ |
+  b'4~ b'8 \acciaccatura dis''16 e''8 dis''4~ dis''8 e''8~ |
   \barNumberCheck #4
   e''1 |
   \barNumberCheck #5
