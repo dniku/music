@@ -1,5 +1,9 @@
 \version "2.24.0"
 
+\layout {
+  \context { \Voice \override Fingering.color = #red }
+}
+
 % Imported from YTPA's Mother_Earth.musicxml with the pinned musicxml2ly.
 % See README.md and dvc.yaml for the baseline, its hash, and exact command.
 % Variable names and executable tempo were adjusted after import.

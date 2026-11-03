@@ -1,5 +1,9 @@
 \version "2.24.0"
 
+\layout {
+  \context { \Voice \override Fingering.color = #red }
+}
+
 #(set-global-staff-size 15)
 
 \paper {
