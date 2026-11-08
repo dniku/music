@@ -29,27 +29,7 @@ cis''2-2 dis''4-3 | % 1
   fis''4-4 e''4-3 dis''4-2 | % 13
   e''4-3 dis''4-2 cis''4-1 | % 14
   cis''2.-1 ~ | % 15
-  cis''2. \bar "||" % 16
-  }
-  \tag #'themeRepeat {
-cis''2-2 dis''4-3 | % 17
-  e''2-4 dis''4-3 | % 18
-  e''4-4 dis''4-3 cis''4-2 | % 19
-
-  b'2-1 b'4-1 | % 20
-  cis''2-2 dis''4-3 | % 21
-  e''2-4 dis''4-3 | % 22
-  fis''4-4 e''4-3 dis''4-2 | % 23
-  gis''2-5 fis''4-4 | % 24
-  cis''2-2 dis''4-3 | % 25
-  e''2-4 dis''4-3 | % 26
-  e''4-4 dis''4-3 cis''4-2 | % 27
-  b'2-1 b'4-1 | % 28
-  fis''4-4 e''4-3 dis''4-2 | % 29
-
-  e''4-3 dis''4-2 cis''4-1 | % 30
-  cis''2.-1 ~ | % 31
-  cis''2. \bar "||" % 32
+  cis''2. | % 16
   }
   \tag #'variant {
 cis''2-2 dis''4-3 | % 33
@@ -175,7 +155,7 @@ R2. | % 121
   r2 dis''4-4 | % 133
   dis''4-4 ais'4-1 cis''4-3 | % 134
   bis'2.-2 ~ | % 135
-  bis'2. \bar "||" % 136
+  bis'2. | % 136
   }
   \tag #'chorusBStart {
 R2. | % 137
@@ -221,27 +201,7 @@ cis2:m s4 | % 1
   fis4:m/cis s4 s4 | % 13
   gis4/bis s4 s4 | % 14
   cis2.:m | % 15
-  s2. \bar "||" % 16
-  }
-  \tag #'themeRepeat {
-cis2:m s4 | % 17
-  s2 s4 | % 18
-  a,4 s4 s4 | % 19
-
-  b,2 s4 | % 20
-  cis2:m s4 | % 21
-  s2 s4 | % 22
-  a,4 s4 s4 | % 23
-  fis2:m/a s4 | % 24
-  cis2:m s4 | % 25
-  s2 s4 | % 26
-  a,4 s4 s4 | % 27
-  e2/b s4 | % 28
-  fis4:m/cis s4 s4 | % 29
-
-  gis4/bis s4 s4 | % 30
-  cis2.:m | % 31
-  s2. \bar "||" % 32
+  s2. | % 16
   }
   \tag #'variant {
 cis2:m s4 | % 33
@@ -368,7 +328,7 @@ cis2.:m | % 121
   dis2 s4 | % 133
   s4 s4 s4 | % 134
   gis,2. | % 135
-  s2. \bar "||" % 136
+  s2. | % 136
   }
   \tag #'chorusBStart {
 cis2.:m | % 137
@@ -417,7 +377,7 @@ gis,2 s4 | % 149
     \with-url "https://ytpa.ch/en/piece?scoreId=FVbDZaUuNvQ"
     "На основе нот с ytpa.ch"
   tagline = \markup \override #'(font-name . "DejaVu Sans") \fontsize #-3 \column {
-    \line { "Тайминги приблизительные, по YouTube FVbDZaUuNvQ. Повторы развёрнуты в порядке записи." }
+    \line { "Тайминги приблизительные, по YouTube FVbDZaUuNvQ. Репризы играть полностью; номера по развёрнутой записи." }
     \line { "Бридж: черновые трезвучия левой руки; хоровые голоса не записаны. Вокальный ритм местами упрощён." }
   }
 }
@@ -426,19 +386,17 @@ gis,2 s4 | % 149
 
 inSongOrder = #(define-music-function (source bridge) (ly:music? ly:music?)
 #{
-  \keepWithTag #'(theme themeRepeat variant rise themeReturn) $(ly:music-deep-copy source)
+  \repeat volta 2 { \bar ".|:" \keepWithTag #'(theme) $(ly:music-deep-copy source) }
+  \keepWithTag #'(variant rise themeReturn) $(ly:music-deep-copy source)
   \keepWithTag #'(verse) $(ly:music-deep-copy source)
   \keepWithTag #'(chorusA chorusBStart chorusBLine ending) $(ly:music-deep-copy source)
   \keepWithTag #'(verse) $(ly:music-deep-copy source)
-  \keepWithTag #'(chorusA) $(ly:music-deep-copy source)
-  \keepWithTag #'(chorusA) $(ly:music-deep-copy source)
+  \repeat volta 2 { \bar ".|:" \keepWithTag #'(chorusA) $(ly:music-deep-copy source) }
   \keepWithTag #'(theme) $(ly:music-deep-copy source)
   $bridge
   \keepWithTag #'(variant) $(ly:music-deep-copy source)
   \keepWithTag #'(chorusA chorusBStart) $(ly:music-deep-copy source)
-  \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source)
-  \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source)
-  \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source)
+  \repeat volta 3 { \keepWithTag #'(chorusBLine) $(ly:music-deep-copy source) }
   \keepWithTag #'(ending) $(ly:music-deep-copy source)
 #})
 
@@ -453,10 +411,9 @@ sectionMarks = {
   \override Score.RehearsalMark.font-size = #-2
   \barNumberCheck #1
 
-  \mark \markup "Вступление · 0:00.45"
+  \mark \markup "Вступление ×2 · 0:00.45 / 0:14.16"
   s2.*16
-  \mark \markup "0:14.16"
-  s2.*16
+  \set Score.currentBarNumber = #33
   \mark \markup "0:27.88"
   s2.*16
   \mark \markup "0:41.59"
@@ -466,7 +423,7 @@ sectionMarks = {
   \mark \markup "1:02.16"
   s2.*16
   \barNumberCheck #89
-  \break
+  \pageBreak
   \mark \markup "Куплет 1 · 1:15.88"
   s2.*32
   \barNumberCheck #121
@@ -478,9 +435,10 @@ sectionMarks = {
   \mark \markup "Куплет 2 · 2:10.74"
   s2.*32
   \barNumberCheck #185
-  \break
-  \mark \markup "Припев 2 · 2:38.16"
-  s2.*32
+  \pageBreak
+  \mark \markup "Припев 2 ×2 · 2:38.16 / 2:51.88"
+  s2.*16
+  \set Score.currentBarNumber = #217
   \barNumberCheck #217
   \break
   \mark \markup "Тема · 3:05.59"
@@ -490,7 +448,7 @@ sectionMarks = {
   \mark \markup "Бридж · 3:19.31"
   s2.*70
   \barNumberCheck #303
-  \break
+  \pageBreak
   \mark \markup "Реприза · 4:19.31"
   s2.*32
   \barNumberCheck #335
@@ -499,16 +457,9 @@ sectionMarks = {
   s2.*24
   \barNumberCheck #359
 
-  \mark \markup "5:07.31 · 1/3"
+  \mark \markup \column { "×3 · 5:07.31 / 5:10.74" "5:14.16" }
   s2.*4
-  \barNumberCheck #363
-
-  \mark \markup "5:10.74 · 2/3"
-  s2.*4
-  \barNumberCheck #367
-
-  \mark \markup "5:14.16 · 3/3"
-  s2.*4
+  \set Score.currentBarNumber = #371
   \barNumberCheck #371
 
   \mark \markup "Концовка · 5:17.59"
@@ -521,7 +472,16 @@ sectionMarks = {
 % Sum each chord's following skips, preserving every explicit chord attack.
 % Split sustained chords at the 3/4 bar boundaries explicitly, so only the
 % attack carries fingerings (not each continuation created by completion).
-heldHarmonies = #(let ((previous #f) (chords '()))
+holdHarmonies = #(define-music-function (harmonies) (ly:music?)
+  ;; ChordNames/RH carry the printed repeat signs. Build the written LH once;
+  ;; MIDI callers unfold the input first. ly:music-length otherwise counts all passes.
+  (let ((harmonies (unfold-repeats-fully (music-map
+          (lambda (music)
+            (if (eq? (ly:music-property music 'name) 'VoltaRepeatedMusic)
+                (set! (ly:music-property music 'repeat-count) 1))
+            music)
+          (ly:music-deep-copy harmonies))))
+        (previous #f) (chords '()))
   (for-each
     (lambda (music)
       (case (ly:music-property music 'name)
@@ -593,12 +553,14 @@ heldHarmonies = #(let ((previous #f) (chords '()))
       (if (not (equal? (ly:music-length result) (ly:music-length harmonies)))
           (ly:error "Chord duration mismatch: built ~a, expected ~a"
                     (ly:music-length result) (ly:music-length harmonies)))
-      result)))
+      result))))
 
-pianoMusic = \new PianoStaff <<
+pianoMusic = #(define-music-function (melody harmonies marks) (ly:music? ly:music? ly:music?)
+#{
+\new PianoStaff <<
   \new Staff = "melody" \with {
     midiInstrument = "acoustic grand"
-  } { \override Fingering.direction = #UP << \melody \sectionMarks >> }
+  } { \override Fingering.direction = #UP << $melody $marks >> }
   \new Staff = "chords" \with {
     midiInstrument = "acoustic grand"
   } {
@@ -609,14 +571,15 @@ pianoMusic = \new PianoStaff <<
     \override Fingering.font-size = #-6
     \override Fingering.padding = #0.2
     % Chord symbols have no register; use an octave below chordmode's default.
-    \transpose c c, { \heldHarmonies }
+    \transpose c c, { \holdHarmonies $harmonies }
   }
 >>
+#})
 
 \score {
   <<
     \new ChordNames { \set chordChanges = ##t \harmonies }
-    \pianoMusic
+    \pianoMusic \melody \harmonies \sectionMarks
   >>
   \layout {
     indent = #0
@@ -627,6 +590,7 @@ pianoMusic = \new PianoStaff <<
 }
 
 \score {
-  \pianoMusic
+  % Expand before constructing held chords, so every repeat is played by both hands.
+  \pianoMusic \unfoldRepeats \melody \unfoldRepeats \harmonies { }
   \midi { }
 }
