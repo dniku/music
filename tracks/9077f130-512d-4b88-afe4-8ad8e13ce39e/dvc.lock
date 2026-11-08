@@ -345,3 +345,35 @@ stages:
       hash: md5
       md5: 9228a26a4114e3337440cf785a61b3a9
       size: 6195665
+  render-drums-score:
+    cmd: output=$(nix build --no-link --print-out-paths 
+      .#mother-earth-drums-score) && mkdir -p 
+      build/within-temptation--mother-earth/practice && cp "$output/score.pdf" 
+      build/within-temptation--mother-earth/practice/drums.pdf
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: 1a68e37c7f4c48da9020a3c05286f107
+      size: 32643
+    - path: scripts/drum-score
+      hash: md5
+      md5: f148c0161afc32bcb1e37fff3a24fbd2.dir
+      size: 5621
+      nfiles: 2
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.csv
+      hash: md5
+      md5: b11522afd4229f74c252fe2aa38926b3
+      size: 109546
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.ly
+      hash: md5
+      md5: 60393acc428d29b5ec1e0ef830d9a780
+      size: 1652
+    outs:
+    - path: build/within-temptation--mother-earth/practice/drums.pdf
+      hash: md5
+      md5: 6d4e1062998bc3363ff75802cff731be
+      size: 802299

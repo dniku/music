@@ -186,6 +186,7 @@ h1 {
 
 .score-card__audio-heading {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;

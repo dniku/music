@@ -1,4 +1,18 @@
 stages:
+  render-drums-score:
+    wdir: ../..
+    cmd: >-
+      output=$(nix build --no-link --print-out-paths .#mother-earth-drums-score) &&
+      mkdir -p build/within-temptation--mother-earth/practice &&
+      cp "$output/score.pdf" build/within-temptation--mother-earth/practice/drums.pdf
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/drum-score
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.csv
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.ly
+    outs:
+      - build/within-temptation--mother-earth/practice/drums.pdf
   render-drums-draft:
     wdir: ../..
     cmd: >-

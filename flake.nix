@@ -93,6 +93,7 @@
           title = "Барабаны · 45 → 85 BPM";
           description = "Практика: +1 BPM каждые 4 такта. Заданный рисунок, не транскрипция записи.";
           duration = null;
+          pdfFor = null;
         }
         {
           id = "mother-earth-drums-draft";
@@ -100,8 +101,37 @@
           title = "Барабаны · черновик";
           description = "Приблизительное распознавание атак: бочка, малый, условный хай-хэт. Вступление с 0:28; возможны пропуски и лишние удары.";
           duration = "331.301";
+          pdfFor = motherEarthDrumScoreFor;
         }
       ];
+
+      motherEarthDrumScoreFor =
+        system:
+        let
+          pkgs = pkgsFor system;
+          source = pkgs.stdenvNoCC.mkDerivation {
+            name = "mother-earth-drum-notation";
+            src = ./scripts/drum-score;
+            nativeBuildInputs = [
+              pkgs.python3
+              pkgs.ruff
+              pkgs.pyrefly
+            ];
+            doCheck = true;
+            checkPhase = ''
+              ruff format --check .
+              ruff check .
+              pyrefly check convert.py test_convert.py
+              python3 -m unittest discover
+            '';
+            installPhase = ''
+              mkdir -p "$out"
+              python3 convert.py ${./tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.csv} > "$out/drums-generated.ily"
+              cp ${./tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.ly} "$out/score.ly"
+            '';
+          };
+        in
+        scoreSourceFor system "mother-earth-drums-score" source "score.ly";
 
       practiceFor =
         system: item:
@@ -408,6 +438,9 @@
                     <h4>${lib.escapeXML item.title}</h4>
                     <p class="score-card__meta">${lib.escapeXML item.description}</p>
                     <div class="score-card__audio-heading">
+                      ${lib.optionalString (
+                        item.pdfFor != null
+                      ) ''<a href="practice/${item.id}.pdf">Открыть PDF</a>''}
                       <a href="practice/${item.id}.midi" download>Скачать MIDI</a>
                       <a href="practice/${item.id}.mp3" download>Скачать MP3</a>
                     </div>
@@ -433,6 +466,7 @@
           artifacts = artifactBundleFor system;
           scoreMp3s = publishedScoreMp3sFor system;
           trackCount = builtins.length siteTracks;
+          practiceFileCount = 2 * builtins.length practice + lib.count (item: item.pdfFor != null) practice;
           trackCards = lib.concatMapStringsSep "\n" siteTrackCardFor siteTracks;
           index = pkgs.writeText "index.html" (
             builtins.replaceStrings
@@ -477,6 +511,9 @@
             + lib.concatMapStrings (item: ''
               install --mode=0644 -- ${practiceFor system item}/drums.midi "$out/practice/${item.id}.midi"
               install --mode=0644 -- ${practiceFor system item}/drums.mp3 "$out/practice/${item.id}.mp3"
+              ${lib.optionalString (item.pdfFor != null) ''
+                install --mode=0644 -- ${item.pdfFor system}/score.pdf "$out/practice/${item.id}.pdf"
+              ''}
             '') practice
             + ''
               # Hash the built files, not their sources or the Git revision.
@@ -503,10 +540,8 @@
               test "$(find "$out/scores" -type f -name '*.midi' | wc --lines)" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f -name '*.mp3' | wc --lines)" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f | wc --lines)" -eq ${toString (3 * trackCount)}
-              test "$(find "$out/practice" -type f | wc --lines)" -eq ${toString (2 * builtins.length practice)}
-              test "$(find "$out" -type f | wc --lines)" -eq ${
-                toString (2 + 3 * trackCount + 2 * builtins.length practice)
-              }
+              test "$(find "$out/practice" -type f | wc --lines)" -eq ${toString practiceFileCount}
+              test "$(find "$out" -type f | wc --lines)" -eq ${toString (2 + 3 * trackCount + practiceFileCount)}
 
               if find "$out" -type l -print -quit | grep --quiet .; then
                 echo "Site output contains a symbolic link" >&2
@@ -829,6 +864,7 @@
         // aliasScores
         // lib.listToAttrs (map (item: lib.nameValuePair item.id (practiceFor system item)) practice)
         // {
+          mother-earth-drums-score = motherEarthDrumScoreFor system;
           blown-away-solo-photo =
             scoreSourceFor system "blown-away-solo-photo" ./tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/drafts
               "solo-photo.ly";
