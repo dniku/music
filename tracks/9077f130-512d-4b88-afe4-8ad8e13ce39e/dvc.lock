@@ -314,3 +314,34 @@ stages:
       hash: md5
       md5: bd3d7f39dc5a7503b9bb3ed7eb9704f4
       size: 1173532
+  render-drums-draft:
+    cmd: output=$(nix build --no-link --print-out-paths 
+      .#mother-earth-drums-draft) && mkdir -p 
+      build/within-temptation--mother-earth/practice && cp "$output/drums.midi" 
+      "$output/drums.mp3" build/within-temptation--mother-earth/practice/
+    deps:
+    - path: flake.lock
+      hash: md5
+      md5: 6a21cca91947c258cf9ac502091e3bde
+      size: 567
+    - path: flake.nix
+      hash: md5
+      md5: dd853566be150dfc6cf7bf5062ec4b96
+      size: 31098
+    - path: scripts/render-midi-audition
+      hash: md5
+      md5: adef65c8a0906bb70cc59fab01a1e0de
+      size: 1016
+    - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.csv
+      hash: md5
+      md5: b11522afd4229f74c252fe2aa38926b3
+      size: 109546
+    outs:
+    - path: build/within-temptation--mother-earth/practice/drums.midi
+      hash: md5
+      md5: 123888f4c07811eb4e61fc9c7bc54822
+      size: 13286
+    - path: build/within-temptation--mother-earth/practice/drums.mp3
+      hash: md5
+      md5: 9228a26a4114e3337440cf785a61b3a9
+      size: 6195665

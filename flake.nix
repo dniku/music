@@ -86,6 +86,49 @@
         repositoryUrl = "https://github.com/dniku/music";
       };
 
+      practice = [
+        {
+          id = "blown-away-drums-practice";
+          trackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
+          title = "Барабаны · 45 → 85 BPM";
+          description = "Практика: +1 BPM каждые 4 такта. Заданный рисунок, не транскрипция записи.";
+          duration = null;
+        }
+        {
+          id = "mother-earth-drums-draft";
+          trackId = "9077f130-512d-4b88-afe4-8ad8e13ce39e";
+          title = "Барабаны · черновик";
+          description = "Приблизительное распознавание атак: бочка, малый, условный хай-хэт. Вступление с 0:28; возможны пропуски и лишние удары.";
+          duration = "331.301";
+        }
+      ];
+
+      practiceFor =
+        system: item:
+        let
+          pkgs = pkgsFor system;
+          source = builtins.path {
+            path = tracks.${item.trackId}.directory + "/practice/drums.csv";
+            name = "${item.id}.csv";
+          };
+        in
+        pkgs.runCommand item.id
+          {
+            nativeBuildInputs = [
+              pkgs.midicsv
+              (midiAuditionRendererFor system)
+            ];
+          }
+          ''
+            mkdir -p "$out"
+            csvmidi ${source} "$out/drums.midi"
+            midicsv "$out/drums.midi" roundtrip.csv
+            cmp ${source} roundtrip.csv
+            render-midi-audition "$out/drums.midi" "$out/drums.mp3" ${
+              lib.optionalString (item.duration != null) item.duration
+            }
+          '';
+
       siteTracks = lib.sort (left: right: builtins.lessThan left.sortKey right.sortKey) (
         map (
           trackId:
@@ -357,6 +400,25 @@
                 <a href="scores/${alias}.mp3" download>Скачать MP3</a>
               </audio>
             </div>
+            ${lib.optionalString (lib.any (item: item.trackId == track.trackId) practice) ''
+              <details class="score-card__practice">
+                <summary>Практика и черновики</summary>
+                ${lib.concatMapStrings (item: ''
+                  <div class="score-card__audio">
+                    <h4>${lib.escapeXML item.title}</h4>
+                    <p class="score-card__meta">${lib.escapeXML item.description}</p>
+                    <div class="score-card__audio-heading">
+                      <a href="practice/${item.id}.midi" download>Скачать MIDI</a>
+                      <a href="practice/${item.id}.mp3" download>Скачать MP3</a>
+                    </div>
+                    <audio controls preload="none" aria-label="${lib.escapeXML item.title}">
+                      <source src="practice/${item.id}.mp3" type="audio/mpeg">
+                      <a href="practice/${item.id}.mp3" download>Скачать MP3</a>
+                    </audio>
+                  </div>
+                '') (builtins.filter (item: item.trackId == track.trackId) practice)}
+              </details>
+            ''}
             <p class="score-card__links">
               <a href="${recordingUrl}">MusicBrainz</a>
               <a href="${scoreUrl}">Исходник LilyPond</a>
@@ -397,7 +459,7 @@
           }
           (
             ''
-              mkdir -p "$out/scores"
+              mkdir -p "$out/scores" "$out/practice"
               install --mode=0644 -- ${index} "$out/index.html"
               install --mode=0644 -- ${./site/styles.css} "$out/styles.css"
             ''
@@ -412,13 +474,16 @@
                 ${scoreMp3s.${track.trackId}}/score.mp3 \
                 "$out/scores/${track.alias}.mp3"
             '') siteTracks
+            + lib.concatMapStrings (item: ''
+              install --mode=0644 -- ${practiceFor system item}/drums.midi "$out/practice/${item.id}.midi"
+              install --mode=0644 -- ${practiceFor system item}/drums.mp3 "$out/practice/${item.id}.mp3"
+            '') practice
             + ''
               # Hash the built files, not their sources or the Git revision.
               # Keep stable filenames for CI and existing direct download links.
-              for artifact in "$out"/scores/*; do
-                artifact_file="$(basename -- "$artifact")"
+              for artifact in "$out"/scores/* "$out"/practice/*; do
                 artifact_hash="$(sha256sum -- "$artifact" | cut --delimiter=' ' --fields=1)"
-                artifact_url="scores/$artifact_file"
+                artifact_url="''${artifact#"$out/"}"
                 substituteInPlace "$out/index.html" \
                   --replace-fail "\"$artifact_url\"" "\"$artifact_url?v=$artifact_hash\""
               done
@@ -429,7 +494,7 @@
                 artifact_hash="$(sha256sum -- "$out/$artifact_path" | cut --delimiter=' ' --fields=1)"
                 test "$artifact_url" = "$artifact_path?v=$artifact_hash"
               done < <(
-                grep --only-matching --extended-regexp '(href|src)="scores/[^"]+"' "$out/index.html" \
+                grep --only-matching --extended-regexp '(href|src)="(scores|practice)/[^"]+"' "$out/index.html" \
                   | cut --delimiter='"' --fields=2
               )
 
@@ -438,6 +503,10 @@
               test "$(find "$out/scores" -type f -name '*.midi' | wc --lines)" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f -name '*.mp3' | wc --lines)" -eq ${toString trackCount}
               test "$(find "$out/scores" -type f | wc --lines)" -eq ${toString (3 * trackCount)}
+              test "$(find "$out/practice" -type f | wc --lines)" -eq ${toString (2 * builtins.length practice)}
+              test "$(find "$out" -type f | wc --lines)" -eq ${
+                toString (2 + 3 * trackCount + 2 * builtins.length practice)
+              }
 
               if find "$out" -type l -print -quit | grep --quiet .; then
                 echo "Site output contains a symbolic link" >&2
@@ -758,9 +827,11 @@
         in
         scores
         // aliasScores
+        // lib.listToAttrs (map (item: lib.nameValuePair item.id (practiceFor system item)) practice)
         // {
-          blown-away-solo-photo = scoreSourceFor system "blown-away-solo-photo"
-            ./tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/drafts "solo-photo.ly";
+          blown-away-solo-photo =
+            scoreSourceFor system "blown-away-solo-photo" ./tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/drafts
+              "solo-photo.ly";
           "${pianoRoll.name}" = pianoRollScoreFor system;
           artifacts = artifactBundleFor system;
           default = allScoresFor system;

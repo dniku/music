@@ -1,0 +1,13 @@
+{
+  "artifact": "mother-earth-drums-draft",
+  "status": "draft",
+  "source": "drums.csv",
+  "derivedFrom": {
+    "youtubeId": "FVbDZaUuNvQ",
+    "audioSha256": "3bd7c760bb30e5d7fe92f929ca71c2108c59b57793acd1f82a033bb0555fd007",
+    "approvedDraftMidiSha256": "b09401ee0309008d254ffbd64929d10f94b5b69ca6d1dc696893d584f10f2d26"
+  },
+  "method": "Frozen result of experimental HPSS spectral-flux onset detection. Reference attack times, not quantized; GM 36/38/42. Quiet intro and 200–231s omitted. Not a complete kit transcription.",
+  "importCommand": "nix shell --inputs-from . nixpkgs#midicsv --command midicsv build/within-temptation--mother-earth/drums-draft/drums.mid tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.csv",
+  "reproduction": "The accepted MIDI event list is the editable baseline. dvc.yaml:render-drums-draft reproduces MIDI and MP3; re-running audio recognition is not part of the build."
+}

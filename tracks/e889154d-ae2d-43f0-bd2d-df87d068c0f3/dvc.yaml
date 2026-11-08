@@ -1,4 +1,18 @@
 stages:
+  render-drums-practice:
+    wdir: ../..
+    cmd: >-
+      output=$(nix build --no-link --print-out-paths .#blown-away-drums-practice) &&
+      mkdir -p build/moi-rakety-vverh--blown-away/practice &&
+      cp "$output/drums.midi" "$output/drums.mp3" build/moi-rakety-vverh--blown-away/practice/
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/practice/drums.csv
+    outs:
+      - build/moi-rakety-vverh--blown-away/practice/drums.midi
+      - build/moi-rakety-vverh--blown-away/practice/drums.mp3
   render-solo-photo:
     wdir: ../..
     cmd: >-

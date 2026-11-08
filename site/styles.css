@@ -209,6 +209,31 @@ h1 {
   font-size: 0.88rem;
 }
 
+.score-card__practice {
+  margin-top: 1.35rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.score-card__practice summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.score-card__practice summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.score-card__practice h4 {
+  margin: 0 0 0.65rem;
+}
+
+.score-card__practice .score-card__meta {
+  margin-bottom: 1rem;
+}
+
 footer {
   padding: 1.5rem 0 3rem;
   border-top: 1px solid var(--line);

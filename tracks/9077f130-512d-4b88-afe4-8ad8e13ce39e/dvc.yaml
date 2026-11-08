@@ -1,4 +1,18 @@
 stages:
+  render-drums-draft:
+    wdir: ../..
+    cmd: >-
+      output=$(nix build --no-link --print-out-paths .#mother-earth-drums-draft) &&
+      mkdir -p build/within-temptation--mother-earth/practice &&
+      cp "$output/drums.midi" "$output/drums.mp3" build/within-temptation--mother-earth/practice/
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/practice/drums.csv
+    outs:
+      - build/within-temptation--mother-earth/practice/drums.midi
+      - build/within-temptation--mother-earth/practice/drums.mp3
   render-bridge-bass:
     wdir: ../..
     cmd: >-

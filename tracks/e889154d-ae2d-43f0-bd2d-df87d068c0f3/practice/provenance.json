@@ -1,0 +1,9 @@
+{
+  "artifact": "blown-away-drums-practice",
+  "status": "practice",
+  "source": "drums.csv",
+  "derivedFrom": "User-specified exercise; not derived from the original recording.",
+  "method": "Frozen MIDI from the auditioned exercise: 45–85 BPM inclusive, +1 BPM every four 4/4 bars. Eight eighth-note positions: kick+hat, hat, snare+hat, hat, kick+hat, kick+hat, snare+hat, hat.",
+  "importCommand": "nix shell --inputs-from . nixpkgs#midicsv --command midicsv build/practice/drums-45-to-85-bpm.mid tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/practice/drums.csv",
+  "reproduction": "dvc.yaml:render-drums-practice reproduces MIDI and MP3 from the editable event list."
+}
