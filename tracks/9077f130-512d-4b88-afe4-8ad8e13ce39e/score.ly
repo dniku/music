@@ -230,8 +230,7 @@ a,2. | % 65
   cis2.:m | % 69
 
   s2. | % 70
-  % Move up to G# before returning to the main register.
-  gis2. | % 71
+  gis,2. | % 71
   s2. \bar "||" % 72
   }
   \tag #'themeReturn {
