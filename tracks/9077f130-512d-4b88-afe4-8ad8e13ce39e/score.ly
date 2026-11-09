@@ -344,7 +344,6 @@ gis,2 s4 | % 149
   left-margin = 12\mm
   right-margin = 12\mm
   ragged-bottom = ##t
-  page-count = 3
 }
 
 \header {
@@ -358,6 +357,7 @@ gis,2 s4 | % 149
   tagline = \markup \override #'(font-name . "DejaVu Sans") \fontsize #-3 \column {
     \line { "Тайминги приблизительные, по YouTube FVbDZaUuNvQ. Репризы играть полностью; номера по развёрнутой записи." }
     \line { "Бридж: черновые трезвучия левой руки; хоровые голоса не записаны. Вокальный ритм местами упрощён." }
+    \line { "Текст над нотами привязан к фразам приблизительно, не послогово." }
   }
 }
 
@@ -384,6 +384,8 @@ melody = {
   \inSongOrder \sourceMelody { R2.*70 }
 }
 harmonies = \inSongOrder \sourceHarmonies { \transpose c c' \bridgeMusic }
+
+\include "lyrics.ily"
 
 sectionMarks = {
   \override Score.RehearsalMark.self-alignment-X = #LEFT
@@ -545,6 +547,12 @@ pianoMusic = #(define-music-function (melody harmonies marks) (ly:music? ly:musi
   \new Staff = "melody" \with {
     midiInstrument = "acoustic grand"
   } { \override Fingering.direction = #UP << $melody $marks >> }
+  \tag #'layout \new Lyrics \with {
+    alignAboveContext = "melody"
+    \override LyricText.font-name = "DejaVu Sans"
+    \override LyricText.font-size = #-2
+    \override LyricText.self-alignment-X = #LEFT
+  } \songLyrics
   \new Staff = "chords" \with {
     midiInstrument = "acoustic grand"
   } {
@@ -575,6 +583,6 @@ pianoMusic = #(define-music-function (melody harmonies marks) (ly:music? ly:musi
 
 \score {
   % Expand before constructing held chords, so every repeat is played by both hands.
-  \pianoMusic \unfoldRepeats \melody \unfoldRepeats \harmonies { }
+  \removeWithTag #'layout \pianoMusic \unfoldRepeats \melody \unfoldRepeats \harmonies { }
   \midi { }
 }
