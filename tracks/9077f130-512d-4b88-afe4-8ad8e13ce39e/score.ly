@@ -406,16 +406,19 @@ sectionMarks = {
   s2.*16
   \barNumberCheck #89
   \break
+  % Whole lyric phrases must stay with their following bars, not force one
+  % pickup bar wide. Keep vocal systems on phrase boundaries instead.
+  \autoLineBreaksOff
   \mark \markup "Куплет 1 · 1:15.88"
-  s2.*32
+  s2.*16 \break s2.*16
   \barNumberCheck #121
   \break
   \mark \markup "Припев 1 · 1:43.31"
-  s2.*32
+  s2.*16 \break s2.*16
   \barNumberCheck #153
   \break
   \mark \markup "Куплет 2 · 2:10.74"
-  s2.*32
+  s2.*16 \break s2.*16
   \barNumberCheck #185
   \break
   \mark \markup "Припев 2 ×2 · 2:38.16 / 2:51.88"
@@ -423,22 +426,31 @@ sectionMarks = {
   \set Score.currentBarNumber = #217
   \barNumberCheck #217
   \break
+  \autoLineBreaksOn
   \mark \markup "Тема · 3:05.59"
   s2.*16
   \barNumberCheck #233
   \break
+  \autoLineBreaksOff
   \mark \markup "Бридж · 3:19.31"
-  s2.*70
+  s2.*14 \break
+  s2.*12 \break
+  s2.*12 \break
+  s2.*12 \break
+  s2.*12 \break
+  s2.*8
   \barNumberCheck #303
   \break
+  \autoLineBreaksOn
   \mark \markup "Реприза · 4:19.31 / 4:33.02"
-  s2.*16
+  s2.*9 \break s2.*7
   \set Score.currentBarNumber = #333
   s2.*2
   \barNumberCheck #335
   \break
+  \autoLineBreaksOff
   \mark \markup "Финальный припев · 4:46.74"
-  s2.*24
+  s2.*16 \break s2.*8
   \barNumberCheck #359
 
   \mark \markup \column { "×3 · 5:07.31 / 5:10.74" "5:14.16" }
@@ -550,8 +562,10 @@ pianoMusic = #(define-music-function (melody harmonies marks) (ly:music? ly:musi
   \tag #'layout \new Lyrics \with {
     alignAboveContext = "melody"
     \override LyricText.font-name = "DejaVu Sans"
-    \override LyricText.font-size = #-2
+    \override LyricText.font-size = #-2.5
     \override LyricText.self-alignment-X = #LEFT
+    % Phrase labels span several bars; they are not syllables under one note.
+    \override LyricText.extra-spacing-width = #'(+inf.0 . -inf.0)
   } \songLyrics
   \new Staff = "chords" \with {
     midiInstrument = "acoustic grand"
