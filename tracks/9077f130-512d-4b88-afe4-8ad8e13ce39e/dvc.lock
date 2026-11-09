@@ -56,25 +56,25 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: dd853566be150dfc6cf7bf5062ec4b96
-      size: 31098
+      md5: 1a68e37c7f4c48da9020a3c05286f107
+      size: 32643
     - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/bridge.ily
       hash: md5
       md5: 23de15d43afb31eeb460aa62e9aa820c
       size: 1345
     - path: tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly
       hash: md5
-      md5: 5c2cdbfece0082fadd372f7e88974e91
-      size: 16426
+      md5: e4be481425210f22bd7339a95a12389f
+      size: 15788
     outs:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
-      md5: 9650b0d2f2684c52d264bda15dd503a9
+      md5: ed27e79958fbce7d7dff88d29dee64f5
       size: 10034
     - path: build/within-temptation--mother-earth/score.pdf
       hash: md5
-      md5: e732659391841381205481b89df22dc8
-      size: 889429
+      md5: 55fdc9871d37dbf6c97e3132767cdade
+      size: 807627
   convert-score-source:
     cmd: mkdir -p build/within-temptation--mother-earth && nix shell 
       --inputs-from . nixpkgs#lilypond --command musicxml2ly --absolute 
@@ -103,7 +103,7 @@ stages:
     deps:
     - path: build/within-temptation--mother-earth/score.midi
       hash: md5
-      md5: 9650b0d2f2684c52d264bda15dd503a9
+      md5: ed27e79958fbce7d7dff88d29dee64f5
       size: 10034
     - path: flake.lock
       hash: md5
@@ -111,8 +111,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: dd853566be150dfc6cf7bf5062ec4b96
-      size: 31098
+      md5: 1a68e37c7f4c48da9020a3c05286f107
+      size: 32643
     - path: scripts/render-midi-audition
       hash: md5
       md5: adef65c8a0906bb70cc59fab01a1e0de
@@ -120,8 +120,8 @@ stages:
     outs:
     - path: build/within-temptation--mother-earth/score.mp3
       hash: md5
-      md5: aefdece47f7c153f1df7c681383c884f
-      size: 4478212
+      md5: 494e37856e6c63a74ae5ced5c4b2b601
+      size: 4477238
   align-score:
     cmd: nix run .#align-midi -- 
       tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/alignment.json 

@@ -8,7 +8,6 @@
 % See README.md and dvc.yaml for the baseline, its hash, and exact command.
 % Variable names and executable tempo were adjusted after import.
 % Whole-chord octaves and selected inversions are chosen per phrase; see README.md.
-% The added bass at bar 69 is corrected to a three-note C#m/E inversion.
 
 % Tags identify the original source phrases; comments retain source-bar numbers.
 sourceMelody = {
@@ -32,6 +31,7 @@ cis''2-2 dis''4-3 | % 1
   cis''2. | % 16
   }
   \tag #'variant {
+  \repeat volta 2 {
 cis''2-2 dis''4-3 | % 33
   e''2-4 dis''4-3 | % 34
   e''4-4 dis''4-3 cis''4-2 | % 35
@@ -47,27 +47,17 @@ cis''2-2 dis''4-3 | % 33
   b'8-1 b'4-1 b'4-1 b'8-1 | % 44
   fis''2-4 fis''4-4 | % 45
   e''2-3 e''4-3 | % 46
+  }
+  \alternative {
+    {
   dis''2-2 dis''4-2 | % 47
-  gis''2.-5 \bar "||" % 48
-
-  cis''2-2 dis''4-3 | % 49
-
-  e''2-4 dis''4-3 | % 50
-  e''4-4 dis''4-3 cis''4-2 | % 51
-  b'8-1 b'4-1 b'4-1 b'8-1 | % 52
-  cis''2-2 dis''4-3 | % 53
-  e''2-4 dis''4-3 | % 54
-  gis''4-5 cis''4-2 dis''4-3 | % 55
-  e''4-4 dis''4-3 b'4-1 | % 56
-  cis''2-2 dis''4-3 | % 57
-  e''2-4 dis''4-3 | % 58
-  e''4-4 dis''4-3 cis''4-2 | % 59
-
-  b'8-1 b'4-1 b'4-1 b'8-1 | % 60
-  fis''2-4 fis''4-4 | % 61
-  e''2-3 e''4-3 | % 62
+  gis''2.-5 | % 48
+    }
+    {
   fisis''2-4 fisis''4-4 | % 63
-  gis''2.-5 \bar "||" % 64
+  gis''2.-5 | % 64
+    }
+  }
   }
   \tag #'rise {
 a'2.-1 ~ | % 65
@@ -204,6 +194,7 @@ cis2:m s4 | % 1
   s2. | % 16
   }
   \tag #'variant {
+  \repeat volta 2 {
 cis2:m s4 | % 33
   s2 s4 | % 34
   s4 s4 s4 | % 35
@@ -219,38 +210,27 @@ cis2:m s4 | % 33
   e8 s4 s4 s8 | % 44
   fis2:m/cis s4 | % 45
   e2 s4 | % 46
+  }
+  \alternative {
+    {
   dis2 s4 | % 47
-  gis,2. \bar "||" % 48
-  cis2:m s4 | % 49
-
-  s2 s4 | % 50
-  s4 s4 s4 | % 51
-  e8 s4 s4 s8 | % 52
-  cis2:m s4 | % 53
-  s2 s4 | % 54
-  s4 s4 s4 | % 55
-  e4 dis4 b,4 | % 56
-  cis2:m s4 | % 57
-  s2 s4 | % 58
-  s4 s4 s4 | % 59
-
-  e8 s4 s4 s8 | % 60
-  fis2:m/cis s4 | % 61
-  e2 s4 | % 62
+  gis,2. | % 48
+    }
+    {
   dis2 s4 | % 63
-  gis,2. \bar "||" % 64
+  gis,2. | % 64
+    }
+  }
   }
   \tag #'rise {
 a,2. | % 65
   s2. | % 66
   cis2.:m | % 67
   s2. | % 68
-  % /e creates an inversion; /+e adds a fourth note. The raised root keeps
-  % the inversion's bass at E3 after the staff's octave-down transposition.
-  cis'2.:m/e | % 69
+  cis2.:m | % 69
 
   s2. | % 70
-  % Continue the rising bass A-C#-E-G# before returning to the main register.
+  % Move up to G# before returning to the main register.
   gis2. | % 71
   s2. \bar "||" % 72
   }
@@ -365,7 +345,7 @@ gis,2 s4 | % 149
   left-margin = 12\mm
   right-margin = 12\mm
   ragged-bottom = ##t
-  page-count = 4
+  page-count = 3
 }
 
 \header {
@@ -414,16 +394,17 @@ sectionMarks = {
   \mark \markup "Вступление ×2 · 0:00.45 / 0:14.16"
   s2.*16
   \set Score.currentBarNumber = #33
-  \mark \markup "0:27.88"
+  \mark \markup "0:27.88 / 0:41.59"
   s2.*16
-  \mark \markup "0:41.59"
-  s2.*16
+  \set Score.currentBarNumber = #63
+  s2.*2
+  \barNumberCheck #65
   \mark \markup "0:55.31"
   s2.*8
   \mark \markup "1:02.16"
   s2.*16
   \barNumberCheck #89
-  \pageBreak
+  \break
   \mark \markup "Куплет 1 · 1:15.88"
   s2.*32
   \barNumberCheck #121
@@ -435,7 +416,7 @@ sectionMarks = {
   \mark \markup "Куплет 2 · 2:10.74"
   s2.*32
   \barNumberCheck #185
-  \pageBreak
+  \break
   \mark \markup "Припев 2 ×2 · 2:38.16 / 2:51.88"
   s2.*16
   \set Score.currentBarNumber = #217
@@ -448,9 +429,11 @@ sectionMarks = {
   \mark \markup "Бридж · 3:19.31"
   s2.*70
   \barNumberCheck #303
-  \pageBreak
-  \mark \markup "Реприза · 4:19.31"
-  s2.*32
+  \break
+  \mark \markup "Реприза · 4:19.31 / 4:33.02"
+  s2.*16
+  \set Score.currentBarNumber = #333
+  s2.*2
   \barNumberCheck #335
   \break
   \mark \markup "Финальный припев · 4:46.74"
@@ -474,12 +457,14 @@ sectionMarks = {
 % attack carries fingerings (not each continuation created by completion).
 holdHarmonies = #(define-music-function (harmonies) (ly:music?)
   ;; ChordNames/RH carry the printed repeat signs. Build the written LH once;
-  ;; MIDI callers unfold the input first. ly:music-length otherwise counts all passes.
+  ;; Include every written ending once. MIDI callers unfold the input first.
   (let ((harmonies (unfold-repeats-fully (music-map
           (lambda (music)
             (if (eq? (ly:music-property music 'name) 'VoltaRepeatedMusic)
-                (set! (ly:music-property music 'repeat-count) 1))
-            music)
+                (make-sequential-music
+                  (cons (ly:music-property music 'element)
+                        (ly:music-property music 'elements)))
+                music))
           (ly:music-deep-copy harmonies))))
         (previous #f) (chords '()))
   (for-each
