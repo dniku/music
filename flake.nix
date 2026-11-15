@@ -91,12 +91,26 @@
           id = "blown-away-drums-practice";
           trackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
           title = "Барабаны · 45 → 85 BPM";
+          source = "drums.csv";
+          loop = false;
           description = "Практика: +1 BPM каждые 4 такта. Заданный рисунок, не транскрипция записи.";
           duration = null;
           pdfFor = null;
         }
         {
+          id = "blown-away-drums-loop";
+          trackId = "e889154d-ae2d-43f0-bd2d-df87d068c0f3";
+          title = "Барабаны · 85 BPM · 4 такта";
+          description = "Тот же рисунок без ускорения и отсчёта. Четыре такта 4/4; плеер повторяет цикл автоматически.";
+          source = "drums-85-bpm-4-bars.csv";
+          loop = true;
+          duration = "11.294112";
+          pdfFor = null;
+        }
+        {
           id = "mother-earth-drums-draft";
+          source = "drums.csv";
+          loop = false;
           trackId = "9077f130-512d-4b88-afe4-8ad8e13ce39e";
           title = "Барабаны · черновик";
           description = "Приблизительное распознавание атак: бочка, малый, условный хай-хэт. Вступление с 0:28; возможны пропуски и лишние удары.";
@@ -138,7 +152,7 @@
         let
           pkgs = pkgsFor system;
           source = builtins.path {
-            path = tracks.${item.trackId}.directory + "/practice/drums.csv";
+            path = tracks.${item.trackId}.directory + "/practice/${item.source}";
             name = "${item.id}.csv";
           };
         in
@@ -468,7 +482,7 @@
                       <a href="practice/${item.id}.midi" download>Скачать MIDI</a>
                       <a href="practice/${item.id}.mp3" download>Скачать MP3</a>
                     </div>
-                    <audio controls preload="none" aria-label="${lib.escapeXML item.title}">
+                    <audio controls ${lib.optionalString item.loop "loop"} preload="none" aria-label="${lib.escapeXML item.title}">
                       <source src="practice/${item.id}.mp3" type="audio/mpeg">
                       <a href="practice/${item.id}.mp3" download>Скачать MP3</a>
                     </audio>

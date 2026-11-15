@@ -1,0 +1,8 @@
+{
+  "artifact": "blown-away-drums-loop",
+  "status": "practice",
+  "source": "drums-85-bpm-4-bars.csv",
+  "derivedFrom": "drums.csv: first four bars of the user-specified practice pattern.",
+  "method": "Keep note events through tick 7680 (excluding note-ons at that boundary), set tempo to 705882 microseconds/quarter (85 BPM rounded to MIDI precision). No count-in; trim audio to 16 quarters = 11.294112 seconds.",
+  "reproduction": "dvc.yaml:render-drums-loop; Nix tools are pinned by flake.lock."
+}
