@@ -16,7 +16,8 @@
   subtitle = "«Лебединое озеро», соч. 20 · Фортепиано"
   composer = "П. И. Чайковский"
   tagline = \markup \override #'(font-name . "DejaVu Sans") \fontsize #-3 \column {
-    \line { "На основе нот с 8notes.com, с рукописными исправлениями и аппликатурой из предоставленного PDF." }
+    \line { "На основе нот:" \with-url "https://www.8notes.com/scores/11419.asp" "https://www.8notes.com/scores/11419.asp" }
+    \line { "С рукописными исправлениями и аппликатурой из предоставленного PDF." }
     \line { "Темп MIDI: четверть = 100 (в печатных нотах — Allegro moderato без числового темпа)." }
   }
 }
