@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "verifiedAt": "2026-11-15",
+  "canonicalRecording": {
+    "title": "Hallelujah",
+    "artist": "Leonard Cohen",
+    "musicbrainz": {
+      "recordingMbid": "0ef6d5e2-78e3-43e8-a32c-36e28fed4834",
+      "workMbid": "9d0296b2-e2d6-3aaa-8e38-7f15d38ed906",
+      "releaseMbid": "f9363b3d-3f03-38f0-96d5-156e95064f0f",
+      "releaseTitle": "Various Positions",
+      "releaseYear": 1984
+    }
+  },
+  "assets": []
+}

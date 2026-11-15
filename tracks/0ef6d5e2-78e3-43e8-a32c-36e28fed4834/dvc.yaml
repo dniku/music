@@ -1,0 +1,24 @@
+stages:
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-leonard-cohen--hallelujah
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/0ef6d5e2-78e3-43e8-a32c-36e28fed4834/score.ly
+    outs:
+      - build/leonard-cohen--hallelujah/score.pdf
+      - build/leonard-cohen--hallelujah/score.midi
+  render-score-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/leonard-cohen--hallelujah/score.midi
+      build/leonard-cohen--hallelujah/score.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/leonard-cohen--hallelujah/score.midi
+    outs:
+      - build/leonard-cohen--hallelujah/score.mp3

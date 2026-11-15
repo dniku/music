@@ -11,6 +11,7 @@
 
 | Основной ID | Алиас | Трек | Партитура |
 | --- | --- | --- | --- |
+| [MusicBrainz Recording `0ef6…4834`](https://musicbrainz.org/recording/0ef6d5e2-78e3-43e8-a32c-36e28fed4834) | `leonard-cohen--hallelujah` | Leonard Cohen — «Hallelujah» | [`score.ly`](tracks/0ef6d5e2-78e3-43e8-a32c-36e28fed4834/score.ly) |
 | [MusicBrainz Recording `b0d9…22fc`](https://musicbrainz.org/recording/b0d93aa9-c69d-4b88-8432-1588eea622fc) | `avantasia--lost-in-space` | Avantasia — «Lost in Space» | [`piano-roll.ly`](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ly) · [черновик соло](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly) |
 | [MusicBrainz Recording `7402…5533`](https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533) | `atom-76--volki-okeana` | Атом-76 — «Волки Океана» | [`score.ly`](tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly) |
 | [MusicBrainz Recording `e889…c0f3`](https://musicbrainz.org/recording/e889154d-ae2d-43f0-bd2d-df87d068c0f3) | `moi-rakety-vverh--blown-away` | Мои Ракеты Вверх — «Blown Away» | [`score.ly`](tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly) |

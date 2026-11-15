@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "path": "hallelujah.sba",
+    "kind": "user_provided",
+    "receivedAt": "2026-11-15",
+    "sha256": "e9adab88850fe99250459ad7ce8fef127bd5911ed56ea77220cc763d776598ed",
+    "format": "Saber archive: BSON v19 plus embedded PDF",
+    "embeddedPdfSha256": "7c1222069bc8a05c1c81d1c03c29ce9d742653a782f6c90534614897d1be97ce"
+  },
+  "transcription": {
+    "output": "../score.ly",
+    "method": "Manual visual transcription of the two piano staves and handwritten fingerings; no optical recognition model or automatic note conversion.",
+    "sourcePages": [57, 58, 59, 60],
+    "omitted": ["separate vocal staff", "lyrics", "guitar chord diagrams", "empty fifth Saber page"],
+    "playbackTempo": {"unit": "dotted quarter", "bpm": 50, "status": "editorial; source only says Moderately slow, in 2"}
+  },
+  "identity": {
+    "recordingMbid": "0ef6d5e2-78e3-43e8-a32c-36e28fed4834",
+    "status": "user_selected_catalog_reference_not_verified_arrangement_match",
+    "verifiedAt": "2026-11-15",
+    "url": "https://musicbrainz.org/recording/0ef6d5e2-78e3-43e8-a32c-36e28fed4834"
+  }
+}
