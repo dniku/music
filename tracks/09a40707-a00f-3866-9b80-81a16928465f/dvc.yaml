@@ -1,0 +1,24 @@
+stages:
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-tchaikovsky--dance-of-the-little-swans
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/09a40707-a00f-3866-9b80-81a16928465f/score.ly
+    outs:
+      - build/tchaikovsky--dance-of-the-little-swans/score.pdf
+      - build/tchaikovsky--dance-of-the-little-swans/score.midi
+  render-score-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/tchaikovsky--dance-of-the-little-swans/score.midi
+      build/tchaikovsky--dance-of-the-little-swans/score.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/tchaikovsky--dance-of-the-little-swans/score.midi
+    outs:
+      - build/tchaikovsky--dance-of-the-little-swans/score.mp3

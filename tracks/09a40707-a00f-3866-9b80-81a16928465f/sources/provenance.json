@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "path": "annotated-score.pdf",
+    "kind": "user_provided",
+    "receivedAt": "2026-11-15",
+    "sha256": "a780be6e87265259aa5877b7d86ed32665b8d90e257401a46e3d7f28e3262018",
+    "printedSourceUrl": "https://www.8notes.com/scores/11419.asp"
+  },
+  "transcription": {
+    "output": "../score.ly",
+    "method": "Manual visual transcription of both piano staves, incorporating the user's red pitch corrections and fingerings. Repeated figures carry the same fingering; alternative handwritten fingers are reduced to one choice.",
+    "sourcePages": [1, 2],
+    "bars": 38,
+    "leftHandCopies": {"18": 10, "20": 12, "21": 13, "22": 14},
+    "leftHandCopiesConfirmedByUser": true,
+    "rightHand": "Printed notes retained in the LH-copy bars; octave-up notes already printed in bars 6–9 are not transposed again.",
+    "omitted": ["handwritten verbal reminders", "crossed-out notes superseded by corrections"],
+    "playbackTempo": {
+      "unit": "quarter",
+      "bpm": 100,
+      "status": "from the publicly linked 8notes MIDI; the PDF only says Allegro Moderato",
+      "referenceUrl": "https://media.8notes.com/school/midi/piano/danses_des_cygnets.mid"
+    }
+  },
+  "identity": {
+    "workMbid": "09a40707-a00f-3866-9b80-81a16928465f",
+    "status": "work_identity_not_a_specific_recording",
+    "url": "https://musicbrainz.org/work/09a40707-a00f-3866-9b80-81a16928465f"
+  }
+}

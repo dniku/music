@@ -1,6 +1,10 @@
 {
   "schemaVersion": 3,
   "tracks": {
+    "09a40707-a00f-3866-9b80-81a16928465f": {
+      "primaryAlias": "tchaikovsky--dance-of-the-little-swans",
+      "aliases": []
+    },
     "0ef6d5e2-78e3-43e8-a32c-36e28fed4834": {
       "primaryAlias": "leonard-cohen--hallelujah",
       "aliases": []

@@ -124,6 +124,22 @@ jobs:
           retention-days: 90
           archive: false
 
+      - name: Upload Little Swans PDF
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          path: artifacts/tchaikovsky--dance-of-the-little-swans.pdf
+          if-no-files-found: error
+          retention-days: 90
+          archive: false
+
+      - name: Upload Little Swans MIDI
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          path: artifacts/tchaikovsky--dance-of-the-little-swans.midi
+          if-no-files-found: error
+          retention-days: 90
+          archive: false
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 

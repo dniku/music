@@ -11,19 +11,14 @@
 
 | Основной ID | Алиас | Трек | Партитура |
 | --- | --- | --- | --- |
+| [MusicBrainz Work `09a4…465f`](https://musicbrainz.org/work/09a40707-a00f-3866-9b80-81a16928465f) | `tchaikovsky--dance-of-the-little-swans` | П. И. Чайковский — «Танец маленьких лебедей» | [`score.ly`](tracks/09a40707-a00f-3866-9b80-81a16928465f/score.ly) |
 | [MusicBrainz Recording `0ef6…4834`](https://musicbrainz.org/recording/0ef6d5e2-78e3-43e8-a32c-36e28fed4834) | `leonard-cohen--hallelujah` | Leonard Cohen — «Hallelujah» | [`score.ly`](tracks/0ef6d5e2-78e3-43e8-a32c-36e28fed4834/score.ly) |
 | [MusicBrainz Recording `b0d9…22fc`](https://musicbrainz.org/recording/b0d93aa9-c69d-4b88-8432-1588eea622fc) | `avantasia--lost-in-space` | Avantasia — «Lost in Space» | [`piano-roll.ly`](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ly) · [черновик соло](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly) |
 | [MusicBrainz Recording `7402…5533`](https://musicbrainz.org/recording/7402bbda-e0cf-4960-9b85-d8f6f4f85533) | `atom-76--volki-okeana` | Атом-76 — «Волки Океана» | [`score.ly`](tracks/7402bbda-e0cf-4960-9b85-d8f6f4f85533/score.ly) |
 | [MusicBrainz Recording `e889…c0f3`](https://musicbrainz.org/recording/e889154d-ae2d-43f0-bd2d-df87d068c0f3) | `moi-rakety-vverh--blown-away` | Мои Ракеты Вверх — «Blown Away» | [`score.ly`](tracks/e889154d-ae2d-43f0-bd2d-df87d068c0f3/score.ly) |
 | [MusicBrainz Recording `9077…e39e`](https://musicbrainz.org/recording/9077f130-512d-4b88-afe4-8ad8e13ce39e) | `within-temptation--mother-earth` | Within Temptation — «Mother Earth» | [`score.ly`](tracks/9077f130-512d-4b88-afe4-8ad8e13ce39e/score.ly) |
 
-Каталог трека называется по его MusicBrainz Recording MBID. Он однозначно
-идентифицирует конкретную запись, к которой относятся таймкоды, аранжировка и
-соло. Человекочитаемые алиасы и единственный основной алиас для каждого трека
-хранятся рядом с каноническим ID в корневом
-[`aliases.json`](aliases.json). Основной алиас используется в путях локальной
-сборки. Work MBID хранится в metadata трека и может быть заполнен, если для
-абстрактной композиции появится отдельная сущность MusicBrainz.
+Каталог трека называется по MusicBrainz MBID: Recording для транскрипции конкретной записи, Work для произведения без выбранного исполнения. В `reference/recordings.json` схема 2 содержит `canonicalRecording`, схема 3 — `canonicalWork`; тип определяет ссылку MusicBrainz в карточке. Человекочитаемые алиасы и единственный основной алиас для каждого трека хранятся в [`aliases.json`](aliases.json). Основной алиас используется в путях локальной сборки.
 
 ## Структура
 
@@ -32,7 +27,7 @@ aliases.json                       # основной и дополнитель�
 .dvc/                              # конфигурация DVC; кеш остаётся локальным
 artifact-store/                    # локальный DVC remote, вне Git, в Restic
 tracks/
-  <musicbrainz-recording-mbid>/
+  <musicbrainz-mbid>/
     README.md
     score.ly
     music.ily                      # общие партии трека, если нужны
@@ -51,7 +46,7 @@ build/
 ```
 
 `flake.nix` автоматически обнаруживает непосредственные подкаталоги `tracks/`,
-проверяет совпадение имени каталога с Recording MBID в metadata и создаёт
+проверяет совпадение имени каталога с Recording или Work MBID в metadata и создаёт
 команды как по ID, так и по алиасу из `aliases.json`. Обе формы команды пишут в
 один каталог `build/<primary-alias>/`. Для нового трека достаточно создать
 каталог с `score.ly` и `reference/recordings.json`, затем добавить основной
@@ -106,7 +101,7 @@ nix run .#render-e889154d-ae2d-43f0-bd2d-df87d068c0f3
 nix run .#render -- --png -dresolution=144
 ```
 
-Команды, названные по Recording MBID и по алиасу, выбирают один трек и всегда
+Команды, названные по MBID и по алиасу, выбирают один трек и всегда
 используют его канонический локальный каталог `build/<primary-alias>/`. Без
 аргументов они копируют PDF и MIDI из той же изолированной Nix-сборки, которую
 использует CI. Дополнительные аргументы запускают отдельный диагностический

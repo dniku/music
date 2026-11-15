@@ -164,15 +164,34 @@
           trackId:
           let
             metadata = builtins.fromJSON (builtins.readFile tracks.${trackId}.metadataPath);
-            recording = metadata.canonicalRecording;
+            identity =
+              if metadata.schemaVersion == 2 then
+                {
+                  inherit (metadata.canonicalRecording) artist title;
+                  entityType = "recording";
+                  releaseYear = metadata.canonicalRecording.musicbrainz.releaseYear or null;
+                }
+              else if metadata.schemaVersion == 3 then
+                {
+                  inherit (metadata.canonicalWork) title;
+                  artist = metadata.canonicalWork.composer;
+                  entityType = "work";
+                  releaseYear = null;
+                }
+              else
+                throw "Unsupported metadata schema for ${trackId}";
           in
           {
             inherit trackId;
             alias = primaryAliasesByTrackId.${trackId};
-            inherit (recording) artist title;
+            inherit (identity)
+              artist
+              title
+              entityType
+              releaseYear
+              ;
             inherit (tracks.${trackId}.publication) source;
-            releaseYear = recording.musicbrainz.releaseYear or null;
-            sortKey = "${recording.artist} — ${recording.title}";
+            sortKey = "${identity.artist} — ${identity.title}";
           }
         ) trackIds
       );
@@ -340,12 +359,17 @@
           ''
             jq --exit-status \
               --arg track_id "${trackId}" '
-              .schemaVersion == 2
-              and .canonicalRecording.musicbrainz.recordingMbid == $track_id
+              (if .schemaVersion == 2 then
+                .canonicalRecording.musicbrainz.recordingMbid == $track_id
+                and (.canonicalRecording.title | strings | length > 0)
+                and (.canonicalRecording.artist | strings | length > 0)
+              elif .schemaVersion == 3 then
+                .canonicalWork.musicbrainz.workMbid == $track_id
+                and (.canonicalWork.title | strings | length > 0)
+                and (.canonicalWork.composer | strings | length > 0)
+              else false end)
               and ($track_id
                 | test("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"))
-              and (.canonicalRecording.title | strings | length > 0)
-              and (.canonicalRecording.artist | strings | length > 0)
               and (.assets | arrays)
               and ([.assets[] |
                 (.path | strings | length > 0)
@@ -408,7 +432,7 @@
           releaseDetails =
             (lib.optionalString (track.releaseYear != null) "${toString track.releaseYear} · ")
             + "PDF + MIDI + MP3";
-          recordingUrl = "https://musicbrainz.org/recording/${track.trackId}";
+          identityUrl = "https://musicbrainz.org/${track.entityType}/${track.trackId}";
           scoreUrl = "${siteConfig.repositoryUrl}/blob/main/tracks/${track.trackId}/${track.source}";
         in
         ''
@@ -453,7 +477,7 @@
               </details>
             ''}
             <p class="score-card__links">
-              <a href="${recordingUrl}">MusicBrainz</a>
+              <a href="${identityUrl}">MusicBrainz</a>
               <a href="${scoreUrl}">Исходник LilyPond</a>
             </p>
           </article>

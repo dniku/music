@@ -1,0 +1,5 @@
+outs:
+- md5: ac422769161a2ed870894dd6b696686d
+  size: 1798506
+  hash: md5
+  path: annotated-score.pdf
