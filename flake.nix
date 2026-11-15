@@ -546,14 +546,14 @@
                 artifact_hash="$(sha256sum -- "$artifact" | cut --delimiter=' ' --fields=1)"
                 artifact_url="''${artifact#"$out/"}"
                 substituteInPlace "$out/index.html" \
-                  --replace-fail "\"$artifact_url\"" "\"$artifact_url?v=$artifact_hash\""
+                  --replace-fail "\"$artifact_url\"" "\"$artifact_url?sha256=$artifact_hash\""
               done
 
               # Check every download and audio-player URL against the final bytes.
               while IFS= read -r artifact_url; do
                 artifact_path="''${artifact_url%%\?*}"
                 artifact_hash="$(sha256sum -- "$out/$artifact_path" | cut --delimiter=' ' --fields=1)"
-                test "$artifact_url" = "$artifact_path?v=$artifact_hash"
+                test "$artifact_url" = "$artifact_path?sha256=$artifact_hash"
               done < <(
                 grep --only-matching --extended-regexp '(href|src)="(scores|practice)/[^"]+"' "$out/index.html" \
                   | cut --delimiter='"' --fields=2
