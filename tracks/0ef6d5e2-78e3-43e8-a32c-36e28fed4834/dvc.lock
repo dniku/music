@@ -9,21 +9,21 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: 1a68e37c7f4c48da9020a3c05286f107
-      size: 32643
+      md5: c07d0ceb61470b348f65a7aef63fb606
+      size: 33594
     - path: tracks/0ef6d5e2-78e3-43e8-a32c-36e28fed4834/score.ly
       hash: md5
-      md5: 9b90b494f2e1c06fef588d35dc6428b4
-      size: 5652
+      md5: 6e34c514011634bf3994b99e95eea215
+      size: 5651
     outs:
     - path: build/leonard-cohen--hallelujah/score.midi
       hash: md5
-      md5: b53d9795a391915043cf1d09386d1dbe
+      md5: e6f428d52c819127af9b4f5f34382fd3
       size: 12374
     - path: build/leonard-cohen--hallelujah/score.pdf
       hash: md5
-      md5: f0376b0a603b143a365d5ccef963bcfb
-      size: 177014
+      md5: bc79d6eabe7fc387f5008051682d312c
+      size: 177048
   render-score-audition:
     cmd: nix run .#render-midi-audition -- 
       build/leonard-cohen--hallelujah/score.midi 
@@ -31,7 +31,7 @@ stages:
     deps:
     - path: build/leonard-cohen--hallelujah/score.midi
       hash: md5
-      md5: b53d9795a391915043cf1d09386d1dbe
+      md5: e6f428d52c819127af9b4f5f34382fd3
       size: 12374
     - path: flake.lock
       hash: md5
@@ -39,8 +39,8 @@ stages:
       size: 567
     - path: flake.nix
       hash: md5
-      md5: 1a68e37c7f4c48da9020a3c05286f107
-      size: 32643
+      md5: c07d0ceb61470b348f65a7aef63fb606
+      size: 33594
     - path: scripts/render-midi-audition
       hash: md5
       md5: adef65c8a0906bb70cc59fab01a1e0de
@@ -48,5 +48,5 @@ stages:
     outs:
     - path: build/leonard-cohen--hallelujah/score.mp3
       hash: md5
-      md5: 5abfd122ad8855dfc7c5b3a9df0eac25
-      size: 4765705
+      md5: 252ba05a7aaad5d92a435f89a9724209
+      size: 4765520
