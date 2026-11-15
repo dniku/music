@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "path": "annotated-score.pdf",
+    "kind": "user_provided",
+    "receivedAt": "2026-11-15",
+    "sha256": "9a66b93da7f49329628bc06bf9c4c0cead7475d28f5aaea8a323c468093d40bd",
+    "printedSourceUrl": "https://musescore.com/user/8584016/scores/2238101",
+    "transcriber": "Marcuste"
+  },
+  "transcription": {
+    "output": "../score.ly",
+    "method": "Manual visual transcription of the supplied annotated PDF; the MuseScore web page returned HTTP 403, so no downloadable score was used.",
+    "sourcePages": [1, 2, 3],
+    "printedBars": 57,
+    "corrections": "Red-crossed notes omitted, red added notes included, handwritten fingerings retained. Printed first and second endings retained.",
+    "meterCorrection": "Bars 32–41 use 6/8 instead of printed 3/4, as confirmed by the user.",
+    "omitted": ["handwritten beat counts", "rhythm-group boxes", "verbal reminders about repeated bars"],
+    "tempo": "Quarter = 75; dotted quarter = 50 from bar 5, preserving the same eighth-note duration."
+  },
+  "identity": {
+    "workMbid": "87bff7dd-4c8e-4b00-8e6b-2d8f3d2a211b",
+    "status": "work_identity_not_a_specific_recording",
+    "url": "https://musicbrainz.org/work/87bff7dd-4c8e-4b00-8e6b-2d8f3d2a211b"
+  }
+}

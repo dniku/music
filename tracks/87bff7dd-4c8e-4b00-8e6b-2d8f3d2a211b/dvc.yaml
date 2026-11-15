@@ -1,0 +1,24 @@
+stages:
+  render-score:
+    wdir: ../..
+    cmd: nix run .#render-jeremy-soule--the-dragonborn-comes
+    deps:
+      - flake.nix
+      - flake.lock
+      - tracks/87bff7dd-4c8e-4b00-8e6b-2d8f3d2a211b/score.ly
+    outs:
+      - build/jeremy-soule--the-dragonborn-comes/score.pdf
+      - build/jeremy-soule--the-dragonborn-comes/score.midi
+  render-score-audition:
+    wdir: ../..
+    cmd: >-
+      nix run .#render-midi-audition --
+      build/jeremy-soule--the-dragonborn-comes/score.midi
+      build/jeremy-soule--the-dragonborn-comes/score.mp3
+    deps:
+      - flake.nix
+      - flake.lock
+      - scripts/render-midi-audition
+      - build/jeremy-soule--the-dragonborn-comes/score.midi
+    outs:
+      - build/jeremy-soule--the-dragonborn-comes/score.mp3

@@ -11,6 +11,7 @@
 
 | Основной ID | Алиас | Трек | Партитура |
 | --- | --- | --- | --- |
+| [MusicBrainz Work `87bf…211b`](https://musicbrainz.org/work/87bff7dd-4c8e-4b00-8e6b-2d8f3d2a211b) | `jeremy-soule--the-dragonborn-comes` | Jeremy Soule — «The Dragonborn Comes» | [`score.ly`](tracks/87bff7dd-4c8e-4b00-8e6b-2d8f3d2a211b/score.ly) |
 | [MusicBrainz Work `09a4…465f`](https://musicbrainz.org/work/09a40707-a00f-3866-9b80-81a16928465f) | `tchaikovsky--dance-of-the-little-swans` | П. И. Чайковский — «Танец маленьких лебедей» | [`score.ly`](tracks/09a40707-a00f-3866-9b80-81a16928465f/score.ly) |
 | [MusicBrainz Recording `0ef6…4834`](https://musicbrainz.org/recording/0ef6d5e2-78e3-43e8-a32c-36e28fed4834) | `leonard-cohen--hallelujah` | Leonard Cohen — «Hallelujah» | [`score.ly`](tracks/0ef6d5e2-78e3-43e8-a32c-36e28fed4834/score.ly) |
 | [MusicBrainz Recording `b0d9…22fc`](https://musicbrainz.org/recording/b0d93aa9-c69d-4b88-8432-1588eea622fc) | `avantasia--lost-in-space` | Avantasia — «Lost in Space» | [`piano-roll.ly`](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/piano-roll.ly) · [черновик соло](tracks/b0d93aa9-c69d-4b88-8432-1588eea622fc/score.ly) |
