@@ -13,8 +13,8 @@ stages:
       size: 33594
     - path: tracks/09a40707-a00f-3866-9b80-81a16928465f/score.ly
       hash: md5
-      md5: 28cc4f51aa9020b86402cf5329703162
-      size: 8031
+      md5: a5360f095f4a01d987db84fe2720bc5f
+      size: 8023
     outs:
     - path: build/tchaikovsky--dance-of-the-little-swans/score.midi
       hash: md5
@@ -22,8 +22,8 @@ stages:
       size: 6803
     - path: build/tchaikovsky--dance-of-the-little-swans/score.pdf
       hash: md5
-      md5: 2dd8ab510dac44170797b2ab955fe12a
-      size: 172432
+      md5: 0d6edf0cf3dc43e807a1b06215b4b7c3
+      size: 172475
   render-score-audition:
     cmd: nix run .#render-midi-audition -- 
       build/tchaikovsky--dance-of-the-little-swans/score.midi 
