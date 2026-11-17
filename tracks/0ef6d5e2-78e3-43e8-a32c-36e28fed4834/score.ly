@@ -41,10 +41,10 @@ right = {
   \tempo "Moderately slow, in 2" 4. = 50
   <>\mp
   \introC
-  << { e'4.-3 <a-1 g'-5>4. } \\
+  << { e'4.-3 <a-1 a'-5>4. } \\
      { r8 a-1 c'-2 r e'-3 c'-2 } >> |
   \introC
-  << { e'4.-3 <a-1 a'-5>4 a8-1 } \\
+  << { e'4.-3 <a-1 a'-5>4 g8-1 } \\
      { r8 a-1 c'-2 r e'-3 s8 } >> |
   \break
   \repeat volta 5 {
